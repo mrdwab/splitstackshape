@@ -1,5 +1,4 @@
 
-
 #' Example dataset with concatenated cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
@@ -13,17 +12,13 @@
 #' @keywords datasets
 NULL
 
-
-
-
-
 #' splitstackshape
 #' 
 #' Functions to split concatenated data, conveniently stack columns of
 #' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.0\cr Date: \tab 2013-08-11\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.0\cr Date: \tab 2013-08-12\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The

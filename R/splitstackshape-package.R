@@ -39,8 +39,29 @@ NULL
 #' @keywords package
 #' @examples
 #' 
+#' ## concat.split
 #' head(concat.split(concat.test, "Likes", drop = TRUE))
 #' 
+#' ## Reshape
+#' set.seed(1)
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), 
+#'                    varA.1 = sample(letters, 6),
+#'                    varA.2 = sample(letters, 6), 
+#'                    varA.3 = sample(letters, 6),
+#'                    varB.2 = sample(10, 6), 
+#'                    varB.3 = sample(10, 6),
+#'                    varC.3 = rnorm(6))
+#' mydf
+#' Reshape(mydf, id.vars = c("id_1", "id_2"),
+#'         var.stubs = c("varA", "varB", "varC"))
+#'
+#' ## Stacked
+#' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
+#'         var.stubs = c("varA", "varB", "varC"),
+#'         sep = "\\.")
+#'         
+#' \dontshow{rm(mydf)}
+#'   
 NULL
 
 

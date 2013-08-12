@@ -1,0 +1,35 @@
+splitstackshape NEWS
+====================
+
+Author/Maintainer: Ananda Mahto
+Email            : ananda@mahto.info
+
+
+
+1.0
+---
+
+12 August 2013
+
+Initial commit of splitstacshape with the following main functions:
+
+* concat.split (plus: concat.split.compact, concat.split.expanded, concat.split.list, and concat.split.multiple) -- To split concatenated data into more manageable data formats.
+* Reshape -- To help base R's reshape function handle unbalanced data and simplify the reshape syntax (wide to long only).
+* Stacked -- To selectively stack columns of a data.frame.
+
+Full list of functions (non-exported functions are indicated with ::: before their names):
+
+* concat.split.compact
+* concat.split.expanded
+* concat.split.list
+* concat.split.multiple
+* concat.split
+* merged.stack
+* Reshape
+* Stacked
+* :::binaryMat
+* :::FacsToChars
+* :::NoSep
+* :::othernames
+* :::read.concat
+* :::valueMat

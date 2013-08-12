@@ -34,25 +34,27 @@
   \code{id.vars} and \code{.time_#} vars.
 }
 \description{
-  A helper function for \code{\link{Reshape}} to stack
-  groups of wide columns into a long form which can then be
+  A function to conveniently stack groups of wide columns
+  into a long form which can then be
   \code{\link[data.table:merge]{merge}}d together.
 }
 \note{
-  This function is ideally used within
-  \code{\link{Reshape}} but might have its own application
-  elsewhere.
+  This is the function internally called by
+  \code{\link{merged.stack}}.
 }
 \examples{
 set.seed(1)
-mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), varA.1 = sample(letters, 6),
-                 varA.2 = sample(letters, 6), varA.3 = sample(letters, 6),
-                 varB.2 = sample(10, 6), varB.3 = sample(10, 6),
-                 varC.3 = rnorm(6))
+mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
+                   varA.1 = sample(letters, 6),
+                   varA.2 = sample(letters, 6),
+                   varA.3 = sample(letters, 6),
+                   varB.2 = sample(10, 6),
+                   varB.3 = sample(10, 6),
+                   varC.3 = rnorm(6))
 mydf
 Stacked(data = mydf, id.vars = c("id_1", "id_2"),
-       var.stubs = c("varA", "varB", "varC"),
-       sep = "\\\\.")
+        var.stubs = c("varA", "varB", "varC"),
+        sep = "\\\\.")
 
 \dontshow{rm(mydf)}
 }

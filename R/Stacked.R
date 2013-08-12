@@ -1,9 +1,6 @@
 #' \code{stack} columns from a wide form to a long form
 #' 
-#' A helper function for \code{\link{Reshape}} to stack groups of wide columns
-#' into a long form which can then be \code{\link[data.table:merge]{merge}}d
-#' together.
-#' 
+#' A function to conveniently stack groups of wide columns into a long form which can then be \code{\link[data.table:merge]{merge}}d together.
 #' 
 #' @param data The source \code{data.frame}.
 #' @param id.vars The variables that serve as unique identifiers.
@@ -20,22 +17,24 @@
 #' @return A \code{list} of \code{data.table}s with one \code{data.table} for
 #' each "var.stub". The \code{\link[data.table:key]{key}} is set to the
 #' \code{id.vars} and \code{.time_#} vars.
-#' @note This function is ideally used within \code{\link{Reshape}} but might
-#' have its own application elsewhere.
+#' @note This is the function internally called by \code{\link{merged.stack}}.
 #' @author Ananda Mahto
 #' @seealso \code{\link{stack}}, \code{\link[reshape2:melt]{melt}} from
 #' "reshape2".
 #' @examples
 #' 
 #' set.seed(1)
-#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), varA.1 = sample(letters, 6),
-#'                  varA.2 = sample(letters, 6), varA.3 = sample(letters, 6),
-#'                  varB.2 = sample(10, 6), varB.3 = sample(10, 6),
-#'                  varC.3 = rnorm(6))
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), 
+#'                    varA.1 = sample(letters, 6),
+#'                    varA.2 = sample(letters, 6), 
+#'                    varA.3 = sample(letters, 6),
+#'                    varB.2 = sample(10, 6), 
+#'                    varB.3 = sample(10, 6),
+#'                    varC.3 = rnorm(6))
 #' mydf
 #' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
-#'        var.stubs = c("varA", "varB", "varC"),
-#'        sep = "\\.")
+#'         var.stubs = c("varA", "varB", "varC"),
+#'         sep = "\\.")
 #' 
 #' \dontshow{rm(mydf)}
 #' 
@@ -95,14 +94,17 @@ NULL
 #' @examples
 #' 
 #' set.seed(1)
-#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), varA.1 = sample(letters, 6),
-#'                  varA.2 = sample(letters, 6), varA.3 = sample(letters, 6),
-#'                  varB.2 = sample(10, 6), varB.3 = sample(10, 6),
-#'                  varC.3 = rnorm(6))
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), 
+#'                    varA.1 = sample(letters, 6),
+#'                    varA.2 = sample(letters, 6), 
+#'                    varA.3 = sample(letters, 6),
+#'                    varB.2 = sample(10, 6), 
+#'                    varB.3 = sample(10, 6),
+#'                    varC.3 = rnorm(6))
 #' mydf
 #' merged.stack(mydf, id.vars = c("id_1", "id_2"),
-#'        var.stubs = c("varA", "varB", "varC"),
-#'        sep = "\\.")
+#'              var.stubs = c("varA", "varB", "varC"),
+#'              sep = "\\.")
 #'        
 #' \dontshow{rm(mydf)}
 #' 

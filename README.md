@@ -10,7 +10,7 @@ R functions to split concatenated data, conveniently stack columns of `data.fram
 
 ## Install
 
-The package [is on CRAN](http://cran.r-project.org/web/packages/splitstackshape/index.html) (though the mirrors have yet to be populated and Windows binaries have yet to be built). Once that is good, you should be able to use:
+The package [is on CRAN](http://cran.r-project.org/web/packages/splitstackshape/index.html). You can install it using:
 
 ```r
 install.packages("splitstackshape")

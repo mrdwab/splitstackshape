@@ -46,10 +46,11 @@ NULL
 #' 
 read.concat <- function(data, col.prefix, sep) {
   if (!is.character(data)) data <- as.character(data)
+  x <- count.fields(textConnection(data), sep = sep)
   t1 <- read.table(text = data, sep = sep, fill = TRUE,
                    row.names = NULL, header = FALSE,
-                   blank.lines.skip = FALSE, 
-                   strip.white = TRUE)
+                   blank.lines.skip = FALSE, strip.white = TRUE,
+                   col.names = paste("v", sequence(max(x))))
   names(t1) <- paste(col.prefix, seq(ncol(t1)), sep = "_")
   t1
 }

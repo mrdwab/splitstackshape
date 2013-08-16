@@ -19,6 +19,7 @@
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the wide \code{data.frame}.
+#' @param rm.rownames Logical. \code{reshape} creates some long distracting \code{rownames} that do not seem to serve much purpose. This argument is set to \code{TRUE} to remove the \code{rownames} by default.
 #' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
 #' is of a different form.
 #' @return A "long" \code{data.frame} of the reshaped data that retains the
@@ -47,7 +48,7 @@
 #'        var.stubs = c("varA", "varB", "varC"))
 #' 
 #' @export Reshape
-Reshape <- function(data, id.vars, var.stubs, sep = ".", ...) {
+Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
   if (sep == ".") sep <- "\\."
   vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
   temp <- names(data)[names(data) %in% 
@@ -81,8 +82,14 @@ Reshape <- function(data, id.vars, var.stubs, sep = ".", ...) {
       matrix(NA, nrow = nrow(data), ncol = length(newVars))), newVars)
     out <- cbind(data, myMat)
   }
-  reshape(out, direction = "long", idvar = id.vars, 
+  out <- reshape(out, direction = "long", idvar = id.vars, 
           varying = lapply(vGrep(var.stubs, names(out), value = TRUE), sort), 
           sep = sep, v.names = var.stubs)
+  if (isTRUE(rm.rownames)) {
+    rownames(out) <- NULL
+    out
+  } else {
+    out
+  }
 }
 NULL

@@ -19,7 +19,9 @@
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the wide \code{data.frame}.
-#' @param rm.rownames Logical. \code{reshape} creates some long distracting \code{rownames} that do not seem to serve much purpose. This argument is set to \code{TRUE} to remove the \code{rownames} by default.
+#' @param rm.rownames Logical. \code{reshape} creates some long distracting
+#' \code{rownames} that do not seem to serve much purpose. This argument is set
+#' to \code{TRUE} to remove the \code{rownames} by default.
 #' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
 #' is of a different form.
 #' @return A "long" \code{data.frame} of the reshaped data that retains the
@@ -51,9 +53,10 @@
 Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
   if (sep == ".") sep <- "\\."
   vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
-  temp <- names(data)[names(data) %in% 
-                        unlist(vGrep(var.stubs, names(data), 
-                                     value = TRUE))]
+  temp <- Names(data, unlist(vGrep(var.stubs, names(data), value = TRUE)))
+  
+  data <- getanID(data, id.vars)
+  if (isTRUE(".id" %in% names(data))) id.vars = c(Names(data, id.vars), ".id")
   
   if (sep == "NoSep") {
     x <- NoSep(temp, ...)

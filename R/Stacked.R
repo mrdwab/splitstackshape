@@ -1,6 +1,8 @@
 #' \code{stack} columns from a wide form to a long form
 #' 
-#' A function to conveniently stack groups of wide columns into a long form which can then be \code{\link[data.table:merge]{merge}}d together.
+#' A function to conveniently stack groups of wide columns into a long form
+#' which can then be \code{\link[data.table:merge]{merge}}d together.
+#' 
 #' 
 #' @param data The source \code{data.frame}.
 #' @param id.vars The variables that serve as unique identifiers.
@@ -24,11 +26,11 @@
 #' @examples
 #' 
 #' set.seed(1)
-#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), 
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
 #'                    varA.1 = sample(letters, 6),
-#'                    varA.2 = sample(letters, 6), 
+#'                    varA.2 = sample(letters, 6),
 #'                    varA.3 = sample(letters, 6),
-#'                    varB.2 = sample(10, 6), 
+#'                    varB.2 = sample(10, 6),
 #'                    varB.3 = sample(10, 6),
 #'                    varC.3 = rnorm(6))
 #' mydf
@@ -61,51 +63,65 @@ Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
     if (isTRUE(keep.all) & length(A) > 0) {
       t2 <- data.table(
         cbind(data[id.vars], splitcols[othernames(splitcols, ".var")], t1, data[A]), 
-        key = c(names(data[id.vars]), timevars))
+        key = c(Names(data, id.vars), timevars))
     } else {
       t2 <- data.table(
         cbind(data[id.vars], splitcols[othernames(splitcols, ".var")], t1), 
-        key = c(names(data[id.vars]), timevars))
+        key = c(Names(data, id.vars), timevars))
     }
     t2
   }))
-  temp2
+  if (length(temp2) == 1) temp2[[1]]
+  else temp2
 }
 NULL
 
 
 
+
+
+
+
 #' Take a \code{list} of stacked \code{data.table}s and \code{merge} them
 #' 
-#' A wrapper around the \code{\link{Stacked}} function to \code{\link[data.table:merge]{merge}} the resulting \code{list} into a single \code{data.table}.
+#' A wrapper around the \code{\link{Stacked}} function to
+#' \code{\link[data.table:merge]{merge}} the resulting \code{list} into a
+#' single \code{data.table}.
+#' 
 #' 
 #' @param data The input \code{data.frame}.
 #' @param id.vars The columns to be used as "ID" variables.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the source \code{data.frame}.
-#' @param keep.all Logical. Should all the variables in the source \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which comprise the \code{id.vars} and split data from the \code{var.stubs} (\code{keep.all = FALSE}).
+#' @param keep.all Logical. Should all the variables in the source
+#' \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which
+#' comprise the \code{id.vars} and split data from the \code{var.stubs}
+#' (\code{keep.all = FALSE}).
 #' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
 #' is of a different form.
 #' @return A merged \code{data.table}.
+#' @note This is not a particularly fast function. It was the original concept
+#' for \code{\link{Reshape}}, but \code{Reshape} will generally be \emph{much}
+#' faster because neither \code{\link{Reduce}} nor \code{merge} are
+#' particularly fast.
 #' @author Ananda Mahto
-#' @note This is not a particularly fast function. It was the original concept for \code{\link{Reshape}}, but \code{Reshape} will generally be \emph{much} faster because neither \code{\link{Reduce}} nor \code{merge} are particularly fast.
 #' @seealso \code{\link{Stacked}}, \code{\link{Reshape}}
 #' @examples
 #' 
 #' set.seed(1)
-#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), 
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
 #'                    varA.1 = sample(letters, 6),
-#'                    varA.2 = sample(letters, 6), 
+#'                    varA.2 = sample(letters, 6),
 #'                    varA.3 = sample(letters, 6),
-#'                    varB.2 = sample(10, 6), 
+#'                    varB.2 = sample(10, 6),
 #'                    varB.3 = sample(10, 6),
 #'                    varC.3 = rnorm(6))
 #' mydf
 #' merged.stack(mydf, id.vars = c("id_1", "id_2"),
 #'              var.stubs = c("varA", "varB", "varC"),
 #'              sep = "\\.")
-#'        
+#' 
 #' \dontshow{rm(mydf)}
 #' 
 #' @export merged.stack

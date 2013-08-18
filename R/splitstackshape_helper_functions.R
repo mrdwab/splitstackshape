@@ -17,9 +17,31 @@
 #' \dontshow{rm(mydf)}
 #' 
 othernames <- function(data, toremove) {
-  setdiff(names(data), names(data[toremove]))
+  setdiff(names(data), Names(data, toremove))
 }
 NULL
+
+#' \code{names} as a character vector, always
+#' 
+#' A convenience function using either character vectors or numeric vectors to specify a subset of \code{names} of a \code{data.frame}.
+#' 
+#' 
+#' @param data The input \code{data.frame}.
+#' @param invec The \code{names} you want.
+#' @return A character vector of the desired names.
+#' @author Ananda Mahto
+#' @examples
+#' 
+#' mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)
+#' splitstackshape:::Names(mydf, c("a", "c"))
+#' splitstackshape:::Names(mydf, c(1, 3))
+#' 
+#' \dontshow{rm(mydf)}
+#' 
+Names <- function(data, invec) {
+  names(data[invec])
+}
+
 
 
 
@@ -42,18 +64,29 @@ NULL
 #' vec <- c("a,b", "c,d,e", "f, g", "h, i, j,k")
 #' splitstackshape:::read.concat(vec, "var", ",")
 #' 
+#' ## More than 5 lines the same
+#' ## `read.table` would fail with this
+#' vec <- c("12,51,34,17", "84,28,17,10", "11,43,28,15",
+#' "80,26,17,91", "10,41,25,13", "97,35,23,12,13")
+#' splitstackshape:::read.concat(vec, "var", ",")
+#' 
 #' \dontshow{rm(vec)}
 #' 
 read.concat <- function(data, col.prefix, sep) {
   if (!is.character(data)) data <- as.character(data)
+  x <- count.fields(textConnection(data), sep = sep)
   t1 <- read.table(text = data, sep = sep, fill = TRUE,
                    row.names = NULL, header = FALSE,
-                   blank.lines.skip = FALSE, 
-                   strip.white = TRUE)
+                   blank.lines.skip = FALSE, strip.white = TRUE,
+                   col.names = paste("v", sequence(max(x))))
   names(t1) <- paste(col.prefix, seq(ncol(t1)), sep = "_")
   t1
 }
 NULL
+
+
+
+
 
 
 
@@ -99,6 +132,10 @@ NULL
 
 
 
+
+
+
+
 #' Create a binary matrix from a list of values
 #' 
 #' Create a binary matrix from a list of values
@@ -134,6 +171,10 @@ valueMat <- function(listOfValues, fill = NA) {
   m
 }
 NULL
+
+
+
+
 
 
 
@@ -178,6 +219,10 @@ NULL
 
 
 
+
+
+
+
 #' Convert all \code{factor} columns to \code{character} columns in a
 #' \code{data.frame}
 #' 
@@ -197,7 +242,7 @@ NULL
 #' dat <- data.frame(title = c("title1", "title2", "title3"),
 #'          author = c("author1", "author2", "author3"),
 #'          customerID = c(1, 2, 1))
-#'          
+#' 
 #' str(dat) # current structure
 #' dat2 <- splitstackshape:::FacsToChars(dat)
 #' str(dat2) # Your new object

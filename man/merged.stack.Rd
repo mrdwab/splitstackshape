@@ -32,13 +32,6 @@
   \code{\link[data.table:merge]{merge}} the resulting
   \code{list} into a single \code{data.table}.
 }
-\note{
-  This is not a particularly fast function. It was the
-  original concept for \code{\link{Reshape}}, but
-  \code{Reshape} will generally be \emph{much} faster
-  because neither \code{\link{Reduce}} nor \code{merge} are
-  particularly fast.
-}
 \examples{
 set.seed(1)
 mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),

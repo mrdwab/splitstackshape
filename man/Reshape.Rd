@@ -2,7 +2,8 @@
 \alias{Reshape}
 \title{Reshape wide data into a semi-long form}
 \usage{
-  Reshape(data, id.vars, var.stubs, sep = ".", ...)
+  Reshape(data, id.vars, var.stubs, sep = ".",
+    rm.rownames = TRUE, ...)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -14,6 +15,11 @@
 
   \item{sep}{The character that separates the "variable
   name" from the "times" in the wide \code{data.frame}.}
+
+  \item{rm.rownames}{Logical. \code{reshape} creates some
+  long distracting \code{rownames} that do not seem to
+  serve much purpose. This argument is set to \code{TRUE}
+  to remove the \code{rownames} by default.}
 
   \item{\dots}{Further arguments to \code{\link{NoSep}} in
   case the separator is of a different form.}

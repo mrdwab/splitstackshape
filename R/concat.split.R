@@ -44,6 +44,10 @@ NULL
 
 
 
+
+
+
+
 #' Split numeric concatenated values into their corresponding column position
 #' 
 #' "Expand" concatenated numeric values to their relevant position in a
@@ -133,6 +137,10 @@ NULL
 
 
 
+
+
+
+
 #' Split concatenated cells in a \code{data.frame} into a \code{list} format
 #' 
 #' Takes a column in a \code{data.frame} with multiple values, splits the
@@ -182,6 +190,10 @@ concat.split.list <- function(data, split.col, sep = ",",
   else data
 }
 NULL
+
+
+
+
 
 
 
@@ -308,6 +320,10 @@ NULL
 
 
 
+
+
+
+
 #' Split concatenated cells in a \code{data.frame} and optionally reshape the
 #' output
 #' 
@@ -342,8 +358,8 @@ NULL
 #' @export concat.split.multiple
 concat.split.multiple <- function(data, split.cols, seps = ",", 
                                   direction = "wide") {
+  split.cols <- Names(data, split.cols)
   IDs <- othernames(data, split.cols)
-  if (is.numeric(split.cols)) split.cols <- names(data)[split.cols]
   if (length(seps) == 1) seps <- rep(seps, length(split.cols))
   if (length(seps) != length(split.cols)) {
     stop("Verify you have entered the correct number of seps")

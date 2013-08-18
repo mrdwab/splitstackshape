@@ -1,4 +1,5 @@
 
+
 #' Example dataset with concatenated cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
@@ -12,13 +13,17 @@
 #' @keywords datasets
 NULL
 
+
+
+
+
 #' splitstackshape
 #' 
 #' Functions to split concatenated data, conveniently stack columns of
 #' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.0\cr Date: \tab 2013-08-12\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.1.0\cr Date: \tab 2013-08-18\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
@@ -44,24 +49,24 @@ NULL
 #' 
 #' ## Reshape
 #' set.seed(1)
-#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), 
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
 #'                    varA.1 = sample(letters, 6),
-#'                    varA.2 = sample(letters, 6), 
+#'                    varA.2 = sample(letters, 6),
 #'                    varA.3 = sample(letters, 6),
-#'                    varB.2 = sample(10, 6), 
+#'                    varB.2 = sample(10, 6),
 #'                    varB.3 = sample(10, 6),
 #'                    varC.3 = rnorm(6))
 #' mydf
 #' Reshape(mydf, id.vars = c("id_1", "id_2"),
 #'         var.stubs = c("varA", "varB", "varC"))
-#'
+#' 
 #' ## Stacked
 #' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
 #'         var.stubs = c("varA", "varB", "varC"),
 #'         sep = "\\.")
-#'         
+#' 
 #' \dontshow{rm(mydf)}
-#'   
+#' 
 NULL
 
 

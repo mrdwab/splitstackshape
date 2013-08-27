@@ -131,7 +131,7 @@ NULL
 #' @export merged.stack
 merged.stack <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
   temp <- Stacked(data = data, id.vars = id.vars, var.stubs = var.stubs,
-                  sep = sep, keep.all = keep.all, keyed = TRUE ...)
+                  sep = sep, keep.all = keep.all, keyed = TRUE, ...)
   if (length(temp) == 1) temp[[1]]
   else Reduce(function(x, y) merge(x, y, all = TRUE), temp)
 }

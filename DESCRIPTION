@@ -2,8 +2,8 @@ Package: splitstackshape
 Type: Package
 Title: Functions to split concatenated data, conveniently stack columns of
     data.frames, and conveniently reshape data.frames.
-Version: 1.1.0
-Date: 2013-08-18
+Version: 1.2.0
+Date: 2013-08-27
 Author: Ananda Mahto
 Maintainer: Ananda Mahto <ananda@mahto.info>
 Description: Online data collection tools like Google Forms often export

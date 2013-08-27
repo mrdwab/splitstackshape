@@ -23,7 +23,7 @@ NULL
 #' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.1.0\cr Date: \tab 2013-08-18\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.2.0\cr Date: \tab 2013-08-27\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
@@ -64,6 +64,39 @@ NULL
 #' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
 #'         var.stubs = c("varA", "varB", "varC"),
 #'         sep = "\\.")
+#' \dontrun{
+#' ## Processing times
+#' set.seed(1)
+#' Nrow <- 1000000
+#' Ncol <- 10
+#' mybigdf <- cbind(id = 1:Nrow, as.data.frame(matrix(rnorm(Nrow*Ncol), 
+#'                                                    nrow=Nrow)))
+#' head(mybigdf)
+#' dim(mybigdf)
+#' tail(mybigdf)
+#' A <- names(mybigdf)
+#' names(mybigdf) <- c("id", paste("varA", 1:3, sep = "_"), 
+#'                     paste("varB", 1:4, sep = "_"), 
+#'                     paste("varC", 1:3, sep = "_"))
+#' system.time({
+#'    O1 <- Reshape(mybigdf, id.vars = "id", 
+#'    var.stubs = c("varA", "varB", "varC"), sep = "_")
+#'    O1 <- O1[order(O1$id, O1$time), ]
+#' })
+#' system.time({
+#'    O2 <- merged.stack(mybigdf, id.vars="id", 
+#'    var.stubs=c("varA", "varB", "varC"), sep = "_")
+#' })
+#' system.time({
+#'    O3 <- Stacked(mybigdf, id.vars="id", 
+#'    var.stubs=c("varA", "varB", "varC"), sep = "_")
+#' })
+#' DT <- data.table(mybigdf)
+#' system.time({
+#'    O4 <- merged.stack(DT, id.vars="id", 
+#'    var.stubs=c("varA", "varB", "varC"), sep = "_")
+#' })
+#' }
 #' 
 #' \dontshow{rm(mydf)}
 #' 

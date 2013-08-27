@@ -14,6 +14,10 @@
 #' \code{\link[data.table:data.table]{data.table}} comprise only columns for
 #' the \code{id.vars}, \code{var.stubs}, and "times" (\code{keep.all = FALSE}).
 #' Other variables are \emph{recycled} to appropriate length.
+#' @param keyed Logical. Should the \code{Stacked} function automatically set
+#' the \code{key} for the resulting \code{data.table}s. If \code{TRUE} (default)
+#' the \code{key} is set to the \code{id.vars} and the "time" variables that
+#' are created by \code{Stacked}.
 #' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
 #' is of a different form.
 #' @return A \code{list} of \code{data.table}s with one \code{data.table} for
@@ -41,15 +45,15 @@
 #' \dontshow{rm(mydf)}
 #' 
 #' @export Stacked
-Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
+Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE, ...) {
   vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
   temp1 <- vGrep(var.stubs, names(data))
-    if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
+  if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
   onames <- setdiff(names(data), 
                     c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
   if (!isTRUE(keep.all)) onames <- NULL
   if (length(onames) == 0) onames <- NULL
-    if (!isTRUE(is.data.table(data))) data <- data.table(data)
+  if (!isTRUE(is.data.table(data))) data <- data.table(data)
   ZZ <- vector("list", length(var.stubs))
   names(ZZ) <- var.stubs
   .SD <- .N <- count <- a <- NULL
@@ -59,21 +63,20 @@ Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
       names(x) <- c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
       x[-1]
     })
-  
+
   for (i in seq_along(var.stubs)) {
     ZZ[[i]] <-  cbind(
       data[, c(id.vars, onames), with = FALSE],
-      stack(data[, lapply(.SD, function(y) {
-        if (any(sapply(y, is.factor))) as.character(y)
-        else y
-      }), .SDcols = temp1[[i]]])[1])
-    setnames(ZZ[[i]], "values", var.stubs[[i]])
+      data[, list(.values = unlist(.SD, use.names=FALSE)), .SDcols = temp1[[i]]])
+    setnames(ZZ[[i]], ".values", var.stubs[[i]])
     setkeyv(ZZ[[i]], id.vars)
     ZZ[[i]] <- cbind(ZZ[[i]], TimeCols[[i]])
-    setkeyv(ZZ[[i]], c(key(ZZ[[i]]), names(TimeCols[[i]])))
-    setcolorder(ZZ[[i]], c(key(ZZ[[i]]), var.stubs[[i]], onames))
+    if (isTRUE(keyed)) {
+      setkeyv(ZZ[[i]], c(key(ZZ[[i]]), names(TimeCols[[i]])))
+      setcolorder(ZZ[[i]], c(key(ZZ[[i]]), var.stubs[[i]], onames))
+    } 
   }
-  
+
   if (length(ZZ) == 1) ZZ[[1]]
   else ZZ
 }
@@ -104,6 +107,8 @@ NULL
 #' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
 #' is of a different form.
 #' @return A merged \code{data.table}.
+#' @note The \code{keyed} argument to \code{\link{Stacked}} has been hard-
+#' coded to \code{TRUE} to make \code{merge} work.
 #' @author Ananda Mahto
 #' @seealso \code{\link{Stacked}}, \code{\link{Reshape}}
 #' @examples
@@ -126,7 +131,7 @@ NULL
 #' @export merged.stack
 merged.stack <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
   temp <- Stacked(data = data, id.vars = id.vars, var.stubs = var.stubs,
-                  sep = sep, keep.all = keep.all, ...)
+                  sep = sep, keep.all = keep.all, keyed = TRUE ...)
   if (length(temp) == 1) temp[[1]]
   else Reduce(function(x, y) merge(x, y, all = TRUE), temp)
 }

@@ -32,6 +32,11 @@
   \code{\link[data.table:merge]{merge}} the resulting
   \code{list} into a single \code{data.table}.
 }
+\note{
+  The \code{keyed} argument to \code{\link{Stacked}} has
+  been hard- coded to \code{TRUE} to make \code{merge}
+  work.
+}
 \examples{
 set.seed(1)
 mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),

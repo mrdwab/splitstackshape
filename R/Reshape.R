@@ -64,10 +64,10 @@ Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...
     x <- do.call(rbind.data.frame, 
                  strsplit(temp, split = sep))
     names(x) <- 
-      c("VAR", paste(".time", 1:(length(x)-1), sep = "_"))
+      c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
   }
   
-  xS <- split(x$.time_1, x$VAR)
+  xS <- split(x$.time_1, x$.var)
   xL <- unique(unlist(xS))
   
   if (isTRUE(all(sapply(xS, function(x) all(xL %in% x))))) {

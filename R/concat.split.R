@@ -48,10 +48,11 @@ NULL
 
 
 
-#' Split numeric concatenated values into their corresponding column position
+#' Split concatenated values into their corresponding column position
 #' 
 #' "Expand" concatenated numeric values to their relevant position in a
-#' \code{data.frame}.
+#' \code{data.frame} or create a binary representation of concatenated
+#' character values.
 #' 
 #' 
 #' @param data The source \code{data.frame}.
@@ -74,15 +75,13 @@ NULL
 #' @author Ananda Mahto
 #' @seealso \code{\link{concat.split}}, \code{\link{concat.split.list}},
 #' \code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-#' \code{\link{binaryMat}}, \code{\link{valueMat}}
+#' \code{\link{binaryMat}}, \code{\link{valueMat}}, \code{\link{charBinaryMat}}
 #' @examples
 #' 
 #' temp <- head(concat.test)
 #' concat.split.expanded(temp, "Likes")
 #' concat.split.expanded(temp, 4, ";")
 #' concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
-#' 
-#' ## Note the warning
 #' concat.split.expanded(temp, "Siblings", drop = TRUE)
 #' 
 #' \dontshow{rm(temp)}
@@ -94,17 +93,17 @@ concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL,
   else a <- data[[split.col]]
   
   b <- strsplit(a, sep, fixed = fixed)
+  trim <- function(x) gsub("^\\s+|\\s+$", "", x)
+  b <- lapply(b, trim)
   
-  if (suppressWarnings(is.na(try(max(as.numeric(unlist(b))))))) {
-    temp1 <- concat.split.compact(data, split.col =  split.col, sep = sep, 
-                                  drop = drop, fixed = fixed)
-    m <- paste("Your concatenated variable is a string.", 
-               "We have used 'concat.split.compact' instead.", sep = "\n")
-    message(m)
-    Return <- "A"
-  } else if (!is.na(try(max(as.numeric(unlist(b)))))) {
+  if (suppressWarnings(is.na(try(max(as.numeric(unlist(b, use.names = FALSE))))))) {
+    temp1 <- charBinaryMat(b, fill = fill)
+    colnames(temp1) <- paste(names(data[split.col]), colnames(temp1), sep = "_")
+    expandedNames <- colnames(temp1)
+    temp1 <- cbind(data, temp1)
+  } else if (!is.na(try(max(as.numeric(unlist(b, use.names = FALSE)))))) {
     if (is.null(mode)) mode = "binary"
-    nchars <- max(nchar(unlist(b)))
+    nchars <- max(nchar(unlist(b, use.names = FALSE)))
     temp1 <- switch(
       mode,
       binary = {
@@ -122,10 +121,9 @@ concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL,
       stop("'mode' must be 'binary' or 'value'"))
     expandedNames <- colnames(temp1)
     temp1 <- cbind(data, temp1)
-    Return <- "B"
   }
   
-  if (isTRUE(drop) & Return == "B") temp1[c(othernames(data, split.col), 
+  if (isTRUE(drop)) temp1[c(othernames(data, split.col), 
                                             expandedNames)]
   else temp1
 }

@@ -37,6 +37,7 @@ splitstackshape:::binaryMat(A, "ZZZ")
   Ananda Mahto
 }
 \seealso{
-  \code{strsplit}, \code{\link{valueMat}}
+  \code{strsplit}, \code{\link{valueMat}},
+  \code{\link{charBinaryMat}}
 }
 

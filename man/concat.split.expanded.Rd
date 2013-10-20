@@ -1,6 +1,6 @@
 \name{concat.split.expanded}
 \alias{concat.split.expanded}
-\title{Split numeric concatenated values into their corresponding column position}
+\title{Split concatenated values into their corresponding column position}
 \usage{
   concat.split.expanded(data, split.col, sep = ",",
     mode = NULL, drop = FALSE, fixed = FALSE, fill = NA)
@@ -32,7 +32,8 @@
 }
 \description{
   "Expand" concatenated numeric values to their relevant
-  position in a \code{data.frame}.
+  position in a \code{data.frame} or create a binary
+  representation of concatenated character values.
 }
 \note{
   When \code{mode = "binary"} is selected, the function
@@ -45,8 +46,6 @@ temp <- head(concat.test)
 concat.split.expanded(temp, "Likes")
 concat.split.expanded(temp, 4, ";")
 concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
-
-## Note the warning
 concat.split.expanded(temp, "Siblings", drop = TRUE)
 
 \dontshow{rm(temp)}
@@ -59,6 +58,7 @@ concat.split.expanded(temp, "Siblings", drop = TRUE)
   \code{\link{concat.split.list}},
   \code{\link{concat.split.compact}},
   \code{\link{concat.split.multiple}},
-  \code{\link{binaryMat}}, \code{\link{valueMat}}
+  \code{\link{binaryMat}}, \code{\link{valueMat}},
+  \code{\link{charBinaryMat}}
 }
 

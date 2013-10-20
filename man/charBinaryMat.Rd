@@ -1,8 +1,8 @@
-\name{valueMat}
-\alias{valueMat}
-\title{Create a value matrix from a list of values}
+\name{charBinaryMat}
+\alias{charBinaryMat}
+\title{Create a binary matrix from a list of character values}
 \usage{
-  valueMat(listOfValues, fill = NA)
+  charBinaryMat(listOfValues, fill = NA)
 }
 \arguments{
   \item{listOfValues}{A \code{list} of input values to be
@@ -15,7 +15,7 @@
   A \code{matrix}.
 }
 \description{
-  Create a value matrix from a list of values
+  Create a binary matrix from a list of character values
 }
 \details{
   This is primarily a helper function for the
@@ -25,11 +25,10 @@
   \code{\link{strsplit}}.
 }
 \examples{
-invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
-           "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
+invec <- c("rock,electro","electro","rock,jazz")
 A <- strsplit(invec, ",")
-splitstackshape:::valueMat(A)
-splitstackshape:::valueMat(A, "ZZZ")
+splitstackshape:::charBinaryMat(A)
+splitstackshape:::charBinaryMat(A, 0)
 
 \dontshow{rm(invec, A)}
 }
@@ -38,6 +37,6 @@ splitstackshape:::valueMat(A, "ZZZ")
 }
 \seealso{
   \code{strsplit}, \code{\link{binaryMat}},
-  \code{\link{charBinaryMat}}
+  \code{\link{valueMat}}
 }
 

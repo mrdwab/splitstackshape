@@ -60,8 +60,14 @@ Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE
   TimeCols <- 
     lapply(seq_along(var.stubs), function(i) {
       x <- do.call(rbind.data.frame, strsplit(names(data)[temp1[[i]]], sep))
-      names(x) <- c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
-      x[-1]
+      if (length(x) == 1L) {
+        names(x) <- ".time_1"
+        x
+      } 
+      else {
+        names(x) <- c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
+        x[-1]
+      } 
     })
 
   for (i in seq_along(var.stubs)) {

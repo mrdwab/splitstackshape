@@ -28,8 +28,3 @@ install_github("splitstackshape", "mrdwab", ref = "devel")
 ```
 
 Current version: 1.2.1
-
-
-
-
-

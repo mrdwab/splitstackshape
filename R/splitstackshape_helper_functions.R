@@ -105,7 +105,7 @@ NULL
 #' @param fill The initializing fill value for the empty matrix.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{valueMat}}
+#' @seealso \code{strsplit}, \code{\link{valueMat}}, \code{\link{charBinaryMat}}
 #' @examples
 #' 
 #' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
@@ -136,9 +136,9 @@ NULL
 
 
 
-#' Create a binary matrix from a list of values
+#' Create a value matrix from a list of values
 #' 
-#' Create a binary matrix from a list of values
+#' Create a value matrix from a list of values
 #' 
 #' This is primarily a helper function for the \code{\link{concat.split}}
 #' function when creating the "expanded" structure. The input is anticipated to
@@ -149,7 +149,7 @@ NULL
 #' @param fill The initializing fill value for the empty matrix.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{binaryMat}}
+#' @seealso \code{strsplit}, \code{\link{binaryMat}}, \code{\link{charBinaryMat}}
 #' @examples
 #' 
 #' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
@@ -174,9 +174,39 @@ NULL
 
 
 
-
-
-
+#' Create a binary matrix from a list of character values
+#' 
+#' Create a binary matrix from a list of character values
+#' 
+#' This is primarily a helper function for the \code{\link{concat.split}}
+#' function when creating the "expanded" structure. The input is anticipated to
+#' be a \code{list} of values obtained using \code{\link{strsplit}}.
+#' 
+#' @param listOfValues A \code{list} of input values to be inserted in a
+#' matrix.
+#' @param fill The initializing fill value for the empty matrix.
+#' @return A \code{matrix}.
+#' @author Ananda Mahto
+#' @seealso \code{strsplit}, \code{\link{binaryMat}}, \code{\link{valueMat}}
+#' @examples
+#' 
+#' invec <- c("rock,electro","electro","rock,jazz")
+#' A <- strsplit(invec, ",")
+#' splitstackshape:::charBinaryMat(A)
+#' splitstackshape:::charBinaryMat(A, 0)
+#' 
+#' \dontshow{rm(invec, A)}
+#' 
+charBinaryMat <- function(listOfValues, fill = NA) {
+  lev <- sort(unique(unlist(listOfValues, use.names = FALSE)))
+  m <- matrix(fill, nrow = length(listOfValues), ncol = length(lev))
+  colnames(m) <- lev
+  for (i in 1:nrow(m)) {
+    m[i, listOfValues[[i]]] <- 1
+  }
+  m
+}
+NULL
 
 
 

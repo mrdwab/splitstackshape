@@ -1,6 +1,6 @@
 \name{valueMat}
 \alias{valueMat}
-\title{Create a binary matrix from a list of values}
+\title{Create a value matrix from a list of values}
 \usage{
   valueMat(listOfValues, fill = NA)
 }
@@ -15,7 +15,7 @@
   A \code{matrix}.
 }
 \description{
-  Create a binary matrix from a list of values
+  Create a value matrix from a list of values
 }
 \details{
   This is primarily a helper function for the
@@ -37,6 +37,7 @@ splitstackshape:::valueMat(A, "ZZZ")
   Ananda Mahto
 }
 \seealso{
-  \code{strsplit}, \code{\link{binaryMat}}
+  \code{strsplit}, \code{\link{binaryMat}},
+  \code{\link{charBinaryMat}}
 }
 

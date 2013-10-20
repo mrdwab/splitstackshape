@@ -8,6 +8,10 @@ R functions to split concatenated data, conveniently stack columns of `data.fram
 * `Stacked`: A function to create a list of `stack`ed sets of variables. Similar to `melt` from "reshape2", but doesn't put everything into one very long `data.frame`.
 * `Reshape`: A function to allow base R's `reshape` function to work with "unbalanced" datasets.
 
+## Utilities
+
+* `getanID`: A function for creating a secondary ID when duplicated "id" variables are present.
+
 ## Install
 
 The package [is on CRAN](http://cran.r-project.org/web/packages/splitstackshape/index.html). You can install it using:
@@ -24,6 +28,7 @@ install_github("splitstackshape", "mrdwab", ref = "devel")
 ```
 
 Current version: 1.2.1
+
 
 
 

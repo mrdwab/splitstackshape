@@ -41,11 +41,7 @@ NULL
 Names <- function(data, invec) {
   names(data[invec])
 }
-
-
-
-
-
+NULL
 
 #' Read concatenated character vectors into a \code{data.frame}
 #' 
@@ -84,14 +80,6 @@ read.concat <- function(data, col.prefix, sep) {
 }
 NULL
 
-
-
-
-
-
-
-
-
 #' Create a binary matrix from a list of values
 #' 
 #' Create a binary matrix from a list of values
@@ -117,24 +105,15 @@ NULL
 #' \dontshow{rm(invec, A)}
 #' 
 binaryMat <- function(listOfValues, fill = NA) {
-  listOfValues <- lapply(listOfValues, as.numeric)
-  ncol <- max(unlist(listOfValues))
+  listOfValues <- lapply(listOfValues, as.integer)
+  ncol <- max(unlist(listOfValues, use.names = FALSE))
   nrow <- length(listOfValues)
-  m <- matrix(fill, nrow = nrow, ncol = ncol)
-  for (i in 1:nrow) {
-    m[i, listOfValues[[i]]] <- 1
-  }
+  m = matrix(fill, nrow = nrow, ncol = ncol)      
+  for (i in seq_along(listOfValues))
+    m[i, listOfValues[[i]]] <- 1L
   m
 }
 NULL
-
-
-
-
-
-
-
-
 
 #' Create a value matrix from a list of values
 #' 
@@ -161,18 +140,15 @@ NULL
 #' \dontshow{rm(invec, A)}
 #' 
 valueMat <- function(listOfValues, fill = NA) {
-  listOfValues <- lapply(listOfValues, as.numeric)
-  ncol <- max(unlist(listOfValues))
+  listOfValues <- lapply(listOfValues, as.integer)
+  ncol <- max(unlist(listOfValues, use.names = FALSE))
   nrow <- length(listOfValues)
-  m <- matrix(fill, nrow = nrow, ncol = ncol)
-  for (i in 1:nrow) {
+  m = matrix(fill, nrow = nrow, ncol = ncol)      
+  for (i in seq_along(listOfValues))
     m[i, listOfValues[[i]]] <- listOfValues[[i]]
-  }
   m
 }
 NULL
-
-
 
 #' Create a binary matrix from a list of character values
 #' 
@@ -201,14 +177,12 @@ charBinaryMat <- function(listOfValues, fill = NA) {
   lev <- sort(unique(unlist(listOfValues, use.names = FALSE)))
   m <- matrix(fill, nrow = length(listOfValues), ncol = length(lev))
   colnames(m) <- lev
-  for (i in 1:nrow(m)) {
-    m[i, listOfValues[[i]]] <- 1
+  for (i in seq_len(nrow(m))) {
+    m[i, listOfValues[[i]]] <- 1L
   }
   m
 }
 NULL
-
-
 
 #' Split basic alphanumeric strings which have no separators
 #' 
@@ -247,12 +221,6 @@ NoSep <- function(data, charfirst = TRUE) {
 }
 NULL
 
-
-
-
-
-
-
 #' Convert all \code{factor} columns to \code{character} columns in a
 #' \code{data.frame}
 #' 
@@ -285,3 +253,7 @@ FacsToChars <- function(mydf) {
     lapply(mydf[sapply(mydf, is.factor)], as.character)
   mydf
 }
+NULL
+
+trim <- function(x) gsub("^\\s+|\\s+$", "", x)
+NULL

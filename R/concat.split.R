@@ -38,16 +38,6 @@ concat.split.compact <- function(data, split.col, sep = ",",
 }
 NULL
 
-
-
-
-
-
-
-
-
-
-
 #' Split concatenated values into their corresponding column position
 #' 
 #' "Expand" concatenated numeric values to their relevant position in a
@@ -80,7 +70,7 @@ NULL
 #' 
 #' temp <- head(concat.test)
 #' concat.split.expanded(temp, "Likes")
-#' concat.split.expanded(temp, 4, ";")
+#' concat.split.expanded(temp, 4, ";", fill = 0)
 #' concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
 #' concat.split.expanded(temp, "Siblings", drop = TRUE)
 #' 
@@ -88,12 +78,11 @@ NULL
 #' 
 #' @export concat.split.expanded
 concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
-                                  drop = FALSE, fixed = FALSE, fill = NA) {
+                                  drop = FALSE, fixed = TRUE, fill = NA) {
   if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
   else a <- data[[split.col]]
   
   b <- strsplit(a, sep, fixed = fixed)
-  trim <- function(x) gsub("^\\s+|\\s+$", "", x)
   b <- lapply(b, trim)
   
   if (suppressWarnings(is.na(try(max(as.numeric(unlist(b, use.names = FALSE))))))) {

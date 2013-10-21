@@ -3,7 +3,7 @@
 \title{Split concatenated values into their corresponding column position}
 \usage{
   concat.split.expanded(data, split.col, sep = ",",
-    mode = NULL, drop = FALSE, fixed = FALSE, fill = NA)
+    mode = NULL, drop = FALSE, fixed = TRUE, fill = NA)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -44,7 +44,7 @@
 \examples{
 temp <- head(concat.test)
 concat.split.expanded(temp, "Likes")
-concat.split.expanded(temp, 4, ";")
+concat.split.expanded(temp, 4, ";", fill = 0)
 concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
 concat.split.expanded(temp, "Siblings", drop = TRUE)
 

@@ -3,8 +3,8 @@
 \title{Split concatenated cells in a \code{data.frame}}
 \usage{
   concat.split(data, split.col, sep = ",",
-    structure = "compact", mode = NULL, drop = FALSE,
-    fixed = FALSE, fill = NA)
+    structure = "compact", mode = NULL, type = NULL,
+    drop = FALSE, fixed = FALSE, fill = NA)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -27,6 +27,12 @@
   setting only applies when \code{structure = "expanded"};
   a warning message will be issued if used with other
   structures.}
+
+  \item{type}{Can be either \code{"numeric"} or
+  \code{"character"} (where \code{"numeric"} is default).
+  This setting only applies when \code{structure =
+  "expanded"}; a warning message will be issued if used
+  with other structures.}
 
   \item{drop}{Logical (whether to remove the original
   variable from the output or not). Defaults to
@@ -92,10 +98,14 @@ concat.split(temp, 2, mode = "value", drop = TRUE)
 
 # Try again. Notice the differing number of resulting columns
 concat.split(temp, 2, structure = "expanded",
-mode = "value", drop = TRUE)
+mode = "value", type = "numeric", drop = TRUE)
 
 # Let's try splitting some strings... Same syntax
 concat.split(temp, 3, drop = TRUE)
+
+# Strings can also be split to binary representations
+concat.split(temp, 3, structure = "expanded",
+type = "character", fill = 0, drop = TRUE)
 
 # Split up the "Likes column" into a list variable; retain original column
 head(concat.split(concat.test, 2, structure = "list", drop = FALSE))

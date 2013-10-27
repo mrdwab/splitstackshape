@@ -40,10 +40,8 @@ NULL
 
 #' Split concatenated values into their corresponding column position
 #' 
-#' "Expand" concatenated numeric values to their relevant position in a
-#' \code{data.frame} or create a binary representation of concatenated
-#' character values.
-#' 
+#' "Expand" concatenated numeric or character values to their relevant position 
+#' in a \code{data.frame} or create a binary representation of such data.
 #' 
 #' @param data The source \code{data.frame}.
 #' @param split.col The variable that needs to be split (either name or index
@@ -52,71 +50,102 @@ NULL
 #' expression.
 #' @param mode Can be either \code{"binary"} (where presence of a number in a
 #' given column is converted to "1") or \code{"value"} (where the value is
-#' retained and not recoded to "1").
+#' retained and not recoded to "1"). Defaults to \code{"binary"}.
+#' @param type Can be either \code{"numeric"} (where the items being split are 
+#' numbers) or \code{"character"} (where the items being split are character
+#' strings). Defaults to \code{"numeric"}.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' \code{FALSE}.
 #' @param fixed Used for \code{strsplit} for allowing regular expressions to be
 #' used.
 #' @param fill Desired "fill" value. Defaults to \code{NA}.
 #' @return A \code{data.frame}
-#' @note When \code{mode = "binary"} is selected, the function calls
-#' \code{\link{binaryMat}} to expand the values. When \code{mode = "value"} is
-#' selected, the function calls \code{\link{valueMat}}.
 #' @author Ananda Mahto
 #' @seealso \code{\link{concat.split}}, \code{\link{concat.split.list}},
 #' \code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-#' \code{\link{binaryMat}}, \code{\link{valueMat}}, \code{\link{charBinaryMat}}
+#' \code{\link{numMat}}, \code{\link{charMat}}
 #' @examples
 #' 
 #' temp <- head(concat.test)
 #' concat.split.expanded(temp, "Likes")
 #' concat.split.expanded(temp, 4, ";", fill = 0)
 #' concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
-#' concat.split.expanded(temp, "Siblings", drop = TRUE)
+#' concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
 #' 
 #' \dontshow{rm(temp)}
 #' 
 #' @export concat.split.expanded
+#' 
 concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
-                                  drop = FALSE, fixed = TRUE, fill = NA) {
+                                  type = "numeric", drop = FALSE, 
+                                  fixed = TRUE, fill = NA) {
   if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
   else a <- data[[split.col]]
-  
+  if (is.null(mode)) mode = "binary"  
   b <- strsplit(a, sep, fixed = fixed)
   b <- lapply(b, trim)
   
-  if (suppressWarnings(is.na(try(max(as.numeric(unlist(b, use.names = FALSE))))))) {
-    temp1 <- charBinaryMat(b, fill = fill)
-    colnames(temp1) <- paste(names(data[split.col]), colnames(temp1), sep = "_")
-    expandedNames <- colnames(temp1)
-    temp1 <- cbind(data, temp1)
-  } else if (!is.na(try(max(as.numeric(unlist(b, use.names = FALSE)))))) {
-    if (is.null(mode)) mode = "binary"
-    nchars <- max(nchar(unlist(b, use.names = FALSE)))
-    temp1 <- switch(
-      mode,
-      binary = {
-        temp <- binaryMat(b, fill = fill)
-        colnames(temp) <- 
-          sprintf(paste0(names(data[split.col]), "_%0", nchars, "d"), 1:ncol(temp))
-        temp
-      },
-      value = {
-        temp <- valueMat(b, fill = fill)
-        colnames(temp) <- 
-          sprintf(paste0(names(data[split.col]), "_%0", nchars, "d"), 1:ncol(temp))
-        temp
-      },
-      stop("'mode' must be 'binary' or 'value'"))
-    expandedNames <- colnames(temp1)
-    temp1 <- cbind(data, temp1)
-  }
-  
-  if (isTRUE(drop)) temp1[c(othernames(data, split.col), 
-                                            expandedNames)]
-  else temp1
+  temp1 <- switch(
+    type,
+    character = {
+      temp1 <- charMat(b, fill = fill, mode = mode)
+      colnames(temp1) <- paste(names(data[split.col]), 
+                               colnames(temp1), sep = "_")
+      temp1
+    },
+    numeric = {
+      nchars <- max(nchar(unlist(b, use.names = FALSE)))
+      temp1 <- numMat(b, fill = fill, mode = mode)
+      colnames(temp1) <- sprintf(paste0(names(data[split.col]), 
+                                        "_%0", nchars, "d"), 
+                                 seq_len(ncol(temp1)))
+      temp1
+    },
+    stop("'type' must be either 'character' or 'numeric'"))
+  if (isTRUE(drop)) cbind(data[othernames(data, split.col)], temp1)
+  else cbind(data, temp1)
 }
 NULL
+# concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
+#                                   drop = FALSE, fixed = TRUE, fill = NA) {
+#   if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
+#   else a <- data[[split.col]]
+#   
+#   b <- strsplit(a, sep, fixed = fixed)
+#   b <- lapply(b, trim)
+#   
+#   if (suppressWarnings(is.na(try(max(as.numeric(unlist(b, use.names = FALSE))))))) {
+#     temp1 <- charBinaryMat(b, fill = fill)
+#     colnames(temp1) <- paste(names(data[split.col]), colnames(temp1), sep = "_")
+#     expandedNames <- colnames(temp1)
+#     temp1 <- cbind(data, temp1)
+#   } else if (!is.na(try(max(as.numeric(unlist(b, use.names = FALSE)))))) {
+#     if (is.null(mode)) mode = "binary"
+#     nchars <- max(nchar(unlist(b, use.names = FALSE)))
+#     temp1 <- switch(
+#       mode,
+#       binary = {
+#         temp <- binaryMat(b, fill = fill)
+#         colnames(temp) <- 
+#           sprintf(paste0(names(data[split.col]), "_%0", nchars, "d"), 1:ncol(temp))
+#         temp
+#       },
+#       value = {
+#         temp <- valueMat(b, fill = fill)
+#         colnames(temp) <- 
+#           sprintf(paste0(names(data[split.col]), "_%0", nchars, "d"), 1:ncol(temp))
+#         temp
+#       },
+#       stop("'mode' must be 'binary' or 'value'"))
+#     expandedNames <- colnames(temp1)
+#     temp1 <- cbind(data, temp1)
+#   }
+#   
+#   if (isTRUE(drop)) temp1[c(othernames(data, split.col), 
+#                                             expandedNames)]
+#   else temp1
+# }
+# NULL
 
 
 
@@ -218,6 +247,10 @@ NULL
 #' Boolean data, but without assuming 0 when data is not available).  This
 #' setting only applies when \code{structure = "expanded"}; a warning message
 #' will be issued if used with other structures.
+#' @param type Can be either \code{"numeric"} or \code{"character"} (where
+#' \code{"numeric"} is default).  This setting only applies when 
+#' \code{structure = "expanded"}; a warning message will be issued if used 
+#' with other structures.
 #' @param drop Logical (whether to remove the original variable from the output
 #' or not). Defaults to \code{FALSE}.
 #' @param fixed Is the input for the \code{sep} value \emph{fixed}, or a
@@ -259,10 +292,14 @@ NULL
 #' 
 #' # Try again. Notice the differing number of resulting columns
 #' concat.split(temp, 2, structure = "expanded",
-#' mode = "value", drop = TRUE)
+#' mode = "value", type = "numeric", drop = TRUE)
 #' 
 #' # Let's try splitting some strings... Same syntax
 #' concat.split(temp, 3, drop = TRUE)
+#' 
+#' # Strings can also be split to binary representations
+#' concat.split(temp, 3, structure = "expanded", 
+#' type = "character", fill = 0, drop = TRUE)
 #' 
 #' # Split up the "Likes column" into a list variable; retain original column
 #' head(concat.split(concat.test, 2, structure = "list", drop = FALSE))
@@ -274,27 +311,34 @@ NULL
 #' 
 #' @export concat.split
 concat.split <- function(data, split.col, sep = ",", structure = "compact",
-                         mode = NULL, drop = FALSE, fixed = FALSE, fill = NA) {
+                         mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, 
+                         fill = NA) {
   
-  Message <- paste(c("", "'mode' supplied but ignored.", 
-                     "'mode' setting only applicable",
-                     "when structure = 'expanded'"), collapse = "\n")
+  M1 <- paste(c("", "'mode' supplied but ignored.", 
+                "'mode' setting only applicable",
+                "when structure = 'expanded'"), collapse = "\n")
+  M2 <- paste(c("", "'type' supplied but ignored.", 
+                "'type' setting only applicable",
+                "when structure = 'expanded'"), collapse = "\n")
+  
   temp <- switch(
     structure, 
     compact = {
-      if (!is.null(mode)) warning(Message)
+      if (!is.null(mode)) warning(M1)
+      if (!is.null(type)) warning(M2)
       concat.split.compact(data = data, split.col = split.col, 
                            sep = sep, drop = drop, fixed = fixed)
     },
     list = {
-      if (!is.null(mode)) warning(Message)
+      if (!is.null(mode)) warning(M1)
+      if (!is.null(type)) warning(M2)
       concat.split.list(data = data, split.col = split.col, 
                         sep = sep, drop = drop, fixed = fixed)
     },
     expanded = {
       concat.split.expanded(data = data, split.col = split.col, 
-                            sep = sep, mode = mode, drop = drop, 
-                            fixed = fixed, fill = fill)
+                            sep = sep, mode = mode, type = type, 
+                            drop = drop, fixed = fixed, fill = fill)
     },
     stop("'structure' must be either 'compact', 'expanded', or 'list'"))
   temp

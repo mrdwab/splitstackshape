@@ -3,7 +3,8 @@
 \title{Split concatenated values into their corresponding column position}
 \usage{
   concat.split.expanded(data, split.col, sep = ",",
-    mode = NULL, drop = FALSE, fixed = TRUE, fill = NA)
+    mode = NULL, type = "numeric", drop = FALSE,
+    fixed = TRUE, fill = NA)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -17,7 +18,12 @@
   \item{mode}{Can be either \code{"binary"} (where presence
   of a number in a given column is converted to "1") or
   \code{"value"} (where the value is retained and not
-  recoded to "1").}
+  recoded to "1"). Defaults to \code{"binary"}.}
+
+  \item{type}{Can be either \code{"numeric"} (where the
+  items being split are numbers) or \code{"character"}
+  (where the items being split are character strings).
+  Defaults to \code{"numeric"}.}
 
   \item{drop}{Logical. Should the original variable be
   dropped? Defaults to \code{FALSE}.}
@@ -31,22 +37,16 @@
   A \code{data.frame}
 }
 \description{
-  "Expand" concatenated numeric values to their relevant
-  position in a \code{data.frame} or create a binary
-  representation of concatenated character values.
-}
-\note{
-  When \code{mode = "binary"} is selected, the function
-  calls \code{\link{binaryMat}} to expand the values. When
-  \code{mode = "value"} is selected, the function calls
-  \code{\link{valueMat}}.
+  "Expand" concatenated numeric or character values to
+  their relevant position in a \code{data.frame} or create
+  a binary representation of such data.
 }
 \examples{
 temp <- head(concat.test)
 concat.split.expanded(temp, "Likes")
 concat.split.expanded(temp, 4, ";", fill = 0)
 concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
-concat.split.expanded(temp, "Siblings", drop = TRUE)
+concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
 
 \dontshow{rm(temp)}
 }
@@ -58,7 +58,6 @@ concat.split.expanded(temp, "Siblings", drop = TRUE)
   \code{\link{concat.split.list}},
   \code{\link{concat.split.compact}},
   \code{\link{concat.split.multiple}},
-  \code{\link{binaryMat}}, \code{\link{valueMat}},
-  \code{\link{charBinaryMat}}
+  \code{\link{numMat}}, \code{\link{charMat}}
 }
 

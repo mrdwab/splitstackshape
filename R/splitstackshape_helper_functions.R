@@ -80,44 +80,9 @@ read.concat <- function(data, col.prefix, sep) {
 }
 NULL
 
-#' Create a binary matrix from a list of values
+#' Create a numeric matrix from a list of values
 #' 
-#' Create a binary matrix from a list of values
-#' 
-#' This is primarily a helper function for the \code{\link{concat.split}}
-#' function when creating the "expanded" structure. The input is anticipated to
-#' be a \code{list} of values obtained using \code{\link{strsplit}}.
-#' 
-#' @param listOfValues A \code{list} of input values to be inserted in a
-#' matrix.
-#' @param fill The initializing fill value for the empty matrix.
-#' @return A \code{matrix}.
-#' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{valueMat}}, \code{\link{charBinaryMat}}
-#' @examples
-#' 
-#' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
-#'            "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
-#' A <- strsplit(invec, ",")
-#' splitstackshape:::binaryMat(A)
-#' splitstackshape:::binaryMat(A, "ZZZ")
-#' 
-#' \dontshow{rm(invec, A)}
-#' 
-binaryMat <- function(listOfValues, fill = NA) {
-  listOfValues <- lapply(listOfValues, as.integer)
-  ncol <- max(unlist(listOfValues, use.names = FALSE))
-  nrow <- length(listOfValues)
-  m = matrix(fill, nrow = nrow, ncol = ncol)      
-  for (i in seq_along(listOfValues))
-    m[i, listOfValues[[i]]] <- 1L
-  m
-}
-NULL
-
-#' Create a value matrix from a list of values
-#' 
-#' Create a value matrix from a list of values
+#' Create a numeric matrix from a list of values
 #' 
 #' This is primarily a helper function for the \code{\link{concat.split}}
 #' function when creating the "expanded" structure. The input is anticipated to
@@ -126,27 +91,33 @@ NULL
 #' @param listOfValues A \code{list} of input values to be inserted in a
 #' matrix.
 #' @param fill The initializing fill value for the empty matrix.
+#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to \code{"binary"}.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{binaryMat}}, \code{\link{charBinaryMat}}
+#' @seealso \code{strsplit}, \code{\link{charMat}}
 #' @examples
 #' 
 #' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
 #'            "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
 #' A <- strsplit(invec, ",")
-#' splitstackshape:::valueMat(A)
-#' splitstackshape:::valueMat(A, "ZZZ")
+#' splitstackshape:::numMat(A)
+#' splitstackshape:::numMat(A, fill = 0)
+#' splitstackshape:::numMat(A, mode = "value")
 #' 
 #' \dontshow{rm(invec, A)}
 #' 
-valueMat <- function(listOfValues, fill = NA) {
+numMat <- function(listOfValues, fill = NA, mode = "binary") {
   listOfValues <- lapply(listOfValues, as.integer)
-  ncol <- max(unlist(listOfValues, use.names = FALSE))
-  nrow <- length(listOfValues)
-  m = matrix(fill, nrow = nrow, ncol = ncol)      
-  for (i in seq_along(listOfValues))
-    m[i, listOfValues[[i]]] <- listOfValues[[i]]
-  m
+  len  <- length(listOfValues)
+  vec  <- unlist(listOfValues, use.names = FALSE)
+  mlvl <- max(vec)
+  slvl <- seq_len(mlvl)
+  out  <- matrix(fill, nrow = len, ncol = mlvl, dimnames = list(NULL, slvl))
+  i.idx <- rep(seq_len(len), vapply(listOfValues, length, integer(1L)))
+  j.idx <- match(vec, slvl)
+  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
+                                     stop("'mode' must be 'binary' or 'value'"))
+  out
 }
 NULL
 
@@ -161,26 +132,31 @@ NULL
 #' @param listOfValues A \code{list} of input values to be inserted in a
 #' matrix.
 #' @param fill The initializing fill value for the empty matrix.
+#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to \code{"binary"}.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{binaryMat}}, \code{\link{valueMat}}
+#' @seealso \code{strsplit}, \code{\link{numMat}}
 #' @examples
 #' 
 #' invec <- c("rock,electro","electro","rock,jazz")
 #' A <- strsplit(invec, ",")
-#' splitstackshape:::charBinaryMat(A)
-#' splitstackshape:::charBinaryMat(A, 0)
+#' splitstackshape:::charMat(A)
+#' splitstackshape:::charMat(A, 0)
+#' splitstackshape:::charMat(A, mode = "value")
 #' 
 #' \dontshow{rm(invec, A)}
 #' 
-charBinaryMat <- function(listOfValues, fill = NA) {
-  lev <- sort(unique(unlist(listOfValues, use.names = FALSE)))
-  m <- matrix(fill, nrow = length(listOfValues), ncol = length(lev))
-  colnames(m) <- lev
-  for (i in seq_len(nrow(m))) {
-    m[i, listOfValues[[i]]] <- 1L
-  }
-  m
+charMat <- function(listOfValues, fill = NA, mode = "binary") {
+  len   <- length(listOfValues)
+  vec   <- unlist(listOfValues, use.names = FALSE)
+  lvl   <- sort(unique(vec))
+  out   <- matrix(fill, nrow = len, ncol = length(lvl), 
+                  dimnames = list(NULL, lvl))
+  i.idx <- rep(seq.int(len), vapply(listOfValues, length, integer(1L)))
+  j.idx <- match(vec, lvl)
+  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
+                                     stop("'mode' must be 'binary' or 'value'"))
+  out
 }
 NULL
 

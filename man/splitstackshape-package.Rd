@@ -10,8 +10,8 @@
 }
 \details{
   \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab
-  Package\cr Version: \tab 1.2.1\cr Date: \tab
-  2013-10-20\cr License: \tab GPL-3\cr }
+  Package\cr Version: \tab 1.3.0\cr Date: \tab
+  2013-10-27\cr License: \tab GPL-3\cr }
 
   Online data collection tools like Google Forms often
   export multiple-response questions with data concatenated

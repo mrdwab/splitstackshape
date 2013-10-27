@@ -1,10 +1,7 @@
-
-
 #' Example dataset with concatenated cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
 #' \code{\link{concat.split}} family of functions.
-#' 
 #' 
 #' @name concat.test
 #' @aliases concatenated concat.test
@@ -13,17 +10,13 @@
 #' @keywords datasets
 NULL
 
-
-
-
-
 #' splitstackshape
 #' 
 #' Functions to split concatenated data, conveniently stack columns of
 #' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.2.2\cr Date: \tab 2013-10-21\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.3.0\cr Date: \tab 2013-10-27\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
@@ -101,6 +94,3 @@ NULL
 #' \dontshow{rm(mydf)}
 #' 
 NULL
-
-
-

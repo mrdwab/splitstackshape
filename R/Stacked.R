@@ -46,9 +46,22 @@
 #' 
 #' @export Stacked
 Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE, ...) {
-  dt.stubs <- sapply(strsplit(names(data), sep), `[[`, 1)
-  temp1 <- lapply(var.stubs, function(x) which(dt.stubs == x))
-  names(temp1) <- var.stubs
+  vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
+  temp1 <- vGrep(var.stubs, names(data))
+  
+  ## Handle overlaps in partial matching - each column in the data should match
+  ## only 1 of var.stubs. Where overlaps happen, it is due to one var.stub being
+  ## a subset of another.
+  s <- sort.list(sapply(names(temp1), nchar), decreasing=T)
+  for (i in s) {
+    matches <- temp1[[i]]
+    for (j in 1:length(temp1)) {
+      if (j != i && any(matches %in% temp1[[j]])) {
+        temp1[[j]] <- temp1[[j]][-which(temp1[[j]] == matches)]
+      }
+    } 
+  }
+  
   if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
   onames <- setdiff(names(data), 
                     c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))

@@ -46,8 +46,9 @@
 #' 
 #' @export Stacked
 Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE, ...) {
-  vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
-  temp1 <- vGrep(var.stubs, names(data))
+  dt.stubs <- sapply(strsplit(names(data), sep), `[[`, 1)
+  temp1 <- lapply(var.stubs, function(x) which(dt.stubs == x))
+  names(temp1) <- var.stubs
   if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
   onames <- setdiff(names(data), 
                     c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))

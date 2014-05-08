@@ -70,7 +70,9 @@ NULL
 #' 
 read.concat <- function(data, col.prefix, sep) {
   if (!is.character(data)) data <- as.character(data)
-  x <- count.fields(textConnection(data), sep = sep)
+  zz <- textConnection(data)
+  x <- count.fields(zz, sep = sep)
+  close(zz)
   t1 <- read.table(text = data, sep = sep, fill = TRUE,
                    row.names = NULL, header = FALSE,
                    blank.lines.skip = FALSE, strip.white = TRUE,

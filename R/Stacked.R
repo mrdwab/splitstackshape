@@ -45,12 +45,14 @@
 #' \dontshow{rm(mydf)}
 #' 
 #' @export Stacked
-Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE, ...) {
+Stacked <- function(data, id.vars, var.stubs, sep, 
+                    keep.all = TRUE, keyed = TRUE, ...) {
   vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
   temp1 <- vGrep(var.stubs, names(data))
   if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
-  onames <- setdiff(names(data), 
-                    c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
+  onames <- setdiff(
+    names(data), 
+    c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
   if (!isTRUE(keep.all)) onames <- NULL
   if (length(onames) == 0) onames <- NULL
   if (!isTRUE(is.data.table(data))) data <- data.table(data)
@@ -59,26 +61,27 @@ Stacked <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE
   .SD <- .N <- count <- a <- NULL
   TimeCols <- 
     lapply(seq_along(var.stubs), function(i) {
-      x <- do.call(rbind.data.frame, strsplit(names(data)[temp1[[i]]], sep))
-      if (length(x) == 1L) {
-        names(x) <- ".time_1"
+      x <- do.call(rbind, strsplit(names(data)[temp1[[i]]], sep))
+      if (ncol(x) == 1L) {
+        colnames(x) <- ".time_1"
         x
-      } 
-      else {
-        names(x) <- c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
-        x[-1]
+      } else {
+        colnames(x) <- c(
+          ".var", paste(".time", 1:(ncol(x)-1), sep = "_"))
+        x[, -1, drop = FALSE]
       } 
     })
 
   for (i in seq_along(var.stubs)) {
     ZZ[[i]] <-  cbind(
       data[, c(id.vars, onames), with = FALSE],
-      data[, list(.values = unlist(.SD, use.names=FALSE)), .SDcols = temp1[[i]]])
+      data[, list(.values = unlist(.SD, use.names=FALSE)), 
+           .SDcols = temp1[[i]]])
     setnames(ZZ[[i]], ".values", var.stubs[[i]])
     setkeyv(ZZ[[i]], id.vars)
     ZZ[[i]] <- cbind(ZZ[[i]], TimeCols[[i]])
     if (isTRUE(keyed)) {
-      setkeyv(ZZ[[i]], c(key(ZZ[[i]]), names(TimeCols[[i]])))
+      setkeyv(ZZ[[i]], c(key(ZZ[[i]]), colnames(TimeCols[[i]])))
       setcolorder(ZZ[[i]], c(key(ZZ[[i]]), var.stubs[[i]], onames))
     } 
   }

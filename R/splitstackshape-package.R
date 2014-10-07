@@ -94,3 +94,6 @@ NULL
 #' \dontshow{rm(mydf)}
 #' 
 NULL
+
+#' @import data.table
+NULL

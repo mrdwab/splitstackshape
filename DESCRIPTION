@@ -18,6 +18,6 @@ LazyData: TRUE
 LazyLoad: yes
 Depends:
     R (>= 2.10),
-    data.table
+    data.table (>= 1.9.4)
 URL: http://github.com/mrdwab/splitstackshape
 BugReports: http://github.com/mrdwab/splitstackshape/issues

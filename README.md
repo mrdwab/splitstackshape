@@ -24,7 +24,7 @@ To install the development version, use:
 
 ```r
 library(devtools)
-install_github("splitstackshape", "mrdwab", ref = "devel")
+install_github("mrdwab/splitstackshape", ref = "devel")
 ```
 
 Current version: 1.3.0

@@ -2,8 +2,7 @@
 \alias{concat.split.list}
 \title{Split concatenated cells in a \code{data.frame} into a \code{list} format}
 \usage{
-  concat.split.list(data, split.col, sep = ",",
-    drop = FALSE, fixed = FALSE)
+concat.split.list(data, split.col, sep = ",", drop = FALSE, fixed = FALSE)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -21,13 +20,13 @@
   regular expressions to be used.}
 }
 \value{
-  A \code{data.frame} with the concatenated column split
-  and added as a \code{list}.
+A \code{data.frame} with the concatenated column split and
+added as a \code{list}.
 }
 \description{
-  Takes a column in a \code{data.frame} with multiple
-  values, splits the values into a \code{list}, and returns
-  a new \code{data.frame}.
+Takes a column in a \code{data.frame} with multiple values,
+splits the values into a \code{list}, and returns a new
+\code{data.frame}.
 }
 \examples{
 temp <- head(concat.test)
@@ -38,12 +37,12 @@ concat.split.list(temp, 4, ";", drop = TRUE)
 \dontshow{rm(temp)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{\link{concat.split}},
-  \code{\link{concat.split.compact}},
-  \code{\link{concat.split.expanded}},
-  \code{\link{concat.split.multiple}}
+\code{\link{concat.split}},
+\code{\link{concat.split.compact}},
+\code{\link{concat.split.expanded}},
+\code{\link{concat.split.multiple}}
 }
 

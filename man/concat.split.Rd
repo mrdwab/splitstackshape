@@ -2,9 +2,8 @@
 \alias{concat.split}
 \title{Split concatenated cells in a \code{data.frame}}
 \usage{
-  concat.split(data, split.col, sep = ",",
-    structure = "compact", mode = NULL, type = NULL,
-    drop = FALSE, fixed = FALSE, fill = NA)
+concat.split(data, split.col, sep = ",", structure = "compact",
+  mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, fill = NA)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -46,37 +45,34 @@
   \code{structure = "expanded"}. Defaults to \code{NA}.}
 }
 \description{
-  The \code{concat.split} function takes a column with
-  multiple values, splits the values into a \code{list} or
-  into separate columns, and returns a new
-  \code{data.frame}.
+The \code{concat.split} function takes a column with
+multiple values, splits the values into a \code{list} or
+into separate columns, and returns a new \code{data.frame}.
 }
 \details{
-  \emph{structure} \itemize{ \item \code{"compact"} creates
-  as many columns as the maximum length of the resulting
-  split. This is the most useful general-case application
-  of this function. \item When the input is numeric,
-  \code{"expanded"} creates as many columns as the maximum
-  value of the input data. This is most useful when
-  converting to \code{mode = "binary"}. \item \code{"list"}
-  creates a single new column that is structurally a
-  \code{\link{list}} within a \code{\link{data.frame}}. }
-  \emph{fixed} \itemize{ \item When \code{structure =
-  "expanded"} or \code{structure = "list"}, it is possible
-  to supply a a regular expression containing the
-  characters to split on.  For example, to split on
-  \code{","}, \code{";"}, or \code{"|"}, you can set
-  \code{sep = ",|;|\|"} or \code{sep = "[,;|]"}, and
-  \code{fixed = FALSE} to split on any of those
-  characters.}
+\emph{structure} \itemize{ \item \code{"compact"} creates
+as many columns as the maximum length of the resulting
+split. This is the most useful general-case application of
+this function. \item When the input is numeric,
+\code{"expanded"} creates as many columns as the maximum
+value of the input data. This is most useful when
+converting to \code{mode = "binary"}. \item \code{"list"}
+creates a single new column that is structurally a
+\code{\link{list}} within a \code{\link{data.frame}}. }
+\emph{fixed} \itemize{ \item When \code{structure =
+"expanded"} or \code{structure = "list"}, it is possible to
+supply a a regular expression containing the characters to
+split on.  For example, to split on \code{","}, \code{";"},
+or \code{"|"}, you can set \code{sep = ",|;|\|"} or
+\code{sep = "[,;|]"}, and \code{fixed = FALSE} to split on
+any of those characters.}
 }
 \note{
-  This is more of a "legacy" or "convenience" wrapper
-  function encompassing the features available in the
-  separated functions of
-  \code{\link{concat.split.compact}},
-  \code{\link{concat.split.list}}, and
-  \code{\link{concat.split.expanded}}.
+This is more of a "legacy" or "convenience" wrapper
+function encompassing the features available in the
+separated functions of \code{\link{concat.split.compact}},
+\code{\link{concat.split.list}}, and
+\code{\link{concat.split.expanded}}.
 }
 \examples{
 ## Load some data
@@ -116,21 +112,21 @@ head(concat.split(concat.test, 2, structure = "list", drop = FALSE))
 str(concat.split(temp, 2, structure = "list", drop = FALSE))
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \references{
-  \itemize{ \item See
-  \url{http://stackoverflow.com/q/10100887/1270695} for
-  some history of this function, even though the solution
-  is not used at all here. \item The \code{"condensed"}
-  setting was inspired by an answer from David Winsemius to
-  a question at Stack Overflow.  See:
-  \url{http://stackoverflow.com/a/13924245/1270695} }
+\itemize{ \item See
+\url{http://stackoverflow.com/q/10100887/1270695} for some
+history of this function, even though the solution is not
+used at all here. \item The \code{"condensed"} setting was
+inspired by an answer from David Winsemius to a question at
+Stack Overflow.  See:
+\url{http://stackoverflow.com/a/13924245/1270695} }
 }
 \seealso{
-  \code{\link{concat.split.compact}},
-  \code{\link{concat.split.expanded}},
-  \code{\link{concat.split.list}},
-  \code{\link{concat.split.multiple}}
+\code{\link{concat.split.compact}},
+\code{\link{concat.split.expanded}},
+\code{\link{concat.split.list}},
+\code{\link{concat.split.multiple}}
 }
 

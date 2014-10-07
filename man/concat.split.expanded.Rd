@@ -2,9 +2,8 @@
 \alias{concat.split.expanded}
 \title{Split concatenated values into their corresponding column position}
 \usage{
-  concat.split.expanded(data, split.col, sep = ",",
-    mode = NULL, type = "numeric", drop = FALSE,
-    fixed = TRUE, fill = NA)
+concat.split.expanded(data, split.col, sep = ",", mode = NULL,
+  type = "numeric", drop = FALSE, fixed = TRUE, fill = NA)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -34,12 +33,12 @@
   \item{fill}{Desired "fill" value. Defaults to \code{NA}.}
 }
 \value{
-  A \code{data.frame}
+A \code{data.frame}
 }
 \description{
-  "Expand" concatenated numeric or character values to
-  their relevant position in a \code{data.frame} or create
-  a binary representation of such data.
+"Expand" concatenated numeric or character values to their
+relevant position in a \code{data.frame} or create a binary
+representation of such data.
 }
 \examples{
 temp <- head(concat.test)
@@ -51,13 +50,13 @@ concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
 \dontshow{rm(temp)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{\link{concat.split}},
-  \code{\link{concat.split.list}},
-  \code{\link{concat.split.compact}},
-  \code{\link{concat.split.multiple}},
-  \code{\link{numMat}}, \code{\link{charMat}}
+\code{\link{concat.split}},
+\code{\link{concat.split.list}},
+\code{\link{concat.split.compact}},
+\code{\link{concat.split.multiple}}, \code{\link{numMat}},
+\code{\link{charMat}}
 }
 

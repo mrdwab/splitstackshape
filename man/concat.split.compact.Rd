@@ -2,8 +2,8 @@
 \alias{concat.split.compact}
 \title{Split concatenated cells in a \code{data.frame} into a condensed format}
 \usage{
-  concat.split.compact(data, split.col, sep = ",",
-    drop = FALSE, fixed = NULL)
+concat.split.compact(data, split.col, sep = ",", drop = FALSE,
+  fixed = NULL)
 }
 \arguments{
   \item{data}{The source \code{data.frame}}
@@ -21,12 +21,12 @@
   \code{\link{concat.split.expanded}}.}
 }
 \value{
-  A \code{data.frame}
+A \code{data.frame}
 }
 \description{
-  The default splitting method for
-  \code{\link{concat.split}}. Uses
-  \code{\link{read.concat}} to do most of the processing.
+The default splitting method for
+\code{\link{concat.split}}. Uses \code{\link{read.concat}}
+to do most of the processing.
 }
 \examples{
 temp <- head(concat.test)
@@ -37,12 +37,12 @@ concat.split.compact(temp, "Siblings", drop = TRUE)
 \dontshow{rm(temp)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{\link{read.concat}}, \code{\link{concat.split}},
-  \code{\link{concat.split.list}},
-  \code{\link{concat.split.expanded}},
-  \code{\link{concat.split.multiple}}
+\code{\link{read.concat}}, \code{\link{concat.split}},
+\code{\link{concat.split.list}},
+\code{\link{concat.split.expanded}},
+\code{\link{concat.split.multiple}}
 }
 

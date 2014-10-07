@@ -2,8 +2,7 @@
 \alias{merged.stack}
 \title{Take a \code{list} of stacked \code{data.table}s and \code{merge} them}
 \usage{
-  merged.stack(data, id.vars, var.stubs, sep,
-    keep.all = TRUE, ...)
+merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE, ...)
 }
 \arguments{
   \item{data}{The input \code{data.frame}.}
@@ -25,17 +24,16 @@
   case the separator is of a different form.}
 }
 \value{
-  A merged \code{data.table}.
+A merged \code{data.table}.
 }
 \description{
-  A wrapper around the \code{\link{Stacked}} function to
-  \code{\link[data.table:merge]{merge}} the resulting
-  \code{list} into a single \code{data.table}.
+A wrapper around the \code{\link{Stacked}} function to
+\code{\link[data.table:merge]{merge}} the resulting
+\code{list} into a single \code{data.table}.
 }
 \note{
-  The \code{keyed} argument to \code{\link{Stacked}} has
-  been hard- coded to \code{TRUE} to make \code{merge}
-  work.
+The \code{keyed} argument to \code{\link{Stacked}} has been
+hard- coded to \code{TRUE} to make \code{merge} work.
 }
 \examples{
 set.seed(1)
@@ -54,9 +52,9 @@ merged.stack(mydf, id.vars = c("id_1", "id_2"),
 \dontshow{rm(mydf)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{\link{Stacked}}, \code{\link{Reshape}}
+\code{\link{Stacked}}, \code{\link{Reshape}}
 }
 

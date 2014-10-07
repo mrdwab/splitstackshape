@@ -2,8 +2,7 @@
 \alias{Reshape}
 \title{Reshape wide data into a semi-long form}
 \usage{
-  Reshape(data, id.vars, var.stubs, sep = ".",
-    rm.rownames = TRUE, ...)
+Reshape(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...)
 }
 \arguments{
   \item{data}{The source \code{data.frame}.}
@@ -25,28 +24,28 @@
   case the separator is of a different form.}
 }
 \value{
-  A "long" \code{data.frame} of the reshaped data that
-  retains the attributes added by base R's \code{reshape}
-  function.
+A "long" \code{data.frame} of the reshaped data that
+retains the attributes added by base R's \code{reshape}
+function.
 }
 \description{
-  The \code{\link{reshape}} function in base R is very
-  handy when you want a semi-long (or semi-wide)
-  \code{data.frame}. However, base R's \code{reshape} has
-  problems is with "unbalanced" panel data, for instance
-  data where one variable was measured at three points in
-  time, and another only twice.
+The \code{\link{reshape}} function in base R is very handy
+when you want a semi-long (or semi-wide) \code{data.frame}.
+However, base R's \code{reshape} has problems is with
+"unbalanced" panel data, for instance data where one
+variable was measured at three points in time, and another
+only twice.
 }
 \details{
-  This function was written to overcome that limitation of
-  dealing with unbalanced data, but is also appropriate for
-  basic wide-to-long reshaping tasks.
+This function was written to overcome that limitation of
+dealing with unbalanced data, but is also appropriate for
+basic wide-to-long reshaping tasks.
 
-  Related functions like \code{\link{stack}} in base R and
-  \code{\link[reshape2:melt]{melt}} in "reshape2" are also
-  very handy when you want a "long" reshaping of data, but
-  they result in a very long structuring of your data, not
-  the "semi-wide" format that \code{reshape} produces.
+Related functions like \code{\link{stack}} in base R and
+\code{\link[reshape2:melt]{melt}} in "reshape2" are also
+very handy when you want a "long" reshaping of data, but
+they result in a very long structuring of your data, not
+the "semi-wide" format that \code{reshape} produces.
 }
 \examples{
 set.seed(1)
@@ -68,10 +67,10 @@ Reshape(mydf, id.vars = c("id_1", "id_2"),
        var.stubs = c("varA", "varB", "varC"))
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{\link{Stacked}}, \code{\link{stack}},
-  \code{\link{reshape}}, \code{\link[reshape2:melt]{melt}}
+\code{\link{Stacked}}, \code{\link{stack}},
+\code{\link{reshape}}, \code{\link[reshape2:melt]{melt}}
 }
 

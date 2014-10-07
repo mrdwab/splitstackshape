@@ -2,7 +2,7 @@
 \alias{numMat}
 \title{Create a numeric matrix from a list of values}
 \usage{
-  numMat(listOfValues, fill = NA, mode = "binary")
+numMat(listOfValues, fill = NA, mode = "binary")
 }
 \arguments{
   \item{listOfValues}{A \code{list} of input values to be
@@ -15,17 +15,17 @@
   Defaults to \code{"binary"}.}
 }
 \value{
-  A \code{matrix}.
+A \code{matrix}.
 }
 \description{
-  Create a numeric matrix from a list of values
+Create a numeric matrix from a list of values
 }
 \details{
-  This is primarily a helper function for the
-  \code{\link{concat.split}} function when creating the
-  "expanded" structure. The input is anticipated to be a
-  \code{list} of values obtained using
-  \code{\link{strsplit}}.
+This is primarily a helper function for the
+\code{\link{concat.split}} function when creating the
+"expanded" structure. The input is anticipated to be a
+\code{list} of values obtained using
+\code{\link{strsplit}}.
 }
 \examples{
 invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
@@ -38,9 +38,9 @@ splitstackshape:::numMat(A, mode = "value")
 \dontshow{rm(invec, A)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{strsplit}, \code{\link{charMat}}
+\code{strsplit}, \code{\link{charMat}}
 }
 

@@ -3,19 +3,19 @@
 \title{Convert all \code{factor} columns to \code{character} columns in a
 \code{data.frame}}
 \usage{
-  FacsToChars(mydf)
+FacsToChars(mydf)
 }
 \arguments{
   \item{mydf}{The name of your \code{data.frame}}
 }
 \description{
-  Sometimes, we forget to use the \code{stringsAsFactors}
-  argument when using \code{\link{read.table}} and related
-  functions. By default, R converts character columns to
-  factors. Instead of re-reading the data, the
-  \code{\link{FacsToChars}} function will identify which
-  columns are currently factors, and convert them all to
-  characters.
+Sometimes, we forget to use the \code{stringsAsFactors}
+argument when using \code{\link{read.table}} and related
+functions. By default, R converts character columns to
+factors. Instead of re-reading the data, the
+\code{\link{FacsToChars}} function will identify which
+columns are currently factors, and convert them all to
+characters.
 }
 \examples{
 ## Some example data
@@ -31,9 +31,9 @@ str(dat)  # Original object is unaffected
 \dontshow{rm(dat, dat2, dat_copy)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{\link{read.table}}
+\code{\link{read.table}}
 }
 

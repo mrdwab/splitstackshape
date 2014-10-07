@@ -2,7 +2,7 @@
 \alias{Names}
 \title{\code{names} as a character vector, always}
 \usage{
-  Names(data, invec)
+Names(data, invec)
 }
 \arguments{
   \item{data}{The input \code{data.frame}.}
@@ -10,12 +10,12 @@
   \item{invec}{The \code{names} you want.}
 }
 \value{
-  A character vector of the desired names.
+A character vector of the desired names.
 }
 \description{
-  A convenience function using either character vectors or
-  numeric vectors to specify a subset of \code{names} of a
-  \code{data.frame}.
+A convenience function using either character vectors or
+numeric vectors to specify a subset of \code{names} of a
+\code{data.frame}.
 }
 \examples{
 mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)
@@ -25,6 +25,6 @@ splitstackshape:::Names(mydf, c(1, 3))
 \dontshow{rm(mydf)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 

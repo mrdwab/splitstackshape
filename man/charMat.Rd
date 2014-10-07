@@ -2,7 +2,7 @@
 \alias{charMat}
 \title{Create a binary matrix from a list of character values}
 \usage{
-  charMat(listOfValues, fill = NA, mode = "binary")
+charMat(listOfValues, fill = NA, mode = "binary")
 }
 \arguments{
   \item{listOfValues}{A \code{list} of input values to be
@@ -15,17 +15,17 @@
   Defaults to \code{"binary"}.}
 }
 \value{
-  A \code{matrix}.
+A \code{matrix}.
 }
 \description{
-  Create a binary matrix from a list of character values
+Create a binary matrix from a list of character values
 }
 \details{
-  This is primarily a helper function for the
-  \code{\link{concat.split}} function when creating the
-  "expanded" structure. The input is anticipated to be a
-  \code{list} of values obtained using
-  \code{\link{strsplit}}.
+This is primarily a helper function for the
+\code{\link{concat.split}} function when creating the
+"expanded" structure. The input is anticipated to be a
+\code{list} of values obtained using
+\code{\link{strsplit}}.
 }
 \examples{
 invec <- c("rock,electro","electro","rock,jazz")
@@ -37,9 +37,9 @@ splitstackshape:::charMat(A, mode = "value")
 \dontshow{rm(invec, A)}
 }
 \author{
-  Ananda Mahto
+Ananda Mahto
 }
 \seealso{
-  \code{strsplit}, \code{\link{numMat}}
+\code{strsplit}, \code{\link{numMat}}
 }
 

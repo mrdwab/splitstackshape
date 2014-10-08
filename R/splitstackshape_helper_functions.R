@@ -44,7 +44,8 @@ NULL
 #' \dontshow{rm(mydf)}
 #' 
 Names <- function(data, invec) {
-  names(data[invec])
+  if (!is.numeric(invec)) invec <- match(invec, names(data))
+  names(data)[invec]
 }
 NULL
 

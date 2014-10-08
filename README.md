@@ -4,6 +4,7 @@ R functions to split concatenated data, conveniently stack columns of `data.fram
 
 ## Core Functions
 
+* `cSplit`: The new core function to supersede the `concat.split` family of functions.
 * `concat.split`: A set of functions to split strings where data have been concatenated into a single value, as is common when getting data collected with tools like Google Forms.
 * `Stacked`: A function to create a list of `stack`ed sets of variables. Similar to `melt` from "reshape2", but doesn't put everything into one very long `data.frame`.
 * `Reshape`: A function to allow base R's `reshape` function to work with "unbalanced" datasets.
@@ -27,4 +28,4 @@ library(devtools)
 install_github("mrdwab/splitstackshape", ref = "devel")
 ```
 
-Current version: 1.3.0
+Current version: 1.3.1

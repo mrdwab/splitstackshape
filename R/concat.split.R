@@ -1,40 +1,37 @@
-#' Split concatenated cells in a \code{data.frame} into a condensed format
+#' Split concatenated cells in a \code{data.frame} or a \code{data.table} into a condensed format
 #' 
-#' The default splitting method for \code{\link{concat.split}}. Uses
-#' \code{\link{read.concat}} to do most of the processing.
+#' The default splitting method for \code{\link{concat.split}}. Formerly based on \code{\link{read.concat}} but presently a simple wrapper for \code{\link{cSplit}}..
 #' 
 #' 
-#' @param data The source \code{data.frame}
+#' @param data The source \code{data.frame} or \code{data.table}
 #' @param split.col The variable that needs to be split (either name or index
 #' position).
 #' @param sep The character separating each value.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' \code{FALSE}.
-#' @param fixed An unused dummy argument to make the function compatible with
-#' \code{\link{concat.split.expanded}}.
-#' @return A \code{data.frame}
+#' @param fixed Logical. Should the split character be treated as a fixed pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param \dots optional arguments to pass to \code{cSplit}.
+#' @return A \code{data.table}.
 #' @author Ananda Mahto
-#' @seealso \code{\link{read.concat}}, \code{\link{concat.split}},
-#' \code{\link{concat.split.list}}, \code{\link{concat.split.expanded}},
-#' \code{\link{concat.split.multiple}}
+#' @note This function no longer does anything different from \code{\link{cSplit}}. It is recommended that you transition your code to the \code{cSplit} function instead.
+#' @seealso \code{\link{read.concat}}, \code{\link{cSplit}}
 #' @examples
 #' 
 #' temp <- head(concat.test)
 #' concat.split.compact(temp, "Likes")
 #' concat.split.compact(temp, 4, ";")
-#' concat.split.compact(temp, "Siblings", drop = TRUE)
+#' 
+#' ## Extra arguments to cSplit
+#' concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
 #' 
 #' \dontshow{rm(temp)}
 #' 
 #' @export concat.split.compact
 concat.split.compact <- function(data, split.col, sep = ",", 
-                                 drop = FALSE, fixed = NULL) {
-  if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
-  else a <- data[[split.col]]
-  
-  t1 <- read.concat(a, names(data[split.col]), sep)
-  if (isTRUE(drop)) cbind(data[othernames(data, split.col)], t1)
-  else cbind(data, t1)
+                                 drop = FALSE, fixed = TRUE, ...) {
+  message("This function is deprecated. Use `cSplit` instead.")
+  cSplit(indt = data, splitCols = split.col, sep = sep, 
+         drop = drop, fixed = fixed, direction = "wide", ...)
 }
 NULL
 
@@ -300,7 +297,7 @@ NULL
 #' \dontrun{
 #' # You'll get a warning here, when trying to retain the original values
 #' concat.split(temp, 2, mode = "value", drop = TRUE)
-#' }
+#' 
 #' 
 #' # Try again. Notice the differing number of resulting columns
 #' concat.split(temp, 2, structure = "expanded",
@@ -320,6 +317,7 @@ NULL
 #' # that the new column is a list; note the
 #' # difference between "Likes" and "Likes_list".
 #' str(concat.split(temp, 2, structure = "list", drop = FALSE))
+#' }
 #' 
 #' @export concat.split
 concat.split <- function(data, split.col, sep = ",", structure = "compact",

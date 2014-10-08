@@ -9,11 +9,16 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 ---------------------------------------------------------------------
 
-## 1.3.1
+## 1.3.1/1.3.2
 
 08 October 2014
 
-### Added functions:
+### Enhancement
+
+* `concat.split.compact` is now a wrapper for `cSplit` and
+  not for `:::read.concat`.
+
+Added functions:
 
 * `cSplit`
 

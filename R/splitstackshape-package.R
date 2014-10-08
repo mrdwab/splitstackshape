@@ -45,7 +45,7 @@ NULL
 #' @examples
 #' 
 #' ## concat.split
-#' head(concat.split(concat.test, "Likes", drop = TRUE))
+#' head(cSplit(concat.test, "Likes", drop = TRUE))
 #' 
 #' ## Reshape
 #' set.seed(1)

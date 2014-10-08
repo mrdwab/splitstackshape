@@ -54,7 +54,7 @@ NULL
 #' given column is converted to "1") or \code{"value"} (where the value is
 #' retained and not recoded to "1"). Defaults to \code{"binary"}.
 #' @param type Can be either \code{"numeric"} (where the items being split are
-#' numbers) or \code{"character"} (where the items being split are character
+#' positive integers (\code{> 0})) or \code{"character"} (where the items being split are character
 #' strings). Defaults to \code{"numeric"}.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' \code{FALSE}.
@@ -80,7 +80,8 @@ NULL
 concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
                                   type = "numeric", drop = FALSE, 
                                   fixed = TRUE, fill = NA) {
-  if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
+  if (is.numeric(split.col)) split.col <- names(data)[split.col]
+  if (!is.character(data[[split.col]])) a <- as.character(data[[split.col]])
   else a <- data[[split.col]]
   if (is.null(mode)) mode = "binary"  
   b <- strsplit(a, sep, fixed = fixed)
@@ -90,16 +91,15 @@ concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL,
     type,
     character = {
       temp1 <- charMat(b, fill = fill, mode = mode)
-      colnames(temp1) <- paste(names(data[split.col]), 
-                               colnames(temp1), sep = "_")
+      colnames(temp1) <- paste(split.col, colnames(temp1), sep = "_")
       temp1
     },
     numeric = {
       nchars <- max(nchar(unlist(b, use.names = FALSE)))
       temp1 <- numMat(b, fill = fill, mode = mode)
-      colnames(temp1) <- sprintf(paste0(names(data[split.col]), 
-                                        "_%0", nchars, "d"), 
-                                 seq_len(ncol(temp1)))
+      colnames(temp1) <- sprintf(paste0(
+        split.col, "_%0", nchars, "d"), 
+        seq_len(ncol(temp1)))
       temp1
     },
     stop("'type' must be either 'character' or 'numeric'"))
@@ -107,54 +107,6 @@ concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL,
   else cbind(data, temp1)
 }
 NULL
-# concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
-#                                   drop = FALSE, fixed = TRUE, fill = NA) {
-#   if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
-#   else a <- data[[split.col]]
-#   
-#   b <- strsplit(a, sep, fixed = fixed)
-#   b <- lapply(b, trim)
-#   
-#   if (suppressWarnings(is.na(try(max(as.numeric(unlist(b, use.names = FALSE))))))) {
-#     temp1 <- charBinaryMat(b, fill = fill)
-#     colnames(temp1) <- paste(names(data[split.col]), colnames(temp1), sep = "_")
-#     expandedNames <- colnames(temp1)
-#     temp1 <- cbind(data, temp1)
-#   } else if (!is.na(try(max(as.numeric(unlist(b, use.names = FALSE)))))) {
-#     if (is.null(mode)) mode = "binary"
-#     nchars <- max(nchar(unlist(b, use.names = FALSE)))
-#     temp1 <- switch(
-#       mode,
-#       binary = {
-#         temp <- binaryMat(b, fill = fill)
-#         colnames(temp) <- 
-#           sprintf(paste0(names(data[split.col]), "_%0", nchars, "d"), 1:ncol(temp))
-#         temp
-#       },
-#       value = {
-#         temp <- valueMat(b, fill = fill)
-#         colnames(temp) <- 
-#           sprintf(paste0(names(data[split.col]), "_%0", nchars, "d"), 1:ncol(temp))
-#         temp
-#       },
-#       stop("'mode' must be 'binary' or 'value'"))
-#     expandedNames <- colnames(temp1)
-#     temp1 <- cbind(data, temp1)
-#   }
-#   
-#   if (isTRUE(drop)) temp1[c(othernames(data, split.col), 
-#                                             expandedNames)]
-#   else temp1
-# }
-# NULL
-
-
-
-
-
-
-
-
 
 
 

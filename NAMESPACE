@@ -2,6 +2,7 @@
 
 export(Reshape)
 export(Stacked)
+export(cSplit)
 export(concat.split)
 export(concat.split.compact)
 export(concat.split.expanded)
@@ -9,4 +10,3 @@ export(concat.split.list)
 export(concat.split.multiple)
 export(getanID)
 export(merged.stack)
-import(data.table)

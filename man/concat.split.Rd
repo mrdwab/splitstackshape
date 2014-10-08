@@ -25,8 +25,8 @@ will be issued if used with other structures.}
 
 \item{type}{Can be either \code{"numeric"} or \code{"character"} (where
 \code{"numeric"} is default).  This setting only applies when
-\code{structure = "expanded"}; a warning message will be issued if used
-with other structures.}
+\code{structure = "expanded"}; a warning message will be issued if used with
+other structures.}
 
 \item{drop}{Logical (whether to remove the original variable from the output
 or not). Defaults to \code{FALSE}.}

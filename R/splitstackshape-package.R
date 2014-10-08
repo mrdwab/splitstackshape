@@ -1,14 +1,21 @@
+
+
 #' Example dataset with concatenated cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
 #' \code{\link{concat.split}} family of functions.
 #' 
+#' 
 #' @name concat.test
-#' @aliases concatenated concat.test
+#' @aliases concat.test concatenated
 #' @docType data
 #' @format A \code{data.frame} in which many columns contain concatenated cells
 #' @keywords datasets
 NULL
+
+
+
+
 
 #' splitstackshape
 #' 
@@ -62,31 +69,31 @@ NULL
 #' set.seed(1)
 #' Nrow <- 1000000
 #' Ncol <- 10
-#' mybigdf <- cbind(id = 1:Nrow, as.data.frame(matrix(rnorm(Nrow*Ncol), 
+#' mybigdf <- cbind(id = 1:Nrow, as.data.frame(matrix(rnorm(Nrow*Ncol),
 #'                                                    nrow=Nrow)))
 #' head(mybigdf)
 #' dim(mybigdf)
 #' tail(mybigdf)
 #' A <- names(mybigdf)
-#' names(mybigdf) <- c("id", paste("varA", 1:3, sep = "_"), 
-#'                     paste("varB", 1:4, sep = "_"), 
+#' names(mybigdf) <- c("id", paste("varA", 1:3, sep = "_"),
+#'                     paste("varB", 1:4, sep = "_"),
 #'                     paste("varC", 1:3, sep = "_"))
 #' system.time({
-#'    O1 <- Reshape(mybigdf, id.vars = "id", 
+#'    O1 <- Reshape(mybigdf, id.vars = "id",
 #'    var.stubs = c("varA", "varB", "varC"), sep = "_")
 #'    O1 <- O1[order(O1$id, O1$time), ]
 #' })
 #' system.time({
-#'    O2 <- merged.stack(mybigdf, id.vars="id", 
+#'    O2 <- merged.stack(mybigdf, id.vars="id",
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' system.time({
-#'    O3 <- Stacked(mybigdf, id.vars="id", 
+#'    O3 <- Stacked(mybigdf, id.vars="id",
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' DT <- data.table(mybigdf)
 #' system.time({
-#'    O4 <- merged.stack(DT, id.vars="id", 
+#'    O4 <- merged.stack(DT, id.vars="id",
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' }
@@ -96,4 +103,4 @@ NULL
 NULL
 
 #' @import data.table
-NULL
+

@@ -15,9 +15,9 @@
 #' the \code{id.vars}, \code{var.stubs}, and "times" (\code{keep.all = FALSE}).
 #' Other variables are \emph{recycled} to appropriate length.
 #' @param keyed Logical. Should the \code{Stacked} function automatically set
-#' the \code{key} for the resulting \code{data.table}s. If \code{TRUE} (default)
-#' the \code{key} is set to the \code{id.vars} and the "time" variables that
-#' are created by \code{Stacked}.
+#' the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
+#' (default) the \code{key} is set to the \code{id.vars} and the "time"
+#' variables that are created by \code{Stacked}.
 #' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
 #' is of a different form.
 #' @return A \code{list} of \code{data.table}s with one \code{data.table} for
@@ -90,6 +90,10 @@ Stacked <- function(data, id.vars, var.stubs, sep,
   else ZZ
 }
 NULL
+
+
+
+
 
 
 

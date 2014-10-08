@@ -11,10 +11,15 @@ getanID(data, id.vars)
 \item{id.vars}{The variables that should be treated as ID variables.}
 }
 \value{
-The input \code{data.frame} if ID variables are unique or the input \code{data.frame} with a new \code{.id} column.
+The input \code{data.frame} if ID variables are unique or the input
+\code{data.frame} with a new \code{.id} column.
 }
 \description{
-Many functions will not work properly if there are duplicated ID variables in a dataset. This function is a convenience function for using \code{\link{ave}} and \code{\link{seq_along}} to create an \code{.id} variable that when used in conjunction with the existing ID variables, should be unique.
+Many functions will not work properly if there are duplicated ID variables
+in a dataset. This function is a convenience function for using
+\code{\link{ave}} and \code{\link{seq_along}} to create an \code{.id}
+variable that when used in conjunction with the existing ID variables,
+should be unique.
 }
 \examples{
 mydf <- data.frame(IDA = c("a", "a", "a", "b", "b"),

@@ -14,7 +14,8 @@ Names(data, invec)
 A character vector of the desired names.
 }
 \description{
-A convenience function using either character vectors or numeric vectors to specify a subset of \code{names} of a \code{data.frame}.
+A convenience function using either character vectors or numeric vectors to
+specify a subset of \code{names} of a \code{data.frame}.
 }
 \examples{
 mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)

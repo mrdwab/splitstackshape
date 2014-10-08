@@ -38,10 +38,15 @@ concat.split.compact <- function(data, split.col, sep = ",",
 }
 NULL
 
+
+
+
+
 #' Split concatenated values into their corresponding column position
 #' 
-#' "Expand" concatenated numeric or character values to their relevant position 
+#' "Expand" concatenated numeric or character values to their relevant position
 #' in a \code{data.frame} or create a binary representation of such data.
+#' 
 #' 
 #' @param data The source \code{data.frame}.
 #' @param split.col The variable that needs to be split (either name or index
@@ -51,7 +56,7 @@ NULL
 #' @param mode Can be either \code{"binary"} (where presence of a number in a
 #' given column is converted to "1") or \code{"value"} (where the value is
 #' retained and not recoded to "1"). Defaults to \code{"binary"}.
-#' @param type Can be either \code{"numeric"} (where the items being split are 
+#' @param type Can be either \code{"numeric"} (where the items being split are
 #' numbers) or \code{"character"} (where the items being split are character
 #' strings). Defaults to \code{"numeric"}.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
@@ -75,7 +80,6 @@ NULL
 #' \dontshow{rm(temp)}
 #' 
 #' @export concat.split.expanded
-#' 
 concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
                                   type = "numeric", drop = FALSE, 
                                   fixed = TRUE, fill = NA) {
@@ -157,6 +161,10 @@ NULL
 
 
 
+
+
+
+
 #' Split concatenated cells in a \code{data.frame} into a \code{list} format
 #' 
 #' Takes a column in a \code{data.frame} with multiple values, splits the
@@ -217,6 +225,10 @@ NULL
 
 
 
+
+
+
+
 #' Split concatenated cells in a \code{data.frame}
 #' 
 #' The \code{concat.split} function takes a column with multiple values, splits
@@ -248,9 +260,9 @@ NULL
 #' setting only applies when \code{structure = "expanded"}; a warning message
 #' will be issued if used with other structures.
 #' @param type Can be either \code{"numeric"} or \code{"character"} (where
-#' \code{"numeric"} is default).  This setting only applies when 
-#' \code{structure = "expanded"}; a warning message will be issued if used 
-#' with other structures.
+#' \code{"numeric"} is default).  This setting only applies when
+#' \code{structure = "expanded"}; a warning message will be issued if used with
+#' other structures.
 #' @param drop Logical (whether to remove the original variable from the output
 #' or not). Defaults to \code{FALSE}.
 #' @param fixed Is the input for the \code{sep} value \emph{fixed}, or a
@@ -298,7 +310,7 @@ NULL
 #' concat.split(temp, 3, drop = TRUE)
 #' 
 #' # Strings can also be split to binary representations
-#' concat.split(temp, 3, structure = "expanded", 
+#' concat.split(temp, 3, structure = "expanded",
 #' type = "character", fill = 0, drop = TRUE)
 #' 
 #' # Split up the "Likes column" into a list variable; retain original column
@@ -344,6 +356,10 @@ concat.split <- function(data, split.col, sep = ",", structure = "compact",
   temp
 }
 NULL
+
+
+
+
 
 
 

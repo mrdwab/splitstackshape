@@ -21,9 +21,14 @@ othernames <- function(data, toremove) {
 }
 NULL
 
+
+
+
+
 #' \code{names} as a character vector, always
 #' 
-#' A convenience function using either character vectors or numeric vectors to specify a subset of \code{names} of a \code{data.frame}.
+#' A convenience function using either character vectors or numeric vectors to
+#' specify a subset of \code{names} of a \code{data.frame}.
 #' 
 #' 
 #' @param data The input \code{data.frame}.
@@ -42,6 +47,10 @@ Names <- function(data, invec) {
   names(data[invec])
 }
 NULL
+
+
+
+
 
 #' Read concatenated character vectors into a \code{data.frame}
 #' 
@@ -82,6 +91,10 @@ read.concat <- function(data, col.prefix, sep) {
 }
 NULL
 
+
+
+
+
 #' Create a numeric matrix from a list of values
 #' 
 #' Create a numeric matrix from a list of values
@@ -93,7 +106,8 @@ NULL
 #' @param listOfValues A \code{list} of input values to be inserted in a
 #' matrix.
 #' @param fill The initializing fill value for the empty matrix.
-#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to \code{"binary"}.
+#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to
+#' \code{"binary"}.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
 #' @seealso \code{strsplit}, \code{\link{charMat}}
@@ -123,6 +137,10 @@ numMat <- function(listOfValues, fill = NA, mode = "binary") {
 }
 NULL
 
+
+
+
+
 #' Create a binary matrix from a list of character values
 #' 
 #' Create a binary matrix from a list of character values
@@ -134,7 +152,8 @@ NULL
 #' @param listOfValues A \code{list} of input values to be inserted in a
 #' matrix.
 #' @param fill The initializing fill value for the empty matrix.
-#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to \code{"binary"}.
+#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to
+#' \code{"binary"}.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
 #' @seealso \code{strsplit}, \code{\link{numMat}}
@@ -161,6 +180,10 @@ charMat <- function(listOfValues, fill = NA, mode = "binary") {
   out
 }
 NULL
+
+
+
+
 
 #' Split basic alphanumeric strings which have no separators
 #' 
@@ -198,6 +221,10 @@ NoSep <- function(data, charfirst = TRUE) {
                       gsub(Pattern, "\\2", data)), Names)
 }
 NULL
+
+
+
+
 
 #' Convert all \code{factor} columns to \code{character} columns in a
 #' \code{data.frame}

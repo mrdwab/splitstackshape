@@ -78,7 +78,7 @@ concat.split(temp, "Hates", sep = ";", drop = TRUE)
 \dontrun{
 # You'll get a warning here, when trying to retain the original values
 concat.split(temp, 2, mode = "value", drop = TRUE)
-}
+
 
 # Try again. Notice the differing number of resulting columns
 concat.split(temp, 2, structure = "expanded",
@@ -98,6 +98,7 @@ head(concat.split(concat.test, 2, structure = "list", drop = FALSE))
 # that the new column is a list; note the
 # difference between "Likes" and "Likes_list".
 str(concat.split(temp, 2, structure = "list", drop = FALSE))
+}
 }
 \author{
 Ananda Mahto

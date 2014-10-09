@@ -23,7 +23,7 @@ NULL
 #' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.3.2\cr Date: \tab 2014-10-08\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.3.3\cr Date: \tab 2014-10-09\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The

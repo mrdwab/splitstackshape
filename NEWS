@@ -9,14 +9,15 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 ---------------------------------------------------------------------
 
-## 1.3.1/1.3.2/1.3.3
+## 1.3.1/1.3.2/1.3.3/1.3.4
 
 08/09 October 2014
 
 ### Enhancement
 
-* `concat.split.compact` is now a wrapper for `cSplit` and
-  not for `:::read.concat`.
+* `concat.split.compact` and `concat.split.multiple` are now
+  simply wrappers for `cSplit` and no longer use 
+  `:::read.concat` to split up the values.
 * `concat.split.expanded` and `concat.split.list` now made
   `data.table` compatable. 
 
@@ -24,7 +25,7 @@ Added functions:
 
 * `cSplit`
 
-  Before the release of 1.4.0, most of the `concat.split*` 
+  Before the release of 1.4.0, the basic `concat.split*` 
   functions would become simple wrappers for `cSplit`, which
   is much more efficient than the previous implementations.
   The earlier functions will remain for compatability purposes.

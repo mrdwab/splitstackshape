@@ -42,10 +42,10 @@ NULL
 #' Split concatenated values into their corresponding column position
 #' 
 #' "Expand" concatenated numeric or character values to their relevant position
-#' in a \code{data.frame} or create a binary representation of such data.
+#' in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
 #' 
 #' 
-#' @param data The source \code{data.frame}.
+#' @param data The source \code{data.frame} or \code{data.table}.
 #' @param split.col The variable that needs to be split (either name or index
 #' position).
 #' @param sep The character separating each value. Can also be a regular
@@ -61,7 +61,7 @@ NULL
 #' @param fixed Used for \code{strsplit} for allowing regular expressions to be
 #' used.
 #' @param fill Desired "fill" value. Defaults to \code{NA}.
-#' @return A \code{data.frame}
+#' @return A \code{data.frame} or a \code{data.table} depending on the source input.
 #' @author Ananda Mahto
 #' @seealso \code{\link{concat.split}}, \code{\link{concat.split.list}},
 #' \code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
@@ -103,7 +103,13 @@ concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL,
       temp1
     },
     stop("'type' must be either 'character' or 'numeric'"))
-  if (isTRUE(drop)) cbind(data[othernames(data, split.col)], temp1)
+  if (isTRUE(drop)) {
+    if (is.data.table(data)) {
+      cbind(data, temp1)[, (split.col) := NULL][]
+    } else {
+      cbind(data[othernames(data, split.col)], temp1)
+    }
+  } 
   else cbind(data, temp1)
 }
 NULL
@@ -114,13 +120,13 @@ NULL
 
 
 
-#' Split concatenated cells in a \code{data.frame} into a \code{list} format
+#' Split concatenated cells into a \code{list} format
 #' 
-#' Takes a column in a \code{data.frame} with multiple values, splits the
-#' values into a \code{list}, and returns a new \code{data.frame}.
+#' Takes a column in a \code{data.frame} or \code{data.table} with multiple values, splits the
+#' values into a \code{list}, and returns a new \code{data.frame} or \code{data.table}.
 #' 
 #' 
-#' @param data The source \code{data.frame}.
+#' @param data The source \code{data.frame} or \code{data.table}.
 #' @param split.col The variable that needs to be split (either name or index
 #' position).
 #' @param sep The character separating each value. Can also be a regular
@@ -129,7 +135,7 @@ NULL
 #' \code{FALSE}.
 #' @param fixed Used for \code{\link{strsplit}} for allowing regular
 #' expressions to be used.
-#' @return A \code{data.frame} with the concatenated column split and added as
+#' @return A \code{data.frame} or \code{data.table} with the concatenated column split and added as
 #' a \code{list}.
 #' @author Ananda Mahto
 #' @seealso \code{\link{concat.split}}, \code{\link{concat.split.compact}},
@@ -146,20 +152,26 @@ NULL
 #' @export concat.split.list
 concat.split.list <- function(data, split.col, sep = ",", 
                               drop = FALSE, fixed = FALSE) {
-  if (!is.character(data[split.col])) a <- as.character(data[[split.col]])
+  if (is.numeric(split.col)) split.col <- names(data)[split.col]
+  if (!is.character(data[[split.col]])) a <- as.character(data[[split.col]])
   else a <- data[[split.col]]
   
-  varname <- paste(names(data[split.col]), "list", sep="_")
+  varname <- paste(split.col, "list", sep="_")
   b <- strsplit(a, sep, fixed = fixed)
   
   if (suppressWarnings(is.na(try(max(as.numeric(unlist(b))))))) {
-    data[varname] <- list(
-      lapply(lapply(b, as.character),
+    data[[varname]] <- I(lapply(lapply(b, as.character),
              function(x) gsub("^\\s+|\\s+$", "", x)))
   } else if (!is.na(try(max(as.numeric(unlist(b)))))) {
-    data[varname] <- list(lapply(b, as.numeric))
+    data[[varname]] <- I(lapply(b, as.numeric))
   }
-  if (isTRUE(drop)) data[othernames(data, split.col)]
+  if (isTRUE(drop)) {
+    if (is.data.table(data)) {
+      data[, (split.col) := NULL][]
+    } else {
+      data[othernames(data, split.col)]
+    }
+  } 
   else data
 }
 NULL

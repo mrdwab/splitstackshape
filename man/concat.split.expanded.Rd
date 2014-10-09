@@ -7,7 +7,7 @@ concat.split.expanded(data, split.col, sep = ",", mode = NULL,
   type = "numeric", drop = FALSE, fixed = TRUE, fill = NA)
 }
 \arguments{
-\item{data}{The source \code{data.frame}.}
+\item{data}{The source \code{data.frame} or \code{data.table}.}
 
 \item{split.col}{The variable that needs to be split (either name or index
 position).}
@@ -32,11 +32,11 @@ used.}
 \item{fill}{Desired "fill" value. Defaults to \code{NA}.}
 }
 \value{
-A \code{data.frame}
+A \code{data.frame} or a \code{data.table} depending on the source input.
 }
 \description{
 "Expand" concatenated numeric or character values to their relevant position
-in a \code{data.frame} or create a binary representation of such data.
+in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
 }
 \examples{
 temp <- head(concat.test)

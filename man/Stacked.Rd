@@ -3,7 +3,7 @@
 \alias{Stacked}
 \title{\code{stack} columns from a wide form to a long form}
 \usage{
-Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE, ...)
+Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE)
 }
 \arguments{
 \item{data}{The source \code{data.frame}.}
@@ -13,7 +13,7 @@ Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE, ...)
 \item{var.stubs}{The prefixes of the variable groups.}
 
 \item{sep}{The character that separates the "variable name" from the "times"
-in the wide \code{data.frame}.}
+in the wide \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.}
 
 \item{keep.all}{Logical. Should all the variables from the source
 \code{data.frame} be kept (\code{keep.all = TRUE}) or should the resulting
@@ -25,9 +25,6 @@ Other variables are \emph{recycled} to appropriate length.}
 the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
 (default) the \code{key} is set to the \code{id.vars} and the "time"
 variables that are created by \code{Stacked}.}
-
-\item{\dots}{Further arguments to \code{\link{NoSep}} in case the separator
-is of a different form.}
 }
 \value{
 A \code{list} of \code{data.table}s with one \code{data.table} for

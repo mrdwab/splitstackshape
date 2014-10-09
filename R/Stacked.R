@@ -8,7 +8,7 @@
 #' @param id.vars The variables that serve as unique identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
-#' in the wide \code{data.frame}.
+#' in the wide \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.
 #' @param keep.all Logical. Should all the variables from the source
 #' \code{data.frame} be kept (\code{keep.all = TRUE}) or should the resulting
 #' \code{\link[data.table:data.table]{data.table}} comprise only columns for
@@ -18,8 +18,6 @@
 #' the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
 #' (default) the \code{key} is set to the \code{id.vars} and the "time"
 #' variables that are created by \code{Stacked}.
-#' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
-#' is of a different form.
 #' @return A \code{list} of \code{data.table}s with one \code{data.table} for
 #' each "var.stub". The \code{\link[data.table:key]{key}} is set to the
 #' \code{id.vars} and \code{.time_#} vars.
@@ -46,9 +44,9 @@
 #' 
 #' @export Stacked
 Stacked <- function(data, id.vars, var.stubs, sep, 
-                    keep.all = TRUE, keyed = TRUE, ...) {
+                    keep.all = TRUE, keyed = TRUE) {
   vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
-  temp1 <- vGrep(var.stubs, names(mydf))
+  temp1 <- vGrep(var.stubs, names(data))
   
   s <- sort.list(sapply(names(temp1), nchar), decreasing = TRUE)
   for (i in s) {
@@ -60,13 +58,15 @@ Stacked <- function(data, id.vars, var.stubs, sep,
     } 
   }
   
+  if (sep == "var.stubs") sep <- .collapseMe(var.stubs)
+  
   if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
   onames <- setdiff(
     names(data), 
     c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
   if (!isTRUE(keep.all)) onames <- NULL
   if (length(onames) == 0) onames <- NULL
-  if (!isTRUE(is.data.table(data))) data <- data.table(data)
+  if (!isTRUE(is.data.table(data))) data <- as.data.table(data)
   ZZ <- vector("list", length(var.stubs))
   names(ZZ) <- var.stubs
   .SD <- .N <- count <- a <- NULL
@@ -123,13 +123,11 @@ NULL
 #' @param id.vars The columns to be used as "ID" variables.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
-#' in the source \code{data.frame}.
+#' in the source \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.
 #' @param keep.all Logical. Should all the variables in the source
 #' \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which
 #' comprise the \code{id.vars} and split data from the \code{var.stubs}
 #' (\code{keep.all = FALSE}).
-#' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
-#' is of a different form.
 #' @return A merged \code{data.table}.
 #' @note The \code{keyed} argument to \code{\link{Stacked}} has been hard-
 #' coded to \code{TRUE} to make \code{merge} work.

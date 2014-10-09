@@ -4,7 +4,8 @@
 \title{Split concatenated cells in a \code{data.frame} or a \code{data.table}}
 \usage{
 concat.split(data, split.col, sep = ",", structure = "compact",
-  mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, fill = NA)
+  mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, fill = NA,
+  ...)
 }
 \arguments{
 \item{data}{The source \code{data.frame} or \code{data.table}.}
@@ -36,6 +37,8 @@ or not). Defaults to \code{FALSE}.}
 
 \item{fill}{The "fill" value for missing values when \code{structure =
 "expanded"}. Defaults to \code{NA}.}
+
+\item{\dots}{Additional arguments to \code{\link{cSplit}}.}
 }
 \description{
 The \code{concat.split} function takes a column with multiple values, splits

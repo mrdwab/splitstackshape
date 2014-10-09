@@ -230,6 +230,7 @@ NULL
 #' \emph{regular expression}? See Details.
 #' @param fill The "fill" value for missing values when \code{structure =
 #' "expanded"}. Defaults to \code{NA}.
+#' @param \dots Additional arguments to \code{\link{cSplit}}.
 #' @note This is more of a "legacy" or "convenience" wrapper function
 #' encompassing the features available in the separated functions of \code{\link{cSplit}},
 #' \code{\link{concat.split.compact}}, \code{\link{concat.split.list}}, and
@@ -280,7 +281,7 @@ NULL
 #' @export concat.split
 concat.split <- function(data, split.col, sep = ",", structure = "compact",
                          mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, 
-                         fill = NA) {
+                         fill = NA, ...) {
   
   M1 <- paste(c("", "'mode' supplied but ignored.", 
                 "'mode' setting only applicable",
@@ -330,23 +331,22 @@ NULL
 #' Split concatenated cells in a \code{data.frame} and optionally reshape the
 #' output
 #' 
-#' This is an extended version of the \code{\link{concat.split.compact}}
-#' function that allows the user to split multiple columns at once and
-#' optionally use the \code{\link{Reshape}} function to convert the
-#' \code{data.frame} into a "long" format.
+#' This is a wrapper for the \code{\link{cSplit}}
+#' function to maintain backwards compatability with earlier versions
+#' of the "splitstackshape" package. It allows the user to split multiple columns at once and
+#' optionally convert the results into a "long" format.
 #' 
 #' 
-#' @param data The source \code{data.frame}.
+#' @param data The source \code{data.frame} or \code{data.table}.
 #' @param split.cols A vector of columns that need to be split.
 #' @param seps A vector of the separator character used in each column. If all
 #' columns use the same character, you can enter that single character.
-#' @param direction The desired form of the resulting \code{data.frame}, either
+#' @param direction The desired form of the resulting \code{data.frame} or \code{data.table}, either
 #' \code{'wide'} or \code{'long'}.  Defaults to \code{'wide'}.
-#' @return A \code{data.frame}. If \code{direction = "long"}, a
-#' \code{data.frame} with additional attributes created by the
-#' \code{\link{reshape}} function in base R.
+#' @param \dots Other arguments to \code{\link{cSplit}}.
+#' @return A \code{data.table}.
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split}}, \code{\link{concat.split.compact}},
+#' @seealso \code{\link{cSplit}}, for which this is simply a wrapper, and \code{\link{concat.split}}, \code{\link{concat.split.compact}},
 #' \code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}},
 #' \code{\link{Reshape}}
 #' @examples
@@ -360,29 +360,9 @@ NULL
 #' 
 #' @export concat.split.multiple
 concat.split.multiple <- function(data, split.cols, seps = ",", 
-                                  direction = "wide") {
-  split.cols <- Names(data, split.cols)
-  IDs <- othernames(data, split.cols)
-  if (length(seps) == 1) seps <- rep(seps, length(split.cols))
-  if (length(seps) != length(split.cols)) {
-    stop("Verify you have entered the correct number of seps")
-  }
-  temp <- lapply(seq_along(split.cols), function(x) {
-    concat.split(data[split.cols[x]], split.cols[x], seps[x], drop = TRUE)
-  })
-  
-  out <- switch(
-    direction, 
-    wide = {
-      cbind(data[IDs], do.call(cbind, temp))
-    },
-    long = {
-      Reshape(cbind(data[IDs], do.call(cbind, temp)), id.vars = IDs, 
-              var.stubs = split.cols, sep = "_")
-    },
-    stop("'direction' must be either 'wide' or 'long'.")
-  )
-  out[out == ""] <- NA
-  out
+                                  direction = "wide", ...) {
+  message("This function is deprecated. Use `cSplit` instead.")
+  cSplit(indt = data, splitCols = split.cols, 
+         sep = seps, direction = direction, ...)
 }
 NULL

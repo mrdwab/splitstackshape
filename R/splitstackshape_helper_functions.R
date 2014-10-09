@@ -263,3 +263,14 @@ NULL
 
 trim <- function(x) gsub("^\\s+|\\s+$", "", x)
 NULL
+
+.collapseMe <- function(invec) {
+  paste(invec, collapse = "|")
+}
+NULL
+
+.stripWhite <- function(invec, delim = ",") {
+  gsub(sprintf("\\s+%s\\s+|\\s+%s|%s\\s+",
+               delim, delim, delim), delim, invec)
+}
+NULL

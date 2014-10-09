@@ -190,11 +190,11 @@ NULL
 
 
 
-#' Split concatenated cells in a \code{data.frame}
+#' Split concatenated cells in a \code{data.frame} or a \code{data.table}
 #' 
 #' The \code{concat.split} function takes a column with multiple values, splits
 #' the values into a \code{list} or into separate columns, and returns a new
-#' \code{data.frame}.
+#' \code{data.frame} or \code{data.table}.
 #' 
 #' \emph{structure} \itemize{ \item \code{"compact"} creates as many columns as
 #' the maximum length of the resulting split. This is the most useful
@@ -202,14 +202,14 @@ NULL
 #' \code{"expanded"} creates as many columns as the maximum value of the input
 #' data. This is most useful when converting to \code{mode = "binary"}. \item
 #' \code{"list"} creates a single new column that is structurally a
-#' \code{\link{list}} within a \code{\link{data.frame}}. } \emph{fixed}
+#' \code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. } \emph{fixed}
 #' \itemize{ \item When \code{structure = "expanded"} or \code{structure =
 #' "list"}, it is possible to supply a a regular expression containing the
 #' characters to split on.  For example, to split on \code{","}, \code{";"}, or
 #' \code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep = "[,;|]"}, and
 #' \code{fixed = FALSE} to split on any of those characters.}
 #' 
-#' @param data The source \code{data.frame}.
+#' @param data The source \code{data.frame} or \code{data.table}.
 #' @param split.col The variable that needs to be split; can be specified
 #' either by the column number or the variable name.
 #' @param sep The character separating each value (defaults to \code{","}).
@@ -231,19 +231,13 @@ NULL
 #' @param fill The "fill" value for missing values when \code{structure =
 #' "expanded"}. Defaults to \code{NA}.
 #' @note This is more of a "legacy" or "convenience" wrapper function
-#' encompassing the features available in the separated functions of
+#' encompassing the features available in the separated functions of \code{\link{cSplit}},
 #' \code{\link{concat.split.compact}}, \code{\link{concat.split.list}}, and
 #' \code{\link{concat.split.expanded}}.
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split.compact}},
+#' @seealso \code{\link{cSplit}}, \code{\link{concat.split.compact}},
 #' \code{\link{concat.split.expanded}}, \code{\link{concat.split.list}},
 #' \code{\link{concat.split.multiple}}
-#' @references \itemize{ \item See
-#' \url{http://stackoverflow.com/q/10100887/1270695} for some history of this
-#' function, even though the solution is not used at all here. \item The
-#' \code{"condensed"} setting was inspired by an answer from David Winsemius to
-#' a question at Stack Overflow.  See:
-#' \url{http://stackoverflow.com/a/13924245/1270695} }
 #' @examples
 #' 
 #' ## Load some data
@@ -261,7 +255,7 @@ NULL
 #' \dontrun{
 #' # You'll get a warning here, when trying to retain the original values
 #' concat.split(temp, 2, mode = "value", drop = TRUE)
-#' 
+#' }
 #' 
 #' # Try again. Notice the differing number of resulting columns
 #' concat.split(temp, 2, structure = "expanded",
@@ -281,7 +275,7 @@ NULL
 #' # that the new column is a list; note the
 #' # difference between "Likes" and "Likes_list".
 #' str(concat.split(temp, 2, structure = "list", drop = FALSE))
-#' }
+#' 
 #' 
 #' @export concat.split
 concat.split <- function(data, split.col, sep = ",", structure = "compact",

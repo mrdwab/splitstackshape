@@ -58,7 +58,10 @@
 cSplit <- function(indt, splitCols, sep = ",", direction = "wide", 
                    fixed = TRUE, drop = TRUE, 
                    stripWhite = FALSE, makeEqual = NULL) {
-  if (!is.data.table(indt)) setDT(indt)
+  
+  if (!is.data.table(indt)) indt <- as.data.table(indt)
+  else indt <- copy(indt)
+
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
   if (any(!vapply(indt[, splitCols, with = FALSE],
                   is.character, logical(1L)))) {

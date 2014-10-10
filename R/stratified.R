@@ -69,8 +69,11 @@ stratified <- function(indt, group, size, select = NULL,
                        replace = FALSE, keep.rownames = FALSE,
                        bothSets = FALSE, ...) {
   if (is.numeric(group)) group <- names(indt)[group]
-  if (!is.data.table(indt)) indt <- as.data.table(
-    indt, keep.rownames = keep.rownames)
+  if (!is.data.table(indt)) {
+    indt <- as.data.table(indt, keep.rownames = keep.rownames)
+  } else {
+    indt <- copy(indt)
+  }
   if (is.null(select)) {
     indt <- indt
   } else {
@@ -127,12 +130,10 @@ stratified <- function(indt, group, size, select = NULL,
   
   if (isTRUE(bothSets)) {
     out2 <- indt[!.RNID %in% out1$`.RNID`]
-    indt[, .RNID := NULL]
     out1[, .RNID := NULL]
     out2[, .RNID := NULL]
     list(SAMP1 = out1, SAMP2 = out2)
   } else {
-    indt[, .RNID := NULL]
     out1[, .RNID := NULL][]
   }
 }

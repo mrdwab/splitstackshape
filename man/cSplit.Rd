@@ -46,12 +46,6 @@ The \code{cSplit} function replaces most of the earlier
 \code{concat.split*} functions. The earlier functions remain for
 compatability purposes, but now they are essentially wrappers for the
 \code{cSplit} function.
-
-This function uses \code{\link[data.table:setDT]{setDT}} if the input file
-is not a \code{data.table}. This will change your input file to a
-\code{\link[data.table:data.table]{data.table}} in the process. Use
-\code{\link[data.table:setDF]{setDF}} if you want to reset your input to a
-\code{data.frame}.
 }
 \examples{
 ## Sample data

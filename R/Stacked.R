@@ -70,7 +70,11 @@ Stacked <- function(data, id.vars, var.stubs, sep,
     c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
   if (!isTRUE(keep.all)) onames <- NULL
   if (length(onames) == 0) onames <- NULL
-  if (!isTRUE(is.data.table(data))) data <- as.data.table(data, keep.rownames = keep.rownames)
+  if (!isTRUE(is.data.table(data))) {
+    data <- as.data.table(data, keep.rownames = keep.rownames)
+  } else {
+    data <- copy(data)
+  }
   ZZ <- vector("list", length(var.stubs))
   names(ZZ) <- var.stubs
   .SD <- .N <- count <- a <- NULL
@@ -156,7 +160,7 @@ NULL
 #' mydf
 #' merged.stack(mydf, id.vars = c("id_1", "id_2"),
 #'              var.stubs = c("varA", "varB", "varC"),
-#'              sep = "\\.")
+#'              sep = ".")
 #' 
 #' \dontshow{rm(mydf)}
 #' 

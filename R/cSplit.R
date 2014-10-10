@@ -29,11 +29,6 @@
 #' compatability purposes, but now they are essentially wrappers for the
 #' \code{cSplit} function.
 #' 
-#' This function uses \code{\link[data.table:setDT]{setDT}} if the input file
-#' is not a \code{data.table}. This will change your input file to a
-#' \code{\link[data.table:data.table]{data.table}} in the process. Use
-#' \code{\link[data.table:setDF]{setDF}} if you want to reset your input to a
-#' \code{data.frame}.
 #' @author Ananda Mahto
 #' @seealso \code{\link{concat.split}}
 #' @examples
@@ -58,7 +53,10 @@
 cSplit <- function(indt, splitCols, sep = ",", direction = "wide", 
                    fixed = TRUE, drop = TRUE, 
                    stripWhite = FALSE, makeEqual = NULL) {
-  if (!is.data.table(indt)) setDT(indt)
+  
+  if (!is.data.table(indt)) indt <- as.data.table(indt)
+  else indt <- copy(indt)
+
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
   if (any(!vapply(indt[, splitCols, with = FALSE],
                   is.character, logical(1L)))) {

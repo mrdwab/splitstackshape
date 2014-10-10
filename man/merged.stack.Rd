@@ -47,7 +47,7 @@ mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
 mydf
 merged.stack(mydf, id.vars = c("id_1", "id_2"),
              var.stubs = c("varA", "varB", "varC"),
-             sep = "\\\\.")
+             sep = ".")
 
 \dontshow{rm(mydf)}
 }

@@ -13,7 +13,7 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 08/10 October 2014
 
-Incremental cleanups to get ready for V1.4.0
+Incremental cleanups and additions to get ready for V1.4.0
 
 ### Enhancement
 
@@ -41,10 +41,13 @@ Added functions:
   A function to take fixed or proportional samples by group
   from a `data.frame` or `data.table.
 
-* :::.collapseMe
+Non-exported additions:
 
-  Allows the use of `sep = "var.stubs"` in `Stacked` and
-  `merged.stack`. 
+* `:::.collapseMe` 
+* `:::.stripWhite`
+* `:::Names`
+* `:::trim`
+* `:::vGrep`
 
 ## 1.3.0
 

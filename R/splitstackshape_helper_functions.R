@@ -306,3 +306,4 @@ NULL
 .noEmpty <- function(invec) {
   invec[invec != ""]
 }
+NULL

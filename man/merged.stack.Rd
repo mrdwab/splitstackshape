@@ -3,7 +3,7 @@
 \alias{merged.stack}
 \title{Take a \code{list} of stacked \code{data.table}s and \code{merge} them}
 \usage{
-merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE, ...)
+merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE)
 }
 \arguments{
 \item{data}{The input \code{data.frame}.}

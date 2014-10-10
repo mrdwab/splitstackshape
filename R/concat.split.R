@@ -69,6 +69,10 @@ NULL
 #' @examples
 #' 
 #' temp <- head(concat.test)
+#' cSplit_e(temp, "Likes")
+#' cSplit_e(temp, 4, ";", fill = 0)
+#'  
+#' ## The old function name still works
 #' concat.split.expanded(temp, "Likes")
 #' concat.split.expanded(temp, 4, ";", fill = 0)
 #' concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
@@ -76,8 +80,14 @@ NULL
 #' 
 #' \dontshow{rm(temp)}
 #' 
+#' @aliases cSplit_e
+#' @aliases concat.split.expanded
+#' @rdname concat.split.expanded
+#' @name concat.split.expanded
+#' 
 #' @export concat.split.expanded
-concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
+#' @export cSplit_e
+cSplit_e <- concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
                                   type = "numeric", drop = FALSE, 
                                   fixed = TRUE, fill = NA) {
   if (is.numeric(split.col)) split.col <- names(data)[split.col]
@@ -143,14 +153,24 @@ NULL
 #' @examples
 #' 
 #' temp <- head(concat.test)
+#' str(cSplit_l(temp, "Likes"))
+#' cSplit_l(temp, 4, ";")
+#' 
+#' ## The old function name still works
 #' str(concat.split.list(temp, "Likes"))
 #' concat.split.list(temp, 4, ";")
 #' concat.split.list(temp, 4, ";", drop = TRUE)
 #' 
 #' \dontshow{rm(temp)}
 #' 
+#' @aliases cSplit_l
+#' @aliases concat.split.list
+#' @rdname concat.split.list
+#' @name concat.split.list
+#' 
 #' @export concat.split.list
-concat.split.list <- function(data, split.col, sep = ",", 
+#' @export cSplit_l
+cSplit_l <- concat.split.list <- function(data, split.col, sep = ",", 
                               drop = FALSE, fixed = FALSE) {
   if (is.numeric(split.col)) split.col <- names(data)[split.col]
   if (!is.character(data[[split.col]])) a <- as.character(data[[split.col]])

@@ -10,7 +10,7 @@ Functions to split concatenated data, conveniently stack columns of
 }
 \details{
 \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-Version: \tab 1.3.4\cr Date: \tab 2014-10-09\cr License: \tab GPL-3\cr }
+Version: \tab 1.3.6\cr Date: \tab 2014-10-10\cr License: \tab GPL-3\cr }
 
 Online data collection tools like Google Forms often export
 multiple-response questions with data concatenated in cells. The

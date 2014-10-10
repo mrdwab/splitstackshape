@@ -3,6 +3,8 @@
 export(Reshape)
 export(Stacked)
 export(cSplit)
+export(cSplit_e)
+export(cSplit_l)
 export(concat.split)
 export(concat.split.compact)
 export(concat.split.expanded)

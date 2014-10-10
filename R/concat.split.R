@@ -1,6 +1,9 @@
-#' Split concatenated cells in a \code{data.frame} or a \code{data.table} into a condensed format
+#' Split concatenated cells in a \code{data.frame} or a \code{data.table} into
+#' a condensed format
 #' 
-#' The default splitting method for \code{\link{concat.split}}. Formerly based on \code{\link{read.concat}} but presently a simple wrapper for \code{\link{cSplit}}..
+#' The default splitting method for \code{\link{concat.split}}. Formerly based
+#' on \code{\link{read.concat}} but presently a simple wrapper for
+#' \code{\link{cSplit}}..
 #' 
 #' 
 #' @param data The source \code{data.frame} or \code{data.table}
@@ -9,11 +12,15 @@
 #' @param sep The character separating each value.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' \code{FALSE}.
-#' @param fixed Logical. Should the split character be treated as a fixed pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to \code{TRUE}.
+#' @param fixed Logical. Should the split character be treated as a fixed
+#' pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
+#' \code{TRUE}.
 #' @param \dots optional arguments to pass to \code{cSplit}.
 #' @return A \code{data.table}.
+#' @note This function no longer does anything different from
+#' \code{\link{cSplit}}. It is recommended that you transition your code to the
+#' \code{cSplit} function instead.
 #' @author Ananda Mahto
-#' @note This function no longer does anything different from \code{\link{cSplit}}. It is recommended that you transition your code to the \code{cSplit} function instead.
 #' @seealso \code{\link{read.concat}}, \code{\link{cSplit}}
 #' @examples
 #' 
@@ -210,6 +217,10 @@ NULL
 
 
 
+
+
+
+
 #' Split concatenated cells in a \code{data.frame} or a \code{data.table}
 #' 
 #' The \code{concat.split} function takes a column with multiple values, splits
@@ -222,12 +233,12 @@ NULL
 #' \code{"expanded"} creates as many columns as the maximum value of the input
 #' data. This is most useful when converting to \code{mode = "binary"}. \item
 #' \code{"list"} creates a single new column that is structurally a
-#' \code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. } \emph{fixed}
-#' \itemize{ \item When \code{structure = "expanded"} or \code{structure =
-#' "list"}, it is possible to supply a a regular expression containing the
-#' characters to split on.  For example, to split on \code{","}, \code{";"}, or
-#' \code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep = "[,;|]"}, and
-#' \code{fixed = FALSE} to split on any of those characters.}
+#' \code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. }
+#' \emph{fixed} \itemize{ \item When \code{structure = "expanded"} or
+#' \code{structure = "list"}, it is possible to supply a a regular expression
+#' containing the characters to split on.  For example, to split on \code{","},
+#' \code{";"}, or \code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep =
+#' "[,;|]"}, and \code{fixed = FALSE} to split on any of those characters.}
 #' 
 #' @param data The source \code{data.frame} or \code{data.table}.
 #' @param split.col The variable that needs to be split; can be specified
@@ -252,9 +263,9 @@ NULL
 #' "expanded"}. Defaults to \code{NA}.
 #' @param \dots Additional arguments to \code{\link{cSplit}}.
 #' @note This is more of a "legacy" or "convenience" wrapper function
-#' encompassing the features available in the separated functions of \code{\link{cSplit}},
-#' \code{\link{concat.split.compact}}, \code{\link{concat.split.list}}, and
-#' \code{\link{concat.split.expanded}}.
+#' encompassing the features available in the separated functions of
+#' \code{\link{cSplit}}, \code{\link{concat.split.compact}},
+#' \code{\link{concat.split.list}}, and \code{\link{concat.split.expanded}}.
 #' @author Ananda Mahto
 #' @seealso \code{\link{cSplit}}, \code{\link{concat.split.compact}},
 #' \code{\link{concat.split.expanded}}, \code{\link{concat.split.list}},
@@ -296,7 +307,6 @@ NULL
 #' # that the new column is a list; note the
 #' # difference between "Likes" and "Likes_list".
 #' str(concat.split(temp, 2, structure = "list", drop = FALSE))
-#' 
 #' 
 #' @export concat.split
 concat.split <- function(data, split.col, sep = ",", structure = "compact",
@@ -348,25 +358,31 @@ NULL
 
 
 
+
+
+
+
 #' Split concatenated cells in a \code{data.frame} and optionally reshape the
 #' output
 #' 
-#' This is a wrapper for the \code{\link{cSplit}}
-#' function to maintain backwards compatability with earlier versions
-#' of the "splitstackshape" package. It allows the user to split multiple columns at once and
-#' optionally convert the results into a "long" format.
+#' This is a wrapper for the \code{\link{cSplit}} function to maintain
+#' backwards compatability with earlier versions of the "splitstackshape"
+#' package. It allows the user to split multiple columns at once and optionally
+#' convert the results into a "long" format.
 #' 
 #' 
 #' @param data The source \code{data.frame} or \code{data.table}.
 #' @param split.cols A vector of columns that need to be split.
 #' @param seps A vector of the separator character used in each column. If all
 #' columns use the same character, you can enter that single character.
-#' @param direction The desired form of the resulting \code{data.frame} or \code{data.table}, either
-#' \code{'wide'} or \code{'long'}.  Defaults to \code{'wide'}.
+#' @param direction The desired form of the resulting \code{data.frame} or
+#' \code{data.table}, either \code{'wide'} or \code{'long'}.  Defaults to
+#' \code{'wide'}.
 #' @param \dots Other arguments to \code{\link{cSplit}}.
 #' @return A \code{data.table}.
 #' @author Ananda Mahto
-#' @seealso \code{\link{cSplit}}, for which this is simply a wrapper, and \code{\link{concat.split}}, \code{\link{concat.split.compact}},
+#' @seealso \code{\link{cSplit}}, for which this is simply a wrapper, and
+#' \code{\link{concat.split}}, \code{\link{concat.split.compact}},
 #' \code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}},
 #' \code{\link{Reshape}}
 #' @examples

@@ -13,7 +13,8 @@ merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE)
 \item{var.stubs}{The prefixes of the variable groups.}
 
 \item{sep}{The character that separates the "variable name" from the "times"
-in the source \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.}
+in the source \code{data.frame}. Alternatively, can be set to
+\code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.}
 
 \item{keep.all}{Logical. Should all the variables in the source
 \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which

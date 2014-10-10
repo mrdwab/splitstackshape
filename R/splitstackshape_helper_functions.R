@@ -25,6 +25,10 @@ NULL
 
 
 
+
+
+
+
 #' \code{names} as a character vector, always
 #' 
 #' A convenience function using either character vectors or numeric vectors to
@@ -48,6 +52,10 @@ Names <- function(data, invec) {
   names(data)[invec]
 }
 NULL
+
+
+
+
 
 
 
@@ -91,6 +99,10 @@ read.concat <- function(data, col.prefix, sep) {
   t1
 }
 NULL
+
+
+
+
 
 
 
@@ -142,6 +154,10 @@ NULL
 
 
 
+
+
+
+
 #' Create a binary matrix from a list of character values
 #' 
 #' Create a binary matrix from a list of character values
@@ -186,6 +202,10 @@ NULL
 
 
 
+
+
+
+
 #' Split basic alphanumeric strings which have no separators
 #' 
 #' Used to split strings like "Abc8" into "Abc" and "8".
@@ -222,6 +242,10 @@ NoSep <- function(data, charfirst = TRUE) {
                       gsub(Pattern, "\\2", data)), Names)
 }
 NULL
+
+
+
+
 
 
 

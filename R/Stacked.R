@@ -8,7 +8,8 @@
 #' @param id.vars The variables that serve as unique identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
-#' in the wide \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.
+#' in the wide \code{data.frame}. Alternatively, can be set to
+#' \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.
 #' @param keep.all Logical. Should all the variables from the source
 #' \code{data.frame} be kept (\code{keep.all = TRUE}) or should the resulting
 #' \code{\link[data.table:data.table]{data.table}} comprise only columns for
@@ -112,6 +113,10 @@ NULL
 
 
 
+
+
+
+
 #' Take a \code{list} of stacked \code{data.table}s and \code{merge} them
 #' 
 #' A wrapper around the \code{\link{Stacked}} function to
@@ -123,7 +128,8 @@ NULL
 #' @param id.vars The columns to be used as "ID" variables.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
-#' in the source \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.
+#' in the source \code{data.frame}. Alternatively, can be set to
+#' \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.
 #' @param keep.all Logical. Should all the variables in the source
 #' \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which
 #' comprise the \code{id.vars} and split data from the \code{var.stubs}

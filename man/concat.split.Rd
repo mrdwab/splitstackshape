@@ -52,18 +52,18 @@ general-case application of this function. \item When the input is numeric,
 \code{"expanded"} creates as many columns as the maximum value of the input
 data. This is most useful when converting to \code{mode = "binary"}. \item
 \code{"list"} creates a single new column that is structurally a
-\code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. } \emph{fixed}
-\itemize{ \item When \code{structure = "expanded"} or \code{structure =
-"list"}, it is possible to supply a a regular expression containing the
-characters to split on.  For example, to split on \code{","}, \code{";"}, or
-\code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep = "[,;|]"}, and
-\code{fixed = FALSE} to split on any of those characters.}
+\code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. }
+\emph{fixed} \itemize{ \item When \code{structure = "expanded"} or
+\code{structure = "list"}, it is possible to supply a a regular expression
+containing the characters to split on.  For example, to split on \code{","},
+\code{";"}, or \code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep =
+"[,;|]"}, and \code{fixed = FALSE} to split on any of those characters.}
 }
 \note{
 This is more of a "legacy" or "convenience" wrapper function
-encompassing the features available in the separated functions of \code{\link{cSplit}},
-\code{\link{concat.split.compact}}, \code{\link{concat.split.list}}, and
-\code{\link{concat.split.expanded}}.
+encompassing the features available in the separated functions of
+\code{\link{cSplit}}, \code{\link{concat.split.compact}},
+\code{\link{concat.split.list}}, and \code{\link{concat.split.expanded}}.
 }
 \examples{
 ## Load some data

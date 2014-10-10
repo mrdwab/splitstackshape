@@ -13,7 +13,8 @@ Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE)
 \item{var.stubs}{The prefixes of the variable groups.}
 
 \item{sep}{The character that separates the "variable name" from the "times"
-in the wide \code{data.frame}. Alternatively, can be set to \code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.}
+in the wide \code{data.frame}. Alternatively, can be set to
+\code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.}
 
 \item{keep.all}{Logical. Should all the variables from the source
 \code{data.frame} be kept (\code{keep.all = TRUE}) or should the resulting

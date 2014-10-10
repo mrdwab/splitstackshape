@@ -1,22 +1,39 @@
 #' Split concatenated values into separate values
 #' 
-#' The \code{cSplit} function is designed to quickly and conveniently split concatenated data into separate values.
-#'  
+#' The \code{cSplit} function is designed to quickly and conveniently split
+#' concatenated data into separate values.
+#' 
+#' 
 #' @param indt The input \code{data.frame} or \code{data.table}.
 #' @param splitCols The column or columns that need to be split.
-#' @param sep The values that serve as a delimiter \emph{within} each column. This can be a single value if all columns have the same delimiter, or a vector of values \emph{in the same order as the delimiters in each of the \code{splitCols}}.
-#' @param direction The desired direction of the results, either \code{"wide"} or \code{"long"}.
-#' @param makeEqual Logical. Should all groups be made to be the same length? Defaults to \code{FALSE}.
-#' @param fixed Logical. Should the split character be treated as a fixed pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to \code{TRUE}.
-#' @param drop Logical. Should the original concatenated column be dropped? Defaults to \code{TRUE}.
-#' @param stripWhite Logical. If there is whitespace around the delimiter in the concatenated columns, should it be stripped prior to splitting? Defaults to \code{FALSE}.
-#' @return A \code{\link[data.table:data.table]{data.table}} with the values split into new columns or rows.
+#' @param sep The values that serve as a delimiter \emph{within} each column.
+#' This can be a single value if all columns have the same delimiter, or a
+#' vector of values \emph{in the same order as the delimiters in each of the
+#' \code{splitCols}}.
+#' @param direction The desired direction of the results, either \code{"wide"}
+#' or \code{"long"}.
+#' @param fixed Logical. Should the split character be treated as a fixed
+#' pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
+#' \code{TRUE}.
+#' @param drop Logical. Should the original concatenated column be dropped?
+#' Defaults to \code{TRUE}.
+#' @param stripWhite Logical. If there is whitespace around the delimiter in
+#' the concatenated columns, should it be stripped prior to splitting? Defaults
+#' to \code{FALSE}.
+#' @param makeEqual Logical. Should all groups be made to be the same length?
+#' Defaults to \code{FALSE}.
+#' @return A \code{\link[data.table:data.table]{data.table}} with the values
+#' split into new columns or rows.
 #' @note The \code{cSplit} function replaces most of the earlier
 #' \code{concat.split*} functions. The earlier functions remain for
 #' compatability purposes, but now they are essentially wrappers for the
 #' \code{cSplit} function.
 #' 
-#' This function uses \code{\link[data.table:setDT]{setDT}} if the input file is not a \code{data.table}. This will change your input file to a \code{\link[data.table:data.table]{data.table}} in the process. Use \code{\link[data.table:setDF]{setDF}} if you want to reset your input to a \code{data.frame}.
+#' This function uses \code{\link[data.table:setDT]{setDT}} if the input file
+#' is not a \code{data.table}. This will change your input file to a
+#' \code{\link[data.table:data.table]{data.table}} in the process. Use
+#' \code{\link[data.table:setDF]{setDF}} if you want to reset your input to a
+#' \code{data.frame}.
 #' @author Ananda Mahto
 #' @seealso \code{\link{concat.split}}
 #' @examples
@@ -27,7 +44,7 @@
 #' ## Split the "Likes" column
 #' cSplit(temp, "Likes")
 #' 
-#' ## Split the "Likes" and "Hates" columns -- 
+#' ## Split the "Likes" and "Hates" columns --
 #' ##   they have different delimiters...
 #' cSplit(temp, c("Likes", "Hates"), c(",", ";"))
 #' 

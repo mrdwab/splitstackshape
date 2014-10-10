@@ -288,8 +288,9 @@ NULL
 trim <- function(x) gsub("^\\s+|\\s+$", "", x)
 NULL
 
-.collapseMe <- function(invec) {
-  paste(invec, collapse = "|")
+.collapseMe <- function(invec, atStart = TRUE) {
+  if (isTRUE(atStart)) paste(sprintf("^%s", invec), collapse = "|")
+  else paste(sprintf("%s$", invec), collapse = "|")
 }
 NULL
 
@@ -298,3 +299,10 @@ NULL
                delim, delim, delim), delim, invec)
 }
 NULL
+
+vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
+NULL
+
+.noEmpty <- function(invec) {
+  invec[invec != ""]
+}

@@ -3,7 +3,8 @@
 \alias{Stacked}
 \title{\code{stack} columns from a wide form to a long form}
 \usage{
-Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE)
+Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE,
+  keep.rownames = FALSE, ...)
 }
 \arguments{
 \item{data}{The source \code{data.frame}.}
@@ -26,6 +27,10 @@ Other variables are \emph{recycled} to appropriate length.}
 the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
 (default) the \code{key} is set to the \code{id.vars} and the "time"
 variables that are created by \code{Stacked}.}
+
+\item{keep.rownames}{Logical. Should rownames be kept when converting the input to a \code{data.table}? Defaults to \code{FALSE}.}
+
+\item{\dots}{Other arguments to be passed on when \code{sep = "var.stubs"} (specifically, \code{atStart}: A logical argument to indicate whether the stubs come at the start or at the end of the variable names).}
 }
 \value{
 A \code{list} of \code{data.table}s with one \code{data.table} for
@@ -51,7 +56,7 @@ mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
 mydf
 Stacked(data = mydf, id.vars = c("id_1", "id_2"),
         var.stubs = c("varA", "varB", "varC"),
-        sep = "\\\\.")
+        sep = ".")
 
 \dontshow{rm(mydf)}
 }

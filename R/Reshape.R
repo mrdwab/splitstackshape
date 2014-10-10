@@ -52,7 +52,6 @@
 #' @export Reshape
 Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
   if (sep == ".") sep <- "\\."
-  vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
   temp <- Names(data, unlist(vGrep(var.stubs, names(data), value = TRUE)))
   
   data <- getanID(data, id.vars)
@@ -61,13 +60,12 @@ Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...
   if (sep == "NoSep") {
     x <- NoSep(temp, ...)
   } else {
-    x <- do.call(rbind.data.frame, 
-                 strsplit(temp, split = sep))
+    x <- as.data.frame(do.call(rbind, strsplit(temp, split = sep)))
     names(x) <- 
       c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
   }
   
-  xS <- split(x$.time_1, x$.var)
+  xS <- split(x[, ".time_1"], x[, ".var"])
   xL <- unique(unlist(xS))
   
   if (isTRUE(all(sapply(xS, function(x) all(xL %in% x))))) {

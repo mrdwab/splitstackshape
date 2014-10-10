@@ -31,57 +31,15 @@ strings). Defaults to \code{"numeric"}.}
 used.}
 
 \item{fill}{Desired "fill" value. Defaults to \code{NA}.}
-
-\item{data}{The source \code{data.frame} or \code{data.table}.}
-
-\item{split.col}{The variable that needs to be split (either name or index
-position).}
-
-\item{sep}{The character separating each value. Can also be a regular
-expression.}
-
-\item{mode}{Can be either \code{"binary"} (where presence of a number in a
-given column is converted to "1") or \code{"value"} (where the value is
-retained and not recoded to "1"). Defaults to \code{"binary"}.}
-
-\item{type}{Can be either \code{"numeric"} (where the items being split are
-positive integers (\code{> 0})) or \code{"character"} (where the items being
-split are character strings). Defaults to \code{"numeric"}.}
-
-\item{drop}{Logical. Should the original variable be dropped? Defaults to
-\code{FALSE}.}
-
-\item{fixed}{Used for \code{strsplit} for allowing regular expressions to be
-used.}
-
-\item{fill}{Desired "fill" value. Defaults to \code{NA}.}
 }
 \value{
 A \code{data.frame} or a \code{data.table} depending on the source input.
-
-A \code{data.frame} or a \code{data.table} depending on the source
-input.
 }
 \description{
 "Expand" concatenated numeric or character values to their relevant position
 in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
-
-"Expand" concatenated numeric or character values to their relevant position
-in a \code{data.frame} or \code{data.table} or create a binary
-representation of such data.
 }
 \examples{
-temp <- head(concat.test)
-cSplit_e(temp, "Likes")
-cSplit_e(temp, 4, ";", fill = 0)
-
-## The old function name still works
-concat.split.expanded(temp, "Likes")
-concat.split.expanded(temp, 4, ";", fill = 0)
-concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
-concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
-
-\dontshow{rm(temp)}
 temp <- head(concat.test)
 cSplit_e(temp, "Likes")
 cSplit_e(temp, 4, ";", fill = 0)
@@ -96,14 +54,8 @@ concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
 }
 \author{
 Ananda Mahto
-
-Ananda Mahto
 }
 \seealso{
-\code{\link{concat.split}}, \code{\link{concat.split.list}},
-\code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-\code{\link{numMat}}, \code{\link{charMat}}
-
 \code{\link{concat.split}}, \code{\link{concat.split.list}},
 \code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
 \code{\link{numMat}}, \code{\link{charMat}}

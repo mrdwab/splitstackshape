@@ -81,6 +81,7 @@ stratified <- function(indt, group, size, select = NULL,
       indt[[x]] %in% select[[x]], logical(nrow(indt)))
     indt <- indt[rowSums(temp) == length(select), ]
   }
+  .SD <- .N <- .RNID <- .EACHI <- ss <- N <- NULL
   df.table <- indt[, .N, by = group]
   df.table
   if (length(size) > 1) {

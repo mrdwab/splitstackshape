@@ -3,7 +3,7 @@
 \alias{merged.stack}
 \title{Take a \code{list} of stacked \code{data.table}s and \code{merge} them}
 \usage{
-merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE)
+merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE, ...)
 }
 \arguments{
 \item{data}{The input \code{data.frame}.}
@@ -20,6 +20,8 @@ in the source \code{data.frame}. Alternatively, can be set to
 \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which
 comprise the \code{id.vars} and split data from the \code{var.stubs}
 (\code{keep.all = FALSE}).}
+
+\item{\dots}{Other arguments to be passed on to \code{\link{Stacked}} (for example, \code{keep.rownames} to retain the rownames of the input dataset, or \code{atStart}, in case \code{sep = "var.stubs"} is specified).}
 }
 \value{
 A merged \code{data.table}.

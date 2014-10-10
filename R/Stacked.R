@@ -19,6 +19,8 @@
 #' the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
 #' (default) the \code{key} is set to the \code{id.vars} and the "time"
 #' variables that are created by \code{Stacked}.
+#' @param keep.rownames Logical. Should rownames be kept when converting the input to a \code{data.table}? Defaults to \code{FALSE}.
+#' @param \dots Other arguments to be passed on when \code{sep = "var.stubs"} (specifically, \code{atStart}: A logical argument to indicate whether the stubs come at the start or at the end of the variable names).
 #' @return A \code{list} of \code{data.table}s with one \code{data.table} for
 #' each "var.stub". The \code{\link[data.table:key]{key}} is set to the
 #' \code{id.vars} and \code{.time_#} vars.
@@ -39,16 +41,16 @@
 #' mydf
 #' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
 #'         var.stubs = c("varA", "varB", "varC"),
-#'         sep = "\\.")
+#'         sep = ".")
 #' 
 #' \dontshow{rm(mydf)}
 #' 
 #' @export Stacked
 Stacked <- function(data, id.vars, var.stubs, sep, 
-                    keep.all = TRUE, keyed = TRUE) {
-  vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
+                    keep.all = TRUE, keyed = TRUE, 
+                    keep.rownames = FALSE, ...) {
   temp1 <- vGrep(var.stubs, names(data))
-  
+
   s <- sort.list(sapply(names(temp1), nchar), decreasing = TRUE)
   for (i in s) {
     matches <- temp1[[i]]
@@ -58,8 +60,9 @@ Stacked <- function(data, id.vars, var.stubs, sep,
       }
     } 
   }
-  
-  if (sep == "var.stubs") sep <- .collapseMe(var.stubs)
+
+  if (sep == ".") sep <- "\\."
+  if (sep == "var.stubs") sep <- .collapseMe(var.stubs, ...)
   
   if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
   onames <- setdiff(
@@ -67,7 +70,7 @@ Stacked <- function(data, id.vars, var.stubs, sep,
     c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
   if (!isTRUE(keep.all)) onames <- NULL
   if (length(onames) == 0) onames <- NULL
-  if (!isTRUE(is.data.table(data))) data <- as.data.table(data)
+  if (!isTRUE(is.data.table(data))) data <- as.data.table(data, keep.rownames = keep.rownames)
   ZZ <- vector("list", length(var.stubs))
   names(ZZ) <- var.stubs
   .SD <- .N <- count <- a <- NULL
@@ -134,6 +137,7 @@ NULL
 #' \code{data.frame} be kept (\code{keep.all = TRUE}) or only those which
 #' comprise the \code{id.vars} and split data from the \code{var.stubs}
 #' (\code{keep.all = FALSE}).
+#' @param \dots Other arguments to be passed on to \code{\link{Stacked}} (for example, \code{keep.rownames} to retain the rownames of the input dataset, or \code{atStart}, in case \code{sep = "var.stubs"} is specified).
 #' @return A merged \code{data.table}.
 #' @note The \code{keyed} argument to \code{\link{Stacked}} has been hard-
 #' coded to \code{TRUE} to make \code{merge} work.
@@ -157,9 +161,9 @@ NULL
 #' \dontshow{rm(mydf)}
 #' 
 #' @export merged.stack
-merged.stack <- function(data, id.vars, var.stubs, sep, keep.all = TRUE) {
-  temp <- Stacked(data = data, id.vars = id.vars, var.stubs = var.stubs,
-                  sep = sep, keep.all = keep.all, keyed = TRUE)
-  if (length(temp) == 1) temp[[1]]
+merged.stack <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
+  temp <- Stacked(data = data, id.vars = id.vars, var.stubs = var.stubs, 
+                  sep = sep, keep.all = keep.all, keyed = TRUE, ...)
+  if (!is.null(dim(temp))) temp
   else Reduce(function(x, y) merge(x, y, all = TRUE), temp)
 }

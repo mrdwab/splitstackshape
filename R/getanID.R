@@ -32,6 +32,8 @@ getanID <- function(data, id.vars = NULL) {
   if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
   if (is.null(id.vars)) id.vars <- names(data)
   
+  .id <- .N <- NULL
+  
   if (any(duplicated(data, by = id.vars))) {
     data[, .id := sequence(.N), by = id.vars]
   } else {

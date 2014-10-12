@@ -14,6 +14,7 @@ R functions to split concatenated data, conveniently stack columns of `data.fram
 ## Utilities
 
 * `getanID`: A function for creating a secondary ID when duplicated "id" variables are present.
+* `expandRows`: "Expands" the rows of a dataset.
 
 ## Install
 

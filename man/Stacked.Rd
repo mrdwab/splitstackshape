@@ -3,13 +3,13 @@
 \alias{Stacked}
 \title{\code{stack} columns from a wide form to a long form}
 \usage{
-Stacked(data, id.vars, var.stubs, sep, keep.all = TRUE, keyed = TRUE,
-  keep.rownames = FALSE, ...)
+Stacked(data, id.vars = NULL, var.stubs, sep, keep.all = TRUE,
+  keyed = TRUE, keep.rownames = FALSE, ...)
 }
 \arguments{
 \item{data}{The source \code{data.frame}.}
 
-\item{id.vars}{The variables that serve as unique identifiers.}
+\item{id.vars}{The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.}
 
 \item{var.stubs}{The prefixes of the variable groups.}
 
@@ -54,9 +54,7 @@ mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
                    varB.3 = sample(10, 6),
                    varC.3 = rnorm(6))
 mydf
-Stacked(data = mydf, id.vars = c("id_1", "id_2"),
-        var.stubs = c("varA", "varB", "varC"),
-        sep = ".")
+Stacked(data = mydf, var.stubs = c("varA", "varB", "varC"), sep = ".")
 
 \dontshow{rm(mydf)}
 }

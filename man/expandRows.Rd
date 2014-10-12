@@ -35,7 +35,7 @@ DT <- as.data.table(mydf)
 mydf
 expandRows(mydf, "count")
 expandRows(DT, "count", drop = FALSE)
-expandRows(mydf, count = 3)
+expandRows(mydf, count = 3) ## This takes values from the third column!
 expandRows(mydf, count = 3, count.is.col = FALSE)
 expandRows(mydf, count = c(1, 5, 9), count.is.col = FALSE)
 expandRows(DT, count = c(1, 5, 9), count.is.col = FALSE)

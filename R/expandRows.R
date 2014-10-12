@@ -26,29 +26,24 @@
 #' mydf
 #' expandRows(mydf, "count")
 #' expandRows(DT, "count", drop = FALSE)
-#' expandRows(mydf, count = 3)
+#' expandRows(mydf, count = 3) ## This takes values from the third column!
 #' expandRows(mydf, count = 3, count.is.col = FALSE)
 #' expandRows(mydf, count = c(1, 5, 9), count.is.col = FALSE)
 #' expandRows(DT, count = c(1, 5, 9), count.is.col = FALSE)
 #' 
 #' @export expandRows
 expandRows <- function(dataset, count, count.is.col = TRUE, drop = TRUE) {
-  if (!isTRUE(count.is.col)) {
-    if (length(count) == 1) {
-      dataset[rep(rownames(dataset), each = count), ]
-    } else {
-      if (length(count) != nrow(dataset)) {
-        stop("Expand vector does not match number of rows in data.frame")
-      }
-      dataset[rep(rownames(dataset), count), ]
-    }
+  if (isTRUE(count.is.col)) {
+    vals <- dataset[[count]]
+    out <- dataset[rep(sequence(nrow(dataset)), vals), ]
+    if (isTRUE(drop)) out[[count]] <- NULL
+  } else if (length(count) == 1) {
+    vals <- count
+    out <- dataset[rep(sequence(nrow(dataset)), each = vals), ]
   } else {
-    if (isTRUE(drop)) {
-      dataset[rep(rownames(dataset), dataset[[count]]), 
-              setdiff(names(dataset), names(dataset[count]))]
-    } else {
-      dataset[rep(rownames(dataset), dataset[[count]]), ]
-    }
+    vals <- count
+    out <- dataset[rep(sequence(nrow(dataset)), vals), ]
   }
+  out
 }
 NULL

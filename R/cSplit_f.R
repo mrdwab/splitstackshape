@@ -20,7 +20,7 @@
 #' \code{sep = "."}, so it needs to be substituted. By default, this function
 #' will substitute \code{"."} with \code{"|"}.
 #' @return A \code{data.table}.
-#' @author Ananda Mahto
+#' @author Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine this function.
 #' @references \url{http://stackoverflow.com/a/19231054/1270695}
 #' @examples
 #' 

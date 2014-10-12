@@ -58,6 +58,7 @@ NULL
 #' @param col.prefix The desired column prefix for the output
 #' \code{data.frame}.
 #' @param sep The character that acts as a delimiter.
+#' @param \dots Other arguments to pass to \code{read.table}.
 #' @return A \code{data.frame}
 #' @author Ananda Mahto
 #' @seealso \code{read.table}
@@ -74,15 +75,16 @@ NULL
 #' 
 #' \dontshow{rm(vec)}
 #' 
-read.concat <- function(data, col.prefix, sep) {
+read.concat <- function(data, col.prefix, sep, ...) {
   if (!is.character(data)) data <- as.character(data)
   zz <- textConnection(data)
   x <- count.fields(zz, sep = sep)
   close(zz)
   t1 <- read.table(text = data, sep = sep, fill = TRUE,
                    row.names = NULL, header = FALSE,
-                   blank.lines.skip = FALSE, strip.white = TRUE,
-                   col.names = paste("v", sequence(max(x))))
+                   strip.white = TRUE,
+                   col.names = paste("v", sequence(max(x))),
+                   ...)
   names(t1) <- paste(col.prefix, seq(ncol(t1)), sep = "_")
   t1
 }

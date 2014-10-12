@@ -3,7 +3,7 @@
 \alias{read.concat}
 \title{Read concatenated character vectors into a \code{data.frame}}
 \usage{
-read.concat(data, col.prefix, sep)
+read.concat(data, col.prefix, sep, ...)
 }
 \arguments{
 \item{data}{The input data.}
@@ -12,6 +12,8 @@ read.concat(data, col.prefix, sep)
 \code{data.frame}.}
 
 \item{sep}{The character that acts as a delimiter.}
+
+\item{\dots}{Other arguments to pass to \code{read.table}.}
 }
 \value{
 A \code{data.frame}

@@ -53,7 +53,7 @@ mydf
 cSplit_f(mydf, splitCols = c("v1", "v2", "v3"), sep = c("-", ".", "_"))
 }
 \author{
-Ananda Mahto
+Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine this function.
 }
 \references{
 \url{http://stackoverflow.com/a/19231054/1270695}

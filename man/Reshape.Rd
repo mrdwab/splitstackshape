@@ -3,12 +3,13 @@
 \alias{Reshape}
 \title{Reshape wide data into a semi-long form}
 \usage{
-Reshape(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...)
+Reshape(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE,
+  ...)
 }
 \arguments{
 \item{data}{The source \code{data.frame}.}
 
-\item{id.vars}{The variables that serve as unique identifiers.}
+\item{id.vars}{The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.}
 
 \item{var.stubs}{The prefixes of the variable groups.}
 

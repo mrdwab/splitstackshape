@@ -5,7 +5,7 @@
 #' 
 #' 
 #' @param data The source \code{data.frame}.
-#' @param id.vars The variables that serve as unique identifiers.
+#' @param id.vars The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the wide \code{data.frame}. Alternatively, can be set to
@@ -39,14 +39,12 @@
 #'                    varB.3 = sample(10, 6),
 #'                    varC.3 = rnorm(6))
 #' mydf
-#' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
-#'         var.stubs = c("varA", "varB", "varC"),
-#'         sep = ".")
+#' Stacked(data = mydf, var.stubs = c("varA", "varB", "varC"), sep = ".")
 #' 
 #' \dontshow{rm(mydf)}
 #' 
 #' @export Stacked
-Stacked <- function(data, id.vars, var.stubs, sep, 
+Stacked <- function(data, id.vars = NULL, var.stubs, sep, 
                     keep.all = TRUE, keyed = TRUE, 
                     keep.rownames = FALSE, ...) {
   temp1 <- vGrep(var.stubs, names(data))
@@ -61,13 +59,19 @@ Stacked <- function(data, id.vars, var.stubs, sep,
     } 
   }
 
+  temp <- Names(data, unlist(temp1))
+  
   if (sep == ".") sep <- "\\."
   if (sep == "var.stubs") sep <- .collapseMe(var.stubs, ...)
-  
-  if (is.numeric(id.vars)) id.vars <- names(data)[id.vars]
-  onames <- setdiff(
-    names(data), 
-    c(id.vars, names(data)[unlist(temp1, use.names=FALSE)]))
+
+  if (is.null(id.vars)) {
+    id.vars <- othernames(data, temp)
+  } else {
+    id.vars <- Names(data, id.vars)
+  }
+
+  onames <- othernames(data, c(id.vars, temp))
+
   if (!isTRUE(keep.all)) onames <- NULL
   if (length(onames) == 0) onames <- NULL
   if (!isTRUE(is.data.table(data))) {
@@ -132,7 +136,7 @@ NULL
 #' 
 #' 
 #' @param data The input \code{data.frame}.
-#' @param id.vars The columns to be used as "ID" variables.
+#' @param id.vars The columns to be used as "ID" variables. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the source \code{data.frame}. Alternatively, can be set to
@@ -158,14 +162,12 @@ NULL
 #'                    varB.3 = sample(10, 6),
 #'                    varC.3 = rnorm(6))
 #' mydf
-#' merged.stack(mydf, id.vars = c("id_1", "id_2"),
-#'              var.stubs = c("varA", "varB", "varC"),
-#'              sep = ".")
+#' merged.stack(mydf, var.stubs = c("varA", "varB", "varC"), sep = ".")
 #' 
 #' \dontshow{rm(mydf)}
 #' 
 #' @export merged.stack
-merged.stack <- function(data, id.vars, var.stubs, sep, keep.all = TRUE, ...) {
+merged.stack <- function(data, id.vars = NULL, var.stubs, sep, keep.all = TRUE, ...) {
   temp <- Stacked(data = data, id.vars = id.vars, var.stubs = var.stubs, 
                   sep = sep, keep.all = keep.all, keyed = TRUE, ...)
   if (!is.null(dim(temp))) temp

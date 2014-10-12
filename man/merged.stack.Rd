@@ -3,12 +3,12 @@
 \alias{merged.stack}
 \title{Take a \code{list} of stacked \code{data.table}s and \code{merge} them}
 \usage{
-merged.stack(data, id.vars, var.stubs, sep, keep.all = TRUE, ...)
+merged.stack(data, id.vars = NULL, var.stubs, sep, keep.all = TRUE, ...)
 }
 \arguments{
 \item{data}{The input \code{data.frame}.}
 
-\item{id.vars}{The columns to be used as "ID" variables.}
+\item{id.vars}{The columns to be used as "ID" variables. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.}
 
 \item{var.stubs}{The prefixes of the variable groups.}
 
@@ -45,9 +45,7 @@ mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
                    varB.3 = sample(10, 6),
                    varC.3 = rnorm(6))
 mydf
-merged.stack(mydf, id.vars = c("id_1", "id_2"),
-             var.stubs = c("varA", "varB", "varC"),
-             sep = ".")
+merged.stack(mydf, var.stubs = c("varA", "varB", "varC"), sep = ".")
 
 \dontshow{rm(mydf)}
 }

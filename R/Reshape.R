@@ -15,7 +15,7 @@
 #' of your data, not the "semi-wide" format that \code{reshape} produces.
 #' 
 #' @param data The source \code{data.frame}.
-#' @param id.vars The variables that serve as unique identifiers.
+#' @param id.vars The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the wide \code{data.frame}.
@@ -50,9 +50,11 @@
 #'        var.stubs = c("varA", "varB", "varC"))
 #' 
 #' @export Reshape
-Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
+Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
   if (sep == ".") sep <- "\\."
   temp <- Names(data, unlist(vGrep(var.stubs, names(data), value = TRUE)))
+  
+  if (is.null(id.vars)) id.vars <- othernames(data, temp)
   
   data <- getanID(data, id.vars)
   if (isTRUE(".id" %in% names(data))) id.vars = c(Names(data, id.vars), ".id")

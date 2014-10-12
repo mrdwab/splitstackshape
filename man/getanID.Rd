@@ -3,21 +3,19 @@
 \alias{getanID}
 \title{Add an "id" variable to a dataset}
 \usage{
-getanID(data, id.vars)
+getanID(data, id.vars = NULL)
 }
 \arguments{
-\item{data}{The input \code{data.frame}.}
+\item{data}{The input \code{data.frame} or \code{data.table}.}
 
-\item{id.vars}{The variables that should be treated as ID variables.}
+\item{id.vars}{The variables that should be treated as ID variables. Defaults to \code{NULL}, at which point all variables are used to create the new ID variable.}
 }
 \value{
-The input \code{data.frame} if ID variables are unique or the input
-\code{data.frame} with a new \code{.id} column.
+The input dataset (as a \code{data.table}) if ID variables are unique, or the input dataset with a new column named "\code{.id}".
 }
 \description{
 Many functions will not work properly if there are duplicated ID variables
-in a dataset. This function is a convenience function for using
-\code{\link{ave}} and \code{\link{seq_along}} to create an \code{.id}
+in a dataset. This function is a convenience function for \code{.N} from the "data.table" package to create an "\code{.id}"
 variable that when used in conjunction with the existing ID variables,
 should be unique.
 }

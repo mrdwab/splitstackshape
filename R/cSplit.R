@@ -29,8 +29,10 @@
 #' compatability purposes, but now they are essentially wrappers for the
 #' \code{cSplit} function.
 #' 
+#' If you know that all values in the column would have the same number of values per row after being split, you should use the \code{\link{cSplit_f}} function instead, which uses \code{\link[data.table:fread]{fread}} instead of \code{\link{strsplit}} and is generally faster.
+#' 
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split}}
+#' @seealso \code{\link{concat.split}}, \code{\link{cSplit_f}}
 #' @examples
 #' 
 #' ## Sample data
@@ -48,6 +50,10 @@
 #' 
 #' ## Split "Siblings" into a long form, removing extra whitespace
 #' cSplit(temp, "Siblings", ",", direction = "long", stripWhite = TRUE)
+#' 
+#' ## Split a vector
+#' y <- c("a_b_c", "a_b", "c_a_b")
+#' cSplit(as.data.table(y), "y", "_")
 #' 
 #' @export cSplit
 cSplit <- function(indt, splitCols, sep = ",", direction = "wide", 

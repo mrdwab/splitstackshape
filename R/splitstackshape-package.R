@@ -21,7 +21,7 @@ NULL
 #' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.3.7\cr Date: \tab 2014-10-10\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.3.8\cr Date: \tab 2014-10-12\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
@@ -62,7 +62,7 @@ NULL
 #' ## Stacked
 #' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
 #'         var.stubs = c("varA", "varB", "varC"),
-#'         sep = "\\.")
+#'         sep = ".")
 #' \dontrun{
 #' ## Processing times
 #' set.seed(1)

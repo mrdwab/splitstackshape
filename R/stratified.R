@@ -1,4 +1,4 @@
-#' Sample from a \code{data.frame} or a \code{data.table} according to a stratification variable
+#' Take a Stratified Sample From a Dataset
 #' 
 #' The \code{\link{stratified}} function samples from a
 #' \code{\link{data.frame}} or a \code{\link{data.table}} in which one or more columns can be used as a

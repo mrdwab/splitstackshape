@@ -1,4 +1,4 @@
-#' "Expand" the rows of a \code{data.frame} or a \code{data.table}.
+#' Expand the Rows of a Dataset
 #' 
 #' Expands (replicates) the rows of a \code{data.frame} or a \code{data.table}, either by a fixed
 #' number, a specified vector, or a value contained in one of the columns in

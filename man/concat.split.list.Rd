@@ -2,7 +2,7 @@
 \name{concat.split.list}
 \alias{cSplit_l}
 \alias{concat.split.list}
-\title{Split concatenated cells into a \code{list} format}
+\title{Split Concatenated Cells into a List Format}
 \usage{
 cSplit_l(data, split.col, sep = ",", drop = FALSE, fixed = FALSE)
 }

@@ -3,7 +3,7 @@
 \name{concat.test}
 \alias{concat.test}
 \alias{concatenated}
-\title{Example dataset with concatenated cells}
+\title{Example Dataset with Concatenated Cells}
 \format{A \code{data.frame} in which many columns contain concatenated cells}
 \description{
 This is a sample dataset to demonstrate the different features of the

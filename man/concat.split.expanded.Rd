@@ -2,7 +2,7 @@
 \name{concat.split.expanded}
 \alias{cSplit_e}
 \alias{concat.split.expanded}
-\title{Split concatenated values into their corresponding column position}
+\title{Split Concatenated Values into their Corresponding Column Position}
 \usage{
 cSplit_e(data, split.col, sep = ",", mode = NULL, type = "numeric",
   drop = FALSE, fixed = TRUE, fill = NA)

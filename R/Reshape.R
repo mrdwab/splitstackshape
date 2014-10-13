@@ -1,4 +1,4 @@
-#' Reshape wide data into a semi-long form
+#' Reshape Wide Data Into a Semi-long Form
 #' 
 #' The \code{\link{reshape}} function in base R is very handy when you want a
 #' semi-long (or semi-wide) \code{data.frame}. However, base R's \code{reshape}

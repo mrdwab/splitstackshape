@@ -78,8 +78,7 @@ cSplit <- function(indt, splitCols, sep = ",", direction = "wide",
 
   if (isTRUE(stripWhite)) {
     indt[, eval(splitCols) := mapply(function(x, y) 
-      gsub(sprintf("\\s+%s\\s+|\\s+%s|%s\\s+", 
-                   x, x, x), x, y), 
+      .stripWhite(x, y), 
       sep, indt[, splitCols, with = FALSE], 
       SIMPLIFY = FALSE)]
   }  

@@ -1,6 +1,6 @@
 # splitstackshape
 
-R functions to split concatenated data, conveniently stack columns of `data.frame`s and `data.table`s, and conveniently reshape them.
+R functions to split concatenated data, stack columns of your datasets, and convert your data into different shapes.
 
 ## Core Functions
 

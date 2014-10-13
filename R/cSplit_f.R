@@ -1,4 +1,4 @@
-#' Split concatenated cells in a \code{data.frame} or a \code{data.table}
+#' Split Concatenated Cells in a data.frame or a data.table
 #' 
 #' A variation of the \code{concat.split} family of functions designed for
 #' large \emph{rectangular} datasets. This function makes use of \code{\link[data.table:fread]{fread}} from the "data.table" package for very speedy splitting of concatenated columns of data.

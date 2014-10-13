@@ -1,4 +1,4 @@
-#' Extract all names from a \code{data.frame} other than the one listed
+#' Extract All Names From a Dataset Other Than the Ones Listed
 #' 
 #' A convenience function for \code{setdiff(names(data),
 #' -some_vector_of_names-)}.
@@ -23,7 +23,7 @@ NULL
 
 
 
-#' \code{names} as a character vector, always
+#' Dataset Names as a Character Vector, Always
 #' 
 #' A convenience function using either character vectors or numeric vectors to
 #' specify a subset of \code{names} of a \code{data.frame}.
@@ -49,9 +49,10 @@ NULL
 
 
 
-#' Read concatenated character vectors into a \code{data.frame}
+#' Read Concatenated Character Vectors Into a data.frame
 #' 
-#' A helper function for the \code{\link{concat.split.compact}} function.
+#' Originally a helper function for the \code{\link{concat.split.compact}} function. 
+#' This function has now been effectively replaced by \code{\link{cSplit}}.
 #' 
 #' 
 #' @param data The input data.
@@ -92,7 +93,7 @@ NULL
 
 
 
-#' Create a numeric matrix from a list of values
+#' Create a Numeric Matrix from a List of Values
 #' 
 #' Create a numeric matrix from a list of values
 #' 
@@ -136,7 +137,7 @@ NULL
 
 
 
-#' Create a binary matrix from a list of character values
+#' Create a Binary Matrix from a List of Character Values
 #' 
 #' Create a binary matrix from a list of character values
 #' 
@@ -178,7 +179,7 @@ NULL
 
 
 
-#' Split basic alphanumeric strings which have no separators
+#' Split Basic Alphanumeric Strings Which Have No Separators
 #' 
 #' Used to split strings like "Abc8" into "Abc" and "8".
 #' 
@@ -217,8 +218,7 @@ NULL
 
 
 
-#' Convert all \code{factor} columns to \code{character} columns in a
-#' \code{data.frame}
+#' Convert All Factor Columns to Character Columns
 #' 
 #' Sometimes, we forget to use the \code{stringsAsFactors} argument when using
 #' \code{\link{read.table}} and related functions. By default, R converts

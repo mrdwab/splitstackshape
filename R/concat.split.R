@@ -1,5 +1,4 @@
-#' Split concatenated cells in a \code{data.frame} or a \code{data.table} into
-#' a condensed format
+#' Split Concatenated Cells into a Condensed Format
 #' 
 #' The default splitting method for \code{\link{concat.split}}. Formerly based
 #' on \code{\link{read.concat}} but presently a simple wrapper for
@@ -46,7 +45,7 @@ NULL
 
 
 
-#' Split concatenated values into their corresponding column position
+#' Split Concatenated Values into their Corresponding Column Position
 #' 
 #' "Expand" concatenated numeric or character values to their relevant position
 #' in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
@@ -137,7 +136,7 @@ NULL
 
 
 
-#' Split concatenated cells into a \code{list} format
+#' Split Concatenated Cells into a List Format
 #' 
 #' Takes a column in a \code{data.frame} or \code{data.table} with multiple values, splits the
 #' values into a \code{list}, and returns a new \code{data.frame} or \code{data.table}.
@@ -221,7 +220,7 @@ NULL
 
 
 
-#' Split concatenated cells in a \code{data.frame} or a \code{data.table}
+#' Split Concatenated Cells in a Dataset
 #' 
 #' The \code{concat.split} function takes a column with multiple values, splits
 #' the values into a \code{list} or into separate columns, and returns a new
@@ -362,8 +361,7 @@ NULL
 
 
 
-#' Split concatenated cells in a \code{data.frame} and optionally reshape the
-#' output
+#' Split Concatenated Cells and Optionally Reshape the Output
 #' 
 #' This is a wrapper for the \code{\link{cSplit}} function to maintain
 #' backwards compatability with earlier versions of the "splitstackshape"

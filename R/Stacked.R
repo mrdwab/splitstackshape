@@ -1,4 +1,4 @@
-#' \code{stack} columns from a wide form to a long form
+#' Stack Columns from a Wide Form to a Long Form
 #' 
 #' A function to conveniently stack groups of wide columns into a long form
 #' which can then be \code{\link[data.table:merge]{merge}}d together.
@@ -128,7 +128,7 @@ NULL
 
 
 
-#' Take a \code{list} of stacked \code{data.table}s and \code{merge} them
+#' Take a List of Stacked data.tables and Merge Them
 #' 
 #' A wrapper around the \code{\link{Stacked}} function to
 #' \code{\link[data.table:merge]{merge}} the resulting \code{list} into a

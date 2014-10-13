@@ -1,19 +1,17 @@
 Package: splitstackshape
 Type: Package
-Title: Functions to split concatenated data, conveniently stack columns
-    of data.frames, and conveniently reshape data.frames and data.tables.
+Title: Stack and Reshape Datasets After Splitting Concatenated Values
 Version: 1.4.0
 Date: 2014-10-13
 Author: Ananda Mahto
 Maintainer: Ananda Mahto <ananda@mahto.info>
 Description: Online data collection tools like Google Forms often export
     multiple-response questions with data concatenated in cells. The
-    concat.split (cSplit) family of functions conveniently splits such
-    data into separate cells. The package also includes functions to
-    conveniently stack groups of columns and to reshape wide data, even
-    when the data are "unbalanced"---something which reshape (from base
-    R) does not handle, and which melt and dcast from reshape2 do not
-    easily handle.
+    concat.split (cSplit) family of functions splits such data into 
+    separate cells. The package also includes functions to stack groups 
+    of columns and to reshape wide data, even when the data are 
+    "unbalanced"---something which reshape (from base R) does not handle, 
+    and which melt and dcast from reshape2 do not easily handle.
 License: GPL-3
 LazyData: TRUE
 LazyLoad: yes

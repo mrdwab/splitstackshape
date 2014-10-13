@@ -1,4 +1,4 @@
-#' Example dataset with concatenated cells
+#' Example Dataset with Concatenated Cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
 #' \code{\link{concat.split}} family of functions.
@@ -17,16 +17,15 @@ NULL
 
 #' splitstackshape
 #' 
-#' Functions to split concatenated data, conveniently stack columns of
-#' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
+#' Stack and Reshape Datasets After Splitting Concatenated Values
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
 #' Version: \tab 1.4.0\cr Date: \tab 2014-10-13\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
-#' \code{\link{concat.split}} family of functions conveniently splits such data
-#' into separate cells. The package also includes functions to conveniently
+#' \code{\link{concat.split}} family of functions splits such data
+#' into separate cells. The package also includes functions to 
 #' \emph{stack} groups of columns and to \emph{reshape} wide data, even when
 #' the data are "unbalanced"---something which \code{\link{reshape}} does not
 #' handle, and which \code{\link[reshape2:melt]{melt}} and

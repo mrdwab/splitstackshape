@@ -261,8 +261,9 @@ NULL
 NULL
 
 .stripWhite <- function(invec, delim = ",") {
-  gsub(sprintf("\\s+%s\\s+|\\s+%s|%s\\s+",
-               delim, delim, delim), delim, invec)
+  gsub("^\\s+|\\s+$", "",
+       gsub(sprintf("\\s+%s\\s+|\\s+%s|%s\\s+",
+                    delim, delim, delim), delim, invec))
 }
 NULL
 

@@ -79,7 +79,7 @@ cSplit <- function(indt, splitCols, sep = ",", direction = "wide",
   if (isTRUE(stripWhite)) {
     indt[, eval(splitCols) := mapply(function(x, y) 
       .stripWhite(x, y), 
-      sep, indt[, splitCols, with = FALSE], 
+      indt[, splitCols, with = FALSE], sep,
       SIMPLIFY = FALSE)]
   }  
   

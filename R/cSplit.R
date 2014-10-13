@@ -1,4 +1,4 @@
-#' Split concatenated values into separate values
+#' Split Concatenated Values into Separate Values
 #' 
 #' The \code{cSplit} function is designed to quickly and conveniently split
 #' concatenated data into separate values.

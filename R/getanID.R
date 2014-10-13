@@ -1,4 +1,4 @@
-#' Add an "id" variable to a dataset
+#' Add an "id" Variable to a Dataset
 #' 
 #' Many functions will not work properly if there are duplicated ID variables
 #' in a dataset. This function is a convenience function for \code{.N} from the "data.table" package to create an "\code{.id}"

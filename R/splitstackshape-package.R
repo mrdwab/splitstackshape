@@ -1,13 +1,11 @@
-
-
-#' Example dataset with concatenated cells
+#' Example Dataset with Concatenated Cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
 #' \code{\link{concat.split}} family of functions.
 #' 
 #' 
 #' @name concat.test
-#' @aliases concatenated concat.test
+#' @aliases concat.test concatenated
 #' @docType data
 #' @format A \code{data.frame} in which many columns contain concatenated cells
 #' @keywords datasets
@@ -19,16 +17,15 @@ NULL
 
 #' splitstackshape
 #' 
-#' Functions to split concatenated data, conveniently stack columns of
-#' \code{data.frame}s, and conveniently reshape \code{data.frame}s.
+#' Stack and Reshape Datasets After Splitting Concatenated Values
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.2.1\cr Date: \tab 2013-10-20\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.4.1\cr Date: \tab 2014-10-18\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
-#' \code{\link{concat.split}} family of functions conveniently splits such data
-#' into separate cells. The package also includes functions to conveniently
+#' \code{\link{concat.split}} family of functions splits such data
+#' into separate cells. The package also includes functions to 
 #' \emph{stack} groups of columns and to \emph{reshape} wide data, even when
 #' the data are "unbalanced"---something which \code{\link{reshape}} does not
 #' handle, and which \code{\link[reshape2:melt]{melt}} and
@@ -42,10 +39,11 @@ NULL
 #' 
 #' Maintainer: Ananda Mahto <ananda@@mahto.info>
 #' @keywords package
+#' @import data.table
 #' @examples
 #' 
 #' ## concat.split
-#' head(concat.split(concat.test, "Likes", drop = TRUE))
+#' head(cSplit(concat.test, "Likes", drop = TRUE))
 #' 
 #' ## Reshape
 #' set.seed(1)
@@ -63,37 +61,37 @@ NULL
 #' ## Stacked
 #' Stacked(data = mydf, id.vars = c("id_1", "id_2"),
 #'         var.stubs = c("varA", "varB", "varC"),
-#'         sep = "\\.")
+#'         sep = ".")
 #' \dontrun{
 #' ## Processing times
 #' set.seed(1)
 #' Nrow <- 1000000
 #' Ncol <- 10
-#' mybigdf <- cbind(id = 1:Nrow, as.data.frame(matrix(rnorm(Nrow*Ncol), 
+#' mybigdf <- cbind(id = 1:Nrow, as.data.frame(matrix(rnorm(Nrow*Ncol),
 #'                                                    nrow=Nrow)))
 #' head(mybigdf)
 #' dim(mybigdf)
 #' tail(mybigdf)
 #' A <- names(mybigdf)
-#' names(mybigdf) <- c("id", paste("varA", 1:3, sep = "_"), 
-#'                     paste("varB", 1:4, sep = "_"), 
+#' names(mybigdf) <- c("id", paste("varA", 1:3, sep = "_"),
+#'                     paste("varB", 1:4, sep = "_"),
 #'                     paste("varC", 1:3, sep = "_"))
 #' system.time({
-#'    O1 <- Reshape(mybigdf, id.vars = "id", 
+#'    O1 <- Reshape(mybigdf, id.vars = "id",
 #'    var.stubs = c("varA", "varB", "varC"), sep = "_")
 #'    O1 <- O1[order(O1$id, O1$time), ]
 #' })
 #' system.time({
-#'    O2 <- merged.stack(mybigdf, id.vars="id", 
+#'    O2 <- merged.stack(mybigdf, id.vars="id",
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' system.time({
-#'    O3 <- Stacked(mybigdf, id.vars="id", 
+#'    O3 <- Stacked(mybigdf, id.vars="id",
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' DT <- data.table(mybigdf)
 #' system.time({
-#'    O4 <- merged.stack(DT, id.vars="id", 
+#'    O4 <- merged.stack(DT, id.vars="id",
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' }
@@ -101,6 +99,5 @@ NULL
 #' \dontshow{rm(mydf)}
 #' 
 NULL
-
 
 

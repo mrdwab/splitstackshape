@@ -1,4 +1,4 @@
-#' Extract all names from a \code{data.frame} other than the one listed
+#' Extract All Names From a Dataset Other Than the Ones Listed
 #' 
 #' A convenience function for \code{setdiff(names(data),
 #' -some_vector_of_names-)}.
@@ -21,9 +21,12 @@ othernames <- function(data, toremove) {
 }
 NULL
 
-#' \code{names} as a character vector, always
+
+
+#' Dataset Names as a Character Vector, Always
 #' 
-#' A convenience function using either character vectors or numeric vectors to specify a subset of \code{names} of a \code{data.frame}.
+#' A convenience function using either character vectors or numeric vectors to
+#' specify a subset of \code{names} of a \code{data.frame}.
 #' 
 #' 
 #' @param data The input \code{data.frame}.
@@ -39,23 +42,24 @@ NULL
 #' \dontshow{rm(mydf)}
 #' 
 Names <- function(data, invec) {
-  names(data[invec])
+  if (!is.numeric(invec)) invec <- match(invec, names(data))
+  names(data)[invec]
 }
+NULL
 
 
 
-
-
-
-#' Read concatenated character vectors into a \code{data.frame}
+#' Read Concatenated Character Vectors Into a data.frame
 #' 
-#' A helper function for the \code{\link{concat.split.compact}} function.
+#' Originally a helper function for the \code{\link{concat.split.compact}} function. 
+#' This function has now been effectively replaced by \code{\link{cSplit}}.
 #' 
 #' 
 #' @param data The input data.
 #' @param col.prefix The desired column prefix for the output
 #' \code{data.frame}.
 #' @param sep The character that acts as a delimiter.
+#' @param \dots Other arguments to pass to \code{read.table}.
 #' @return A \code{data.frame}
 #' @author Ananda Mahto
 #' @seealso \code{read.table}
@@ -72,13 +76,16 @@ Names <- function(data, invec) {
 #' 
 #' \dontshow{rm(vec)}
 #' 
-read.concat <- function(data, col.prefix, sep) {
+read.concat <- function(data, col.prefix, sep, ...) {
   if (!is.character(data)) data <- as.character(data)
-  x <- count.fields(textConnection(data), sep = sep)
+  zz <- textConnection(data)
+  x <- count.fields(zz, sep = sep)
+  close(zz)
   t1 <- read.table(text = data, sep = sep, fill = TRUE,
                    row.names = NULL, header = FALSE,
-                   blank.lines.skip = FALSE, strip.white = TRUE,
-                   col.names = paste("v", sequence(max(x))))
+                   strip.white = TRUE,
+                   col.names = paste("v", sequence(max(x))),
+                   ...)
   names(t1) <- paste(col.prefix, seq(ncol(t1)), sep = "_")
   t1
 }
@@ -86,15 +93,9 @@ NULL
 
 
 
-
-
-
-
-
-
-#' Create a binary matrix from a list of values
+#' Create a Numeric Matrix from a List of Values
 #' 
-#' Create a binary matrix from a list of values
+#' Create a numeric matrix from a list of values
 #' 
 #' This is primarily a helper function for the \code{\link{concat.split}}
 #' function when creating the "expanded" structure. The input is anticipated to
@@ -103,78 +104,40 @@ NULL
 #' @param listOfValues A \code{list} of input values to be inserted in a
 #' matrix.
 #' @param fill The initializing fill value for the empty matrix.
+#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to
+#' \code{"binary"}.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{valueMat}}, \code{\link{charBinaryMat}}
+#' @seealso \code{strsplit}, \code{\link{charMat}}
 #' @examples
 #' 
 #' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
 #'            "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
 #' A <- strsplit(invec, ",")
-#' splitstackshape:::binaryMat(A)
-#' splitstackshape:::binaryMat(A, "ZZZ")
+#' splitstackshape:::numMat(A)
+#' splitstackshape:::numMat(A, fill = 0)
+#' splitstackshape:::numMat(A, mode = "value")
 #' 
 #' \dontshow{rm(invec, A)}
 #' 
-binaryMat <- function(listOfValues, fill = NA) {
-  listOfValues <- lapply(listOfValues, as.numeric)
-  ncol <- max(unlist(listOfValues))
-  nrow <- length(listOfValues)
-  m <- matrix(fill, nrow = nrow, ncol = ncol)
-  for (i in 1:nrow) {
-    m[i, listOfValues[[i]]] <- 1
-  }
-  m
+numMat <- function(listOfValues, fill = NA, mode = "binary") {
+  listOfValues <- lapply(listOfValues, as.integer)
+  len  <- length(listOfValues)
+  vec  <- unlist(listOfValues, use.names = FALSE)
+  mlvl <- max(vec)
+  slvl <- seq_len(mlvl)
+  out  <- matrix(fill, nrow = len, ncol = mlvl, dimnames = list(NULL, slvl))
+  i.idx <- rep(seq_len(len), vapply(listOfValues, length, integer(1L)))
+  j.idx <- match(vec, slvl)
+  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
+                                     stop("'mode' must be 'binary' or 'value'"))
+  out
 }
 NULL
 
 
 
-
-
-
-
-
-
-#' Create a value matrix from a list of values
-#' 
-#' Create a value matrix from a list of values
-#' 
-#' This is primarily a helper function for the \code{\link{concat.split}}
-#' function when creating the "expanded" structure. The input is anticipated to
-#' be a \code{list} of values obtained using \code{\link{strsplit}}.
-#' 
-#' @param listOfValues A \code{list} of input values to be inserted in a
-#' matrix.
-#' @param fill The initializing fill value for the empty matrix.
-#' @return A \code{matrix}.
-#' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{binaryMat}}, \code{\link{charBinaryMat}}
-#' @examples
-#' 
-#' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
-#'            "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
-#' A <- strsplit(invec, ",")
-#' splitstackshape:::valueMat(A)
-#' splitstackshape:::valueMat(A, "ZZZ")
-#' 
-#' \dontshow{rm(invec, A)}
-#' 
-valueMat <- function(listOfValues, fill = NA) {
-  listOfValues <- lapply(listOfValues, as.numeric)
-  ncol <- max(unlist(listOfValues))
-  nrow <- length(listOfValues)
-  m <- matrix(fill, nrow = nrow, ncol = ncol)
-  for (i in 1:nrow) {
-    m[i, listOfValues[[i]]] <- listOfValues[[i]]
-  }
-  m
-}
-NULL
-
-
-
-#' Create a binary matrix from a list of character values
+#' Create a Binary Matrix from a List of Character Values
 #' 
 #' Create a binary matrix from a list of character values
 #' 
@@ -185,32 +148,38 @@ NULL
 #' @param listOfValues A \code{list} of input values to be inserted in a
 #' matrix.
 #' @param fill The initializing fill value for the empty matrix.
+#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to
+#' \code{"binary"}.
 #' @return A \code{matrix}.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{binaryMat}}, \code{\link{valueMat}}
+#' @seealso \code{strsplit}, \code{\link{numMat}}
 #' @examples
 #' 
 #' invec <- c("rock,electro","electro","rock,jazz")
 #' A <- strsplit(invec, ",")
-#' splitstackshape:::charBinaryMat(A)
-#' splitstackshape:::charBinaryMat(A, 0)
+#' splitstackshape:::charMat(A)
+#' splitstackshape:::charMat(A, 0)
+#' splitstackshape:::charMat(A, mode = "value")
 #' 
 #' \dontshow{rm(invec, A)}
 #' 
-charBinaryMat <- function(listOfValues, fill = NA) {
-  lev <- sort(unique(unlist(listOfValues, use.names = FALSE)))
-  m <- matrix(fill, nrow = length(listOfValues), ncol = length(lev))
-  colnames(m) <- lev
-  for (i in 1:nrow(m)) {
-    m[i, listOfValues[[i]]] <- 1
-  }
-  m
+charMat <- function(listOfValues, fill = NA, mode = "binary") {
+  len   <- length(listOfValues)
+  vec   <- unlist(listOfValues, use.names = FALSE)
+  lvl   <- sort(unique(vec))
+  out   <- matrix(fill, nrow = len, ncol = length(lvl), 
+                  dimnames = list(NULL, lvl))
+  i.idx <- rep(seq.int(len), vapply(listOfValues, length, integer(1L)))
+  j.idx <- match(vec, lvl)
+  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
+                                     stop("'mode' must be 'binary' or 'value'"))
+  out
 }
 NULL
 
 
 
-#' Split basic alphanumeric strings which have no separators
+#' Split Basic Alphanumeric Strings Which Have No Separators
 #' 
 #' Used to split strings like "Abc8" into "Abc" and "8".
 #' 
@@ -249,12 +218,7 @@ NULL
 
 
 
-
-
-
-
-#' Convert all \code{factor} columns to \code{character} columns in a
-#' \code{data.frame}
+#' Convert All Factor Columns to Character Columns
 #' 
 #' Sometimes, we forget to use the \code{stringsAsFactors} argument when using
 #' \code{\link{read.table}} and related functions. By default, R converts
@@ -285,3 +249,28 @@ FacsToChars <- function(mydf) {
     lapply(mydf[sapply(mydf, is.factor)], as.character)
   mydf
 }
+NULL
+
+trim <- function(x) gsub("^\\s+|\\s+$", "", x)
+NULL
+
+.collapseMe <- function(invec, atStart = TRUE) {
+  if (isTRUE(atStart)) paste(sprintf("^%s", invec), collapse = "|")
+  else paste(sprintf("%s$", invec), collapse = "|")
+}
+NULL
+
+.stripWhite <- function(invec, delim = ",") {
+  gsub("^\\s+|\\s+$", "",
+       gsub(sprintf("\\s+[%s]\\s+|\\s+[%s]|[%s]\\s+",
+                    delim, delim, delim), delim, invec))
+}
+NULL
+
+vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
+NULL
+
+.noEmpty <- function(invec) {
+  invec[invec != ""]
+}
+NULL

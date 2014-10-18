@@ -1,4 +1,4 @@
-#' Reshape wide data into a semi-long form
+#' Reshape Wide Data Into a Semi-long Form
 #' 
 #' The \code{\link{reshape}} function in base R is very handy when you want a
 #' semi-long (or semi-wide) \code{data.frame}. However, base R's \code{reshape}
@@ -15,7 +15,7 @@
 #' of your data, not the "semi-wide" format that \code{reshape} produces.
 #' 
 #' @param data The source \code{data.frame}.
-#' @param id.vars The variables that serve as unique identifiers.
+#' @param id.vars The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the wide \code{data.frame}.
@@ -50,10 +50,11 @@
 #'        var.stubs = c("varA", "varB", "varC"))
 #' 
 #' @export Reshape
-Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
+Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
   if (sep == ".") sep <- "\\."
-  vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
   temp <- Names(data, unlist(vGrep(var.stubs, names(data), value = TRUE)))
+  
+  if (is.null(id.vars)) id.vars <- othernames(data, temp)
   
   data <- getanID(data, id.vars)
   if (isTRUE(".id" %in% names(data))) id.vars = c(Names(data, id.vars), ".id")
@@ -61,13 +62,12 @@ Reshape <- function(data, id.vars, var.stubs, sep = ".", rm.rownames = TRUE, ...
   if (sep == "NoSep") {
     x <- NoSep(temp, ...)
   } else {
-    x <- do.call(rbind.data.frame, 
-                 strsplit(temp, split = sep))
+    x <- as.data.frame(do.call(rbind, strsplit(temp, split = sep)))
     names(x) <- 
       c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
   }
   
-  xS <- split(x$.time_1, x$.var)
+  xS <- split(x[, ".time_1"], x[, ".var"])
   xL <- unique(unlist(xS))
   
   if (isTRUE(all(sapply(xS, function(x) all(xL %in% x))))) {

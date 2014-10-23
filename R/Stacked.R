@@ -14,7 +14,8 @@
 #' \code{data.frame} be kept (\code{keep.all = TRUE}) or should the resulting
 #' \code{\link[data.table:data.table]{data.table}} comprise only columns for
 #' the \code{id.vars}, \code{var.stubs}, and "times" (\code{keep.all = FALSE}).
-#' Other variables are \emph{recycled} to appropriate length.
+#' Other variables are \emph{recycled} to appropriate length. For this to work,
+#' both \code{id.vars} and \code{var.stubs} must be specified.
 #' @param keyed Logical. Should the \code{Stacked} function automatically set
 #' the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
 #' (default) the \code{key} is set to the \code{id.vars} and the "time"

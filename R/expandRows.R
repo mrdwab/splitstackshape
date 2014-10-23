@@ -44,6 +44,11 @@ expandRows <- function(dataset, count, count.is.col = TRUE, drop = TRUE) {
     vals <- count
     out <- dataset[rep(sequence(nrow(dataset)), vals), ]
   }
+  if (any(vals == 0)) {
+    mess <- sprintf("The following rows have been dropped from the input: \n\n%s\n", 
+                    paste(which(vals == 0), collapse = ", "))
+    message(mess)
+  }
   out
 }
 NULL

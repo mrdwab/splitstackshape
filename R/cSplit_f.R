@@ -19,6 +19,7 @@
 #' \emph{if \code{sep = "."}}. \code{fread} does not seem to work nicely with
 #' \code{sep = "."}, so it needs to be substituted. By default, this function
 #' will substitute \code{"."} with \code{"|"}.
+#' @param stripWhite Logical. Should whitespace be stripped before writing to the temporary file? Defaults to \code{FALSE}.
 #' @return A \code{data.table}.
 #' @author Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine this function.
 #' @references \url{http://stackoverflow.com/a/19231054/1270695}
@@ -41,7 +42,7 @@
 #' cSplit_f(mydf, splitCols = c("v1", "v2", "v3"), sep = c("-", ".", "_"))
 #' 
 #' @export cSplit_f
-cSplit_f <- function(indt, splitCols, sep, drop = TRUE, dotsub = "|") {
+cSplit_f <- function(indt, splitCols, sep, drop = TRUE, dotsub = "|", stripWhite = FALSE) {
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
   
   if (!is.data.table(indt)) indt <- as.data.table(indt) 
@@ -59,9 +60,15 @@ cSplit_f <- function(indt, splitCols, sep, drop = TRUE, dotsub = "|") {
       sep[i] <- dotsub
     }
     x <- tempfile()
-    if (!is.character(indt[[splitCols[i]]])) writeLines(
-      as.character(indt[[splitCols[i]]]), x)
-    else writeLines(indt[[splitCols[i]]], x)
+    
+    if (isTRUE(stripWhite)) {
+      writeLines(.stripWhite(indt[[splitCols[i]]], sep[i]), x)
+    } else if (!is.character(indt[[splitCols[i]]])) {
+      writeLines(as.character(indt[[splitCols[i]]]), x)
+    } else {
+      writeLines(indt[[splitCols[i]]], x)
+    }
+
     Split <- fread(x, sep[i], header = FALSE)
     split_names <- paste(splitCols[i], seq_along(Split), sep = "_")
     set(indt, i = NULL, j = split_names, value = Split)

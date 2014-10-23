@@ -27,7 +27,7 @@ be a \code{list} of values obtained using \code{\link{strsplit}}.
 }
 \examples{
 invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
-           "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
+           "1,2,4,5,6", "-1,1,2,5,6", "1,2,5,6")
 A <- strsplit(invec, ",")
 splitstackshape:::numMat(A)
 splitstackshape:::numMat(A, fill = 0)

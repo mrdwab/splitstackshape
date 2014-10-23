@@ -29,7 +29,7 @@ A \code{data.table}.
 \description{
 The default splitting method for \code{\link{concat.split}}. Formerly based
 on \code{\link{read.concat}} but presently a simple wrapper for
-\code{\link{cSplit}}..
+\code{\link{cSplit}}.
 }
 \note{
 This function no longer does anything different from

@@ -21,7 +21,7 @@ given column is converted to "1") or \code{"value"} (where the value is
 retained and not recoded to "1"). Defaults to \code{"binary"}.}
 
 \item{type}{Can be either \code{"numeric"} (where the items being split are
-positive integers (\code{> 0})) or \code{"character"} (where the items being split are character
+integers) or \code{"character"} (where the items being split are character
 strings). Defaults to \code{"numeric"}.}
 
 \item{drop}{Logical. Should the original variable be dropped? Defaults to

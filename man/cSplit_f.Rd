@@ -3,7 +3,8 @@
 \alias{cSplit_f}
 \title{Split Concatenated Cells in a data.frame or a data.table}
 \usage{
-cSplit_f(indt, splitCols, sep, drop = TRUE, dotsub = "|")
+cSplit_f(indt, splitCols, sep, drop = TRUE, dotsub = "|",
+  stripWhite = FALSE)
 }
 \arguments{
 \item{indt}{The input \code{data.frame} or \code{data.table}.}
@@ -20,6 +21,8 @@ need to be split up. If different columns use different delimiters, enter the de
 \emph{if \code{sep = "."}}. \code{fread} does not seem to work nicely with
 \code{sep = "."}, so it needs to be substituted. By default, this function
 will substitute \code{"."} with \code{"|"}.}
+
+\item{stripWhite}{Logical. Should whitespace be stripped before writing to the temporary file? Defaults to \code{FALSE}.}
 }
 \value{
 A \code{data.table}.

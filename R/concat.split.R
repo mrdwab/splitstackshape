@@ -2,7 +2,7 @@
 #' 
 #' The default splitting method for \code{\link{concat.split}}. Formerly based
 #' on \code{\link{read.concat}} but presently a simple wrapper for
-#' \code{\link{cSplit}}..
+#' \code{\link{cSplit}}.
 #' 
 #' 
 #' @param data The source \code{data.frame} or \code{data.table}
@@ -60,7 +60,7 @@ NULL
 #' given column is converted to "1") or \code{"value"} (where the value is
 #' retained and not recoded to "1"). Defaults to \code{"binary"}.
 #' @param type Can be either \code{"numeric"} (where the items being split are
-#' positive integers (\code{> 0})) or \code{"character"} (where the items being split are character
+#' integers) or \code{"character"} (where the items being split are character
 #' strings). Defaults to \code{"numeric"}.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' \code{FALSE}.
@@ -96,7 +96,7 @@ NULL
 cSplit_e <- concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
                                   type = "numeric", drop = FALSE, 
                                   fixed = TRUE, fill = NA) {
-  if (is.numeric(split.col)) split.col <- names(data)[split.col]
+  if (is.numeric(split.col)) split.col <- Names(data, split.col)
   if (!is.character(data[[split.col]])) a <- as.character(data[[split.col]])
   else a <- data[[split.col]]
   if (is.null(mode)) mode = "binary"  
@@ -113,9 +113,7 @@ cSplit_e <- concat.split.expanded <- function(data, split.col, sep = ",", mode =
     numeric = {
       nchars <- max(nchar(unlist(b, use.names = FALSE)))
       temp1 <- numMat(b, fill = fill, mode = mode)
-      colnames(temp1) <- sprintf(paste0(
-        split.col, "_%0", nchars, "d"), 
-        seq_len(ncol(temp1)))
+      colnames(temp1) <- paste(split.col, .pad(seq_len(ncol(temp1))), sep = "_")
       temp1
     },
     stop("'type' must be either 'character' or 'numeric'"))
@@ -178,16 +176,14 @@ NULL
 #' @export cSplit_l
 cSplit_l <- concat.split.list <- function(data, split.col, sep = ",", 
                               drop = FALSE, fixed = FALSE) {
-  if (is.numeric(split.col)) split.col <- names(data)[split.col]
-  if (!is.character(data[[split.col]])) a <- as.character(data[[split.col]])
-  else a <- data[[split.col]]
+  if (is.numeric(split.col)) split.col <- Names(data, split.col)
+  a <- .stripWhite(data[[split.col]], sep)
   
   varname <- paste(split.col, "list", sep="_")
   b <- strsplit(a, sep, fixed = fixed)
   
   if (suppressWarnings(is.na(try(max(as.numeric(unlist(b))))))) {
-    data[[varname]] <- I(lapply(lapply(b, as.character),
-             function(x) gsub("^\\s+|\\s+$", "", x)))
+    data[[varname]] <- I(b)
   } else if (!is.na(try(max(as.numeric(unlist(b)))))) {
     data[[varname]] <- I(lapply(b, as.numeric))
   }

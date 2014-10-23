@@ -19,9 +19,11 @@
 #' Defaults to \code{TRUE}.
 #' @param stripWhite Logical. If there is whitespace around the delimiter in
 #' the concatenated columns, should it be stripped prior to splitting? Defaults
-#' to \code{FALSE}.
+#' to \code{TRUE}.
 #' @param makeEqual Logical. Should all groups be made to be the same length?
 #' Defaults to \code{FALSE}.
+#' @param type.convert Logical. Should \code{\link{type.convert}} be used to convert
+#' the result of each column? This would add a little to the execution time.
 #' @return A \code{\link[data.table:data.table]{data.table}} with the values
 #' split into new columns or rows.
 #' @note The \code{cSplit} function replaces most of the earlier
@@ -58,7 +60,8 @@
 #' @export cSplit
 cSplit <- function(indt, splitCols, sep = ",", direction = "wide", 
                    fixed = TRUE, drop = TRUE, 
-                   stripWhite = FALSE, makeEqual = NULL) {
+                   stripWhite = TRUE, makeEqual = NULL, 
+                   type.convert = TRUE) {
   
   if (!is.data.table(indt)) indt <- as.data.table(indt)
   else indt <- copy(indt)
@@ -120,24 +123,38 @@ cSplit <- function(indt, splitCols, sep = ",", direction = "wide",
     if (direction == "wide") {
       X <- lapply(seq_along(X), function(x) {
         colnames(X[[x]]) <- paste(splitCols[x], 
-                                  sequence(ncol(X[[x]])), 
+                                  .pad(sequence(ncol(X[[x]]))), 
                                   sep = "_")
         X[[x]]
       })
+      
+      if (isTRUE(type.convert)) {
+        X <- lapply(seq_along(X), function(x) {
+          as.data.table(X[[x]])[, lapply(.SD, type.convert)]
+        })
+      }
+      
       if (isTRUE(drop)) {
         cbind(indt, do.call(cbind, X))[, eval(splitCols) := NULL][]
       } else {
         cbind(indt, do.call(cbind, X))
       }
+      
     } else {
       indt <- indt[rep(sequence(nrow(indt)), each = Ncol)]
-      X <- lapply(X, function(y) as.vector(t(y)))
+      X <- lapply(X, function(y) {
+        if (isTRUE(type.convert)) type.convert(as.vector(t(y)))
+        else as.vector(t(y))
+      })
       indt[, eval(splitCols) := lapply(X, unlist, use.names = FALSE)][]
     }  
   } else {
     Rep <- vapply(X[[1]], length, integer(1L))
     indt <- indt[rep(sequence(nrow(indt)), Rep)]
-    indt[, eval(splitCols) := lapply(X, unlist, use.names = FALSE)][]
+    indt[, eval(splitCols) := lapply(X, function(x) {
+      if (isTRUE(type.convert)) type.convert(unlist(x, use.names = FALSE))
+      else unlist(x, use.names = FALSE)
+    })][]
   }
 }
 NULL

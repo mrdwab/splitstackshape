@@ -112,7 +112,7 @@ NULL
 #' @examples
 #' 
 #' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
-#'            "1,2,4,5,6", "1,2,5,6", "1,2,5,6")
+#'            "1,2,4,5,6", "-1,1,2,5,6", "1,2,5,6")
 #' A <- strsplit(invec, ",")
 #' splitstackshape:::numMat(A)
 #' splitstackshape:::numMat(A, fill = 0)
@@ -124,9 +124,8 @@ numMat <- function(listOfValues, fill = NA, mode = "binary") {
   listOfValues <- lapply(listOfValues, as.integer)
   len  <- length(listOfValues)
   vec  <- unlist(listOfValues, use.names = FALSE)
-  mlvl <- max(vec)
-  slvl <- seq_len(mlvl)
-  out  <- matrix(fill, nrow = len, ncol = mlvl, dimnames = list(NULL, slvl))
+  slvl <- seq(min(vec), max(vec))
+  out  <- matrix(fill, nrow = len, ncol = length(slvl), dimnames = list(NULL, slvl))
   i.idx <- rep(seq_len(len), vapply(listOfValues, length, integer(1L)))
   j.idx <- match(vec, slvl)
   out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
@@ -272,5 +271,11 @@ NULL
 
 .noEmpty <- function(invec) {
   invec[invec != ""]
+}
+NULL
+
+.pad <- function(invec) {
+  nchars <- max(nchar(invec))
+  sprintf(paste0("%0", nchars, "d"), invec)
 }
 NULL

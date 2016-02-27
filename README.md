@@ -15,7 +15,7 @@ R functions to split concatenated data, stack columns of your datasets, and conv
 
 * `getanID`: A function for creating a secondary ID when duplicated "id" variables are present.
 * `expandRows`: "Expands" the rows of a dataset.
-* `listCol_l` and `listCol_w`: Unlists (long) or flattens (wide) a column in a `data.frame` or a `data.table` stored as a `list`.
+* `listCol_l` and `listCol_w`: Unlists (long) or flattens (wide) a column in a `data.frame` or a `data.table` stored as a `list`. Neither is vectorized.
 
 ## Install
 

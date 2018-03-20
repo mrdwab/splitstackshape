@@ -41,10 +41,6 @@ concat.split.compact <- function(data, split.col, sep = ",",
 }
 NULL
 
-
-
-
-
 #' Split Concatenated Values into their Corresponding Column Position
 #' 
 #' "Expand" concatenated numeric or character values to their relevant position
@@ -128,12 +124,6 @@ cSplit_e <- concat.split.expanded <- function(data, split.col, sep = ",", mode =
 }
 NULL
 
-
-
-
-
-
-
 #' Split Concatenated Cells into a List Format
 #' 
 #' Takes a column in a \code{data.frame} or \code{data.table} with multiple values, splits the
@@ -197,24 +187,6 @@ cSplit_l <- concat.split.list <- function(data, split.col, sep = ",",
   else data
 }
 NULL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #' Split Concatenated Cells in a Dataset
 #' 
@@ -338,24 +310,6 @@ concat.split <- function(data, split.col, sep = ",", structure = "compact",
   temp
 }
 NULL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #' Split Concatenated Cells and Optionally Reshape the Output
 #' 

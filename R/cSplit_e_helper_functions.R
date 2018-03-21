@@ -1,19 +1,20 @@
-#' Create a Numeric Matrix from a List of Values
+#' @name num_mat
+#' @rdname num_mat
+#' @title Create Binary, Value, or Count Matrix from a List
 #' 
-#' Create a numeric matrix from a list of values.
+#' @description Creates a binary, value, or count matrix from a list of values.
 #' 
-#' Takes an input \code{list} and converts it to a binary, value, or count 
-#' matrix.
+#' Takes an input `list` and converts it to a binary, value, or count matrix.
 #' 
-#' @param listOfValues A \code{list} of input values to be inserted in a
-#' matrix.
-#' @param mode Either \code{"binary"}, \code{"value"}, or \code{"count"}. 
-#' Defaults to \code{"binary"}.
-#' @param fill The initializing fill value for the empty matrix. Defaults to
-#' \code{NA} if \code{mode = "value"} and \code{0} for other modes.
-#' @return A \code{matrix}.
+#' @param listOfValues A `list` of input values to be inserted in a matrix.
+#' @param mode Either `"binary"`, `"value"`, or `"count"`. Defaults to `"binary"`.
+#' @param fill The initializing fill value for the empty matrix. Defaults to `NA` 
+#' if `mode = "value"` and `0` for other modes.
+#' @return A `matrix`.
 #' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{char_mat}}
+NULL
+
+#' @rdname num_mat
 #' @examples
 #' 
 #' invec <- c("1,2,4,5,6", "1,2,4,5,6", NA,
@@ -25,6 +26,7 @@
 #' num_mat(A, mode = "count")
 #' 
 #' @export
+#' @aliases num_mat
 num_mat <- function (listOfValues, mode = "binary", fill = NULL) {
   len <- length(listOfValues)
   vec <- as.integer(unlist(listOfValues, use.names = FALSE))
@@ -51,22 +53,7 @@ num_mat <- function (listOfValues, mode = "binary", fill = NULL) {
 }
 NULL
 
-#' Create a Binary Matrix from a List of Values
-#' 
-#' Create a binary matrix from a list of character values.
-#' 
-#' Takes an input \code{list} and converts it to a binary, value, or count 
-#' matrix.
-#' 
-#' @param listOfValues A \code{list} of input values to be inserted in a
-#' matrix.
-#' @param mode Either \code{"binary"}, \code{"value"}, or \code{"count"}. 
-#' Defaults to \code{"binary"}.
-#' @param fill The initializing fill value for the empty matrix. Defaults to
-#' \code{NA} if \code{mode = "value"} and \code{0} for other modes.
-#' @return A \code{matrix}.
-#' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{num_mat}}
+#' @rdname num_mat
 #' @examples
 #' 
 #' invec <- c("rock,electro", "electro", "rock,jazz", NA, "jazz,jazz,jazz")
@@ -77,6 +64,7 @@ NULL
 #' char_mat(A, mode = "count")
 #' 
 #' @export
+#' @aliases char_mat
 char_mat <- function (listOfValues, mode = "binary", fill = NULL) {
   len <- length(listOfValues)
   vec <- trim_vec(unlist(listOfValues, use.names = FALSE), attr = FALSE)
@@ -105,23 +93,34 @@ char_mat <- function (listOfValues, mode = "binary", fill = NULL) {
 }
 NULL
 
-#' Trim Whitespace from a List of Character Vectors
+
+#' @name trim_list
+#' @rdname trim_list
+#' @title Trims Whitespace from Lists of Character Vectors
 #' 
-#' Trims whitespace from a list of character vectors.
+#' @description Trims whitespace from character vectors and lists of character
+#' vectors. `trim_vec` takes a character vector and trims any leading or trailing
+#' whitespace. `trim_list` does the same for vectors in a `list`, optionally
+#' retaining the `list` structure or flattening the `list` to a simple vector.
 #' 
-#' Takes an input \code{list} of character vectors trims any leading or
-#' trailing whitespace, and optionally relists the output.
-#' 
-#' @param x A \code{list} of character vectors.
-#' @param relist Logical. Should the output also be a \code{list}? Defaults to
-#' \code{TRUE}.
-#' @param convert Logical. Should \code{type.convert} be used on the output?
-#' Defaults to \code{FALSE}. 
-#' @return A \code{list} or the unlisted values.
-#' @note Empty list elements or empty characters (eg: \code{""}) are converted
-#' to \code{NA}.
+#' @param x A `list` of character vectors.
+#' @param relist Logical. Should the output also be a `list`? Defaults to `TRUE`.
+#' @param convert Logical. Should [utils::type.convert()] be used on the output?
+#' Defaults to `FALSE`. 
+#' @param vec A character vector.
+#' @param attr Logical. Should an attribute be set indicating that the the 
+#' output was `"clean"` or has been `"cleaned"`? Defaults to `FALSE`. 
+#' @return A `list` or a vector of the trimmed values, possibly converted for
+#' `trim_list()` or a vector of the trimmed values for `trim_vec()`.
+#' @note Empty list elements or empty characters (eg: `""`) are converted to `NA`.
+#' @note The `attr` argument in `trim_vec()` is used to increase the efficiency 
+#' of `trim_list()` by returning the original object if no leading or trailing
+#' whitespace was detected.
+#' @seealso [base::trimws()]
 #' @author Ananda Mahto
-#' @seealso \code{trimws}
+NULL
+
+#' @rdname trim_list
 #' @examples
 #' 
 #' L1 <- list(c(" A", "B   ", NA), NA, c("   A", NA, ""), "", "B   ")
@@ -133,6 +132,7 @@ NULL
 #' trim_list(L2, convert = TRUE)
 #' 
 #' @export
+#' @aliases trim_list
 trim_list <- function(x, relist = TRUE, convert = FALSE) {
   x <- replace(x, lengths(x) == 0, NA_character_)
   y <- unlist(x, use.names = FALSE)
@@ -153,20 +153,8 @@ trim_list <- function(x, relist = TRUE, convert = FALSE) {
 }
 NULL
 
-#' Trim Whitespace from a Character Vector
-#' 
-#' Trims whitespace from a character vector.
-#' 
-#' Takes an input character vector and trims any leading or trailing whitespace.
-#' 
-#' @param vec A character vector.
-#' @param attr Logical. Should an attribute be set indicating that the the 
-#' output was "clean" or has been "cleaned"? Defaults to \code{FALSE}. 
-#' @return A vector of the trimmed values.
-#' @note The \code{attr} argument is used to increase the efficiency of
-#' \code{\link{trim_list}}.
-#' @author Ananda Mahto
-#' @seealso \code{trimws}, \code{\link{trim_list}}
+
+#' @rdname trim_list
 #' @examples
 #' 
 #' V1 <- letters
@@ -178,10 +166,15 @@ NULL
 #' trim_vec(V2, TRUE)
 #' 
 #' @export
+#' @aliases trim_vec
 trim_vec <- function(vec, attr = FALSE) {
   if (!is.atomic(vec)) stop("This function is for character vectors only")
   if (any(endsWith(vec, " ") | startsWith(vec, " "), na.rm = TRUE)) {
-    vec <- stringi::stri_trim_both(vec, "\\P{Zs}")
+    vec <- if (requireNamespace("stringi", quietly = TRUE)) {
+      stringi::stri_trim_both(vec, "\\P{Zs}")
+    } else {
+      .tws(vec)
+    }
     vec <- if (attr) setattr(copy(vec), "test", "cleaned")[] else vec
   } else {
     vec <- if (attr) setattr(copy(vec), "test", "clean")[] else vec

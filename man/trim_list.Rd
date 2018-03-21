@@ -2,32 +2,43 @@
 % Please edit documentation in R/cSplit_e_helper_functions.R
 \name{trim_list}
 \alias{trim_list}
-\title{Trim Whitespace from a List of Character Vectors}
+\alias{trim_list}
+\alias{trim_vec}
+\title{Trims Whitespace from Lists of Character Vectors}
 \usage{
 trim_list(x, relist = TRUE, convert = FALSE)
+
+trim_vec(vec, attr = FALSE)
 }
 \arguments{
 \item{x}{A \code{list} of character vectors.}
 
-\item{relist}{Logical. Should the output also be a \code{list}? Defaults to
-\code{TRUE}.}
+\item{relist}{Logical. Should the output also be a \code{list}? Defaults to \code{TRUE}.}
 
-\item{convert}{Logical. Should \code{type.convert} be used on the output?
+\item{convert}{Logical. Should \code{\link[utils:type.convert]{utils::type.convert()}} be used on the output?
 Defaults to \code{FALSE}.}
+
+\item{vec}{A character vector.}
+
+\item{attr}{Logical. Should an attribute be set indicating that the the
+output was \code{"clean"} or has been \code{"cleaned"}? Defaults to \code{FALSE}.}
 }
 \value{
-A \code{list} or the unlisted values.
+A \code{list} or a vector of the trimmed values, possibly converted for
+\code{trim_list()} or a vector of the trimmed values for \code{trim_vec()}.
 }
 \description{
-Trims whitespace from a list of character vectors.
-}
-\details{
-Takes an input \code{list} of character vectors trims any leading or
-trailing whitespace, and optionally relists the output.
+Trims whitespace from character vectors and lists of character
+vectors. \code{trim_vec} takes a character vector and trims any leading or trailing
+whitespace. \code{trim_list} does the same for vectors in a \code{list}, optionally
+retaining the \code{list} structure or flattening the \code{list} to a simple vector.
 }
 \note{
-Empty list elements or empty characters (eg: \code{""}) are converted
-to \code{NA}.
+Empty list elements or empty characters (eg: \code{""}) are converted to \code{NA}.
+
+The \code{attr} argument in \code{trim_vec()} is used to increase the efficiency
+of \code{trim_list()} by returning the original object if no leading or trailing
+whitespace was detected.
 }
 \examples{
 
@@ -39,9 +50,18 @@ L2 <- list(c(" 1", "2   ", NA), NA, c("   1", NA, ""), "", "3   ")
 trim_list(L2)
 trim_list(L2, convert = TRUE)
 
+
+V1 <- letters
+trim_vec(V1)
+trim_vec(V1, TRUE)
+
+V2 <- c(" 1", "2   ", NA, "")
+trim_vec(V2)
+trim_vec(V2, TRUE)
+
 }
 \seealso{
-\code{trimws}
+\code{\link[base:trimws]{base::trimws()}}
 }
 \author{
 Ananda Mahto

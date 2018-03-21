@@ -11,14 +11,14 @@ cSplit_f(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE, type.convert)
 
 \item{splitCols}{The columns that need to be split up.}
 
-\item{sep}{The character or characters that serve as delimiters within the 
-columns that need to be split up. If different columns use different 
+\item{sep}{The character or characters that serve as delimiters within the
+columns that need to be split up. If different columns use different
 delimiters, enter the delimiters as a character vector.}
 
 \item{drop}{Logical. Should the original columns be dropped? Defaults to
 \code{TRUE}.}
 
-\item{stripWhite}{Logical. Should whitespace be removed from character 
+\item{stripWhite}{Logical. Should whitespace be removed from character
 columns? Defaults to \code{TRUE}.}
 
 \item{type.convert}{Logical. Should the output be converted to relevant types

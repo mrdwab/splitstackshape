@@ -18,8 +18,10 @@ LazyLoad: yes
 Depends:
     R (>= 3.2.0)
 Imports:
-    data.table (>= 1.10.5),
+    data.table (>= 1.10.5)
+Suggests:
     stringi
 URL: http://github.com/mrdwab/splitstackshape
 BugReports: http://github.com/mrdwab/splitstackshape/issues
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)

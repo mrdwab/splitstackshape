@@ -2,29 +2,29 @@
 % Please edit documentation in R/cSplit_e_helper_functions.R
 \name{num_mat}
 \alias{num_mat}
-\title{Create a Numeric Matrix from a List of Values}
+\alias{num_mat}
+\alias{char_mat}
+\title{Create Binary, Value, or Count Matrix from a List}
 \usage{
 num_mat(listOfValues, mode = "binary", fill = NULL)
+
+char_mat(listOfValues, mode = "binary", fill = NULL)
 }
 \arguments{
-\item{listOfValues}{A \code{list} of input values to be inserted in a
-matrix.}
+\item{listOfValues}{A \code{list} of input values to be inserted in a matrix.}
 
-\item{mode}{Either \code{"binary"}, \code{"value"}, or \code{"count"}. 
-Defaults to \code{"binary"}.}
+\item{mode}{Either \code{"binary"}, \code{"value"}, or \code{"count"}. Defaults to \code{"binary"}.}
 
-\item{fill}{The initializing fill value for the empty matrix. Defaults to
-\code{NA} if \code{mode = "value"} and \code{0} for other modes.}
+\item{fill}{The initializing fill value for the empty matrix. Defaults to \code{NA}
+if \code{mode = "value"} and \code{0} for other modes.}
 }
 \value{
 A \code{matrix}.
 }
 \description{
-Create a numeric matrix from a list of values.
-}
-\details{
-Takes an input \code{list} and converts it to a binary, value, or count 
-matrix.
+Creates a binary, value, or count matrix from a list of values.
+
+Takes an input \code{list} and converts it to a binary, value, or count matrix.
 }
 \examples{
 
@@ -36,9 +36,14 @@ num_mat(A, fill = 0)
 num_mat(A, mode = "value")
 num_mat(A, mode = "count")
 
-}
-\seealso{
-\code{strsplit}, \code{\link{char_mat}}
+
+invec <- c("rock,electro", "electro", "rock,jazz", NA, "jazz,jazz,jazz")
+A <- strsplit(invec, ",")
+char_mat(A)
+char_mat(A, fill = 99)
+char_mat(A, mode = "value")
+char_mat(A, mode = "count")
+
 }
 \author{
 Ananda Mahto

@@ -253,6 +253,20 @@ NULL
 trim <- function(x) gsub("^\\s+|\\s+$", "", x)
 NULL
 
+# Trim Whitespace Fallback
+.tws <- function(vec) {
+  sw <- startsWith(vec, " ")
+  ew <- endsWith(vec, " ")
+  if (any(sw, na.rm = TRUE)) {
+    vec[which(sw)] <- sub("^ +", "", vec[which(sw)])
+  }
+  if (any(ew, na.rm = TRUE)) {
+    vec[which(ew)] <- sub(" +$", "", vec[which(ew)])
+  }
+  vec
+}
+NULL
+
 .collapseMe <- function(invec, atStart = TRUE) {
   if (isTRUE(atStart)) paste(sprintf("^%s", invec), collapse = "|")
   else paste(sprintf("%s$", invec), collapse = "|")

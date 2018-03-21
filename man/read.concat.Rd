@@ -20,7 +20,7 @@ read.concat(data, col.prefix, sep, ...)
 A \code{data.frame}
 }
 \description{
-Originally a helper function for the \code{\link{concat.split.compact}} function. 
+Originally a helper function for the \code{\link{concat.split.compact}} function.
 This function has now been effectively replaced by \code{\link{cSplit}}.
 }
 \examples{

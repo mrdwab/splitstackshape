@@ -26,17 +26,18 @@
 
 ### New functions
 
-* `char_mat` and `num_mat` take lists and convert them to binary, value, or
+* `char_mat()` and `num_mat()` take lists and convert them to binary, value, or
   count matrices.
-* `trim_vec` and `trim_list` take vectors or lists and trims the whitespace,
+* `trim_vec()` and `trim_list()` take vectors or lists and trims the whitespace,
   being careful about empty elements and zero-length elements.
 
 ### Potentially breaking changes
 
-* `cSplit_f` has been deprecated and is likely to be removed. It is presently
-  just a wrapper for `cSplit` as the new `cSplit` uses `fread` anyway by
-  default. The argument `dotsub` has been removed. The default for `stripWhite`
-  has been changed to `TRUE`.
+* `cSplit_f()` has been soft-deprecated and is likely to be removed. It is 
+  presently just a wrapper for `cSplit()` as the new `cSplit()` uses `fread()` 
+  anyway by default. The argument `dotsub` has been removed. The default for 
+  `stripWhite` has been changed to `TRUE`. The order of arguments has changed
+  slightly.
 
 ## 1.4.3
 

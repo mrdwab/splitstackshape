@@ -4,40 +4,32 @@
 \alias{cSplit_f}
 \title{Split Concatenated Cells in a data.frame or a data.table}
 \usage{
-cSplit_f(indt, splitCols, sep, drop = TRUE, dotsub = "|",
-  stripWhite = FALSE)
+cSplit_f(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE, type.convert)
 }
 \arguments{
 \item{indt}{The input \code{data.frame} or \code{data.table}.}
 
 \item{splitCols}{The columns that need to be split up.}
 
-\item{sep}{The character or characters that serve as delimiters within the columns that
-need to be split up. If different columns use different delimiters, enter the delimiters as a character vector.}
+\item{sep}{The character or characters that serve as delimiters within the 
+columns that need to be split up. If different columns use different 
+delimiters, enter the delimiters as a character vector.}
 
 \item{drop}{Logical. Should the original columns be dropped? Defaults to
 \code{TRUE}.}
 
-\item{dotsub}{The character that should be substituted as a delimiter
-\emph{if \code{sep = "."}}. \code{fread} does not seem to work nicely with
-\code{sep = "."}, so it needs to be substituted. By default, this function
-will substitute \code{"."} with \code{"|"}.}
+\item{stripWhite}{Logical. Should whitespace be removed from character 
+columns? Defaults to \code{TRUE}.}
 
-\item{stripWhite}{Logical. Should whitespace be stripped before writing to the temporary file? Defaults to \code{FALSE}.}
+\item{type.convert}{Logical. Should the output be converted to relevant types
+or kept as character columns? Defaults to \code{TRUE}.}
 }
 \value{
 A \code{data.table}.
 }
 \description{
-A variation of the \code{concat.split} family of functions designed for
-large \emph{rectangular} datasets. This function makes use of \code{\link[data.table:fread]{fread}} from the "data.table" package for very speedy splitting of concatenated columns of data.
-}
-\details{
-While the general \code{concat.split} functions (\code{\link{cSplit}} in particular) are able to handle
-"unbalanced" datasets (for example, where the number of fields in a given
-column might differ from row to row) because of the nature of \code{fread}
-from the "data.table" package, this function does not support such data
-types.
+Deprecated. Simply calls \code{\link{cSplit}}, so it is better to use that
+function directly rather than continue using this one.
 }
 \examples{
 
@@ -58,9 +50,6 @@ mydf
 cSplit_f(mydf, splitCols = c("v1", "v2", "v3"), sep = c("-", ".", "_"))
 
 }
-\references{
-\url{http://stackoverflow.com/a/19231054/1270695}
-}
 \author{
-Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine this function.
+Ananda Mahto.
 }

@@ -1,26 +1,35 @@
 # splitstackshape NEWS
 
----------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 Author/Maintainer : Ananda Mahto
 Email             : ananda@mahto.info
 URL               : http://github.com/mrdwab/splitstackshape
 BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
----------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## 2.0.1
 
 21 March 2018
 
 * Changed data.table dependency to >= 1.10.5. Install the development
-  version using 
+  version using: 
       
       remove.packages("data.table")
       install.packages("data.table", type = "source",
         repos = "http://Rdatatable.github.io/data.table")
 
 * Changed R dependency to >= 3.2.0 for the `lengths()` function.
+
+--------------
+
+Potentially breaking changes:
+
+* `cSplit_f` has been deprecated and is likely to be removed. It is presently
+  just a wrapper for `cSplit` as the new `cSplit` uses `fread` anyway by
+  default. The argument `dotsub` has been removed. The default for `stripWhite`
+  has been changed to `TRUE`.
 
 ## 1.4.3
 

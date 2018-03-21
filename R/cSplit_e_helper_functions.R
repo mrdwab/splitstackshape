@@ -144,6 +144,7 @@ trim_list <- function(x, relist = TRUE, convert = FALSE) {
     setattr(out, "test", NULL)
     if (convert) out <- type.convert(out, as.is = TRUE)
     if (relist) {
+      V2 <- NULL
       out <- data.table(out, rep.int(seq.int(length(x)), 
                                      lengths(x)))[, list(list(out)), V2]$V1
       if (is.null(names(x))) out else `names<-`(out, names(x))

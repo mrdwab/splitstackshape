@@ -1,6 +1,3 @@
-#' @importFrom stringi stri_trim_both
-NULL
-
 #' @importFrom stats na.omit
 NULL
 

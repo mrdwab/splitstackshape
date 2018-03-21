@@ -214,7 +214,7 @@ New function added:
   feature to automatically add an ID variable if the present 
   "IDs" are not unique.
 
-## Feature Changes
+### Feature Changes
 
 New functions added:
 

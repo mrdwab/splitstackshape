@@ -2,10 +2,10 @@
 
 --------------------------------------------------------------------------------
 
-Author/Maintainer : Ananda Mahto
-Email             : ananda@mahto.info
-URL               : http://github.com/mrdwab/splitstackshape
-BugReports        : http://github.com/mrdwab/splitstackshape/issues
+* Author/Maintainer : Ananda Mahto
+* Email             : ananda@mahto.info
+* URL               : http://github.com/mrdwab/splitstackshape
+* BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 --------------------------------------------------------------------------------
 
@@ -16,9 +16,9 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 * Changed data.table dependency to >= 1.10.5. Install the development
   version using: 
       
-      remove.packages("data.table")
-      install.packages("data.table", type = "source",
-        repos = "http://Rdatatable.github.io/data.table")
+        remove.packages("data.table")
+        install.packages("data.table", type = "source",
+          repos = "http://Rdatatable.github.io/data.table")
 
 * Changed R dependency to >= 3.2.0 for the `lengths()` function.
 

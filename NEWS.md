@@ -24,7 +24,7 @@
 
 --------------
 
-# Potentially breaking changes
+### Potentially breaking changes
 
 * `cSplit_f` has been deprecated and is likely to be removed. It is presently
   just a wrapper for `cSplit` as the new `cSplit` uses `fread` anyway by

@@ -44,43 +44,42 @@ NULL
 #' Split Concatenated Values into their Corresponding Column Position
 #' 
 #' "Expand" concatenated numeric or character values to their relevant position
-#' in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
+#' in a `data.table` or create a binary or count representation of such data.
 #' 
-#' 
-#' @param data The source \code{data.frame} or \code{data.table}.
-#' @param split.col The variable that needs to be split (either name or index
-#' position).
-#' @param sep The character separating each value. Can also be a regular
-#' expression.
-#' @param mode Can be either \code{"binary"} (where presence of a number in a
-#' given column is converted to "1") or \code{"value"} (where the value is
-#' retained and not recoded to "1"). Defaults to \code{"binary"}.
-#' @param type Can be either \code{"numeric"} (where the items being split are
-#' integers) or \code{"character"} (where the items being split are character
-#' strings). Defaults to \code{"numeric"}.
+#' @param indt The source `data.table`.
+#' @param splitCols The variables that need to be split. Can be either the name
+#' or the index position.
+#' @param sep The character or a vector of characters separating each value. Can
+#' also be a regular expression.
+#' @param mode Can be either `"binary"` (where the presence of a number in a
+#' given column is converted to "1"), `"value"` (where the value is retained and 
+#' not recoded to "1"), or `"count"` (where the frequency of each value is
+#' is returned). Defaults to `"binary"`.
+#' @param type Can be either `"numeric"` (where the items being split are
+#' integers) or `"character"` (where the items being split are character 
+#' strings). Defaults to `"numeric"`.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' \code{FALSE}.
-#' @param fixed Used for \code{strsplit} for allowing regular expressions to be
-#' used.
-#' @param fill Desired "fill" value. Defaults to \code{NA}.
-#' @return A \code{data.frame} or a \code{data.table} depending on the source input.
+#' @param fixed Used for [base::strsplit()] for allowing regular expressions to 
+#' be used when splitting the values.
+#' @param fill Desired "fill" value. Defaults to `NULL` at which reasonable
+#' options are provided by default. If `mode = "binary"` or `mode = "count"`,
+#' the default fill would be "0". If `mode = "value"`, the default fill would 
+#' be `NA`.
+#' @return A `data.table`.
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split}}, \code{\link{concat.split.list}},
-#' \code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-#' \code{\link{numMat}}, \code{\link{charMat}}
+#' @seealso [concat.split()], [concat.split.list()], [num_mat()], [char_mat()]
 #' @examples
 #' 
 #' temp <- head(concat.test)
 #' cSplit_e(temp, "Likes")
-#' cSplit_e(temp, 4, ";", fill = 0)
+#' cSplit_e(temp, 4, ";", fill = 999)
 #'  
 #' ## The old function name still works
 #' concat.split.expanded(temp, "Likes")
 #' concat.split.expanded(temp, 4, ";", fill = 0)
 #' concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
 #' concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
-#' 
-#' \dontshow{rm(temp)}
 #' 
 #' @aliases cSplit_e
 #' @aliases concat.split.expanded
@@ -89,38 +88,41 @@ NULL
 #' 
 #' @export concat.split.expanded
 #' @export cSplit_e
-cSplit_e <- concat.split.expanded <- function(data, split.col, sep = ",", mode = NULL, 
-                                  type = "numeric", drop = FALSE, 
-                                  fixed = TRUE, fill = NA) {
-  if (is.numeric(split.col)) split.col <- Names(data, split.col)
-  if (!is.character(data[[split.col]])) a <- as.character(data[[split.col]])
-  else a <- data[[split.col]]
-  if (is.null(mode)) mode = "binary"  
-  b <- strsplit(a, sep, fixed = fixed)
-  b <- lapply(b, trim)
+cSplit_e <- concat.split.expanded <- function(
+  indt, splitCols, sep = ",", mode = "binary", type = "numeric",
+  drop = FALSE, fixed = TRUE, fill = NULL) {
   
-  temp1 <- switch(
-    type,
-    character = {
-      temp1 <- charMat(b, fill = fill, mode = mode)
-      colnames(temp1) <- paste(split.col, colnames(temp1), sep = "_")
-      temp1
-    },
-    numeric = {
-      nchars <- max(nchar(unlist(b, use.names = FALSE)))
-      temp1 <- numMat(b, fill = fill, mode = mode)
-      colnames(temp1) <- paste(split.col, .pad(seq_len(ncol(temp1))), sep = "_")
-      temp1
-    },
-    stop("'type' must be either 'character' or 'numeric'"))
-  if (isTRUE(drop)) {
-    if (is.data.table(data)) {
-      cbind(data, temp1)[, (split.col) := NULL][]
+  indt <- setDT(copy(indt))
+  if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
+  if (length(sep) == 1) sep <- rep(sep, length(splitCols))
+  if (length(sep) != length(splitCols)) stop("Wrong number of sep supplied")
+  if (length(mode) == 1) mode <- rep(mode, length(splitCols))
+  if (length(mode) != length(mode)) stop("Wrong number of mode supplied")
+  if (any(!mode %in% c("binary", "value", "count"))) {
+    stop("Mode must be `binary`, `value`, or `count`")
+  }
+  if (length(type) == 1) type <- rep(type, length(splitCols))
+  if (length(type) != length(type)) stop("Wrong number of type supplied")
+  
+  for (i in seq_along(splitCols)) {
+    a <- strsplit(as.character(indt[[splitCols[i]]]), sep[i], fixed = fixed)
+    TYPE <- type[i]
+    if (TYPE == "character") a <- trim_list(a)
+    temp <- switch(
+      TYPE,
+      numeric = num_mat(a, mode = mode[i], fill = fill),
+      character = char_mat(a, mode = mode[i], fill = fill),
+      stop("type must be numeric or character"))
+    NAMES <- if (typeof(type.convert(colnames(temp), as.is = TRUE)) == "character") {
+      colnames(temp)
     } else {
-      cbind(data[othernames(data, split.col)], temp1)
+      sprintf("%s_%s", splitCols[i], seq.int(ncol(temp)))
     }
-  } 
-  else cbind(data, temp1)
+    set(indt, j = NAMES, 
+        value = as.data.table(temp))
+    if (drop) set(indt, j = splitCols[i], value = NULL)
+  }
+  indt[]
 }
 NULL
 

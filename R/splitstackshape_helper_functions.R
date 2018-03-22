@@ -1,3 +1,22 @@
+# Trim Whitespace Fallback
+.tws <- function(vec) {
+  sw <- startsWith(vec, " ")
+  ew <- endsWith(vec, " ")
+  if (any(sw, na.rm = TRUE)) {
+    vec[which(sw)] <- sub("^ +", "", vec[which(sw)])
+  }
+  if (any(ew, na.rm = TRUE)) {
+    vec[which(ew)] <- sub(" +$", "", vec[which(ew)])
+  }
+  vec
+}
+NULL
+
+# stri_flatten fallback
+.strflat <- function(invec) paste(invec, collapse = "\n")
+NULL
+
+
 #' Extract All Names From a Dataset Other Than the Ones Listed
 #' 
 #' A convenience function for \code{setdiff(names(data),
@@ -92,92 +111,6 @@ read.concat <- function(data, col.prefix, sep, ...) {
 NULL
 
 
-
-#' Create a Numeric Matrix from a List of Values
-#' 
-#' Create a numeric matrix from a list of values
-#' 
-#' This is primarily a helper function for the \code{\link{concat.split}}
-#' function when creating the "expanded" structure. The input is anticipated to
-#' be a \code{list} of values obtained using \code{\link{strsplit}}.
-#' 
-#' @param listOfValues A \code{list} of input values to be inserted in a
-#' matrix.
-#' @param fill The initializing fill value for the empty matrix.
-#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to
-#' \code{"binary"}.
-#' @return A \code{matrix}.
-#' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{charMat}}
-#' @examples
-#' 
-#' invec <- c("1,2,4,5,6", "1,2,4,5,6", "1,2,4,5,6",
-#'            "1,2,4,5,6", "-1,1,2,5,6", "1,2,5,6")
-#' A <- strsplit(invec, ",")
-#' splitstackshape:::numMat(A)
-#' splitstackshape:::numMat(A, fill = 0)
-#' splitstackshape:::numMat(A, mode = "value")
-#' 
-#' \dontshow{rm(invec, A)}
-#' 
-numMat <- function(listOfValues, fill = NA, mode = "binary") {
-  listOfValues <- lapply(listOfValues, as.integer)
-  len  <- length(listOfValues)
-  vec  <- unlist(listOfValues, use.names = FALSE)
-  slvl <- seq(min(vec), max(vec))
-  out  <- matrix(fill, nrow = len, ncol = length(slvl), dimnames = list(NULL, slvl))
-  i.idx <- rep(seq_len(len), vapply(listOfValues, length, integer(1L)))
-  j.idx <- match(vec, slvl)
-  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
-                                     stop("'mode' must be 'binary' or 'value'"))
-  out
-}
-NULL
-
-
-
-#' Create a Binary Matrix from a List of Character Values
-#' 
-#' Create a binary matrix from a list of character values
-#' 
-#' This is primarily a helper function for the \code{\link{concat.split}}
-#' function when creating the "expanded" structure. The input is anticipated to
-#' be a \code{list} of values obtained using \code{\link{strsplit}}.
-#' 
-#' @param listOfValues A \code{list} of input values to be inserted in a
-#' matrix.
-#' @param fill The initializing fill value for the empty matrix.
-#' @param mode Either \code{"binary"} or \code{"value"}. Defaults to
-#' \code{"binary"}.
-#' @return A \code{matrix}.
-#' @author Ananda Mahto
-#' @seealso \code{strsplit}, \code{\link{numMat}}
-#' @examples
-#' 
-#' invec <- c("rock,electro","electro","rock,jazz")
-#' A <- strsplit(invec, ",")
-#' splitstackshape:::charMat(A)
-#' splitstackshape:::charMat(A, 0)
-#' splitstackshape:::charMat(A, mode = "value")
-#' 
-#' \dontshow{rm(invec, A)}
-#' 
-charMat <- function(listOfValues, fill = NA, mode = "binary") {
-  len   <- length(listOfValues)
-  vec   <- unlist(listOfValues, use.names = FALSE)
-  lvl   <- sort(unique(vec))
-  out   <- matrix(fill, nrow = len, ncol = length(lvl), 
-                  dimnames = list(NULL, lvl))
-  i.idx <- rep(seq.int(len), vapply(listOfValues, length, integer(1L)))
-  j.idx <- match(vec, lvl)
-  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
-                                     stop("'mode' must be 'binary' or 'value'"))
-  out
-}
-NULL
-
-
-
 #' Split Basic Alphanumeric Strings Which Have No Separators
 #' 
 #' Used to split strings like "Abc8" into "Abc" and "8".
@@ -253,22 +186,7 @@ NULL
 trim <- function(x) gsub("^\\s+|\\s+$", "", x)
 NULL
 
-# Trim Whitespace Fallback
-.tws <- function(vec) {
-  sw <- startsWith(vec, " ")
-  ew <- endsWith(vec, " ")
-  if (any(sw, na.rm = TRUE)) {
-    vec[which(sw)] <- sub("^ +", "", vec[which(sw)])
-  }
-  if (any(ew, na.rm = TRUE)) {
-    vec[which(ew)] <- sub(" +$", "", vec[which(ew)])
-  }
-  vec
-}
-NULL
 
-# stri_flatten fallback
-.strflat <- function(invec) paste(invec, collapse = "\n")
 
 .collapseMe <- function(invec, atStart = TRUE) {
   if (isTRUE(atStart)) paste(sprintf("^%s", invec), collapse = "|")

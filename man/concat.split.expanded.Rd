@@ -5,21 +5,22 @@
 \alias{cSplit_e}
 \title{Split Concatenated Values into their Corresponding Column Position}
 \usage{
-cSplit_e(data, split.col, sep = ",", mode = NULL, type = "numeric",
-  drop = FALSE, fixed = TRUE, fill = NA)
+cSplit_e(indt, splitCols, sep = ",", mode = "binary", type = "numeric",
+  drop = FALSE, fixed = TRUE, fill = NULL)
 }
 \arguments{
-\item{data}{The source \code{data.frame} or \code{data.table}.}
+\item{indt}{The source \code{data.table}.}
 
-\item{split.col}{The variable that needs to be split (either name or index
-position).}
+\item{splitCols}{The variables that need to be split. Can be either the name
+or the index position.}
 
-\item{sep}{The character separating each value. Can also be a regular
-expression.}
+\item{sep}{The character or a vector of characters separating each value. Can
+also be a regular expression.}
 
-\item{mode}{Can be either \code{"binary"} (where presence of a number in a
-given column is converted to "1") or \code{"value"} (where the value is
-retained and not recoded to "1"). Defaults to \code{"binary"}.}
+\item{mode}{Can be either \code{"binary"} (where the presence of a number in a
+given column is converted to "1"), \code{"value"} (where the value is retained and
+not recoded to "1"), or \code{"count"} (where the frequency of each value is
+is returned). Defaults to \code{"binary"}.}
 
 \item{type}{Can be either \code{"numeric"} (where the items being split are
 integers) or \code{"character"} (where the items being split are character
@@ -28,23 +29,26 @@ strings). Defaults to \code{"numeric"}.}
 \item{drop}{Logical. Should the original variable be dropped? Defaults to
 \code{FALSE}.}
 
-\item{fixed}{Used for \code{strsplit} for allowing regular expressions to be
-used.}
+\item{fixed}{Used for \code{\link[base:strsplit]{base::strsplit()}} for allowing regular expressions to
+be used when splitting the values.}
 
-\item{fill}{Desired "fill" value. Defaults to \code{NA}.}
+\item{fill}{Desired "fill" value. Defaults to \code{NULL} at which reasonable
+options are provided by default. If \code{mode = "binary"} or \code{mode = "count"},
+the default fill would be "0". If \code{mode = "value"}, the default fill would
+be \code{NA}.}
 }
 \value{
-A \code{data.frame} or a \code{data.table} depending on the source input.
+A \code{data.table}.
 }
 \description{
 "Expand" concatenated numeric or character values to their relevant position
-in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
+in a \code{data.table} or create a binary or count representation of such data.
 }
 \examples{
 
 temp <- head(concat.test)
 cSplit_e(temp, "Likes")
-cSplit_e(temp, 4, ";", fill = 0)
+cSplit_e(temp, 4, ";", fill = 999)
  
 ## The old function name still works
 concat.split.expanded(temp, "Likes")
@@ -52,13 +56,9 @@ concat.split.expanded(temp, 4, ";", fill = 0)
 concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
 concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
 
-\dontshow{rm(temp)}
-
 }
 \seealso{
-\code{\link{concat.split}}, \code{\link{concat.split.list}},
-\code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-\code{\link{numMat}}, \code{\link{charMat}}
+\code{\link[=concat.split]{concat.split()}}, \code{\link[=concat.split.list]{concat.split.list()}}, \code{\link[=num_mat]{num_mat()}}, \code{\link[=char_mat]{char_mat()}}
 }
 \author{
 Ananda Mahto

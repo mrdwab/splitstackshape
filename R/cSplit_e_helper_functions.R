@@ -28,6 +28,7 @@ NULL
 #' @export
 #' @aliases num_mat
 num_mat <- function (listOfValues, mode = "binary", fill = NULL) {
+  listOfValues <- trim_list(listOfValues)
   len <- length(listOfValues)
   vec <- as.integer(unlist(listOfValues, use.names = FALSE))
   slvl <- seq.int(min(vec, na.rm = TRUE), max(vec, na.rm = TRUE))
@@ -67,7 +68,9 @@ NULL
 #' @aliases char_mat
 char_mat <- function (listOfValues, mode = "binary", fill = NULL) {
   len <- length(listOfValues)
-  vec <- trim_vec(unlist(listOfValues, use.names = FALSE), attr = FALSE)
+  listOfValues <- trim_list(listOfValues)
+  vec <- unlist(listOfValues, use.names = FALSE)
+  # vec <- trim_vec(unlist(listOfValues, use.names = FALSE), attr = FALSE)
   lvl <- sort(unique(vec))
   i.idx <- rep.int(seq_along(listOfValues), lengths(listOfValues))
   

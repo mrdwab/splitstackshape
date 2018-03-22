@@ -47,7 +47,7 @@ cSplit_l <- concat.split.list <- function(
   for (i in seq_along(splitCols)) {
     a <- strsplit(as.character(indt[[splitCols[i]]]), sep[i], fixed, ...)
     if (!stripWhite & type.convert) {
-      message("type.convert requires stripWhite = TRUE. Changing setting.")
+      message("type.convert requires stripWhite = TRUE. Setting type.convert = FALSE.")
     }
     if (stripWhite | type.convert) a <- trim_list(a, convert = type.convert)
     if (drop) {

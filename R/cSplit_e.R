@@ -16,7 +16,7 @@
 #' integers) or `"character"` (where the items being split are character 
 #' strings). Defaults to `"numeric"`.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
-#' \code{FALSE}.
+#' `FALSE`.
 #' @param fixed Used for [base::strsplit()] for allowing regular expressions to 
 #' be used when splitting the values.
 #' @param fill Desired "fill" value. Defaults to `NULL` at which reasonable

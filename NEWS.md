@@ -11,7 +11,7 @@
 
 ## 2.0.1
 
-21 March 2018
+22 March 2018
 
 * Changed data.table dependency to >= 1.10.5. Install the development
   version using: 
@@ -30,6 +30,10 @@
   count matrices.
 * `trim_vec()` and `trim_list()` take vectors or lists and trims the whitespace,
   being careful about empty elements and zero-length elements.
+  
+### Enhancements
+
+* `cSplit_e()` and `cSplit_l()` can now split multiple columns at once. 
 
 ### Potentially breaking changes
 
@@ -38,6 +42,10 @@
   anyway by default. The argument `dotsub` has been removed. The default for 
   `stripWhite` has been changed to `TRUE`. The order of arguments has changed
   slightly.
+* Some arguments for `cSplit_e()` and `cSplit_l()` have been renamed to reflect
+  the expected input types; the positional order of some arguments have been 
+  changed. Both functions also gained a few arguments. It is recommended to 
+  review any code using the functions and use the argument name specifically.
 
 ## 1.4.3
 

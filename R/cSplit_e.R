@@ -68,7 +68,7 @@ cSplit_e <- concat.split.expanded <- function(
       character = char_mat(a, mode = mode[i], fill = fill),
       stop("type must be numeric or character"))
     NAMES <- if (typeof(type.convert(colnames(temp), as.is = TRUE)) == "character") {
-      colnames(temp)
+      sprintf("%s_%s", splitCols[i], colnames(temp))
     } else {
       sprintf("%s_%s", splitCols[i], seq.int(ncol(temp)))
     }

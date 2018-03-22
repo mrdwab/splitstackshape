@@ -267,6 +267,9 @@ NULL
 }
 NULL
 
+# stri_flatten fallback
+.strflat <- function(invec) paste(invec, collapse = "\n")
+
 .collapseMe <- function(invec, atStart = TRUE) {
   if (isTRUE(atStart)) paste(sprintf("^%s", invec), collapse = "|")
   else paste(sprintf("%s$", invec), collapse = "|")

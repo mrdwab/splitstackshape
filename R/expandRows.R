@@ -16,10 +16,7 @@
 #' @author Ananda Mahto
 #' @examples
 #' 
-#' mydf <- data.frame(x = c("a", "b", "q"), 
-#'                    y = c("c", "d", "r"), 
-#'                    count = c(2, 5, 3))
-#' mydf
+#' mydf <- data.frame(x = c("a", "b", "q"), y = c("c", "d", "r"), count = c(2, 5, 3))
 #' expandRows(mydf, "count")
 #' expandRows(mydf, count = 3) ## This takes values from the third column!
 #' expandRows(mydf, count = 3, count.is.col = FALSE)

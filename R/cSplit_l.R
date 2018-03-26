@@ -12,6 +12,7 @@
 #' be used when splitting the values.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
 #' `FALSE`.
+#' @param \dots Further arguments to [base::strsplit()].
 #' @param stripWhite Logical. Should leading and trailing whitespace be trimmed
 #' from the list items? Defaults to `FALSE`.
 #' @param type.convert Logical. Should [utils::type.convert()] be used on the 

@@ -28,6 +28,8 @@ from the list items? Defaults to \code{FALSE}.}
 
 \item{type.convert}{Logical. Should \code{\link[utils:type.convert]{utils::type.convert()}} be used on the
 output? Defaults to \code{TRUE}.}
+
+\item{\dots}{Further arguments to \code{\link[base:strsplit]{base::strsplit()}}.}
 }
 \value{
 A \code{data.table} with the concatenated column split and added as

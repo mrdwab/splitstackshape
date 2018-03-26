@@ -1,4 +1,4 @@
-# Trim Whitespace Fallback
+# Trim Whitespace Fallback -- Don't Export --------------------------------
 .tws <- function(vec) {
   sw <- startsWith(vec, " ")
   ew <- endsWith(vec, " ")
@@ -12,9 +12,87 @@
 }
 NULL
 
-# stri_flatten fallback
+# stri_flatten Fallback -- Don't Export -----------------------------------
 .strflat <- function(invec) paste(invec, collapse = "\n")
 NULL
+
+# Make Equal Columns -- Don't Export --------------------------------------
+make_equal <- function(indt, splitCols) {
+  check <- all_names(names(indt), stubs = splitCols, end_stub = FALSE)
+  
+  if (length(check[["miss"]]) > 0L) {
+    nat <- vapply(unname(check[["stubs"]]), function(x) {
+      typeof(indt[[grep(x, names(indt), fixed = TRUE)[[1L]]]])
+    }, character(1L))
+    
+    for (i in seq_along(nat)) {
+      COLS <- grep(names(nat[i]), check[["miss"]], value = TRUE, fixed = TRUE)
+      if (length(COLS) > 0L) indt[, (COLS) := NA_type(nat[i])]
+    } 
+  } 
+  
+  setcolorder(indt, check[["full_names"]])
+}
+NULL
+
+# NA Types -- Don't Export ------------------------------------------------
+NA_type <- function(string) {
+  switch(string,
+         double = NA_real_,
+         integer = NA_integer_,
+         complex = NA_complex_,
+         character = NA_character_,
+         NA)
+}
+NULL
+
+# All Names for a Balanced Dataset -- Don't Export ------------------------
+all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL, keep_all = TRUE) {
+  stub_names <- grep(paste(stubs, collapse = "|"), current_names, value = TRUE)
+  stub_names <- stub_names[!stub_names %in% stubs]
+  stub_list <- setNames(lapply(stubs, function(x) stub_names[grepl(x, stub_names)]), stubs)
+  if (is.null(ids) & keep_all) {
+    message("All non-stub names being used as ids")
+    ids <- setdiff(current_names, stub_names)
+  } 
+  id_names <- if (!is.null(ids)) {
+    if (keep_all) setdiff(current_names, stub_names)
+  } else {
+    ids
+  }
+  levs <- unique(gsub(paste(stubs, collapse = "|"), "", stub_names))
+  stub_levs <- trim_vec(CJ(stubs, levs)[, if (end_stub) paste0(V2, V1) else paste0(V1, V2)])
+  full_names <- c(id_names, stub_levs[order(stub_levs)])
+  levs <- gsub("^[[:punct:]]|[[:punct:]]$", "", levs)
+  levs <- levs[order(levs)]
+  miss <- setdiff(full_names, current_names)
+  list(stubs = stubs,
+       stub_names = stub_names, 
+       stub_list = stub_list,
+       id_names = id_names, 
+       levs = levs, 
+       stub_levs = stub_levs,
+       full_names = full_names,
+       miss = miss)
+}
+NULL
+
+# Long Fixer -- Don't Export ----------------------------------------------
+long_fixer <- function(indt, cols) {
+  temp <- rowSums(is.na(indt[, ..cols])) + rowSums(indt[, ..cols] == "", na.rm = TRUE)
+  temp == length(cols)
+}
+NULL
+
+
+
+
+
+
+
+
+
+
 
 
 #' Extract All Names From a Dataset Other Than the Ones Listed

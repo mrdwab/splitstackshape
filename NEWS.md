@@ -30,6 +30,8 @@
   count matrices.
 * `trim_vec()` and `trim_list()` take vectors or lists and trims the whitespace,
   being careful about empty elements and zero-length elements.
+* `unlist_cols()` added as a convenience function for `listCol_l()` and 
+  `listCol_w()`.
   
 ### Enhancements
 
@@ -47,6 +49,9 @@
   changed. Both functions also gained a few arguments. It is recommended to 
   review any code using the functions and use the argument name specifically.
 * `expandRows()` initial argument renamed for consistency.
+* Some arguments `listCol_l()` and `listCol_w()` have been renamed to reflext
+  the expected input types. Some arguments have been removed as they are no 
+  longer relevant.
 
 ## 1.4.3
 

@@ -4,47 +4,40 @@
 \alias{expandRows}
 \title{Expand the Rows of a Dataset}
 \usage{
-expandRows(dataset, count, count.is.col = TRUE, drop = TRUE)
+expandRows(indt, count, count.is.col = TRUE, drop = TRUE)
 }
 \arguments{
-\item{dataset}{The input \code{data.frame} or \code{data.table}.}
+\item{count}{The numeric vector of counts \emph{OR} the column from the dataset
+that contains the count data. If \code{count} is a single digit, it is assumed
+that all rows should be repeated by this amount.}
 
-\item{count}{The numeric vector of counts OR the column from the
-dataset that contains the count data. If \code{count} is a single
-digit, it is assumed that all rows should be repeated by this amount.}
+\item{count.is.col}{Logical. Is the \code{count} value a column from the input
+dataset? Defaults to \code{TRUE}.}
 
-\item{count.is.col}{Logical. Is the \code{count} value a column from the
-input dataset? Defaults to \code{TRUE}.}
+\item{drop}{Logical. If \code{count.is.col = TRUE}, should the "count" column be
+dropped from the result? Defaults to \code{TRUE}.}
 
-\item{drop}{Logical. If \code{count.is.col = TRUE}, should the "count"
-column be dropped from the result? Defaults to \code{TRUE}.}
+\item{dataset}{The input \code{data.table}.}
 }
 \value{
-A \code{data.frame} or a \code{data.table}, depending on the input.
+A \code{data.table}.
 }
 \description{
-Expands (replicates) the rows of a \code{data.frame} or a \code{data.table}, either by a fixed
-number, a specified vector, or a value contained in one of the columns in
-the source \code{data.frame} or a \code{data.table}.
+Expands (replicates) the rows of a \code{data.table}, either by a fixed number, a
+specified vector, or a value contained in one of the columns in the source
+\code{data.table}.
 }
 \examples{
 
 mydf <- data.frame(x = c("a", "b", "q"), 
                    y = c("c", "d", "r"), 
                    count = c(2, 5, 3))
-library(data.table)
-DT <- as.data.table(mydf)
 mydf
 expandRows(mydf, "count")
-expandRows(DT, "count", drop = FALSE)
 expandRows(mydf, count = 3) ## This takes values from the third column!
 expandRows(mydf, count = 3, count.is.col = FALSE)
 expandRows(mydf, count = c(1, 5, 9), count.is.col = FALSE)
-expandRows(DT, count = c(1, 5, 9), count.is.col = FALSE)
 
-}
-\references{
-\url{http://stackoverflow.com/a/19519828/1270695}
 }
 \author{
 Ananda Mahto

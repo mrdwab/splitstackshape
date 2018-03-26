@@ -30,7 +30,9 @@ from the list items? Defaults to \code{FALSE}.}
 output? Defaults to \code{TRUE}.}
 }
 \value{
-A \code{data.table`` with the concatenated column split and added as a}list\code{. If}drop = FALSE\code{, the list-columns would be named in the form of}"original_name_list"\code{. If}drop = TRUE`, the list-columns maintain the
+A \code{data.table} with the concatenated column split and added as
+a \code{list}. If \code{drop = FALSE}, the list-columns would be named in the form of
+\code{"original_name_list"}. If \code{drop = TRUE}, the list-columns maintain the
 original column names.
 }
 \description{

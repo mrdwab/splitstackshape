@@ -16,7 +16,7 @@
 #' from the list items? Defaults to `FALSE`.
 #' @param type.convert Logical. Should [utils::type.convert()] be used on the 
 #' output? Defaults to `TRUE`.
-#' @return A `data.table`` with the concatenated column split and added as
+#' @return A `data.table` with the concatenated column split and added as
 #' a `list`. If `drop = FALSE`, the list-columns would be named in the form of
 #' `"original_name_list"`. If `drop = TRUE`, the list-columns maintain the 
 #' original column names.

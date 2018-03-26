@@ -17,7 +17,7 @@ test_that("Functions return the correct number of columns and rows", {
   invec <- strsplit(invec, ",")
   expect_equal(ncol(num_mat(invec)), 6)
   expect_equal(nrow(num_mat(invec)), length(invec))
-  expect_equal(num_mat(invec, mode = "count")[4, 6], 3)
+  expect_equal(num_mat(invec, mode = "count")[5, 6], 3)
   invec <- c("rock,electro", "rock,jazz", NA, "", "jazz,jazz,jazz")
   invec <- strsplit(invec, ",")
   expect_equal(ncol(char_mat(invec)), 3)

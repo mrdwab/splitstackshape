@@ -46,7 +46,7 @@ cSplit_e <- concat.split.expanded <- function(
   indt, splitCols, sep = ",", mode = "binary", type = "numeric",
   drop = FALSE, fixed = TRUE, fill = NULL) {
   
-  indt <- setDT(copy(indt))
+  indt <- data.table::setDT(copy(indt))
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
   if (length(sep) == 1) sep <- rep(sep, length(splitCols))
   if (length(sep) != length(splitCols)) stop("Wrong number of sep supplied")
@@ -71,6 +71,9 @@ cSplit_e <- concat.split.expanded <- function(
       sprintf("%s_%s", splitCols[i], colnames(temp))
     } else {
       sprintf("%s_%s", splitCols[i], seq.int(ncol(temp)))
+    }
+    if (any(duplicated(splitCols))) {
+      NAMES <- sprintf("%s_%s", NAMES, mode[i])
     }
     set(indt, j = NAMES, 
         value = as.data.table(temp))

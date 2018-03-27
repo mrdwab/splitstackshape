@@ -8,7 +8,7 @@ concat.split.compact(data, split.col, sep = ",", drop = FALSE,
   fixed = TRUE, ...)
 }
 \arguments{
-\item{data}{The source \code{data.frame} or \code{data.table}}
+\item{data}{The source \code{data.table}.}
 
 \item{split.col}{The variable that needs to be split (either name or index
 position).}
@@ -19,38 +19,33 @@ position).}
 \code{FALSE}.}
 
 \item{fixed}{Logical. Should the split character be treated as a fixed
-pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
-\code{TRUE}.}
+pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to \code{TRUE}.}
 
-\item{\dots}{optional arguments to pass to \code{cSplit}.}
+\item{\dots}{optional arguments to pass to \code{\link[=cSplit]{cSplit()}}.}
 }
 \value{
 A \code{data.table}.
 }
 \description{
-The default splitting method for \code{\link{concat.split}}. Formerly based
-on \code{\link{read.concat}} but presently a simple wrapper for
-\code{\link{cSplit}}.
+The default splitting method for \code{concat.split}. This is simply a wrapper for
+\code{\link[=cSplit]{cSplit()}}.
 }
 \note{
-This function no longer does anything different from
-\code{\link{cSplit}}. It is recommended that you transition your code to the
-\code{cSplit} function instead.
+This function no longer does anything different from \code{\link[=cSplit]{cSplit()}}. It is
+recommended that you transition your code to the \code{cSplit} function instead.
 }
 \examples{
 
-temp <- head(concat.test)
-concat.split.compact(temp, "Likes")
-concat.split.compact(temp, 4, ";")
+DT <- head(concat.test)
+concat.split.compact(DT, "Likes")
+concat.split.compact(DT, 4, ";")
 
 ## Extra arguments to cSplit
-concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
-
-\dontshow{rm(temp)}
+concat.split.compact(DT, "Siblings", drop = TRUE, stripWhite = TRUE)
 
 }
 \seealso{
-\code{\link{read.concat}}, \code{\link{cSplit}}
+\code{\link[=cSplit]{cSplit()}}
 }
 \author{
 Ananda Mahto

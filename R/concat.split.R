@@ -1,36 +1,30 @@
 #' Split Concatenated Cells into a Condensed Format
 #' 
-#' The default splitting method for \code{\link{concat.split}}. Formerly based
-#' on \code{\link{read.concat}} but presently a simple wrapper for
-#' \code{\link{cSplit}}.
+#' The default splitting method for `concat.split`. This is simply a wrapper for
+#' [cSplit()].
 #' 
-#' 
-#' @param data The source \code{data.frame} or \code{data.table}
+#' @param data The source `data.table`.
 #' @param split.col The variable that needs to be split (either name or index
 #' position).
 #' @param sep The character separating each value.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
-#' \code{FALSE}.
+#' `FALSE`.
 #' @param fixed Logical. Should the split character be treated as a fixed
-#' pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
-#' \code{TRUE}.
-#' @param \dots optional arguments to pass to \code{cSplit}.
-#' @return A \code{data.table}.
-#' @note This function no longer does anything different from
-#' \code{\link{cSplit}}. It is recommended that you transition your code to the
-#' \code{cSplit} function instead.
+#' pattern (`TRUE`) or a regular expression (`FALSE`)? Defaults to `TRUE`.
+#' @param \dots optional arguments to pass to [cSplit()].
+#' @return A `data.table`.
+#' @note This function no longer does anything different from [cSplit()]. It is 
+#' recommended that you transition your code to the `cSplit` function instead.
 #' @author Ananda Mahto
-#' @seealso \code{\link{read.concat}}, \code{\link{cSplit}}
+#' @seealso [cSplit()]
 #' @examples
 #' 
-#' temp <- head(concat.test)
-#' concat.split.compact(temp, "Likes")
-#' concat.split.compact(temp, 4, ";")
+#' DT <- head(concat.test)
+#' concat.split.compact(DT, "Likes")
+#' concat.split.compact(DT, 4, ";")
 #' 
 #' ## Extra arguments to cSplit
-#' concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
-#' 
-#' \dontshow{rm(temp)}
+#' concat.split.compact(DT, "Siblings", drop = TRUE, stripWhite = TRUE)
 #' 
 #' @export concat.split.compact
 concat.split.compact <- function(data, split.col, sep = ",", 
@@ -117,7 +111,7 @@ NULL
 #' concat.split(temp, 3, drop = TRUE)
 #' 
 #' # Strings can also be split to binary representations
-#' concat.split(temp, 3, structure = "expanded",
+#' concat.split(temp, 3, structure = "expanded", mode = "binary",
 #' type = "character", fill = 0, drop = TRUE)
 #' 
 #' # Split up the "Likes column" into a list variable; retain original column
@@ -151,11 +145,11 @@ concat.split <- function(data, split.col, sep = ",", structure = "compact",
     list = {
       if (!is.null(mode)) warning(M1)
       if (!is.null(type)) warning(M2)
-      concat.split.list(data = data, split.col = split.col, 
+      concat.split.list(indt = data, splitCols = split.col, 
                         sep = sep, drop = drop, fixed = fixed)
     },
     expanded = {
-      concat.split.expanded(data = data, split.col = split.col, 
+      concat.split.expanded(indt = data, splitCols = split.col, 
                             sep = sep, mode = mode, type = type, 
                             drop = drop, fixed = fixed, fill = fill)
     },

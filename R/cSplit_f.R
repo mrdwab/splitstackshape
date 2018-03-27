@@ -35,7 +35,7 @@
 #' 
 #' @export cSplit_f
 cSplit_f <- function(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE, 
-                     type.convert) {
+                     type.convert = TRUE) {
   message("This function is deprecated. Use `cSplit` instead.")
   cSplit(indt, splitCols, sep, direction = "wide", fixed = TRUE, drop, 
          stripWhite, makeEqual = NULL, type.convert)

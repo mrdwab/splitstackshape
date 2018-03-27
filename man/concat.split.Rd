@@ -93,7 +93,7 @@ mode = "value", type = "numeric", drop = TRUE)
 concat.split(temp, 3, drop = TRUE)
 
 # Strings can also be split to binary representations
-concat.split(temp, 3, structure = "expanded",
+concat.split(temp, 3, structure = "expanded", mode = "binary",
 type = "character", fill = 0, drop = TRUE)
 
 # Split up the "Likes column" into a list variable; retain original column

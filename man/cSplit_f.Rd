@@ -4,7 +4,8 @@
 \alias{cSplit_f}
 \title{Split Concatenated Cells in a data.table}
 \usage{
-cSplit_f(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE, type.convert)
+cSplit_f(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE,
+  type.convert = TRUE)
 }
 \arguments{
 \item{indt}{The input \code{data.table}.}

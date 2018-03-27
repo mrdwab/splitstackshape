@@ -23,8 +23,8 @@ NULL
 #' @export 
 #' @aliases listCol_l
 listCol_l <- function(indt, listCols, drop = TRUE, makeEqual = FALSE) {
+  ..cols <- ._ID1 <- ._ID2 <- patterns <- NULL
   if (is.numeric(listCols)) listCols <- names(indt)[listCols]
-  
   temp <- listCol_w(indt, listCols, drop, makeEqual = TRUE)[, ._ID1 := .I]
   COLS <- if (drop) listCols else sprintf("%s_ul", listCols)
   out <- set(suppressWarnings(melt(

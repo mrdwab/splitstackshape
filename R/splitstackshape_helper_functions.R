@@ -1,3 +1,7 @@
+# NULL some variables out -------------------------------------------------
+
+
+
 # Trim Whitespace Fallback -- Don't Export --------------------------------
 .tws <- function(vec) {
   sw <- startsWith(vec, " ")
@@ -49,6 +53,7 @@ NULL
 # All Names for a Balanced Dataset -- Don't Export ------------------------
 all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL, 
                       keep_all = TRUE, verbose = TRUE) {
+  V1 <- V2 <- NULL
   stub_names <- grep(paste(stubs, collapse = "|"), current_names, value = TRUE)
   stub_names <- stub_names[!stub_names %in% stubs]
   stub_list <- setNames(
@@ -81,6 +86,7 @@ NULL
 
 # Long Fixer -- Don't Export ----------------------------------------------
 long_fixer <- function(indt, cols) {
+  ..cols <- NULL
   temp <- rowSums(is.na(indt[, ..cols])) + rowSums(indt[, ..cols] == "", na.rm = TRUE)
   temp == length(cols)
 }

@@ -13,10 +13,10 @@
 
 27 March 2018
 
-* Changed data.table dependency to >= 1.10.5. Install the development
-  version using: 
+* Changed data.table dependency to >= 1.10.4, but version >= 1.10.5 (the current
+  development version) is recommended. Install the development version using: 
       
-        remove.packages("data.table")
+        remove.packages("data.table") # If already installed
         install.packages("data.table", type = "source",
           repos = "http://Rdatatable.github.io/data.table")
 

@@ -18,7 +18,7 @@ LazyLoad: yes
 Depends:
     R (>= 3.2.0)
 Imports:
-    data.table (>= 1.10.5)
+    data.table (>= 1.10.4)
 Suggests:
     stringi,
     testthat

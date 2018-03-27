@@ -93,11 +93,20 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       }
     }
     
-    temp <- fread(VEC, sep = sep, fill = TRUE, 
-                  blank.lines.skip = FALSE, header = FALSE,
-                  colClasses = if (!type.convert) "character" else NULL,
-                  strip.white = stripWhite, logical01 = FALSE)[, lapply(
-                    .SD, function(x) replace(x, x ==  "", NA))]
+    temp <- if (packageVersion("data.table") < "1.10.5") {
+      message("It is recommended to update data.table to >= 1.10.5")
+      fread(VEC, sep = sep, fill = TRUE, 
+            blank.lines.skip = FALSE, header = FALSE,
+            colClasses = if (!type.convert) "character" else NULL,
+            strip.white = stripWhite)[, lapply(
+              .SD, function(x) replace(x, x ==  "", NA))]
+    } else {
+      fread(VEC, sep = sep, fill = TRUE, 
+            blank.lines.skip = FALSE, header = FALSE,
+            colClasses = if (!type.convert) "character" else NULL,
+            strip.white = stripWhite, logical01 = FALSE)[, lapply(
+              .SD, function(x) replace(x, x ==  "", NA))]
+    }
     
     if (length(temp) == 1L) {
       message("Expected more than 1 column. Splitting with `t_split`.")

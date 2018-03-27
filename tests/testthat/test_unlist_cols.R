@@ -17,4 +17,7 @@ test_that("Correct number of rows and columns are returned", {
                sum(max(pmax(lengths(dat$B), lengths(dat$C))) * nrow(dat)))
   expect_equal(unlist_cols(dat, "B"), listCol_w(dat, "B"))
   expect_equal(unlist_cols(dat, "B", "long"), listCol_l(dat, "B"))
+  expect_equal(unlist_cols(dat, "B", "long"), unlist_cols(dat, 2, "long"))
+  expect_equal(unlist_cols(dat, "B"), unlist_cols(dat, 2))
+  expect_error(unlist_cols(dat, "B", "narrow"))
 })

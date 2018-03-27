@@ -35,8 +35,14 @@ num_mat <- function (listOfValues, mode = "binary", fill = NULL) {
   i.idx <- rep.int(seq_len(len), lengths(listOfValues))
   
   if (mode %in% c("binary", "value")) {
-    if (is.null(fill)) {
-      fill <- if (mode == "binary") 0L else NA_integer_
+    fill <- if (is.null(fill)) {
+      if (mode == "binary") 0L else NA_integer_
+    } else {
+      if (is.character(fill)) {
+        stop("fill should be of the same type as result (integer)")
+      } else {
+        fill
+      } 
     }
     out <- matrix(as.integer(fill), nrow = len, ncol = length(slvl), 
                   dimnames = list(NULL, slvl))
@@ -76,11 +82,15 @@ char_mat <- function (listOfValues, mode = "binary", fill = NULL) {
   
   if (mode %in% c("binary", "value")) {
     fill <- if (is.null(fill)) {
-      if (mode == "binary") 0L else NA_integer_
+      if (mode == "binary") 0L else NA_character_
     } else {
-      fill
+      if (mode == "binary" & is.character(fill)) {
+        stop("fill should be of the same type as result (integer)")
+      } else {
+        fill
+      }
     }
-    out <- matrix(as.integer(fill), nrow = len, ncol = length(lvl), 
+    out <- matrix(fill, nrow = len, ncol = length(lvl), 
                   dimnames = list(NULL, lvl))
     j.idx <- match(vec, lvl)
     out[na.omit(cbind(i.idx, j.idx))] <- switch(

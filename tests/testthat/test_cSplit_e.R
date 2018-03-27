@@ -14,4 +14,5 @@ test_that("Correct number of rows and columns are returned", {
                  "V1_4_count"))
   expect_equal(cSplit_e(DT, "V2", ";", "count", "character")$V2_D,
                c(0, 3, 0, 0, 0))
+  expect_error(cSplit_e(DT, "V1", ",", "length"))
 })

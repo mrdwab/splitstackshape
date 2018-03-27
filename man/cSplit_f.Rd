@@ -2,12 +2,12 @@
 % Please edit documentation in R/cSplit_f.R
 \name{cSplit_f}
 \alias{cSplit_f}
-\title{Split Concatenated Cells in a data.frame or a data.table}
+\title{Split Concatenated Cells in a data.table}
 \usage{
 cSplit_f(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE, type.convert)
 }
 \arguments{
-\item{indt}{The input \code{data.frame} or \code{data.table}.}
+\item{indt}{The input \code{data.table}.}
 
 \item{splitCols}{The columns that need to be split up.}
 
@@ -15,8 +15,7 @@ cSplit_f(indt, splitCols, sep, drop = TRUE, stripWhite = TRUE, type.convert)
 columns that need to be split up. If different columns use different
 delimiters, enter the delimiters as a character vector.}
 
-\item{drop}{Logical. Should the original columns be dropped? Defaults to
-\code{TRUE}.}
+\item{drop}{Logical. Should the original columns be dropped? Defaults to \code{TRUE}.}
 
 \item{stripWhite}{Logical. Should whitespace be removed from character
 columns? Defaults to \code{TRUE}.}
@@ -28,8 +27,8 @@ or kept as character columns? Defaults to \code{TRUE}.}
 A \code{data.table}.
 }
 \description{
-Deprecated. Simply calls \code{\link{cSplit}}, so it is better to use that
-function directly rather than continue using this one.
+Deprecated. Simply calls \code{\link[=cSplit]{cSplit()}}, so it is better to use that function
+directly rather than continue using this one.
 }
 \examples{
 

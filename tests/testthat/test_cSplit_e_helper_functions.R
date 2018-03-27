@@ -25,4 +25,18 @@ test_that("Functions return the correct number of columns and rows", {
   expect_equal(char_mat(invec, "count")[5, "jazz"], 3)
 })
 
+test_that("fill values work as expected", {
+  invec <- c("1,4,6", "2,6", NA, "", "3,6,6,6")
+  invec <- strsplit(invec, ",")
+  expect_equal(sum(is.na(num_mat(invec, mode = "count", fill = NA))), 23)
+  expect_equal(sum(num_mat(invec, mode = "count", fill = 999) == 999), 23)
+  expect_error(num_mat(invec, mode = "binary", fill = "X"))
+  expect_equal(sum(num_mat(invec, mode = "value", fill = 999) == 999), 23)
+  invec <- c("rock,electro", "rock,jazz", NA, "", "jazz,jazz,jazz")
+  invec <- strsplit(invec, ",")
+  expect_equal(sum(is.na(char_mat(invec, mode = "count", fill = NA))), 10)
+  expect_equal(sum(char_mat(invec, mode = "count", fill = 999) == 999), 10)
+  expect_error(char_mat(invec, mode = "binary", fill = "X"))
+  expect_equal(sum(char_mat(invec, mode = "value", fill = "X") == "X"), 10)
+})
 

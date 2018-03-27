@@ -1,20 +1,19 @@
-#' Split Concatenated Cells in a data.frame or a data.table
+#' Split Concatenated Cells in a data.table
 #' 
-#' Deprecated. Simply calls \code{\link{cSplit}}, so it is better to use that
-#' function directly rather than continue using this one.
+#' Deprecated. Simply calls [cSplit()], so it is better to use that function 
+#' directly rather than continue using this one.
 #' 
-#' @param indt The input \code{data.frame} or \code{data.table}.
+#' @param indt The input `data.table`.
 #' @param splitCols The columns that need to be split up.
 #' @param sep The character or characters that serve as delimiters within the 
 #' columns that need to be split up. If different columns use different 
 #' delimiters, enter the delimiters as a character vector.
-#' @param drop Logical. Should the original columns be dropped? Defaults to
-#' \code{TRUE}.
+#' @param drop Logical. Should the original columns be dropped? Defaults to `TRUE`.
 #' @param stripWhite Logical. Should whitespace be removed from character 
-#' columns? Defaults to \code{TRUE}.
+#' columns? Defaults to `TRUE`.
 #' @param type.convert Logical. Should the output be converted to relevant types
-#' or kept as character columns? Defaults to \code{TRUE}.
-#' @return A \code{data.table}.
+#' or kept as character columns? Defaults to `TRUE`.
+#' @return A `data.table`.
 #' @author Ananda Mahto. 
 #' @examples
 #' 

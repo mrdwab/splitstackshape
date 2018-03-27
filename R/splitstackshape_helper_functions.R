@@ -17,8 +17,8 @@ NULL
 NULL
 
 # Make Equal Columns -- Don't Export --------------------------------------
-make_equal <- function(indt, splitCols) {
-  check <- all_names(names(indt), stubs = splitCols, end_stub = FALSE)
+make_equal <- function(indt, splitCols, verbose = TRUE) {
+  check <- all_names(names(indt), stubs = splitCols, end_stub = FALSE, verbose)
   
   if (length(check[["miss"]]) > 0L) {
     nat <- vapply(unname(check[["stubs"]]), function(x) {
@@ -47,12 +47,14 @@ NA_type <- function(string) {
 NULL
 
 # All Names for a Balanced Dataset -- Don't Export ------------------------
-all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL, keep_all = TRUE) {
+all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL, 
+                      keep_all = TRUE, verbose = TRUE) {
   stub_names <- grep(paste(stubs, collapse = "|"), current_names, value = TRUE)
   stub_names <- stub_names[!stub_names %in% stubs]
-  stub_list <- setNames(lapply(stubs, function(x) stub_names[grepl(x, stub_names)]), stubs)
+  stub_list <- setNames(
+    lapply(stubs, function(x) stub_names[grepl(x, stub_names)]), stubs)
   if (is.null(ids) & keep_all) {
-    message("All non-stub names being used as ids")
+    if (verbose) message("All non-stub names being used as ids")
     ids <- setdiff(current_names, stub_names)
   } 
   id_names <- if (!is.null(ids)) {

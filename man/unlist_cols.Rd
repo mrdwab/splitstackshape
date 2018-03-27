@@ -36,17 +36,15 @@ them into a wide form.
 }
 \examples{
 
-dat <- data.frame(A = 1:3, B = I(list(c(1, 2), c(1, 3, 5), c(4))))
+dat <- data.frame(A = 1:3, B = I(list(1:2, 1:3, 4)), C = I(list(1, 1:2, 1:4)))
 listCol_l(dat, "B")
-
-
-dat <- data.frame(A = 1:3, B = I(list(c(1, 2), c(1, 3, 5), c(4))))
 listCol_w(dat, "B")
 
-
-dat <- data.frame(A = 1:3, B = I(list(c(1, 2), c(1, 3, 5), c(4))))
-unlist_cols(dat, "B", "wide")
-unlist_cols(dat, "B", "long")
+# Demonstration of `makeEqual` behavior
+unlist_cols(dat, c("B", "C"), direction = "wide", makeEqual = FALSE)
+unlist_cols(dat, c("B", "C"), direction = "wide", makeEqual = TRUE)
+unlist_cols(dat, c("B", "C"), direction = "long", makeEqual = FALSE)
+unlist_cols(dat, c("B", "C"), direction = "long", makeEqual = TRUE)
 
 }
 \author{

@@ -20,11 +20,6 @@ NULL
 
 #' @rdname unlist_cols
 #' 
-#' @examples
-#' 
-#' dat <- data.frame(A = 1:3, B = I(list(c(1, 2), c(1, 3, 5), c(4))))
-#' listCol_l(dat, "B")
-#' 
 #' @export 
 #' @aliases listCol_l
 listCol_l <- function(indt, listCols, drop = TRUE, makeEqual = FALSE) {
@@ -44,11 +39,6 @@ NULL
 
 #' @rdname unlist_cols
 #' 
-#' @examples
-#' 
-#' dat <- data.frame(A = 1:3, B = I(list(c(1, 2), c(1, 3, 5), c(4))))
-#' listCol_w(dat, "B")
-#' 
 #' @export 
 #' @aliases listCol_w
 listCol_w <- function(indt, listCols, drop = TRUE, makeEqual = FALSE) {
@@ -61,17 +51,23 @@ listCol_w <- function(indt, listCols, drop = TRUE, makeEqual = FALSE) {
     if (drop) set(indt, j = listCols[i], value = NULL)
   }
   
-  if (makeEqual) make_equal(indt, listCols)[] else indt[]
+  if (makeEqual) make_equal(indt, listCols, verbose = FALSE)[] else indt[]
 }
 NULL
 
 #' @rdname unlist_cols
 #' 
-#' @examples
+#' @examples 
 #' 
-#' dat <- data.frame(A = 1:3, B = I(list(c(1, 2), c(1, 3, 5), c(4))))
-#' unlist_cols(dat, "B", "wide")
-#' unlist_cols(dat, "B", "long")
+#' dat <- data.frame(A = 1:3, B = I(list(1:2, 1:3, 4)), C = I(list(1, 1:2, 1:4)))
+#' listCol_l(dat, "B")
+#' listCol_w(dat, "B")
+#' 
+#' # Demonstration of `makeEqual` behavior
+#' unlist_cols(dat, c("B", "C"), direction = "wide", makeEqual = FALSE)
+#' unlist_cols(dat, c("B", "C"), direction = "wide", makeEqual = TRUE)
+#' unlist_cols(dat, c("B", "C"), direction = "long", makeEqual = FALSE)
+#' unlist_cols(dat, c("B", "C"), direction = "long", makeEqual = TRUE)
 #' 
 #' @export 
 #' @aliases unlist_cols

@@ -55,7 +55,7 @@ cSplit_e(DT, c("V1", "V2"), c(",", ";"), mode = "count",
 
 }
 \seealso{
-\code{\link[=concat.split]{concat.split()}}, \code{\link[=concat.split.list]{concat.split.list()}}, \code{\link[=num_mat]{num_mat()}}, \code{\link[=char_mat]{char_mat()}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_l]{cSplit_l()}}, \code{\link[=num_mat]{num_mat()}}, \code{\link[=char_mat]{char_mat()}}
 }
 \author{
 Ananda Mahto

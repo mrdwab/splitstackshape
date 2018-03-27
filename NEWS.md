@@ -39,11 +39,6 @@
 
 ### Potentially breaking changes
 
-* `cSplit_f()` has been soft-deprecated and is likely to be removed. It is 
-  presently just a wrapper for `cSplit()` as the new `cSplit()` uses `fread()` 
-  anyway by default. The argument `dotsub` has been removed. The default for 
-  `stripWhite` has been changed to `TRUE`. The order of arguments has changed
-  slightly.
 * Some arguments for `cSplit_e()` and `cSplit_l()` have been renamed to reflect
   the expected input types; the positional order of some arguments have been 
   changed. Both functions also gained a few arguments. It is recommended to 
@@ -52,6 +47,11 @@
 * Some arguments `listCol_l()` and `listCol_w()` have been renamed to reflext
   the expected input types. Some arguments have been removed as they are no 
   longer relevant.
+
+### Removed functions
+
+* `cSplit_f()` has been removed as its functionality is completely covered by
+  `cSplit()`.
 
 ## 1.4.3
 

@@ -49,7 +49,7 @@ cSplit_l(DT, c("V1", "V2"), c(",", ";"))
 
 }
 \seealso{
-\code{\link[=concat.split]{concat.split()}}, \code{\link[=concat.split.expanded]{concat.split.expanded()}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_e]{cSplit_e()}}
 }
 \author{
 Ananda Mahto

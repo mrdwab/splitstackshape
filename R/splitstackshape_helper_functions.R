@@ -1,7 +1,3 @@
-# NULL some variables out -------------------------------------------------
-
-
-
 # Trim Whitespace Fallback -- Don't Export --------------------------------
 .tws <- function(vec) {
   sw <- startsWith(vec, " ")
@@ -86,7 +82,6 @@ NULL
 
 # Long Fixer -- Don't Export ----------------------------------------------
 long_fixer <- function(indt, cols) {
-  ..cols <- NULL
   temp <- rowSums(is.na(indt[, ..cols])) + rowSums(indt[, ..cols] == "", na.rm = TRUE)
   temp == length(cols)
 }

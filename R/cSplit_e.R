@@ -25,7 +25,7 @@
 #' be `NA`.
 #' @return A `data.table`.
 #' @author Ananda Mahto
-#' @seealso [concat.split()], [concat.split.list()], [num_mat()], [char_mat()]
+#' @seealso [cSplit()], [cSplit_l()], [num_mat()], [char_mat()]
 #' @examples
 #' 
 #' DT <- data.frame(ID = 1:5, V1 = c("1,2,3", "2,2,2,4", NA, "", "2,4"), 

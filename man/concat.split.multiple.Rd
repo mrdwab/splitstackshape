@@ -7,43 +7,38 @@
 concat.split.multiple(data, split.cols, seps = ",", direction = "wide", ...)
 }
 \arguments{
-\item{data}{The source \code{data.frame} or \code{data.table}.}
+\item{data}{The source \code{data.table}.}
 
 \item{split.cols}{A vector of columns that need to be split.}
 
 \item{seps}{A vector of the separator character used in each column. If all
 columns use the same character, you can enter that single character.}
 
-\item{direction}{The desired form of the resulting \code{data.frame} or
-\code{data.table}, either \code{'wide'} or \code{'long'}.  Defaults to
-\code{'wide'}.}
+\item{direction}{The desired form of the resulting \code{data.table}, either
+\code{"wide"} or \code{"long"}.  Defaults to \code{"wide"}.}
 
-\item{\dots}{Other arguments to \code{\link{cSplit}}.}
+\item{\dots}{Other arguments to \code{\link[=cSplit]{cSplit()}}.}
 }
 \value{
 A \code{data.table}.
 }
 \description{
-This is a wrapper for the \code{\link{cSplit}} function to maintain
-backwards compatability with earlier versions of the "splitstackshape"
-package. It allows the user to split multiple columns at once and optionally
-convert the results into a "long" format.
+This is a wrapper around the \code{\link[=cSplit]{cSplit()}} function to maintain backwards
+compatability with earlier versions of the "splitstackshape" package. It
+allows the user to split multiple columns at once and optionally convert the
+results into a "long" format.
 }
 \examples{
 
-temp <- head(concat.test)
-concat.split.multiple(temp, split.cols = c("Likes", "Hates", "Siblings"),
-                      seps = c(",", ";", ","))
-concat.split.multiple(temp, split.cols = c("Likes", "Siblings"),
-                      seps = ",", direction = "long")
-\dontshow{rm(temp)}
+DT <- head(concat.test)
+concat.split.multiple(DT, split.cols = c("Likes", "Hates", "Siblings"),
+                      DT = c(",", ";", ","))
+concat.split.multiple(DT, split.cols = c("Likes", "Siblings"),
+                      DT = ",", direction = "long")
 
 }
 \seealso{
-\code{\link{cSplit}}, for which this is simply a wrapper, and
-\code{\link{concat.split}}, \code{\link{concat.split.compact}},
-\code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}},
-\code{\link{Reshape}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_e]{cSplit_e()}}, \code{\link[=cSplit_l]{cSplit_l()}}.
 }
 \author{
 Ananda Mahto

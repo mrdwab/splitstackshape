@@ -51,9 +51,9 @@
 #' cSplit(data.frame(y), "y", "_")
 #' 
 #' @export cSplit
-cSplit <- function(indt, splitCols, sep = ",", direction = "wide", 
-                   fixed = TRUE, drop = TRUE, stripWhite = TRUE, 
-                   makeEqual = NULL, type.convert = TRUE) {
+cSplit <- function(indt, splitCols, sep = ",", direction = "wide", fixed = TRUE, 
+                   drop = TRUE, stripWhite = TRUE, makeEqual = NULL, 
+                   type.convert = TRUE) {
   
   dropinid1 <- dropinid2 <- patterns <- NULL
   

@@ -10,17 +10,15 @@ Stack and Reshape Datasets After Splitting Concatenated Values
 }
 \details{
 \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-Version: \tab 2.0.1\cr Date: \tab 2018-03-21\cr License: \tab GPL-3\cr }
+Version: \tab 2.0.0000-pre_release\cr Date: \tab 2018-03-27\cr License: \tab GPL-3\cr }
 
-Online data collection tools like Google Forms often export
-multiple-response questions with data concatenated in cells. The
-\code{\link{concat.split}} family of functions splits such data
-into separate cells. The package also includes functions to
-\emph{stack} groups of columns and to \emph{reshape} wide data, even when
-the data are "unbalanced"---something which \code{\link{reshape}} does not
-handle, and which \code{\link[reshape2:melt]{melt}} and
-\code{\link[reshape2:dcast]{dcast}} from \emph{reshape2} do not easily
-handle.
+Online data collection tools like Google Forms often export multiple-response
+questions with data concatenated in cells. The \code{\link[=concat.split]{concat.split()}} family of
+functions splits such data into separate cells. The package also includes
+functions to \emph{stack} groups of columns and to \emph{reshape} wide data, even when
+the data are "unbalanced"---something which \code{\link[stats:reshape]{stats::reshape()}} does not
+handle, and which \code{\link[reshape2:melt]{reshape2::melt()}} and \code{\link[reshape2:dcast]{reshape2::dcast()}} from \emph{reshape2}
+do not easily handle.
 }
 \examples{
 

@@ -9,9 +9,9 @@
 
 --------------------------------------------------------------------------------
 
-## 2.0.1
+## 2.0.0000-pre_release
 
-22 March 2018
+27 March 2018
 
 * Changed data.table dependency to >= 1.10.5. Install the development
   version using: 

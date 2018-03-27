@@ -1,13 +1,13 @@
 #' Example Dataset with Concatenated Cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
-#' \code{\link{concat.split}} family of functions.
+#' [concat.split()] family of functions.
 #' 
 #' 
 #' @name concat.test
 #' @aliases concat.test concatenated
 #' @docType data
-#' @format A \code{data.frame} in which many columns contain concatenated cells
+#' @format A `data.frame` in which many columns contain concatenated cells
 #' @keywords datasets
 NULL
 
@@ -20,17 +20,15 @@ NULL
 #' Stack and Reshape Datasets After Splitting Concatenated Values
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 2.0.1\cr Date: \tab 2018-03-21\cr License: \tab GPL-3\cr }
+#' Version: \tab 2.0.0000-pre_release\cr Date: \tab 2018-03-27\cr License: \tab GPL-3\cr }
 #' 
-#' Online data collection tools like Google Forms often export
-#' multiple-response questions with data concatenated in cells. The
-#' \code{\link{concat.split}} family of functions splits such data
-#' into separate cells. The package also includes functions to 
-#' \emph{stack} groups of columns and to \emph{reshape} wide data, even when
-#' the data are "unbalanced"---something which \code{\link{reshape}} does not
-#' handle, and which \code{\link[reshape2:melt]{melt}} and
-#' \code{\link[reshape2:dcast]{dcast}} from \emph{reshape2} do not easily
-#' handle.
+#' Online data collection tools like Google Forms often export multiple-response 
+#' questions with data concatenated in cells. The [concat.split()] family of 
+#' functions splits such data into separate cells. The package also includes 
+#' functions to *stack* groups of columns and to *reshape* wide data, even when
+#' the data are "unbalanced"---something which [stats::reshape()] does not
+#' handle, and which [reshape2::melt()] and [reshape2::dcast()] from *reshape2* 
+#' do not easily handle.
 #' 
 #' @name splitstackshape-package
 #' @aliases splitstackshape splitstackshape-package

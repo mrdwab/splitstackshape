@@ -4,67 +4,55 @@
 \alias{Stacked}
 \title{Stack Columns from a Wide Form to a Long Form}
 \usage{
-Stacked(data, id.vars = NULL, var.stubs, sep, keep.all = TRUE,
-  keyed = TRUE, keep.rownames = FALSE, ...)
+Stacked(indt, id.vars = NULL, var.stubs, keep.all = TRUE, keyed = TRUE,
+  keep.rownames = FALSE, end_stub = FALSE)
 }
 \arguments{
-\item{data}{The source \code{data.frame}.}
+\item{indt}{The source \code{data.table}.}
 
-\item{id.vars}{The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.}
+\item{id.vars}{The variables that serve as unique identifiers. Defaults to
+\code{NULL}, at which point, all names which are not identified as variable groups
+are used as the identifiers.}
 
 \item{var.stubs}{The prefixes of the variable groups.}
 
-\item{sep}{The character that separates the "variable name" from the "times"
-in the wide \code{data.frame}. Alternatively, can be set to
-\code{"var.stubs"} (in quotes) if you do not have a value for \code{sep}.}
+\item{keep.all}{Logical. Should all the variables from the source \code{data.table}
+be kept (\code{keep.all = TRUE}) or should the resulting \code{data.table} comprise
+only columns for the \code{id.vars}, \code{var.stubs}, and "times" (\code{keep.all = FALSE}).
+Other variables are \emph{recycled} to appropriate length. For this to work, both
+\code{id.vars} and \code{var.stubs} must be specified.}
 
-\item{keep.all}{Logical. Should all the variables from the source
-\code{data.frame} be kept (\code{keep.all = TRUE}) or should the resulting
-\code{\link[data.table:data.table]{data.table}} comprise only columns for
-the \code{id.vars}, \code{var.stubs}, and "times" (\code{keep.all = FALSE}).
-Other variables are \emph{recycled} to appropriate length. For this to work,
-both \code{id.vars} and \code{var.stubs} must be specified.}
+\item{keyed}{Logical. Should the function automatically set the
+\code{\link[data.table:key]{data.table::key()}} for the resulting \code{data.table}s. If \code{TRUE} (default) the
+\code{key} is set to the \code{id.vars} and the "time" variables that are created.}
 
-\item{keyed}{Logical. Should the \code{Stacked} function automatically set
-the \code{key} for the resulting \code{data.table}s. If \code{TRUE}
-(default) the \code{key} is set to the \code{id.vars} and the "time"
-variables that are created by \code{Stacked}.}
+\item{keep.rownames}{Logical. Should rownames be kept when converting the
+input to a \code{data.table}? Defaults to \code{FALSE}.}
 
-\item{keep.rownames}{Logical. Should rownames be kept when converting the input to a \code{data.table}? Defaults to \code{FALSE}.}
-
-\item{\dots}{Other arguments to be passed on when \code{sep = "var.stubs"} (specifically, \code{atStart}: A logical argument to indicate whether the stubs come at the start or at the end of the variable names).}
+\item{end_stub}{Logical. Are the \code{var.stubs} found at the start (eg:
+\code{"Var_1"}) or at the end (eg: \code{"Q1_Var"})? Defaults to \code{TRUE}.}
 }
 \value{
-A \code{list} of \code{data.table}s with one \code{data.table} for
-each "var.stub". The \code{\link[data.table:key]{key}} is set to the
-\code{id.vars} and \code{.time_#} vars.
+A \code{list} of \code{data.table}s with one \code{data.table} for each "var.stub".
+The \code{key} is set to the \code{id.vars} and \code{.time_#} vars.
 }
 \description{
-A function to conveniently stack groups of wide columns into a long form
-which can then be \code{\link[data.table:merge]{merge}}d together.
+A function to conveniently stack groups of wide columns into a long form.
 }
 \note{
-This is the function internally called by \code{\link{merged.stack}}.
+This is the function internally called by \code{\link[=merged.stack]{merged.stack()}}.
 }
 \examples{
 
-set.seed(1)
-mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
-                   varA.1 = sample(letters, 6),
-                   varA.2 = sample(letters, 6),
-                   varA.3 = sample(letters, 6),
-                   varB.2 = sample(10, 6),
-                   varB.3 = sample(10, 6),
-                   varC.3 = rnorm(6))
-mydf
-Stacked(data = mydf, var.stubs = c("varA", "varB", "varC"), sep = ".")
-
-\dontshow{rm(mydf)}
+DF <- data.frame(id_1 = 1:3, id_2 = c("A", "B", "A"),
+                 varA.1 = c("a", "b", "c"), varA.2 = c("x", "y", "z"), 
+                 varA.3 = c("q", "r", "s"), varB.2 = c(10, 20, 30),
+                 varB.3 = c(11, 22, 33), varC.3 = c(-1.23, .992, -.351))
+Stacked(DF, var.stubs = c("varA", "varB", "varC"))
 
 }
 \seealso{
-\code{\link{stack}}, \code{\link[reshape2:melt]{melt}} from
-"reshape2".
+\code{\link[utils:stack]{utils::stack()}}, \code{\link[reshape2:melt]{reshape2::melt()}} from "reshape2".
 }
 \author{
 Ananda Mahto

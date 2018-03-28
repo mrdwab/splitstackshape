@@ -39,9 +39,8 @@ Reshape(mydf, id.vars = c("id_1", "id_2"),
         var.stubs = c("varA", "varB", "varC"))
 
 ## Stacked
-Stacked(data = mydf, id.vars = c("id_1", "id_2"),
-        var.stubs = c("varA", "varB", "varC"),
-        sep = ".")
+Stacked(mydf, id.vars = c("id_1", "id_2"),
+        var.stubs = c("varA", "varB", "varC"))
 \dontrun{
 ## Processing times
 set.seed(1)

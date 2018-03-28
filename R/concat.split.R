@@ -176,9 +176,9 @@ NULL
 #' 
 #' DT <- head(concat.test)
 #' concat.split.multiple(DT, split.cols = c("Likes", "Hates", "Siblings"),
-#'                       DT = c(",", ";", ","))
+#'                       seps = c(",", ";", ","))
 #' concat.split.multiple(DT, split.cols = c("Likes", "Siblings"),
-#'                       DT = ",", direction = "long")
+#'                       seps = ",", direction = "long")
 #' 
 #' @export concat.split.multiple
 concat.split.multiple <- function(data, split.cols, seps = ",", 

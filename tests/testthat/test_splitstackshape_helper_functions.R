@@ -27,6 +27,10 @@ test_that("all_names produces messages when expected", {
                c("ID1", "A_1", "A_2", "B_1", "B_2"))
 })
 
+
+
+# MIGHT BE REMOVED --------------------------------------------------------
+
 test_that("name convenience functons work as expected", {
   mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)
   expect_equal(othernames(mydf, "a"), setdiff(names(mydf), "a"))
@@ -34,7 +38,7 @@ test_that("name convenience functons work as expected", {
   expect_equal(Names(mydf, c("a", "c")), Names(mydf, c(1, 3)))
 })
 
-test_that("NoSep wors as expected", {
+test_that("NoSep works as expected", {
   x <- paste0("Var", LETTERS[1:2], 1:2)
   y <- paste0(1:2, "Var", LETTERS[1:2])
   expect_equal(NoSep(x), data.frame(variable = c("VarA", "VarB"), measure = 1:2, 
@@ -42,4 +46,13 @@ test_that("NoSep wors as expected", {
   expect_equal(NoSep(y, charfirst = FALSE),
                data.frame(measure = 1:2, variable = c("VarA", "VarB"), 
                           stringsAsFactors = FALSE))
+})
+
+test_that("stripwhite works as expected", {
+  vec <- c("A, B", " A ,   B, C", NA, "", " , ")
+  expect_true(all(!grepl(" ", .stripWhite(vec))))
+})
+
+test_that("pad results in the correct width", {
+  expect_equal(nchar(.pad(1000)), 4)
 })

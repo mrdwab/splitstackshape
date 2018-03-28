@@ -61,7 +61,8 @@ all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL,
   }
   
   if (!is.null(ids)) {
-    ids <- if (keep_all) setdiff(current_names, stub_names) else ids
+    if (keep_all) ids <- setdiff(current_names, stub_names)
+    if (!keep_all) ids <- ids
   }
   
   id_names <- ids
@@ -90,8 +91,6 @@ long_fixer <- function(indt, cols) {
 }
 NULL
 
-
-
 #' @name dataset_names
 #' @rdname dataset_names
 #' @title Name Convenience Functions
@@ -109,7 +108,6 @@ NULL
 #' @author Ananda Mahto
 #' @seealso [base::setdiff()]
 NULL
-
 
 #' @rdname dataset_names
 #' 
@@ -138,9 +136,6 @@ Names <- function(data, invec) {
   names(data)[invec]
 }
 NULL
-
-
-
 
 #' Split Basic Alphanumeric Strings Which Have No Separators
 #' 
@@ -173,6 +168,25 @@ NoSep <- function(data, charfirst = TRUE) {
   strcapture(pattern, data, proto)
 }
 NULL
+
+# STRING STUFF ------------------------------------------------------------
+
+.stripWhite <- function(invec, delim = ",") {
+  .tws(gsub(sprintf("\\s+[%s]\\s+|\\s+[%s]|[%s]\\s+",
+                    delim, delim, delim), delim, invec))
+}
+NULL
+
+.pad <- function(invec) {
+  nchars <- max(nchar(invec))
+  sprintf(paste0("%0", nchars, "d"), invec)
+}
+NULL
+
+
+
+
+
 
 
 
@@ -217,23 +231,8 @@ NULL
 }
 NULL
 
-.stripWhite <- function(invec, delim = ",") {
-  gsub("^\\s+|\\s+$", "",
-       gsub(sprintf("\\s+[%s]\\s+|\\s+[%s]|[%s]\\s+",
-                    delim, delim, delim), delim, invec))
-}
-NULL
+
 
 vGrep <- Vectorize(grep, "pattern", SIMPLIFY = FALSE)
 NULL
 
-.noEmpty <- function(invec) {
-  invec[invec != ""]
-}
-NULL
-
-.pad <- function(invec) {
-  nchars <- max(nchar(invec))
-  sprintf(paste0("%0", nchars, "d"), invec)
-}
-NULL

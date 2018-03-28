@@ -1,5 +1,5 @@
 # Trim Whitespace Fallback -- Don't Export --------------------------------
-.tws <- function(vec) {
+.tws <- trim <- function(vec) {
   sw <- startsWith(vec, " ")
   ew <- endsWith(vec, " ")
   if (any(sw, na.rm = TRUE)) {
@@ -54,15 +54,18 @@ all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL,
   stub_names <- stub_names[!stub_names %in% stubs]
   stub_list <- setNames(
     lapply(stubs, function(x) stub_names[grepl(x, stub_names)]), stubs)
-  if (is.null(ids) & keep_all) {
+  
+  if (is.null(ids)) {
     if (verbose) message("All non-stub names being used as ids")
     ids <- setdiff(current_names, stub_names)
-  } 
-  id_names <- if (!is.null(ids)) {
-    if (keep_all) setdiff(current_names, stub_names)
-  } else {
-    ids
   }
+  
+  if (!is.null(ids)) {
+    ids <- if (keep_all) setdiff(current_names, stub_names) else ids
+  }
+  
+  id_names <- ids
+
   levs <- unique(gsub(paste(stubs, collapse = "|"), "", stub_names))
   stub_levs <- trim_vec(CJ(stubs, levs)[, if (end_stub) paste0(V2, V1) else paste0(V1, V2)])
   full_names <- c(id_names, stub_levs[order(stub_levs)])
@@ -89,58 +92,47 @@ NULL
 
 
 
-
-
-
-
-
-
-
-
-
-#' Extract All Names From a Dataset Other Than the Ones Listed
+#' @name dataset_names
+#' @rdname dataset_names
+#' @title Name Convenience Functions
 #' 
-#' A convenience function for \code{setdiff(names(data),
-#' -some_vector_of_names-)}.
+#' @description `othernames` is a convenience function for 
+#' `setdiff(names(data), -some_vector_of_names-)`. `Names` is a convenience 
+#' function using either character vectors or numeric vectors to specify a 
+#' subset of [base::names()] of a dataset, returning the names as a character 
+#' vector, always.
 #' 
-#' 
-#' @param data The input \code{data.frame}.
-#' @param toremove The \code{names} you want to exclude.
+#' @param data The input dataset.
+#' @param toremove The [base::names()] you want to exclude.
+#' @param invec The [base::names()] you want to keep.
 #' @return A character vector of the remaining names.
 #' @author Ananda Mahto
-#' @seealso \code{\link{setdiff}}
+#' @seealso [base::setdiff()]
+NULL
+
+
+#' @rdname dataset_names
+#' 
 #' @examples
 #' 
 #' mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)
 #' splitstackshape:::othernames(mydf, "a")
 #' 
-#' \dontshow{rm(mydf)}
-#' 
+#' @aliases othernames
 othernames <- function(data, toremove) {
   setdiff(names(data), Names(data, toremove))
 }
 NULL
 
-
-
-#' Dataset Names as a Character Vector, Always
+#' @rdname dataset_names
 #' 
-#' A convenience function using either character vectors or numeric vectors to
-#' specify a subset of \code{names} of a \code{data.frame}.
-#' 
-#' 
-#' @param data The input \code{data.frame}.
-#' @param invec The \code{names} you want.
-#' @return A character vector of the desired names.
-#' @author Ananda Mahto
 #' @examples
 #' 
 #' mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)
 #' splitstackshape:::Names(mydf, c("a", "c"))
 #' splitstackshape:::Names(mydf, c(1, 3))
 #' 
-#' \dontshow{rm(mydf)}
-#' 
+#' @aliases Names 
 Names <- function(data, invec) {
   if (!is.numeric(invec)) invec <- match(invec, names(data))
   names(data)[invec]
@@ -149,63 +141,17 @@ NULL
 
 
 
-#' Read Concatenated Character Vectors Into a data.frame
-#' 
-#' Originally a helper function for the \code{\link{concat.split.compact}} function. 
-#' This function has now been effectively replaced by \code{\link{cSplit}}.
-#' 
-#' 
-#' @param data The input data.
-#' @param col.prefix The desired column prefix for the output
-#' \code{data.frame}.
-#' @param sep The character that acts as a delimiter.
-#' @param \dots Other arguments to pass to \code{read.table}.
-#' @return A \code{data.frame}
-#' @author Ananda Mahto
-#' @seealso \code{read.table}
-#' @examples
-#' 
-#' vec <- c("a,b", "c,d,e", "f, g", "h, i, j,k")
-#' splitstackshape:::read.concat(vec, "var", ",")
-#' 
-#' ## More than 5 lines the same
-#' ## `read.table` would fail with this
-#' vec <- c("12,51,34,17", "84,28,17,10", "11,43,28,15",
-#' "80,26,17,91", "10,41,25,13", "97,35,23,12,13")
-#' splitstackshape:::read.concat(vec, "var", ",")
-#' 
-#' \dontshow{rm(vec)}
-#' 
-read.concat <- function(data, col.prefix, sep, ...) {
-  if (!is.character(data)) data <- as.character(data)
-  zz <- textConnection(data)
-  x <- count.fields(zz, sep = sep)
-  close(zz)
-  t1 <- read.table(text = data, sep = sep, fill = TRUE,
-                   row.names = NULL, header = FALSE,
-                   strip.white = TRUE,
-                   col.names = paste("v", sequence(max(x))),
-                   ...)
-  names(t1) <- paste(col.prefix, seq(ncol(t1)), sep = "_")
-  t1
-}
-NULL
-
 
 #' Split Basic Alphanumeric Strings Which Have No Separators
 #' 
 #' Used to split strings like "Abc8" into "Abc" and "8".
 #' 
-#' 
 #' @param data The vector of strings to be split.
 #' @param charfirst Is the string constructed with characters at the start or
-#' numbers? Defaults to \code{TRUE}.
-#' @return A \code{data.frame} with two columns, \code{.var} and
-#' \code{.time_1}.
-#' @note This is a helper function for the \code{\link{Stacked}} and
-#' \code{\link{Reshape}} functions.
+#' numbers? Defaults to `TRUE`.
+#' @return A `data.frame` with two columns, "variable" and "measure".
 #' @author Ananda Mahto
-#' @seealso \code{\link{strsplit}}
+#' @seealso [utils::strcapture()]
 #' @examples
 #' 
 #' x <- paste0("Var", LETTERS[1:3], 1:3)
@@ -214,20 +160,20 @@ NULL
 #' y <- paste0(1:3, "Var", LETTERS[1:3])
 #' splitstackshape:::NoSep(y, charfirst = FALSE)
 #' 
-#' \dontshow{rm(x, y)}
-#' 
 NoSep <- function(data, charfirst = TRUE) {
   if (isTRUE(charfirst)) {
-    Pattern <- "([[:alpha:]]+)([[:digit:]]+)"
-    Names <- c(".var", ".time_1")
+    pattern <- "([[:alpha:]]+)([[:digit:]]+)"
+    proto <- data.frame(variable = character(), measure = integer(), 
+                        stringsAsFactors = FALSE)
   } else {
-    Pattern <- "([[:digit:]]+)([[:alpha:]]+)"
-    Names <- c(".time_1", ".var")
+    pattern <- "([[:digit:]]+)([[:alpha:]]+)"
+    proto <- data.frame(measure = integer(), variable = character(),
+                        stringsAsFactors = FALSE)
   }
-  setNames(data.frame(gsub(Pattern, "\\1", data), 
-                      gsub(Pattern, "\\2", data)), Names)
+  strcapture(pattern, data, proto)
 }
 NULL
+
 
 
 
@@ -263,10 +209,6 @@ FacsToChars <- function(mydf) {
   mydf
 }
 NULL
-
-trim <- function(x) gsub("^\\s+|\\s+$", "", x)
-NULL
-
 
 
 .collapseMe <- function(invec, atStart = TRUE) {

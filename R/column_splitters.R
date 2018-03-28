@@ -70,7 +70,7 @@ NULL
 f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE, 
                     type.convert = TRUE, prefix = NULL) {
   if ((sep %in% c("", ".")) | (nchar(sep) > 1L) | (!fixed)) {
-    message("Unsupported `sep`. Splitting with `f_split` instead.")
+    message("Unsupported `sep`. Splitting with `t_split` instead.")
     temp <- t_split(vec, sep, fixed, stripWhite, type.convert)
   } else {
     VEC <- as.character(vec)
@@ -81,6 +81,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
         stringi::stri_flatten(VEC, collapse = "\n")
       } else {
+        message("`stringi` recommended for efficient string processing.")
         .strflat(VEC)
       }
     } else {
@@ -89,6 +90,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
         stringi::stri_flatten(VEC, collapse = "\n")
       } else {
+        message("`stringi` recommended for efficient string processing.")
         .strflat(VEC)
       }
     }
@@ -109,7 +111,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
     }
     
     if (length(temp) == 1L) {
-      message("Expected more than 1 column. Splitting with `t_split`.")
+      message("Expected more than 1 column. Trying with `t_split`.")
       temp <- t_split(vec, sep, fixed, stripWhite, type.convert, prefix)
     } 
   }

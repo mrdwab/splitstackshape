@@ -50,9 +50,8 @@ reshape_long <- function(indt, stubs, ids = NULL, value.name = NULL,
                          keep.all = TRUE) {
 
   indt <- setDT(copy(indt))
-  check <- all_names(names(indt), stubs, end_stub, ids, keep_all = keep.all)
-  
-  if (!is.null(ids)) check[["id_names"]] <- ids
+  check <- all_names(current_names = names(indt), stubs = stubs, 
+                     end_stub = end_stub, ids = ids, keep_all = TRUE)
   
   if (length(check[["miss"]]) > 0L) {
     nat <- vapply(unname(check[["stubs"]]), function(x) {
@@ -77,7 +76,7 @@ reshape_long <- function(indt, stubs, ids = NULL, value.name = NULL,
   
   varn <- if (is.null(variable.name)) "variable" else variable.name
   out <- melt(indt, measure = patterns(stubs), 
-              id.vars = check[["id_names"]],
+              id.vars = if (keep.all) check[["id_names"]] else ids,
               value.name = valn,
               variable.name = varn)
   setattr(out[[varn]], "levels", check[["levs"]])
@@ -118,7 +117,7 @@ NULL
 #' @export merged.stack
 merged.stack <- function(indt, id.vars = NULL, var.stubs, keep.all = TRUE, 
                          end_stub = FALSE, sep = NULL) {
-  message("This function is deprecated. Use `reshape_long()` instead.")
+  message("This function is deprecated. Use reshape_long instead.")
   if (!missing(sep)) .NotYetUsed("sep", error = FALSE)
   reshape_long(indt, stubs = var.stubs, ids = id.vars, keep.all = keep.all,
                value.name = NULL, variable.name = NULL, end_stub = end_stub)

@@ -124,16 +124,15 @@ numMat <- function(listOfValues, fill = NA, mode = "binary") {
   listOfValues <- lapply(listOfValues, as.integer)
   len  <- length(listOfValues)
   vec  <- unlist(listOfValues, use.names = FALSE)
-  slvl <- seq(min(vec), max(vec))
+  slvl <- seq(min(vec, na.rm = TRUE), max(vec, na.rm = TRUE))
   out  <- matrix(fill, nrow = len, ncol = length(slvl), dimnames = list(NULL, slvl))
   i.idx <- rep(seq_len(len), vapply(listOfValues, length, integer(1L)))
   j.idx <- match(vec, slvl)
-  out[cbind(i.idx, j.idx)] <- switch(mode, binary = 1L, value = vec, 
+  out[na.omit(cbind(i.idx, j.idx))] <- switch(mode, binary = 1L, value = na.omit(vec), 
                                      stop("'mode' must be 'binary' or 'value'"))
   out
 }
 NULL
-
 
 
 #' Create a Binary Matrix from a List of Character Values

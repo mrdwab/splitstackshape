@@ -20,7 +20,7 @@ NULL
 #' Stack and Reshape Datasets After Splitting Concatenated Values
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.4.3\cr Date: \tab 2018-03-20\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.4.4\cr Date: \tab 2018-03-29\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export
 #' multiple-response questions with data concatenated in cells. The
@@ -40,7 +40,7 @@ NULL
 #' Maintainer: Ananda Mahto <ananda@@mahto.info>
 #' @keywords package
 #' @import data.table
-#' @importFrom stats reshape setNames
+#' @importFrom stats reshape setNames na.omit
 #' @importFrom utils count.fields read.table
 #' @examples
 #' 

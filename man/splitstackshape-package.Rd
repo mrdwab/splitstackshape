@@ -10,12 +10,12 @@ Stack and Reshape Datasets After Splitting Concatenated Values
 }
 \details{
 \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-Version: \tab 1.4.3\cr Date: \tab 2018-03-20\cr License: \tab GPL-3\cr }
+Version: \tab 1.4.4\cr Date: \tab 2018-03-29\cr License: \tab GPL-3\cr }
 
 Online data collection tools like Google Forms often export
 multiple-response questions with data concatenated in cells. The
 \code{\link{concat.split}} family of functions splits such data
-into separate cells. The package also includes functions to 
+into separate cells. The package also includes functions to
 \emph{stack} groups of columns and to \emph{reshape} wide data, even when
 the data are "unbalanced"---something which \code{\link{reshape}} does not
 handle, and which \code{\link[reshape2:melt]{melt}} and
@@ -84,6 +84,6 @@ system.time({
 \author{
 Ananda Mahto
 
-Maintainer: Ananda Mahto <ananda@mahto.info>
+Maintainer: Ananda Mahto \href{mailto:ananda@mahto.info}{ananda@mahto.info}
 }
 \keyword{package}

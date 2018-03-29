@@ -9,6 +9,14 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 ---------------------------------------------------------------------
 
+## 1.4.4
+
+29 March 2018
+
+* `Reshape()` bugfix. Reported at [https://stackoverflow.com/q/49281838/1270695](https://stackoverflow.com/q/49281838/1270695).
+* `listCol_w()` bugfix. Thanks to @jazzurro.
+* `cSplit_e()` bugfix. Reported at [https://stackoverflow.com/q/48576331/1270695](https://stackoverflow.com/q/48576331/1270695)
+
 ## 1.4.3
 
 20 March 2018

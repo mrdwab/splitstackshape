@@ -1,3 +1,17 @@
+# nocov start
+.onAttach <- function(libname, pkgname) {
+  M <- sprintf("This is 'splitstackshape' version %s.", 
+               packageVersion("splitstackshape"))
+  if (packageVersion("data.table") < "1.10.5") {
+    M <- c(M, "'splitstackshape' works best with 'data.table' >= 1.10.5.")
+  }
+  if (!(requireNamespace("stringi", quietly = TRUE))) {
+    M <- c(M, "The 'stringi' package is also strongly recommended.")
+  }
+  packageStartupMessage(paste(M, collapse = "\n"))
+}
+# nocov end
+
 #' Example Dataset with Concatenated Cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the

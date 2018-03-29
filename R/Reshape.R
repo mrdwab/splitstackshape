@@ -1,34 +1,38 @@
 #' Reshape Wide Data Into a Semi-long Form
 #' 
-#' The \code{\link{reshape}} function in base R is very handy when you want a
-#' semi-long (or semi-wide) \code{data.frame}. However, base R's \code{reshape}
-#' has problems is with "unbalanced" panel data, for instance data where one
+#' The [stats::reshape()] function in base R is very handy when you want a
+#' semi-long (or semi-wide) `data.frame`. However, base R's `reshape` has 
+#' problems is with "unbalanced" panel data, for instance data where one 
 #' variable was measured at three points in time, and another only twice.
 #' 
 #' This function was written to overcome that limitation of dealing with
 #' unbalanced data, but is also appropriate for basic wide-to-long reshaping
 #' tasks.
 #' 
-#' Related functions like \code{\link{stack}} in base R and
-#' \code{\link[reshape2:melt]{melt}} in "reshape2" are also very handy when you
-#' want a "long" reshaping of data, but they result in a very long structuring
-#' of your data, not the "semi-wide" format that \code{reshape} produces.
+#' Related functions like [utils::stack()] in base R and [reshape2::melt()] in 
+#' "reshape2" are also very handy when you want a "long" reshaping of data, but 
+#' they result in a very long structuring of your data, not the "semi-wide" 
+#' format that `reshape` produces. [data.table::melt()] can produce output like
+#' `reshape`, but it also expects an equal number of measurements for each
+#' variable.
 #' 
-#' @param data The source \code{data.frame}.
-#' @param id.vars The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.
+#' @param data The source `data.frame`.
+#' @param id.vars The variables that serve as unique identifiers. Defaults to 
+#' `NULL`, at which point, all names which are not identified as variable groups 
+#' are used as the identifiers.
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
-#' in the wide \code{data.frame}.
-#' @param rm.rownames Logical. \code{reshape} creates some long distracting
-#' \code{rownames} that do not seem to serve much purpose. This argument is set
-#' to \code{TRUE} to remove the \code{rownames} by default.
-#' @param \dots Further arguments to \code{\link{NoSep}} in case the separator
-#' is of a different form.
-#' @return A "long" \code{data.frame} of the reshaped data that retains the
-#' attributes added by base R's \code{reshape} function.
+#' in the wide `data.frame`.
+#' @param rm.rownames Logical. `reshape` creates some long distracting 
+#' `rownames` that do not seem to serve much purpose. This argument is set to 
+#' `TRUE` to remove the `rownames` by default.
+#' @param \dots Further arguments to [NoSep()] in case the separator is of a 
+#' different form.
+#' @return A "long" `data.frame` of the reshaped data that retains the
+#' attributes added by base R's `reshape` function.
 #' @author Ananda Mahto
-#' @seealso \code{\link{Stacked}}, \code{\link{stack}}, \code{\link{reshape}},
-#' \code{\link[reshape2:melt]{melt}}
+#' @seealso [Stacked()], [utils::stack()], [stats::reshape()], 
+#' [reshape2::melt()], [data.table::melt()]
 #' @examples
 #' 
 #' set.seed(1)
@@ -63,8 +67,7 @@ Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TR
     x <- NoSep(temp, ...)
   } else {
     x <- as.data.frame(do.call(rbind, strsplit(temp, split = sep)))
-    names(x) <- 
-      c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
+    names(x) <- c(".var", paste(".time", 1:(length(x)-1), sep = "_"))
   }
   
   xS <- split(x[, ".time_1"], x[, ".var"])
@@ -78,16 +81,16 @@ Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TR
       if (length(temp) == 0) {
         temp <- NULL
       } else {
-        paste(y, temp, sep = sep)
+        paste(y, temp, sep = if (sep == "\\.") "." else sep)
       }
     }))
     myMat <- setNames(data.frame(
       matrix(NA, nrow = nrow(data), ncol = length(newVars))), newVars)
     out <- cbind(data, myMat)
   }
-  out <- reshape(out, direction = "long", idvar = id.vars, 
-          varying = lapply(vGrep(var.stubs, names(out), value = TRUE), sort), 
-          sep = sep, v.names = var.stubs)
+  out <- reshape(out, direction = "long", idvar = id.vars,
+                 varying = lapply(vGrep(var.stubs, names(out), value = TRUE), sort),
+                 sep = sep, v.names = var.stubs)
   if (isTRUE(rm.rownames)) {
     rownames(out) <- NULL
     out

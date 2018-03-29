@@ -10,7 +10,9 @@ Reshape(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE,
 \arguments{
 \item{data}{The source \code{data.frame}.}
 
-\item{id.vars}{The variables that serve as unique identifiers. Defaults to \code{NULL}, at which point, all names which are not identified as variable groups are used as the identifiers.}
+\item{id.vars}{The variables that serve as unique identifiers. Defaults to
+\code{NULL}, at which point, all names which are not identified as variable groups
+are used as the identifiers.}
 
 \item{var.stubs}{The prefixes of the variable groups.}
 
@@ -18,20 +20,20 @@ Reshape(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE,
 in the wide \code{data.frame}.}
 
 \item{rm.rownames}{Logical. \code{reshape} creates some long distracting
-\code{rownames} that do not seem to serve much purpose. This argument is set
-to \code{TRUE} to remove the \code{rownames} by default.}
+\code{rownames} that do not seem to serve much purpose. This argument is set to
+\code{TRUE} to remove the \code{rownames} by default.}
 
-\item{\dots}{Further arguments to \code{\link{NoSep}} in case the separator
-is of a different form.}
+\item{\dots}{Further arguments to \code{\link[=NoSep]{NoSep()}} in case the separator is of a
+different form.}
 }
 \value{
 A "long" \code{data.frame} of the reshaped data that retains the
 attributes added by base R's \code{reshape} function.
 }
 \description{
-The \code{\link{reshape}} function in base R is very handy when you want a
-semi-long (or semi-wide) \code{data.frame}. However, base R's \code{reshape}
-has problems is with "unbalanced" panel data, for instance data where one
+The \code{\link[stats:reshape]{stats::reshape()}} function in base R is very handy when you want a
+semi-long (or semi-wide) \code{data.frame}. However, base R's \code{reshape} has
+problems is with "unbalanced" panel data, for instance data where one
 variable was measured at three points in time, and another only twice.
 }
 \details{
@@ -39,10 +41,12 @@ This function was written to overcome that limitation of dealing with
 unbalanced data, but is also appropriate for basic wide-to-long reshaping
 tasks.
 
-Related functions like \code{\link{stack}} in base R and
-\code{\link[reshape2:melt]{melt}} in "reshape2" are also very handy when you
-want a "long" reshaping of data, but they result in a very long structuring
-of your data, not the "semi-wide" format that \code{reshape} produces.
+Related functions like \code{\link[utils:stack]{utils::stack()}} in base R and \code{\link[reshape2:melt]{reshape2::melt()}} in
+"reshape2" are also very handy when you want a "long" reshaping of data, but
+they result in a very long structuring of your data, not the "semi-wide"
+format that \code{reshape} produces. \code{\link[data.table:melt]{data.table::melt()}} can produce output like
+\code{reshape}, but it also expects an equal number of measurements for each
+variable.
 }
 \examples{
 
@@ -66,8 +70,8 @@ Reshape(mydf, id.vars = c("id_1", "id_2"),
 
 }
 \seealso{
-\code{\link{Stacked}}, \code{\link{stack}}, \code{\link{reshape}},
-\code{\link[reshape2:melt]{melt}}
+\code{\link[=Stacked]{Stacked()}}, \code{\link[utils:stack]{utils::stack()}}, \code{\link[stats:reshape]{stats::reshape()}},
+\code{\link[reshape2:melt]{reshape2::melt()}}, \code{\link[data.table:melt]{data.table::melt()}}
 }
 \author{
 Ananda Mahto

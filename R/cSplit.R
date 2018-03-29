@@ -24,7 +24,7 @@
 #' the result of each column? This would add a little to the execution time.
 #' @return A `data.table` with the values split into new columns or rows.
 #' @note The `cSplit` function replaces most of the earlier `concat.split*` 
-#' functions. The earlier functions remain for compatability purposes, but now 
+#' functions. The earlier functions remain for compatibility purposes, but now 
 #' they are essentially wrappers for the `cSplit` function.
 #' 
 #' @author Ananda Mahto

@@ -44,7 +44,7 @@ concatenated data into separate values.
 }
 \note{
 The \code{cSplit} function replaces most of the earlier \code{concat.split*}
-functions. The earlier functions remain for compatability purposes, but now
+functions. The earlier functions remain for compatibility purposes, but now
 they are essentially wrappers for the \code{cSplit} function.
 }
 \examples{

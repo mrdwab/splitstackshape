@@ -308,7 +308,7 @@ NULL
 #' Split Concatenated Cells and Optionally Reshape the Output
 #' 
 #' This is a wrapper for the \code{\link{cSplit}} function to maintain
-#' backwards compatability with earlier versions of the "splitstackshape"
+#' backwards compatibility with earlier versions of the "splitstackshape"
 #' package. It allows the user to split multiple columns at once and optionally
 #' convert the results into a "long" format.
 #' 

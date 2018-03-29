@@ -1,6 +1,6 @@
 # splitstackshape
 
-[![Travis-CI Build Status](https://travis-ci.org/mrdwab/splitstackshape.svg?branch=master)](https://travis-ci.org/mrdwab/splitstackshape)
+[![Travis-CI Build Status](https://travis-ci.org/mrdwab/splitstackshape.svg?branch=v1_development)](https://travis-ci.org/mrdwab/splitstackshape)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mrdwab/splitstackshape/v1_development.svg)](https://codecov.io/gh/mrdwab/splitstackshape/branch/v1_development)
 
 R functions to split concatenated data, stack columns of your datasets, and convert your data into different shapes.

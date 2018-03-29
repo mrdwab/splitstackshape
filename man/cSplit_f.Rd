@@ -12,32 +12,27 @@ cSplit_f(indt, splitCols, sep, drop = TRUE, dotsub = "|",
 
 \item{splitCols}{The columns that need to be split up.}
 
-\item{sep}{The character or characters that serve as delimiters within the columns that
-need to be split up. If different columns use different delimiters, enter the delimiters as a character vector.}
+\item{sep}{The character or characters that serve as delimiters within the
+columns that need to be split up. If different columns use different
+delimiters, enter the delimiters as a character vector.}
 
 \item{drop}{Logical. Should the original columns be dropped? Defaults to
 \code{TRUE}.}
 
-\item{dotsub}{The character that should be substituted as a delimiter
-\emph{if \code{sep = "."}}. \code{fread} does not seem to work nicely with
-\code{sep = "."}, so it needs to be substituted. By default, this function
-will substitute \code{"."} with \code{"|"}.}
+\item{dotsub}{The character that should be substituted as a delimiter *if
+\code{sep = "."}. \code{fread} does not seem to always work nicely with \code{sep = "."}, so
+it needs to be substituted. By default, this function will substitute \code{"."}
+with \code{"|"}.}
 
-\item{stripWhite}{Logical. Should whitespace be stripped before writing to the temporary file? Defaults to \code{FALSE}.}
+\item{stripWhite}{Logical. Should whitespace be stripped before writing to
+the temporary file? Defaults to \code{FALSE}.}
 }
 \value{
 A \code{data.table}.
 }
 \description{
-A variation of the \code{concat.split} family of functions designed for
-large \emph{rectangular} datasets. This function makes use of \code{\link[data.table:fread]{fread}} from the "data.table" package for very speedy splitting of concatenated columns of data.
-}
-\details{
-While the general \code{concat.split} functions (\code{\link{cSplit}} in particular) are able to handle
-"unbalanced" datasets (for example, where the number of fields in a given
-column might differ from row to row) because of the nature of \code{fread}
-from the "data.table" package, this function does not support such data
-types.
+A variation of the \code{\link[=concat.split]{concat.split()}} family of functions that uses
+\code{\link[data.table:fread]{data.table::fread()}} for speedy splitting of concatenated columns of data.
 }
 \examples{
 
@@ -62,5 +57,6 @@ cSplit_f(mydf, splitCols = c("v1", "v2", "v3"), sep = c("-", ".", "_"))
 \url{http://stackoverflow.com/a/19231054/1270695}
 }
 \author{
-Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine this function.
+Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine
+this function.
 }

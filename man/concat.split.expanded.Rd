@@ -17,9 +17,9 @@ position).}
 \item{sep}{The character separating each value. Can also be a regular
 expression.}
 
-\item{mode}{Can be either \code{"binary"} (where presence of a number in a
-given column is converted to "1") or \code{"value"} (where the value is
-retained and not recoded to "1"). Defaults to \code{"binary"}.}
+\item{mode}{Can be either \code{"binary"} (where presence of a number in a given
+column is converted to "1") or \code{"value"} (where the value is retained and not
+recoded to "1"). Defaults to \code{"binary"}.}
 
 \item{type}{Can be either \code{"numeric"} (where the items being split are
 integers) or \code{"character"} (where the items being split are character
@@ -28,13 +28,13 @@ strings). Defaults to \code{"numeric"}.}
 \item{drop}{Logical. Should the original variable be dropped? Defaults to
 \code{FALSE}.}
 
-\item{fixed}{Used for \code{strsplit} for allowing regular expressions to be
-used.}
+\item{fixed}{Used for \code{\link[base:strsplit]{base::strsplit()}} for allowing regular expressions to
+be used.}
 
 \item{fill}{Desired "fill" value. Defaults to \code{NA}.}
 }
 \value{
-A \code{data.frame} or a \code{data.table} depending on the source input.
+A \code{data.frame} or \code{data.table} depending on the source input.
 }
 \description{
 "Expand" concatenated numeric or character values to their relevant position
@@ -52,13 +52,9 @@ concat.split.expanded(temp, 4, ";", fill = 0)
 concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
 concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
 
-\dontshow{rm(temp)}
-
 }
 \seealso{
-\code{\link{concat.split}}, \code{\link{concat.split.list}},
-\code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-\code{\link{numMat}}, \code{\link{charMat}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_l]{cSplit_l()}}, \code{\link[=numMat]{numMat()}}, \code{\link[=charMat]{charMat()}}
 }
 \author{
 Ananda Mahto

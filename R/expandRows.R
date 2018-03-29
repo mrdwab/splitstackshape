@@ -1,19 +1,19 @@
 #' Expand the Rows of a Dataset
 #' 
-#' Expands (replicates) the rows of a \code{data.frame} or a \code{data.table}, either by a fixed
-#' number, a specified vector, or a value contained in one of the columns in
-#' the source \code{data.frame} or a \code{data.table}.
+#' Expands (replicates) the rows of a `data.frame` or `data.table`, either by a 
+#' fixed number, a specified vector, or a value contained in one of the columns 
+#' in the source `data.frame` or `data.table`.
 #' 
 #' 
-#' @param dataset The input \code{data.frame} or \code{data.table}.
+#' @param dataset The input `data.frame` or `data.table`.
 #' @param count The numeric vector of counts OR the column from the
-#' dataset that contains the count data. If \code{count} is a single
+#' dataset that contains the count data. If `count` is a single
 #' digit, it is assumed that all rows should be repeated by this amount.
-#' @param count.is.col Logical. Is the \code{count} value a column from the
-#' input dataset? Defaults to \code{TRUE}.
-#' @param drop Logical. If \code{count.is.col = TRUE}, should the "count"
-#' column be dropped from the result? Defaults to \code{TRUE}.
-#' @return A \code{data.frame} or a \code{data.table}, depending on the input.
+#' @param count.is.col Logical. Is the `count` value a column from the
+#' input dataset? Defaults to `TRUE`.
+#' @param drop Logical. If `count.is.col = TRUE`, should the "count"
+#' column be dropped from the result? Defaults to `TRUE`.
+#' @return A `data.frame` or `data.table`, depending on the input.
 #' @author Ananda Mahto
 #' @references \url{http://stackoverflow.com/a/19519828/1270695}
 #' @examples

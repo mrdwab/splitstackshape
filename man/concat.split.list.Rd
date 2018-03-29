@@ -13,22 +13,20 @@ cSplit_l(data, split.col, sep = ",", drop = FALSE, fixed = FALSE)
 \item{split.col}{The variable that needs to be split (either name or index
 position).}
 
-\item{sep}{The character separating each value. Can also be a regular
-expression.}
+\item{sep}{The character separating each value. Can also be a regular expression.}
 
-\item{drop}{Logical. Should the original variable be dropped? Defaults to
-\code{FALSE}.}
+\item{drop}{Logical. Should the original variable be dropped? Defaults to \code{FALSE}.}
 
-\item{fixed}{Used for \code{\link{strsplit}} for allowing regular
-expressions to be used.}
+\item{fixed}{Used for \code{\link[base:strsplit]{base::strsplit()}} for allowing regular expressions to
+be used.}
 }
 \value{
-A \code{data.frame} or \code{data.table} with the concatenated column split and added as
-a \code{list}.
+A \code{data.frame} or \code{data.table} with the concatenated column split and
+added as a \code{list}.
 }
 \description{
-Takes a column in a \code{data.frame} or \code{data.table} with multiple values, splits the
-values into a \code{list}, and returns a new \code{data.frame} or \code{data.table}.
+Takes a column in a \code{data.frame} or \code{data.table} with multiple values, splits
+the values into a \code{list}, and returns a new \code{data.frame} or \code{data.table}.
 }
 \examples{
 
@@ -41,12 +39,9 @@ str(concat.split.list(temp, "Likes"))
 concat.split.list(temp, 4, ";")
 concat.split.list(temp, 4, ";", drop = TRUE)
 
-\dontshow{rm(temp)}
-
 }
 \seealso{
-\code{\link{concat.split}}, \code{\link{concat.split.compact}},
-\code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_e]{cSplit_e()}}
 }
 \author{
 Ananda Mahto

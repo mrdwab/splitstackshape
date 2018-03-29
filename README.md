@@ -1,13 +1,13 @@
 # splitstackshape
 
 [![Travis-CI Build Status](https://travis-ci.org/mrdwab/splitstackshape.svg?branch=master)](https://travis-ci.org/mrdwab/splitstackshape)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mrdwab/splitstackshape/v1_development.svg)](https://codecov.io/gh/mrdwab/splitstackshape/branch/v1_development)
 
 R functions to split concatenated data, stack columns of your datasets, and convert your data into different shapes.
 
 ## Core Functions
 
 * `cSplit`: A core function that collects the functionality of several of the  `concat.split` family of functions.
-* `cSplit_f`: A fast way to split columns of data where you know each row would result in the same number of values after being split.
 * `concat.split`: A set of functions to split strings where data have been concatenated into a single value, as is common when getting data collected with tools like Google Forms. (`cSplit_l` to return a `list`; and `cSplit_e` to return an "expanded" view of the input data.)
 * `Stacked`: A function to create a list of `stack`ed sets of variables. Similar to `melt` from "reshape2", but doesn't put everything into one very long `data.frame`.
 * `Reshape`: A function to allow base R's `reshape` function to work with "unbalanced" datasets.

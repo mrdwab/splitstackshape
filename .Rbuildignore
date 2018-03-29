@@ -3,3 +3,4 @@
 ^\.travis\.yml$
 ^revdep$
 ^cran-comments\.md$
+^codecov\.yml$

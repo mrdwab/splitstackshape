@@ -9,6 +9,13 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 ---------------------------------------------------------------------
 
+## 1.4.5
+
+30 March 2018
+
+Preparing for transition to V2 of the splitstackshape package. Redundant
+functions are being marked using `.Deprecated()`.
+
 ## 1.4.4
 
 29 March 2018

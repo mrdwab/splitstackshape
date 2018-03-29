@@ -1,28 +1,25 @@
 #' Split Concatenated Cells in a data.frame or a data.table
 #' 
-#' A variation of the \code{concat.split} family of functions designed for
-#' large \emph{rectangular} datasets. This function makes use of \code{\link[data.table:fread]{fread}} from the "data.table" package for very speedy splitting of concatenated columns of data.
+#' A variation of the [concat.split()] family of functions that uses
+#' [data.table::fread()] for speedy splitting of concatenated columns of data.
 #' 
-#' While the general \code{concat.split} functions (\code{\link{cSplit}} in particular) are able to handle
-#' "unbalanced" datasets (for example, where the number of fields in a given
-#' column might differ from row to row) because of the nature of \code{fread}
-#' from the "data.table" package, this function does not support such data
-#' types.
-#' 
-#' @param indt The input \code{data.frame} or \code{data.table}.
+#' @param indt The input `data.frame` or `data.table`.
 #' @param splitCols The columns that need to be split up.
-#' @param sep The character or characters that serve as delimiters within the columns that
-#' need to be split up. If different columns use different delimiters, enter the delimiters as a character vector.
+#' @param sep The character or characters that serve as delimiters within the 
+#' columns that need to be split up. If different columns use different 
+#' delimiters, enter the delimiters as a character vector.
 #' @param drop Logical. Should the original columns be dropped? Defaults to
-#' \code{TRUE}.
-#' @param dotsub The character that should be substituted as a delimiter
-#' \emph{if \code{sep = "."}}. \code{fread} does not seem to work nicely with
-#' \code{sep = "."}, so it needs to be substituted. By default, this function
-#' will substitute \code{"."} with \code{"|"}.
-#' @param stripWhite Logical. Should whitespace be stripped before writing to the temporary file? Defaults to \code{FALSE}.
-#' @return A \code{data.table}.
-#' @author Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine this function.
-#' @references \url{http://stackoverflow.com/a/19231054/1270695}
+#' `TRUE`.
+#' @param dotsub The character that should be substituted as a delimiter *if 
+#' `sep = "."`. `fread` does not seem to always work nicely with `sep = "."`, so 
+#' it needs to be substituted. By default, this function will substitute `"."` 
+#' with `"|"`.
+#' @param stripWhite Logical. Should whitespace be stripped before writing to 
+#' the temporary file? Defaults to `FALSE`.
+#' @return A `data.table`.
+#' @author Ananda Mahto. Thanks also to Arun Srinivasan for helping to refine 
+#' this function.
+#' @references <http://stackoverflow.com/a/19231054/1270695>
 #' @examples
 #' 
 #' ## Sample data. Change `n` to larger values to test on larger data
@@ -43,6 +40,9 @@
 #' 
 #' @export cSplit_f
 cSplit_f <- function(indt, splitCols, sep, drop = TRUE, dotsub = "|", stripWhite = FALSE) {
+  .Deprecated(
+    "cSplit", 
+    msg = "V2 of splitstackshape will feature a rewritten cSplit that makes this function obsolete.")
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
   
   if (!is.data.table(indt)) indt <- as.data.table(indt) 

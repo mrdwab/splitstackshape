@@ -4,21 +4,22 @@
 \alias{getanID}
 \title{Add an "id" Variable to a Dataset}
 \usage{
-getanID(data, id.vars = NULL)
+getanID(indt, id.vars = NULL)
 }
 \arguments{
-\item{data}{The input \code{data.frame} or \code{data.table}.}
+\item{id.vars}{The variables that should be treated as ID variables. Defaults
+to \code{NULL}, at which point all variables are used to create the new ID variable.}
 
-\item{id.vars}{The variables that should be treated as ID variables. Defaults to \code{NULL}, at which point all variables are used to create the new ID variable.}
+\item{data}{The input \code{data.table}.}
 }
 \value{
-The input dataset (as a \code{data.table}) if ID variables are unique, or the input dataset with a new column named "\code{.id}".
+The input dataset if ID variables are already unique, or the input
+dataset with a new column named "\code{sub_id}".
 }
 \description{
-Many functions will not work properly if there are duplicated ID variables
-in a dataset. This function is a convenience function for \code{.N} from the "data.table" package to create an "\code{.id}"
-variable that when used in conjunction with the existing ID variables,
-should be unique.
+Many functions will not work properly if there are duplicated ID variables in
+a dataset. This function is a convenience function for \code{\link[data.table:rowid]{data.table::rowid()}}
+and is largely unnecessary now that \code{rowid} exists.
 }
 \examples{
 
@@ -31,8 +32,6 @@ mydf <- data.frame(IDA = c("a", "a", "a", "b", "b"),
                    IDB = c(1, 2, 1, 1, 2), values = 1:5)
 mydf
 getanID(mydf, 1:2)
-
-\dontshow{rm(mydf)}
 
 }
 \author{

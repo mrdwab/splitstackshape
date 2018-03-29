@@ -76,7 +76,7 @@ char_mat <- function (listOfValues, mode = "binary", fill = NULL) {
   len <- length(listOfValues)
   listOfValues <- trim_list(listOfValues)
   vec <- unlist(listOfValues, use.names = FALSE)
-  # vec <- trim_vec(unlist(listOfValues, use.names = FALSE), attr = FALSE)
+
   lvl <- sort(unique(vec))
   i.idx <- rep.int(seq_along(listOfValues), lengths(listOfValues))
   

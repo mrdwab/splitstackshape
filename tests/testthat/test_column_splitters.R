@@ -1,14 +1,6 @@
 library(splitstackshape)
 context("Splitting vectors into columns")
 
-if (packageVersion("data.table") < "1.10.5") {
-  test_that("data.table version 1.10.4 generates a message", {
-    vec <- c("rock,electro", "rock,jazz", NA, "jazz,jazz,jazz")
-    expect_message(f_split(vec, ","), 
-                   "It is recommended to update data.table to >= 1.10.5")
-  })
-}
-
 test_that("t_split is used as f_split fallback", {
   vec <- c("rockSEPelectro", "rockSEPjazz", NA, "jazzSEPjazzSEPjazz")
   expect_message(f_split(vec, "SEP"), 
@@ -17,10 +9,7 @@ test_that("t_split is used as f_split fallback", {
                  "Unsupported `sep`. Splitting with `t_split` instead.")
   vec <- c("A;B", "A", "A", "A")
   
-  if (packageVersion("data.table") < "1.10.5") {
-    expect_message(f_split(vec, ";"), 
-                   "It is recommended to update data.table to >= 1.10.5")
-  } else {
+  if (packageVersion("data.table") >= "1.10.5") {
     expect_message(f_split(vec, ";"), 
                    "Expected more than 1 column. Trying with `t_split`.")
   }

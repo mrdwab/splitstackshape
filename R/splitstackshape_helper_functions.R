@@ -172,8 +172,8 @@ NULL
 # STRING STUFF ------------------------------------------------------------
 
 .stripWhite <- function(invec, delim = ",") {
-  .tws(gsub(sprintf("\\s+[%s]\\s+|\\s+[%s]|[%s]\\s+",
-                    delim, delim, delim), delim, invec))
+  trim_vec(gsub(sprintf("\\s+[%s]\\s+|\\s+[%s]|[%s]\\s+",
+                        delim, delim, delim), delim, invec))
 }
 NULL
 

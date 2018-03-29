@@ -81,7 +81,6 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
         stringi::stri_flatten(VEC, collapse = "\n")
       } else {
-        message("`stringi` recommended for efficient string processing.")
         .strflat(VEC)
       }
     } else {
@@ -90,13 +89,11 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
         stringi::stri_flatten(VEC, collapse = "\n")
       } else {
-        message("`stringi` recommended for efficient string processing.")
         .strflat(VEC)
       }
     }
     
     temp <- if (packageVersion("data.table") < "1.10.5") {
-      message("It is recommended to update data.table to >= 1.10.5")
       fread(VEC, sep = sep, fill = TRUE, 
             blank.lines.skip = FALSE, header = FALSE,
             colClasses = if (!type.convert) "character" else NULL,

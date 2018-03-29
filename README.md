@@ -21,7 +21,7 @@ R functions to split concatenated data, stack columns of your datasets, and conv
 
 ## Install
 
-The package [is on CRAN](http://cran.r-project.org/web/packages/splitstackshape/index.html). You can install it using:
+The package [is on CRAN](https://CRAN.R-project.org/package=splitstackshape). You can install it using:
 
 ```r
 install.packages("splitstackshape")

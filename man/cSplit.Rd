@@ -12,17 +12,15 @@ cSplit(indt, splitCols, sep = ",", direction = "wide", fixed = TRUE,
 
 \item{splitCols}{The column or columns that need to be split.}
 
-\item{sep}{The values that serve as a delimiter \emph{within} each column.
-This can be a single value if all columns have the same delimiter, or a
-vector of values \emph{in the same order as the delimiters in each of the
-\code{splitCols}}.}
+\item{sep}{The values that serve as a delimiter \emph{within} each column. This
+can be a single value if all columns have the same delimiter, or a vector of
+values \emph{in the same order as the delimiters in each of the \code{splitCols}}.}
 
 \item{direction}{The desired direction of the results, either \code{"wide"}
 or \code{"long"}.}
 
 \item{fixed}{Logical. Should the split character be treated as a fixed
-pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
-\code{TRUE}.}
+pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to \code{TRUE}.}
 
 \item{drop}{Logical. Should the original concatenated column be dropped?
 Defaults to \code{TRUE}.}
@@ -34,24 +32,20 @@ to \code{TRUE}.}
 \item{makeEqual}{Logical. Should all groups be made to be the same length?
 Defaults to \code{FALSE}.}
 
-\item{type.convert}{Logical. Should \code{\link{type.convert}} be used to convert
+\item{type.convert}{Logical. Should \code{\link[utils:type.convert]{utils::type.convert()}} be used to convert
 the result of each column? This would add a little to the execution time.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table}} with the values
-split into new columns or rows.
+A \code{data.table} with the values split into new columns or rows.
 }
 \description{
 The \code{cSplit} function is designed to quickly and conveniently split
 concatenated data into separate values.
 }
 \note{
-The \code{cSplit} function replaces most of the earlier
-\code{concat.split*} functions. The earlier functions remain for
-compatability purposes, but now they are essentially wrappers for the
-\code{cSplit} function.
-
-If you know that all values in the column would have the same number of values per row after being split, you should use the \code{\link{cSplit_f}} function instead, which uses \code{\link[data.table:fread]{fread}} instead of \code{\link{strsplit}} and is generally faster.
+The \code{cSplit} function replaces most of the earlier \code{concat.split*}
+functions. The earlier functions remain for compatability purposes, but now
+they are essentially wrappers for the \code{cSplit} function.
 }
 \examples{
 
@@ -68,16 +62,16 @@ cSplit(temp, c("Likes", "Hates"), c(",", ";"))
 ## Split "Siblings" into a long form...
 cSplit(temp, "Siblings", ",", direction = "long")
 
-## Split "Siblings" into a long form, removing extra whitespace
-cSplit(temp, "Siblings", ",", direction = "long", stripWhite = TRUE)
+## Split "Siblings" into a long form, not removing whitespace
+cSplit(temp, "Siblings", ",", direction = "long", stripWhite = FALSE)
 
 ## Split a vector
 y <- c("a_b_c", "a_b", "c_a_b")
-cSplit(as.data.table(y), "y", "_")
+cSplit(data.frame(y), "y", "_")
 
 }
 \seealso{
-\code{\link{concat.split}}, \code{\link{cSplit_f}}
+\code{\link[=concat.split]{concat.split()}}
 }
 \author{
 Ananda Mahto

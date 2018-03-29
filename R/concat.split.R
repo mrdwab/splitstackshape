@@ -1,26 +1,22 @@
 #' Split Concatenated Cells into a Condensed Format
 #' 
-#' The default splitting method for \code{\link{concat.split}}. Formerly based
-#' on \code{\link{read.concat}} but presently a simple wrapper for
-#' \code{\link{cSplit}}.
+#' The default splitting method for `concat.split`. Formerly based on 
+#' [read.concat()] but presently a simple wrapper around [cSplit()].
 #' 
 #' 
-#' @param data The source \code{data.frame} or \code{data.table}
-#' @param split.col The variable that needs to be split (either name or index
-#' position).
+#' @param data The input `data.frame` or `data.table`.
+#' @param split.col The column that need to be split.
 #' @param sep The character separating each value.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
-#' \code{FALSE}.
+#' `FALSE`.
 #' @param fixed Logical. Should the split character be treated as a fixed
-#' pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
-#' \code{TRUE}.
-#' @param \dots optional arguments to pass to \code{cSplit}.
-#' @return A \code{data.table}.
-#' @note This function no longer does anything different from
-#' \code{\link{cSplit}}. It is recommended that you transition your code to the
-#' \code{cSplit} function instead.
+#' pattern (`TRUE`) or a regular expression (`FALSE`)? Defaults to `TRUE`.
+#' @param \dots optional arguments to pass to `cSplit`.
+#' @return A `data.table`.
+#' @note This function no longer does anything different from [cSplit()]. It is 
+#' recommended that you transition your code to the `cSplit` function instead.
 #' @author Ananda Mahto
-#' @seealso \code{\link{read.concat}}, \code{\link{cSplit}}
+#' @seealso [read.concat()], [cSplit()]
 #' @examples
 #' 
 #' temp <- head(concat.test)
@@ -29,8 +25,6 @@
 #' 
 #' ## Extra arguments to cSplit
 #' concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
-#' 
-#' \dontshow{rm(temp)}
 #' 
 #' @export concat.split.compact
 concat.split.compact <- function(data, split.col, sep = ",", 

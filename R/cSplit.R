@@ -1,40 +1,34 @@
 #' Split Concatenated Values into Separate Values
 #' 
-#' The \code{cSplit} function is designed to quickly and conveniently split
+#' The `cSplit` function is designed to quickly and conveniently split
 #' concatenated data into separate values.
 #' 
 #' 
-#' @param indt The input \code{data.frame} or \code{data.table}.
+#' @param indt The input `data.frame` or `data.table`.
 #' @param splitCols The column or columns that need to be split.
-#' @param sep The values that serve as a delimiter \emph{within} each column.
-#' This can be a single value if all columns have the same delimiter, or a
-#' vector of values \emph{in the same order as the delimiters in each of the
-#' \code{splitCols}}.
-#' @param direction The desired direction of the results, either \code{"wide"}
-#' or \code{"long"}.
+#' @param sep The values that serve as a delimiter *within* each column. This 
+#' can be a single value if all columns have the same delimiter, or a vector of 
+#' values *in the same order as the delimiters in each of the `splitCols`*.
+#' @param direction The desired direction of the results, either `"wide"`
+#' or `"long"`.
 #' @param fixed Logical. Should the split character be treated as a fixed
-#' pattern (\code{TRUE}) or a regular expression (\code{FALSE})? Defaults to
-#' \code{TRUE}.
+#' pattern (`TRUE`) or a regular expression (`FALSE`)? Defaults to `TRUE`.
 #' @param drop Logical. Should the original concatenated column be dropped?
-#' Defaults to \code{TRUE}.
+#' Defaults to `TRUE`.
 #' @param stripWhite Logical. If there is whitespace around the delimiter in
 #' the concatenated columns, should it be stripped prior to splitting? Defaults
-#' to \code{TRUE}.
+#' to `TRUE`.
 #' @param makeEqual Logical. Should all groups be made to be the same length?
-#' Defaults to \code{FALSE}.
-#' @param type.convert Logical. Should \code{\link{type.convert}} be used to convert
+#' Defaults to `FALSE`.
+#' @param type.convert Logical. Should [utils::type.convert()] be used to convert
 #' the result of each column? This would add a little to the execution time.
-#' @return A \code{\link[data.table:data.table]{data.table}} with the values
-#' split into new columns or rows.
-#' @note The \code{cSplit} function replaces most of the earlier
-#' \code{concat.split*} functions. The earlier functions remain for
-#' compatability purposes, but now they are essentially wrappers for the
-#' \code{cSplit} function.
-#' 
-#' If you know that all values in the column would have the same number of values per row after being split, you should use the \code{\link{cSplit_f}} function instead, which uses \code{\link[data.table:fread]{fread}} instead of \code{\link{strsplit}} and is generally faster.
+#' @return A `data.table` with the values split into new columns or rows.
+#' @note The `cSplit` function replaces most of the earlier `concat.split*` 
+#' functions. The earlier functions remain for compatability purposes, but now 
+#' they are essentially wrappers for the `cSplit` function.
 #' 
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split}}, \code{\link{cSplit_f}}
+#' @seealso [concat.split()]
 #' @examples
 #' 
 #' ## Sample data
@@ -50,12 +44,12 @@
 #' ## Split "Siblings" into a long form...
 #' cSplit(temp, "Siblings", ",", direction = "long")
 #' 
-#' ## Split "Siblings" into a long form, removing extra whitespace
-#' cSplit(temp, "Siblings", ",", direction = "long", stripWhite = TRUE)
+#' ## Split "Siblings" into a long form, not removing whitespace
+#' cSplit(temp, "Siblings", ",", direction = "long", stripWhite = FALSE)
 #' 
 #' ## Split a vector
 #' y <- c("a_b_c", "a_b", "c_a_b")
-#' cSplit(as.data.table(y), "y", "_")
+#' cSplit(data.frame(y), "y", "_")
 #' 
 #' @export cSplit
 cSplit <- function(indt, splitCols, sep = ",", direction = "wide", 

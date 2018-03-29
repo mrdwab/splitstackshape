@@ -29,6 +29,6 @@ listCol_l <- function(inDT, listcol, drop = TRUE) {
   if (isTRUE(drop)) {
     temp[, (LC) := NULL]
   }
-  temp
+  temp[]
 }
 NULL

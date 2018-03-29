@@ -35,8 +35,8 @@ getanID <- function(data, id.vars = NULL) {
   .id <- .N <- NULL
   
   if (any(duplicated(data, by = id.vars))) {
-    data[, .id := sequence(.N), by = id.vars]
+    data[, .id := sequence(.N), by = id.vars][]
   } else {
-    data
+    data[]
   }
 }

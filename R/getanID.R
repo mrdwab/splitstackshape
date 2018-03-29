@@ -4,7 +4,7 @@
 #' a dataset. This function is a convenience function for [data.table::rowid()] 
 #' and is largely unnecessary now that `rowid` exists.
 #' 
-#' @param data The input `data.table`.
+#' @param indt The input `data.table`.
 #' @param id.vars The variables that should be treated as ID variables. Defaults 
 #' to `NULL`, at which point all variables are used to create the new ID variable.
 #' @return The input dataset if ID variables are already unique, or the input 

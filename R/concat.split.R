@@ -157,9 +157,9 @@ cSplit_l <- concat.split.list <- function(data, split.col, sep = ",",
   varname <- paste(split.col, "list", sep="_")
   b <- strsplit(a, sep, fixed = fixed)
   
-  if (suppressWarnings(is.na(try(max(as.numeric(unlist(b))))))) {
+  if (suppressWarnings(is.na(try(max(as.numeric(na.omit(unlist(b)))))))) {
     data[[varname]] <- I(b)
-  } else if (!is.na(try(max(as.numeric(unlist(b)))))) {
+  } else if (!is.na(try(max(as.numeric(na.omit(unlist(b))))))) {
     data[[varname]] <- I(lapply(b, as.numeric))
   }
   if (isTRUE(drop)) {
@@ -267,31 +267,31 @@ concat.split <- function(data, split.col, sep = ",", structure = "compact",
                          mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, 
                          fill = NA, ...) {
   
-  M1 <- paste(c("", "'mode' supplied but ignored.", 
-                "'mode' setting only applicable",
-                "when structure = 'expanded'"), collapse = "\n")
-  M2 <- paste(c("", "'type' supplied but ignored.", 
-                "'type' setting only applicable",
-                "when structure = 'expanded'"), collapse = "\n")
+  M1 <- paste(
+    c("", "'mode' supplied but ignored.", "'mode' setting only applicable",
+      "when structure = 'expanded'"), collapse = " ")
+  M2 <- paste(
+    c("", "'type' supplied but ignored.", "'type' setting only applicable",
+      "when structure = 'expanded'"), collapse = " ")
   
   temp <- switch(
     structure, 
     compact = {
       if (!is.null(mode)) warning(M1)
       if (!is.null(type)) warning(M2)
-      concat.split.compact(data = data, split.col = split.col, 
-                           sep = sep, drop = drop, fixed = fixed)
+      cSplit(indt = data, splitCols = split.col, 
+             sep = sep, drop = drop, fixed = fixed)
     },
     list = {
       if (!is.null(mode)) warning(M1)
       if (!is.null(type)) warning(M2)
-      concat.split.list(data = data, split.col = split.col, 
-                        sep = sep, drop = drop, fixed = fixed)
+      cSplit_l(data = data, split.col = split.col,
+               sep = sep, drop = drop, fixed = fixed)
     },
     expanded = {
-      concat.split.expanded(data = data, split.col = split.col, 
-                            sep = sep, mode = mode, type = type, 
-                            drop = drop, fixed = fixed, fill = fill)
+      cSplit_e(data = data, split.col = split.col, 
+               sep = sep, mode = mode, type = type, 
+               drop = drop, fixed = fixed, fill = fill)
     },
     stop("'structure' must be either 'compact', 'expanded', or 'list'"))
   temp

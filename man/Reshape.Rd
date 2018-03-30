@@ -4,8 +4,7 @@
 \alias{Reshape}
 \title{Reshape Wide Data Into a Semi-long Form}
 \usage{
-Reshape(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE,
-  ...)
+Reshape(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames, ...)
 }
 \arguments{
 \item{data}{The source \code{data.frame}.}
@@ -19,15 +18,13 @@ are used as the identifiers.}
 \item{sep}{The character that separates the "variable name" from the "times"
 in the wide \code{data.frame}.}
 
-\item{rm.rownames}{Logical. \code{reshape} creates some long distracting
-\code{rownames} that do not seem to serve much purpose. This argument is set to
-\code{TRUE} to remove the \code{rownames} by default.}
+\item{rm.rownames}{Ignored as \code{data.table}s do not have rownames anyway.}
 
 \item{\dots}{Further arguments to \code{\link[=NoSep]{NoSep()}} in case the separator is of a
 different form.}
 }
 \value{
-A "long" \code{data.frame} of the reshaped data that retains the
+A "long" \code{data.table} of the reshaped data that retains the
 attributes added by base R's \code{reshape} function.
 }
 \description{

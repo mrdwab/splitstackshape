@@ -74,6 +74,6 @@ cSplit_f <- function(indt, splitCols, sep, drop = TRUE, dotsub = "|", stripWhite
     set(indt, i = NULL, j = split_names, value = Split)
   }
   if (isTRUE(drop)) set(indt, i = NULL, j = splitCols, value = NULL)
-  indt
+  indt[]
 }
 NULL

@@ -50,6 +50,7 @@ Stacked <- function(data, id.vars = NULL, var.stubs, sep,
                     keep.rownames = FALSE, ...) {
   temp1 <- vGrep(var.stubs, names(data))
 
+  # nocov start
   s <- sort.list(sapply(names(temp1), nchar), decreasing = TRUE)
   for (i in s) {
     matches <- temp1[[i]]
@@ -59,6 +60,7 @@ Stacked <- function(data, id.vars = NULL, var.stubs, sep,
       }
     } 
   }
+  # nocov end
 
   temp <- Names(data, unlist(temp1))
   

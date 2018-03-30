@@ -8,44 +8,55 @@ stratified(indt, group, size, select = NULL, replace = FALSE,
   keep.rownames = FALSE, bothSets = FALSE, ...)
 }
 \arguments{
-\item{indt}{The input \code{data.frame} or \code{data.table}.}
+\item{indt}{\code{data.table}.}
 
-\item{group}{The column or columns that should be used to create the groups. Can be a character vector of column names (recommended) or a numeric vector of column positions. Generally, if you are using more than
-one variable to create your "strata", you should list them in the order of
-\emph{slowest} varying to \emph{quickest} varying. This can be a vector of
-names or column indexes.}
+\item{group}{The column or columns that should be used to create the groups.
+Can be a character vector of column names (recommended) or a numeric vector
+of column positions. Generally, if you are using more than one variable to
+create your "strata", you should list them in the order of \emph{slowest} varying
+to \emph{quickest} varying. This can be a vector of names or column indexes.}
 
-\item{size}{The desired sample size. \itemize{ \item If \code{size} is a
-value between \code{0} and \code{1} expressed as a decimal, size is set to
-be proportional to the number of observations per group. \item If
-\code{size} is a single positive integer, it will be assumed that you want
-the same number of samples from each group. \item If \code{size} is a named
-vector, the function will check to see whether the length of the vector
-matches the number of groups and that the names match the group names.}}
+\item{size}{The desired sample size.
+\itemize{
+\item If \code{size} is a value between \code{0} and \code{1} expressed as a decimal, size is
+set to be proportional to the number of observations per group.
+\item If \code{size} is a single positive integer, it will be assumed that you want
+the same number of samples from each group.
+\item If \code{size} is a named vector, the function will check to see whether the
+length of the vector matches the number of groups and that the names match
+the group names.
+}}
 
-\item{select}{A named list containing levels from the "group" variables in
+\item{select}{A named list containing levels from the \code{"group"} variables in
 which you are interested. The list names must be present as variable names
 for the input dataset.}
 
 \item{replace}{Logical. Should sampling be with replacement? Defaults to \code{FALSE}.}
 
-\item{keep.rownames}{Logical. If the input is a \code{data.frame} or a \code{matrix}, \code{as.data.table} would normally drop the rownames. If \code{TRUE}, the rownames would be retained in a column named \code{rn}. Defaults to \code{FALSE}.}
+\item{keep.rownames}{Logical. If the input is a \code{data.frame} or a \code{matrix},
+\code{as.data.table} would normally drop the rownames. If \code{TRUE}, the rownames
+would be retained in a column named \code{rn}. Defaults to \code{FALSE}.}
 
-\item{bothSets}{Logical. Should both the sampled and non-sampled sets be returned as a \code{list}? Defaults to \code{FALSE}.}
+\item{bothSets}{Logical. Should both the sampled and non-sampled sets be
+returned as a \code{list}? Defaults to \code{FALSE}.}
 
-\item{\dots}{Optional arguments to \code{\link{sample}}.}
+\item{\dots}{Optional arguments to \code{sample}.}
 }
 \value{
-If \code{bothSets = FALSE}, a \code{list} of two \code{data.tables}; otherwise, a \code{data.table}.
+If \code{bothSets = TRUE}, a \code{list} of two \code{data.tables}; otherwise, a
+single \code{data.table} with the sampled rows.
 }
 \description{
-The \code{\link{stratified}} function samples from a
-\code{\link{data.frame}} or a \code{\link{data.table}} in which one or more columns can be used as a
-"stratification" or "grouping" variable. The result is a new
-\code{data.table} with the specified number of samples from each group.
+The \code{stratified} function samples from a \code{data.table} in which one or more
+columns can be used as a "stratification" or "grouping" variable. The result
+is a new \code{data.table} with the specified number or proportion of samples from
+each group.
 }
 \note{
-\emph{Slightly different sizes than requested}: Because of how computers deal with floating-point arithmetic, and because R uses a "round to even" approach, the size per strata that results when specifying a proportionate sample may be slightly higher or lower per strata than you might have expected.
+\emph{Slightly different sizes than requested}: Because of how computers
+deal with floating-point arithmetic, and because R uses a "round to even"
+approach, the size per strata that results when specifying a proportionate
+sample may be slightly higher or lower per strata than you might have expected.
 }
 \examples{
 
@@ -85,7 +96,8 @@ s.out <- stratified(dat1, c("E", "D", "A"), size = 2)
 
 }
 \seealso{
-\code{\link[sampling:strata]{strata}} from the "strata" package; \code{\link[dplyr:sample_n]{sample_n}} and \code{\link[dplyr:sample_frac]{sample_frac}} from "dplyr".
+\code{\link[sampling:strata]{sampling::strata()}} from the "strata" package; \code{\link[dplyr:sample_n]{dplyr::sample_n()}}
+and \code{\link[dplyr:sample_frac]{dplyr::sample_frac()}} from "dplyr".
 }
 \author{
 Ananda Mahto

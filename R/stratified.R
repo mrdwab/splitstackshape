@@ -1,33 +1,43 @@
 #' Take a Stratified Sample From a Dataset
 #' 
-#' The \code{\link{stratified}} function samples from a
-#' \code{\link{data.frame}} or a \code{\link{data.table}} in which one or more columns can be used as a
-#' "stratification" or "grouping" variable. The result is a new
-#' \code{data.table} with the specified number of samples from each group.
+#' The `stratified` function samples from a `data.table` in which one or more 
+#' columns can be used as a "stratification" or "grouping" variable. The result 
+#' is a new `data.table` with the specified number or proportion of samples from 
+#' each group.
 #' 
-#' @param indt The input \code{data.frame} or \code{data.table}. 
-#' @param group The column or columns that should be used to create the groups. Can be a character vector of column names (recommended) or a numeric vector of column positions. Generally, if you are using more than
-#' one variable to create your "strata", you should list them in the order of
-#' \emph{slowest} varying to \emph{quickest} varying. This can be a vector of
-#' names or column indexes.
-#' @param size The desired sample size. \itemize{ \item If \code{size} is a
-#' value between \code{0} and \code{1} expressed as a decimal, size is set to
-#' be proportional to the number of observations per group. \item If
-#' \code{size} is a single positive integer, it will be assumed that you want
-#' the same number of samples from each group. \item If \code{size} is a named
-#' vector, the function will check to see whether the length of the vector
-#' matches the number of groups and that the names match the group names.}
-#' @param select A named list containing levels from the "group" variables in
+#' @param indt `data.table`. 
+#' @param group The column or columns that should be used to create the groups. 
+#' Can be a character vector of column names (recommended) or a numeric vector 
+#' of column positions. Generally, if you are using more than one variable to 
+#' create your "strata", you should list them in the order of *slowest* varying 
+#' to *quickest* varying. This can be a vector of names or column indexes.
+#' @param size The desired sample size.
+#' * If `size` is a value between `0` and `1` expressed as a decimal, size is 
+#' set to be proportional to the number of observations per group.
+#' * If `size` is a single positive integer, it will be assumed that you want
+#' the same number of samples from each group.
+#' * If `size` is a named vector, the function will check to see whether the 
+#' length of the vector matches the number of groups and that the names match 
+#' the group names.
+#' @param select A named list containing levels from the `"group"` variables in
 #' which you are interested. The list names must be present as variable names
 #' for the input dataset.
-#' @param replace Logical. Should sampling be with replacement? Defaults to \code{FALSE}.
-#' @param keep.rownames Logical. If the input is a \code{data.frame} or a \code{matrix}, \code{as.data.table} would normally drop the rownames. If \code{TRUE}, the rownames would be retained in a column named \code{rn}. Defaults to \code{FALSE}.
-#' @param bothSets Logical. Should both the sampled and non-sampled sets be returned as a \code{list}? Defaults to \code{FALSE}.
-#' @param \dots Optional arguments to \code{\link{sample}}.
-#' @return If \code{bothSets = FALSE}, a \code{list} of two \code{data.tables}; otherwise, a \code{data.table}.
-#' @note \emph{Slightly different sizes than requested}: Because of how computers deal with floating-point arithmetic, and because R uses a "round to even" approach, the size per strata that results when specifying a proportionate sample may be slightly higher or lower per strata than you might have expected.
+#' @param replace Logical. Should sampling be with replacement? Defaults to `FALSE`.
+#' @param keep.rownames Logical. If the input is a `data.frame` or a `matrix`, 
+#' `as.data.table` would normally drop the rownames. If `TRUE`, the rownames 
+#' would be retained in a column named `rn`. Defaults to `FALSE`.
+#' @param bothSets Logical. Should both the sampled and non-sampled sets be 
+#' returned as a `list`? Defaults to `FALSE`.
+#' @param \dots Optional arguments to `sample`.
+#' @return If `bothSets = TRUE`, a `list` of two `data.tables`; otherwise, a 
+#' single `data.table` with the sampled rows.
+#' @note *Slightly different sizes than requested*: Because of how computers 
+#' deal with floating-point arithmetic, and because R uses a "round to even" 
+#' approach, the size per strata that results when specifying a proportionate 
+#' sample may be slightly higher or lower per strata than you might have expected.
 #' @author Ananda Mahto
-#' @seealso \code{\link[sampling:strata]{strata}} from the "strata" package; \code{\link[dplyr:sample_n]{sample_n}} and \code{\link[dplyr:sample_frac]{sample_frac}} from "dplyr". 
+#' @seealso [sampling::strata()] from the "strata" package; [dplyr::sample_n()]
+#' and [dplyr::sample_frac()] from "dplyr". 
 #' @examples
 #' 
 #' # Generate a sample data.frame to play with

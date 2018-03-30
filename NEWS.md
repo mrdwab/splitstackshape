@@ -33,6 +33,8 @@
   being careful about empty elements and zero-length elements.
 * `unlist_cols()` added as a convenience function for `listCol_l()` and 
   `listCol_w()`.
+* `cSplit_cartesian()` splits data into a long form returning the Cartesian 
+  Product of the split values.
   
 ### Enhancements
 

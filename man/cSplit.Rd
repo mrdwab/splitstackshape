@@ -50,7 +50,6 @@ be deprecated over time.
 }
 \examples{
 
-## Sample data
 DT <- head(concat.test)
 
 ## Split the "Likes" column

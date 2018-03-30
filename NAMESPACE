@@ -2,6 +2,7 @@
 
 export(Stacked)
 export(cSplit)
+export(cSplit_cartesian)
 export(cSplit_e)
 export(cSplit_l)
 export(char_mat)

@@ -1,0 +1,8 @@
+library(splitstackshape)
+context("cSplit_cartesian")
+
+test_that("correct dim for output", {
+  DC <- data.frame(AB = c("A", "B"), V1 = c("AB,BW", "x,y,z"), 
+                   V2 = c("1,2,3", "4,5,6,7"))
+  expect_equal(dim(cSplit_cartesian(DC, c("V1", "V2"))), c(18, 3))
+})

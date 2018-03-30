@@ -30,7 +30,6 @@
 #' @seealso [concat.split()]
 #' @examples
 #' 
-#' ## Sample data
 #' DT <- head(concat.test)
 #' 
 #' ## Split the "Likes" column

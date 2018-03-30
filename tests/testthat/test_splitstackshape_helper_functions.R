@@ -56,3 +56,14 @@ test_that("stripwhite works as expected", {
 test_that("pad results in the correct width", {
   expect_equal(nchar(.pad(1000)), 4)
 })
+
+test_that("helpers work", {
+  DF <- data.frame(c("A", "B"), c("C", "D"))
+  expect_true(all(sapply(FacsToChars(DF), is.character)))
+  vec <- c("a", "b", "c")
+  expect_equal(.collapseMe(vec), "^a|^b|^c")
+  expect_equal(.collapseMe(vec, FALSE), "a$|b$|c$")
+  vec <- c("varA.1", "varA.2", "varB.1")
+  expect_equal(vGrep(c("varA", "varB"), vec),
+               structure(list(varA = 1:2, varB = 3L), .Names = c("varA", "varB")))
+})

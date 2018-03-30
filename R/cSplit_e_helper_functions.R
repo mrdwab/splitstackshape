@@ -187,7 +187,9 @@ trim_vec <- function(vec, attr = FALSE) {
     vec <- if (requireNamespace("stringi", quietly = TRUE)) {
       stringi::stri_trim_both(vec, "\\P{Zs}")
     } else {
+      # nocov start
       .tws(vec)
+      # nocov end
     }
     vec <- if (attr) setattr(copy(vec), "test", "cleaned")[] else vec
   } else {

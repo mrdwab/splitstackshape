@@ -20,7 +20,8 @@
         install.packages("data.table", type = "source",
           repos = "http://Rdatatable.github.io/data.table")
 
-* Changed R dependency to >= 3.2.0 for the `lengths()` function.
+* Changed R dependency to >= 3.4.0 for the `lengths()` function (introduced in
+  3.2.0) and `strcapture()` (introduced in 3.4.0).
 
 --------------
 
@@ -52,6 +53,8 @@
 
 * `cSplit_f()` has been removed as its functionality is completely covered by
   `cSplit()`.
+* `Reshape()` has been removed as it was mostly a proof of concept and its
+  functionality is completely covered by `reshape_long()`.
 
 ## 1.4.3
 

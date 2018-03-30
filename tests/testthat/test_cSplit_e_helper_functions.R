@@ -40,3 +40,9 @@ test_that("fill values work as expected", {
   expect_equal(sum(char_mat(invec, mode = "value", fill = "X") == "X"), 10)
 })
 
+test_that("t_split gets called when fixed=FALSE", {
+  DF <- data.frame(ID = 1:3, num_col = c("1,2,6", "3,5", "2,4,7"),
+                   char_col = c("  A, B  ", NA, ""),
+                   diff_delim_col = c("6;7", "5", "1;3;2"))
+  expect_equal(dim(cSplit(DF, names(DF)[-1], "[,;]", fixed = FALSE)), c(3, 9))
+})

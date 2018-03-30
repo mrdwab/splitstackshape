@@ -81,7 +81,9 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
         stringi::stri_flatten(VEC, collapse = "\n")
       } else {
+        # nocov start
         .strflat(VEC)
+        # nocov end
       }
     } else {
       if (!is.null(ana)) VEC[which(ana)] <- sep
@@ -89,7 +91,9 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
         stringi::stri_flatten(VEC, collapse = "\n")
       } else {
+        # nocov start
         .strflat(VEC)
+        # nocov end
       }
     }
     
@@ -100,11 +104,13 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
             strip.white = stripWhite)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
     } else {
+      # nocov start
       fread(VEC, sep = sep, fill = TRUE, 
             blank.lines.skip = FALSE, header = FALSE,
             colClasses = if (!type.convert) "character" else NULL,
             strip.white = stripWhite, logical01 = FALSE)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
+      # nocov end
     }
     
     if (length(temp) == 1L) {

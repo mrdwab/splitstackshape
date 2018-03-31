@@ -27,10 +27,10 @@
 
 ### New functions
 
+* `cartesian_split()` splits data into a long form returning the Cartesian 
+  Product of the split values.
 * `char_mat()` and `num_mat()` take lists and convert them to binary, value, or
   count matrices.
-* `cSplit_cartesian()` splits data into a long form returning the Cartesian 
-  Product of the split values.
 * `move_me()` moves values around using natural language statements.
 * `trim_vec()` and `trim_list()` take vectors or lists and trims the whitespace,
   being careful about empty elements and zero-length elements.

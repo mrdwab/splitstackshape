@@ -19,9 +19,9 @@
 #' 
 #' @examples
 #' DC <- data.frame(AB = c("A", "B"), V1 = c("AB,BW", "x,y,z"), V2 = c("1,2,3", "4,5,6,7"))
-#' cSplit_cartesian(DC, c("V1", "V2"))
+#' cartesian_split(DC, c("V1", "V2"))
 #' @export 
-cSplit_cartesian <- function(indt, splitCols, sep = ",", fixed = TRUE, 
+cartesian_split <- function(indt, splitCols, sep = ",", fixed = TRUE, 
                              stripWhite = TRUE, type.convert = TRUE) {
   indt <- setDT(copy(indt))
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]

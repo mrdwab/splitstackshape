@@ -36,7 +36,7 @@ DC <- data.frame(AB = c("A", "B"), V1 = c("AB,BW", "x,y,z"), V2 = c("1,2,3", "4,
 cartesian_split(DC, c("V1", "V2"))
 }
 \seealso{
-\code{\link[=cSplit]{cSplit()}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cartesian_unlist]{cartesian_unlist()}}
 }
 \author{
 Ananda Mahto

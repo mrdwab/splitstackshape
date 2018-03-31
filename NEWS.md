@@ -27,8 +27,8 @@
 
 ### New functions
 
-* `cartesian_split()` splits data into a long form returning the Cartesian 
-  Product of the split values.
+* `cartesian_split()` and `cartesian_unlist()` splits or unlists data into a 
+  long form returning the Cartesian Product of the resulting values.
 * `char_mat()` and `num_mat()` take lists and convert them to binary, value, or
   count matrices.
 * `move_me()` moves values around using natural language statements.

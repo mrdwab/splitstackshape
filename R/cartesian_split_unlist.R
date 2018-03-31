@@ -15,7 +15,7 @@
 #' execution time.
 #' @return A `data.table`.
 #' @author Ananda Mahto
-#' @seealso [cSplit()]
+#' @seealso [cSplit()], [cartesian_unlist()]
 #' 
 #' @examples
 #' DC <- data.frame(AB = c("A", "B"), V1 = c("AB,BW", "x,y,z"), V2 = c("1,2,3", "4,5,6,7"))
@@ -36,3 +36,36 @@ cartesian_split <- function(indt, splitCols, sep = ",", fixed = TRUE,
   indt[]
 }
 NULL
+
+#' Unlist a List Sequentially to Cartesian Product
+#' 
+#' @description Unlists a list sequentially to resulting in the Cartesian Product 
+#' of the list elements.
+#' 
+#' @param inlist The input list.
+#' @return A `data.table`.
+#' @author Ananda Mahto
+#' @seealso [cartesian_split()]
+#' 
+#' @examples
+#' L2 <- list(X1 = list("A", c("A", "B"), "X", NULL),
+#'            X2 = list(NULL, c(1, 2, 3), c(1, 2), c(1, 2, 3, 4)),
+#'            X3 = list(c("a", "b"), "c", "d", c("e", "f", "g")))
+#' cartesian_unlist(L2)
+#' @export 
+cartesian_unlist <- function(inlist) {
+  LEN <- lengths(inlist)
+  MLen <- max(LEN)
+  outlist <- lapply(seq_along(inlist), function(x) {
+    if (LEN[x]) length(inlist[[x]]) <- MLen
+    trim_list(inlist[[x]], convert = TRUE)
+  })
+  if (!is.null(names(inlist))) outlist <- setNames(outlist, names(inlist))
+  lst_id <- NULL
+  DT <- as.data.table(outlist)[, lst_id := seq.int(MLen)]
+  setcolorder(DT, move_me(names(DT), "lst_id first"))
+  out <- Reduce(function(x, y) x[y, allow.cartesian = TRUE, on = "lst_id"],
+                lapply(setdiff(names(DT), "lst_id"), function(COL)
+                  DT[, list(unlist(get(COL))), by = "lst_id"]))
+  setnames(out, names(DT))[]
+}

@@ -1,5 +1,5 @@
 library(splitstackshape)
-context("cSplit_cartesian")
+context("cartesian_split and cartesian_unlist")
 
 test_that("correct dim for output", {
   DC <- data.frame(AB = c("A", "B"), V1 = c("AB,BW", "x,y,z"), 

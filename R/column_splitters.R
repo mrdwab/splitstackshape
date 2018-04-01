@@ -101,6 +101,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       fread(VEC, sep = sep, fill = TRUE, 
             blank.lines.skip = FALSE, header = FALSE,
             colClasses = if (!type.convert) "character" else NULL,
+            encoding = "UTF-8",
             strip.white = stripWhite)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
     } else {
@@ -108,6 +109,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
       fread(VEC, sep = sep, fill = TRUE, 
             blank.lines.skip = FALSE, header = FALSE,
             colClasses = if (!type.convert) "character" else NULL,
+            encoding = "UTF-8",
             strip.white = stripWhite, logical01 = FALSE)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
       # nocov end

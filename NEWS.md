@@ -34,6 +34,7 @@
   long form returning the Cartesian Product of the resulting values.
 * `char_mat()` and `num_mat()` take lists and convert them to binary, value, or
   count matrices.
+* `dist2dt()` converts `dist` objects to long `data.table`s.
 * `move_me()` moves values around using natural language statements.
 * `trim_vec()` and `trim_list()` take vectors or lists and trims the whitespace,
   being careful about empty elements and zero-length elements.

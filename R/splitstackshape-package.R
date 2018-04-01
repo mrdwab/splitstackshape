@@ -34,7 +34,7 @@ NULL
 #' Stack and Reshape Datasets After Splitting Concatenated Values
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 2.0.0000-pre_release\cr Date: \tab 2018-03-30\cr License: \tab GPL-3\cr }
+#' Version: \tab 2.0.0000-pre_release\cr Date: \tab 2018-04-01\cr License: \tab GPL-3\cr }
 #' 
 #' Online data collection tools like Google Forms often export multiple-response 
 #' questions with data concatenated in cells. The [concat.split()] family of 

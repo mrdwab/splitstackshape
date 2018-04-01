@@ -11,7 +11,7 @@
 
 ## 2.0.0000-pre_release
 
-27 March 2018
+01 April 2018
 
 * Changed data.table dependency to >= 1.10.4, but version >= 1.10.5 (the current
   development version) is recommended. Install the development version using: 
@@ -27,6 +27,9 @@
 
 ### New functions
 
+* `ftable2dt()` and `array2dt()` conveniently convert multidimensional arrays or 
+  `ftable`s to `data.table`s, either in a "wide" form (as they are presently 
+  laid out) or a "long" form.
 * `cartesian_split()` and `cartesian_unlist()` splits or unlists data into a 
   long form returning the Cartesian Product of the resulting values.
 * `char_mat()` and `num_mat()` take lists and convert them to binary, value, or

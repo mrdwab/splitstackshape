@@ -4,10 +4,10 @@
 \alias{expandRows}
 \title{Expand the Rows of a Dataset}
 \usage{
-expandRows(indt, count, count.is.col = TRUE, drop = TRUE)
+expandRows(data, count, count.is.col = TRUE, drop = TRUE)
 }
 \arguments{
-\item{indt}{The input \code{data.table}.}
+\item{data}{The input dataset.}
 
 \item{count}{The numeric vector of counts \emph{OR} the column from the dataset
 that contains the count data. If \code{count} is a single digit, it is assumed
@@ -20,12 +20,12 @@ dataset? Defaults to \code{TRUE}.}
 dropped from the result? Defaults to \code{TRUE}.}
 }
 \value{
-A \code{data.table}.
+A \code{data.table} or a \code{data.frame}, depending on the input.
 }
 \description{
-Expands (replicates) the rows of a \code{data.table}, either by a fixed number, a
-specified vector, or a value contained in one of the columns in the source
-\code{data.table}.
+Expands (replicates) the rows of a \code{data.table} or a \code{data.frame}, either by
+a fixed number, a specified vector, or a value contained in one of the
+columns in the source \code{data.table}.
 }
 \examples{
 
@@ -34,6 +34,9 @@ expandRows(mydf, "count")
 expandRows(mydf, count = 3) ## This takes values from the third column!
 expandRows(mydf, count = 3, count.is.col = FALSE)
 expandRows(mydf, count = c(1, 5, 9), count.is.col = FALSE)
+
+## Separate method for `data.table`s
+expandRows(data.table::as.data.table(mydf), "count")
 
 }
 \author{

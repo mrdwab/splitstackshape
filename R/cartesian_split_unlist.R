@@ -23,7 +23,6 @@
 #' @export 
 cartesian_split <- function(indt, splitCols, sep = ",", fixed = TRUE, 
                              stripWhite = TRUE, type.convert = TRUE) {
-  indt <- setDT(copy(indt))
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
   if (length(sep) == 1L) sep <- rep(sep, length(splitCols))
   if (length(sep) != length(splitCols)) stop("Wrong number of sep supplied")

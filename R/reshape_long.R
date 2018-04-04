@@ -55,7 +55,7 @@ reshape_long <- function(indt, stubs, ids = NULL, value.name = NULL,
   
   if (length(check[["miss"]]) > 0L) {
     nat <- vapply(unname(check[["stubs"]]), function(x) {
-      typeof(indt[[grep(x, names(indt))[[1]]]][1])
+      typeof(indt[[grep(x, names(indt))[[1L]]]][1L])
     }, character(1L))
     
     for (i in seq_along(nat)) {

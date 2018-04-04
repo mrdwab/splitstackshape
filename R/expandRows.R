@@ -38,7 +38,7 @@ expandRows.data.table <- function(data, count, count.is.col = TRUE, drop = TRUE)
     vals <- data[[count]]
     out <- data[rep.int(seq.int(nrow(data)), vals)]
     if (drop) set(out, j = count, value = NULL)
-    if (any(vals == 0)) setattr(out, "dropped_vals", data[vals == 0])
+    if (any(vals == 0L)) setattr(out, "dropped_vals", data[vals == 0L])
   } else if (length(count) == 1L) {
     vals <- count
     out <- data[rep(seq.int(nrow(data)), each = vals)]
@@ -46,7 +46,7 @@ expandRows.data.table <- function(data, count, count.is.col = TRUE, drop = TRUE)
     vals <- count
     if (length(vals) != nrow(data)) stop("wrong number of count values supplied")
     out <- data[rep.int(seq.int(nrow(data)), as.integer(vals))]
-    if (any(vals == 0)) setattr(out, "dropped_vals", data[vals == 0])
+    if (any(vals == 0L)) setattr(out, "dropped_vals", data[vals == 0L])
   }
   
   out[]
@@ -60,7 +60,7 @@ expandRows.data.frame <- function(data, count, count.is.col = TRUE, drop = TRUE)
     vals <- data[[count]]
     out <- data[rep.int(seq.int(nrow(data)), vals), ]
     if (drop) out[[count]] <- NULL
-    if (any(vals == 0)) setattr(out, "dropped_vals", data[vals == 0, ])
+    if (any(vals == 0L)) setattr(out, "dropped_vals", data[vals == 0L, ])
   } else if (length(count) == 1L) {
     vals <- count
     out <- data[rep(seq.int(nrow(data)), each = vals), ]
@@ -68,7 +68,7 @@ expandRows.data.frame <- function(data, count, count.is.col = TRUE, drop = TRUE)
     vals <- count
     if (length(vals) != nrow(data)) stop("wrong number of count values supplied")
     out <- data[rep.int(seq.int(nrow(data)), as.integer(vals)), ]
-    if (any(vals == 0)) setattr(out, "dropped_vals", data[vals == 0])
+    if (any(vals == 0L)) setattr(out, "dropped_vals", data[vals == 0L])
   }
   
   `rownames<-`(out, NULL)

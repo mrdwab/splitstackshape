@@ -46,16 +46,16 @@ cSplit_e <- concat.split.expanded <- function(
   indt, splitCols, sep = ",", mode = "binary", type = "numeric",
   drop = FALSE, fixed = TRUE, fill = NULL) {
   
-  indt <- data.table::setDT(copy(indt))
+  indt <- setDT(copy(indt))
   if (is.numeric(splitCols)) splitCols <- names(indt)[splitCols]
-  if (length(sep) == 1) sep <- rep(sep, length(splitCols))
+  if (length(sep) == 1L) sep <- rep(sep, length(splitCols))
   if (length(sep) != length(splitCols)) stop("Wrong number of sep supplied")
-  if (length(mode) == 1) mode <- rep(mode, length(splitCols))
+  if (length(mode) == 1L) mode <- rep(mode, length(splitCols))
   if (length(mode) != length(mode)) stop("Wrong number of mode supplied")
   if (any(!mode %in% c("binary", "value", "count"))) {
     stop("Mode must be `binary`, `value`, or `count`")
   }
-  if (length(type) == 1) type <- rep(type, length(splitCols))
+  if (length(type) == 1L) type <- rep(type, length(splitCols))
   if (length(type) != length(type)) stop("Wrong number of type supplied")
   
   for (i in seq_along(splitCols)) {
@@ -75,8 +75,7 @@ cSplit_e <- concat.split.expanded <- function(
     if (any(duplicated(splitCols))) {
       NAMES <- sprintf("%s_%s", NAMES, mode[i])
     }
-    set(indt, j = NAMES, 
-        value = as.data.table(temp))
+    set(indt, j = NAMES, value = as.data.table(temp))
     if (drop) set(indt, j = splitCols[i], value = NULL)
   }
   indt[]

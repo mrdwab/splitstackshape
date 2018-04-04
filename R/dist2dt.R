@@ -19,8 +19,8 @@ dist2dt <- function(inDist) {
   if (isTRUE(attr(inDist, "Diag"))) attr(inDist, "Diag") <- FALSE
   if (isTRUE(attr(inDist, "Upper"))) attr(inDist, "Upper") <- FALSE
   data.table(
-    row = B[unlist(lapply(sequence(A)[-1], function(x) x:A))],
-    col = rep(B[-length(B)], (length(B)-1):1),
+    row = B[unlist(lapply(sequence(A)[-1L], function(x) x:A))],
+    col = rep(B[-length(B)], (length(B)-1L):1L),
     value = as.vector(inDist))
 }
 NULL

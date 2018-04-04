@@ -21,4 +21,6 @@ test_that("stratified returns the expected number of rows", {
     stratified(as.data.table(DF), "A", c(AA = 1, BB = 3, CC = 2), 
                select = list(A = c("AA", "BB", "CC")))), 6)
   expect_error(stratified(as.data.table(DF), "A", c(1, 2, 3, 2, 1)))
+  df <- data.frame(x = c(1,1,2,2,2,7), t = 1:6)
+  expect_true(all(replicate(10, stratified(df, "x", 1)[x %in% 7, t]) == 6))
 })

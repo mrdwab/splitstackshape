@@ -45,4 +45,9 @@ test_that("t_split gets called when fixed=FALSE", {
                    char_col = c("  A, B  ", NA, ""),
                    diff_delim_col = c("6;7", "5", "1;3;2"))
   expect_equal(dim(cSplit(DF, names(DF)[-1], "[,;]", fixed = FALSE)), c(3, 9))
+  
+  df <- data.frame(V1 = c("A", "B", "C"),
+                   V2 = c("C", "C", NA),
+                   V3 = c("D", "A", "B"))
+  expect_equal(dim(char_mat(df)), c(3, 4))
 })

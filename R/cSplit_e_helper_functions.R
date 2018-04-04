@@ -148,7 +148,7 @@ NULL
 #' @aliases trim_list
 trim_list <- function(x, relist = TRUE, convert = FALSE) {
   x <- replace(x, lengths(x) == 0, NA_character_)
-  y <- unlist(x, use.names = FALSE)
+  y <- as.character(unlist(x, use.names = FALSE))
   y[!nzchar(y)] <- NA_character_
   out <- trim_vec(y, TRUE)
   if ((attr(out, "test") == "clean") & (!convert)) {
@@ -158,8 +158,8 @@ trim_list <- function(x, relist = TRUE, convert = FALSE) {
     if (convert) out <- type.convert(out, as.is = TRUE)
     if (relist) {
       V2 <- NULL
-      out <- data.table(out, rep.int(seq.int(length(x)), 
-                                     lengths(x)))[, list(list(out)), V2]$V1
+      out <- data.table(out, rep.int(
+        seq.int(length(x)), lengths(x)))[, list(list(out)), V2]$V1
       if (is.null(names(x))) out else `names<-`(out, names(x))
     }
     out
@@ -183,6 +183,7 @@ NULL
 #' @aliases trim_vec
 trim_vec <- function(vec, attr = FALSE) {
   if (!is.atomic(vec)) stop("This function is for character vectors only")
+  vec <- as.character(vec)
   if (any(endsWith(vec, " ") | startsWith(vec, " "), na.rm = TRUE)) {
     vec <- if (requireNamespace("stringi", quietly = TRUE)) {
       stringi::stri_trim_both(vec, "\\P{Zs}")

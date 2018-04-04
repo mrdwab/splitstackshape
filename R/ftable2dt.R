@@ -74,14 +74,13 @@ NULL
 
 ftablewide <- function(FT, FIX = TRUE) {
   ft_attr <- attributes(FT)
-  rows <- setDT(rev(expand.grid(rev(ft_attr$row.vars), 
-                                stringsAsFactors = FALSE)))
+  rows <- do.call(CJ, c(ft_attr$row.vars, sorted = FALSE))
   if (is.null(names(ft_attr$row.vars))) setnames(
     rows, paste0("V", seq_len(ncol(rows))))
   Nam <- names(rows)
-  cols <- data.table(setattr(FT, "class", "matrix"))
-  setnames(cols, do.call(paste, c(rev(expand.grid(
-    rev(ft_attr$col.vars), stringsAsFactors = FALSE)), sep = "_")))
+  cols <- as.data.table(setattr(FT, "class", "matrix"))
+  setnames(cols, do.call(paste, c(do.call(CJ, c(
+    ft_attr$col.vars, sorted = FALSE)), sep = "_")))
   temp <- data.table(rows, cols)
   if (isTRUE(FIX)) temp[, (Nam) := lapply(.SD, as.integer), .SDcols = Nam]
   list(Attributes = ft_attr, Names = Nam, Data = temp)

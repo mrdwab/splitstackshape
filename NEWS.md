@@ -27,6 +27,10 @@
 
 ### New functions
 
+* `[.ftable` extends `?Extract` to be able to conveniently extract values from 
+  an `ftable`.
+* `array_extractor()` uses a `list` to extract values from an array based on the
+  `dimnames` requested.
 * `ftable2dt()` and `array2dt()` conveniently convert multidimensional arrays or 
   `ftable`s to `data.table`s, either in a "wide" form (as they are presently 
   laid out) or a "long" form.

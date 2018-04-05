@@ -12,6 +12,16 @@ NULL
 #' the names of the columns and rows (stored in the attributes of the `ftable`).
 #' 
 #' @param inftable The input `ftable`.
+#' @param \dots The values you would like to extract, as character strings for
+#' each dimension.
+#' 
+#' @note The extraction should be specified positionally from left to right for 
+#' the row attributes and then top to bottom for the column attributes. For 
+#' example, the `tab2` table in the examples has four dimensions: `Class`, `Sex`, 
+#' `Age`, and `Survived`, so the approach to extract should be in the form of
+#' `tab2[values from "Class", values from "Sex", values from "Age", values from
+#' "Survived"]`. So, if you wanted to extract the count of children who did not
+#' survive for all classes and genders, you would use `tab2[, , "Child", "No"]`.
 #' 
 #' @examples
 #' mytable <- ftable(Titanic, row.vars = 1:3)
@@ -20,7 +30,6 @@ NULL
 #' tab2[c("1st", "3rd"), , , ]
 #' @export 
 `[.ftable` <- function (inftable, ...) {
-  if (!class(inftable) %in% "ftable") stop("input is not an ftable")
   tblatr <- attributes(inftable)[c("row.vars", "col.vars")]
   valslist <- replace_empty_arguments(as.list(match.call()[-(1:2)]))
   x <- sapply(valslist, function(x) identical(x, 0))
@@ -66,6 +75,9 @@ NULL
 #' 
 #' @export
 array_extractor <- function(inarray, valslist) {
+  if (any(!unlist(valslist) %in% unlist(dimnames(inarray)))) {
+    stop("valslist not all found in dimnames")
+  }
   x <- vapply(valslist, is.null, logical(1L))
   valslist[x] <- dimnames(inarray)[x]
   temp <- as.matrix(expand.grid(valslist))

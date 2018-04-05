@@ -9,10 +9,21 @@
 }
 \arguments{
 \item{inftable}{The input \code{ftable}.}
+
+\item{\dots}{The values you would like to extract, as character strings for
+each dimension.}
 }
 \description{
 Extension of \code{?Extract} to work with \code{\link[stats:ftable]{stats::ftable()}} by using
 the names of the columns and rows (stored in the attributes of the \code{ftable}).
+}
+\note{
+The extraction should be specified positionally from left to right for
+the row attributes and then top to bottom for the column attributes. For
+example, the \code{tab2} table in the examples has four dimensions: \code{Class}, \code{Sex},
+\code{Age}, and \code{Survived}, so the approach to extract should be in the form of
+\code{tab2[values from "Class", values from "Sex", values from "Age", values from "Survived"]}. So, if you wanted to extract the count of children who did not
+survive for all classes and genders, you would use \code{tab2[, , "Child", "No"]}.
 }
 \examples{
 mytable <- ftable(Titanic, row.vars = 1:3)

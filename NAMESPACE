@@ -3,6 +3,7 @@
 S3method("[",ftable)
 S3method(expandRows,data.frame)
 S3method(expandRows,data.table)
+export(Riffle)
 export(Stacked)
 export(array2dt)
 export(array_extractor)

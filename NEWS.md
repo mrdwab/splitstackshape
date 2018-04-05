@@ -31,15 +31,16 @@
   an `ftable`.
 * `array_extractor()` uses a `list` to extract values from an array based on the
   `dimnames` requested.
-* `ftable2dt()` and `array2dt()` conveniently convert multidimensional arrays or 
-  `ftable`s to `data.table`s, either in a "wide" form (as they are presently 
-  laid out) or a "long" form.
 * `cartesian_split()` and `cartesian_unlist()` splits or unlists data into a 
   long form returning the Cartesian Product of the resulting values.
 * `char_mat()` and `num_mat()` take lists and convert them to binary, value, or
   count matrices.
 * `dist2dt()` converts `dist` objects to long `data.table`s.
+* `ftable2dt()` and `array2dt()` conveniently convert multidimensional arrays or 
+  `ftable`s to `data.table`s, either in a "wide" form (as they are presently 
+  laid out) or a "long" form.
 * `move_me()` moves values around using natural language statements.
+* `Riffle()` interleaves matrices or vectors together.
 * `trim_vec()` and `trim_list()` take vectors or lists and trims the whitespace,
   being careful about empty elements and zero-length elements.
 * `unlist_cols()` added as a convenience function for `listCol_l()` and 

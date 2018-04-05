@@ -12,23 +12,6 @@
 }
 # nocov end
 
-#' Example Dataset with Concatenated Cells
-#' 
-#' This is a sample dataset to demonstrate the different features of the
-#' [concat.split()] family of functions.
-#' 
-#' 
-#' @name concat.test
-#' @aliases concat.test concatenated
-#' @docType data
-#' @format A `data.frame` in which many columns contain concatenated cells
-#' @keywords datasets
-NULL
-
-
-
-
-
 #' splitstackshape
 #' 
 #' Stack and Reshape Datasets After Splitting Concatenated Values

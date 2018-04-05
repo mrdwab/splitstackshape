@@ -67,6 +67,34 @@
 * `Reshape()` has been removed as it was mostly a proof of concept and its
   functionality is completely covered by `reshape_long()`.
 
+## 1.4.5
+
+05 April 2018
+
+Preparing for transition to V2 of the splitstackshape package. 
+
+* Redundant functions are being marked using `.Deprecated()`. These include
+  `concat.split.multiple` and `concat.split.compact`, both of which can now just
+  directly use `cSplit`.
+* `cSplit_f` has been removed as it would no longer be relevant in V2 of the
+  package and isn't entirely reliable the way it has been written. `fread`, on
+  which the function was based, has underwent many changes since the function 
+  was written.
+
+Tests have been added covering most basic cases, but not for all potential bugs
+that have been fixed in V2 of the package.
+
+* `stratified` has been fixed.
+* `cSplit_f` has been removed.
+
+## 1.4.4
+
+29 March 2018
+
+* `Reshape()` bugfix. Reported at [https://stackoverflow.com/q/49281838/1270695](https://stackoverflow.com/q/49281838/1270695).
+* `listCol_w()` bugfix. Thanks to @jazzurro.
+* `cSplit_e()` bugfix. Reported at [https://stackoverflow.com/q/48576331/1270695](https://stackoverflow.com/q/48576331/1270695)
+
 ## 1.4.3
 
 20 March 2018

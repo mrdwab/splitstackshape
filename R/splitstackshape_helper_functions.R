@@ -86,7 +86,8 @@ NULL
 
 # Long Fixer -- Don't Export ----------------------------------------------
 long_fixer <- function(indt, cols) {
-  temp <- rowSums(is.na(indt[, ..cols])) + rowSums(indt[, ..cols] == "", na.rm = TRUE)
+  temp <- rowSums(is.na(indt[, cols, with = FALSE])) + 
+    rowSums(indt[, cols, with = FALSE] == "", na.rm = TRUE)
   temp == length(cols)
 }
 NULL

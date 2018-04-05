@@ -1,7 +1,7 @@
 #' Split Concatenated Cells into a Condensed Format
 #' 
 #' The default splitting method for `concat.split`. Formerly based on 
-#' [read.concat()] but presently a simple wrapper around [cSplit()].
+#' [read.concat()] but presently a simple wrapper around [cSplit()]. 
 #' 
 #' 
 #' @param data The input `data.frame` or `data.table`.
@@ -13,18 +13,21 @@
 #' pattern (`TRUE`) or a regular expression (`FALSE`)? Defaults to `TRUE`.
 #' @param \dots optional arguments to pass to `cSplit`.
 #' @return A `data.table`.
-#' @note This function no longer does anything different from [cSplit()]. It is 
+#' @note THIS FUNCTION IS DEPRECATED AND WILL BE REMOVED FROM LATER VERSIONS OF
+#' "SPLITSTACKSHAPE". It no longer does anything different from [cSplit()]. It is 
 #' recommended that you transition your code to the `cSplit` function instead.
 #' @author Ananda Mahto
 #' @seealso [read.concat()], [cSplit()]
 #' @examples
 #' 
+#' \dontrun{
 #' temp <- head(concat.test)
 #' concat.split.compact(temp, "Likes")
 #' concat.split.compact(temp, 4, ";")
 #' 
 #' ## Extra arguments to cSplit
 #' concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
+#' }
 #' 
 #' @export concat.split.compact
 concat.split.compact <- function(data, split.col, sep = ",", 
@@ -313,16 +316,18 @@ NULL
 #' @param direction The desired form of the resulting `data.frame` or `data.table`, 
 #' either `"wide"` or `"long"`.  Defaults to `"wide"`.
 #' @param \dots Other arguments to [cSplit()].
-#' @return A \code{data.table}.
+#' @return A `data.table`.
 #' @author Ananda Mahto
 #' @seealso [cSplit()]
 #' @examples
 #' 
+#' \dontrun{
 #' temp <- head(concat.test)
 #' concat.split.multiple(temp, split.cols = c("Likes", "Hates", "Siblings"),
 #'                       seps = c(",", ";", ","))
 #' concat.split.multiple(temp, split.cols = c("Likes", "Siblings"),
 #'                       seps = ",", direction = "long")
+#' }
 #' 
 #' @export concat.split.multiple
 concat.split.multiple <- function(data, split.cols, seps = ",", 

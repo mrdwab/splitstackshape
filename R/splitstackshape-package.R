@@ -1,18 +1,15 @@
 #' Example Dataset with Concatenated Cells
 #' 
 #' This is a sample dataset to demonstrate the different features of the
-#' \code{\link{concat.split}} family of functions.
+#' [concat.split()] family of functions.
 #' 
 #' 
 #' @name concat.test
-#' @aliases concat.test concatenated
+#' @aliases concat.test
 #' @docType data
-#' @format A \code{data.frame} in which many columns contain concatenated cells
+#' @format A `data.frame` in which many columns contain concatenated cells.
 #' @keywords datasets
 NULL
-
-
-
 
 
 #' splitstackshape
@@ -20,17 +17,15 @@ NULL
 #' Stack and Reshape Datasets After Splitting Concatenated Values
 #' 
 #' \tabular{ll}{ Package: \tab splitstackshape\cr Type: \tab Package\cr
-#' Version: \tab 1.4.5\cr Date: \tab 2018-03-30\cr License: \tab GPL-3\cr }
+#' Version: \tab 1.4.5\cr Date: \tab 2018-04-05\cr License: \tab GPL-3\cr }
 #' 
-#' Online data collection tools like Google Forms often export
-#' multiple-response questions with data concatenated in cells. The
-#' \code{\link{concat.split}} family of functions splits such data
-#' into separate cells. The package also includes functions to 
-#' \emph{stack} groups of columns and to \emph{reshape} wide data, even when
-#' the data are "unbalanced"---something which \code{\link{reshape}} does not
-#' handle, and which \code{\link[reshape2:melt]{melt}} and
-#' \code{\link[reshape2:dcast]{dcast}} from \emph{reshape2} do not easily
-#' handle.
+#' Online data collection tools like Google Forms often export multiple-response 
+#' questions with data concatenated in cells. The [concat.split()] family of 
+#' functions splits such data into separate cells. The package also includes 
+#' functions to *stack* groups of columns and to *reshape* wide data, even when
+#' the data are "unbalanced"---something which [stats::reshape()] does not handle, 
+#' and which [reshape2::melt()] and [reshape2::dcast()] from *reshape2* do not 
+#' easily handle.
 #' 
 #' @name splitstackshape-package
 #' @aliases splitstackshape splitstackshape-package
@@ -49,12 +44,9 @@ NULL
 #' 
 #' ## Reshape
 #' set.seed(1)
-#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"),
-#'                    varA.1 = sample(letters, 6),
-#'                    varA.2 = sample(letters, 6),
-#'                    varA.3 = sample(letters, 6),
-#'                    varB.2 = sample(10, 6),
-#'                    varB.3 = sample(10, 6),
+#' mydf <- data.frame(id_1 = 1:6, id_2 = c("A", "B"), varA.1 = sample(letters, 6),
+#'                    varA.2 = sample(letters, 6), varA.3 = sample(letters, 6),
+#'                    varB.2 = sample(10, 6), varB.3 = sample(10, 6), 
 #'                    varC.3 = rnorm(6))
 #' mydf
 #' Reshape(mydf, id.vars = c("id_1", "id_2"),
@@ -97,8 +89,6 @@ NULL
 #'    var.stubs=c("varA", "varB", "varC"), sep = "_")
 #' })
 #' }
-#' 
-#' \dontshow{rm(mydf)}
 #' 
 NULL
 

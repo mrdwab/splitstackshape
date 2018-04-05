@@ -8,7 +8,7 @@ stratified(indt, group, size, select = NULL, replace = FALSE,
   keep.rownames = FALSE, bothSets = FALSE, ...)
 }
 \arguments{
-\item{indt}{\code{data.table}.}
+\item{indt}{The input \code{data.table}.}
 
 \item{group}{The column or columns that should be used to create the groups.
 Can be a character vector of column names (recommended) or a numeric vector
@@ -33,66 +33,74 @@ for the input dataset.}
 
 \item{replace}{Logical. Should sampling be with replacement? Defaults to \code{FALSE}.}
 
-\item{keep.rownames}{Logical. If the input is a \code{data.frame} or a \code{matrix},
+\item{keep.rownames}{Logical. If the input is a \code{data.frame} with \code{rownames},
 \code{as.data.table} would normally drop the rownames. If \code{TRUE}, the rownames
 would be retained in a column named \code{rn}. Defaults to \code{FALSE}.}
 
 \item{bothSets}{Logical. Should both the sampled and non-sampled sets be
 returned as a \code{list}? Defaults to \code{FALSE}.}
 
-\item{\dots}{Optional arguments to \code{sample}.}
+\item{\dots}{Optional arguments to \code{\link[base:sample]{base::sample()}}.}
 }
 \value{
-If \code{bothSets = TRUE}, a \code{list} of two \code{data.tables}; otherwise, a
-single \code{data.table} with the sampled rows.
+If \code{bothSets = TRUE}, a \code{list} of two \code{data.tables}; otherwise, a \code{data.table}.
 }
 \description{
 The \code{stratified} function samples from a \code{data.table} in which one or more
 columns can be used as a "stratification" or "grouping" variable. The result
-is a new \code{data.table} with the specified number or proportion of samples from
-each group.
+is a new \code{data.table} with the specified number of samples from each group.
 }
 \note{
 \emph{Slightly different sizes than requested}: Because of how computers
 deal with floating-point arithmetic, and because R uses a "round to even"
 approach, the size per strata that results when specifying a proportionate
-sample may be slightly higher or lower per strata than you might have expected.
+sample may be one sample higher or lower per strata than you might have expected.
 }
 \examples{
 
 # Generate a sample data.frame to play with
 set.seed(1)
-dat1 <- data.frame(ID = 1:100,
-              A = sample(c("AA", "BB", "CC", "DD", "EE"), 
-                         100, replace = TRUE),
-              B = rnorm(100), C = abs(round(rnorm(100), digits=1)),
-              D = sample(c("CA", "NY", "TX"), 100, replace = TRUE),
-              E = sample(c("M", "F"), 100, replace = TRUE))
+DF <- data.frame(
+  ID = 1:100,
+  A = sample(c("AA", "BB", "CC", "DD", "EE"), 100, replace = TRUE),
+  B = rnorm(100), C = abs(round(rnorm(100), digits=1)),
+  D = sample(c("CA", "NY", "TX"), 100, replace = TRUE),
+  E = sample(c("M", "F"), 100, replace = TRUE))
 
-# Let's take a 10\% sample from all -A- groups in dat1
-stratified(dat1, "A", .1)
+# Take a 10\% sample from all -A- groups in DF
+stratified(DF, "A", .1)
 
-# Let's take a 10\% sample from only "AA" and "BB" groups from -A- in dat1
-stratified(dat1, "A", .1, select = list(A = c("AA", "BB")))
+# Take a 10\% sample from only "AA" and "BB" groups from -A- in DF
+stratified(DF, "A", .1, select = list(A = c("AA", "BB")))
 
-# Let's take 5 samples from all -D- groups in dat1,
-#   specified by column number
-stratified(dat1, group = 5, size = 5)
+# Take 5 samples from all -D- groups in DF, specified by column number
+stratified(DF, group = 5, size = 5)
 
 # Use a two-column strata: -E- and -D-
-#   -E- varies more slowly, so it is better to put that first
-stratified(dat1, c("E", "D"), size = .15)
+stratified(DF, c("E", "D"), size = .15)
 
-# Use a two-column strata (-E- and -D-) but only interested in
-#   cases where -E- == "M"
-stratified(dat1, c("E", "D"), .15, select = list(E = "M"))
+# Use a two-column strata (-E- and -D-) but only use cases where -E- == "M"
+stratified(DF, c("E", "D"), .15, select = list(E = "M"))
 
 ## As above, but where -E- == "M" and -D- == "CA" or "TX"
-stratified(dat1, c("E", "D"), .15,
-     select = list(E = "M", D = c("CA", "TX")))
+stratified(DF, c("E", "D"), .15, select = list(E = "M", D = c("CA", "TX")))
 
 # Use a three-column strata: -E-, -D-, and -A-
-s.out <- stratified(dat1, c("E", "D", "A"), size = 2)
+stratified(DF, c("E", "D", "A"), size = 2)
+
+\dontrun{
+# The following will produce errors
+stratified(DF, "D", c(5, 3))
+stratified(DF, "D", c(5, 3, 2))
+}
+
+# Sizes using a named vector
+stratified(DF, "D", c(CA = 5, NY = 3, TX = 2))
+
+# Works with multiple groups as well
+stratified(DF, c("D", "E"), 
+           c("NY F" = 2, "NY M" = 3, "TX F" = 1, "TX M" = 1,
+             "CA F" = 5, "CA M" = 1))
 
 }
 \seealso{

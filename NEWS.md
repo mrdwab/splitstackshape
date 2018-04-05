@@ -19,6 +19,9 @@ functions are being marked using `.Deprecated()`.
 Tests have been added covering most basic cases, but not for all potential bugs
 that have been fixed in V2 of the package.
 
+* `stratified` has been fixed.
+* `cSplit_f` has been removed.
+
 ## 1.4.4
 
 29 March 2018

@@ -15,19 +15,16 @@ othernames(data, toremove)
 A character vector of the remaining names.
 }
 \description{
-A convenience function for \code{setdiff(names(data),
--some_vector_of_names-)}.
+A convenience function for \code{setdiff(names(data), -some_vector_of_names-)}.
 }
 \examples{
 
 mydf <- data.frame(a = 1:2, b = 3:4, c = 5:6)
 splitstackshape:::othernames(mydf, "a")
 
-\dontshow{rm(mydf)}
-
 }
 \seealso{
-\code{\link{setdiff}}
+\code{\link[base:setdiff]{base::setdiff()}}
 }
 \author{
 Ananda Mahto

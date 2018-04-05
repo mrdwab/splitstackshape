@@ -30,11 +30,13 @@ results into a "long" format.
 }
 \examples{
 
+\dontrun{
 temp <- head(concat.test)
 concat.split.multiple(temp, split.cols = c("Likes", "Hates", "Siblings"),
                       seps = c(",", ";", ","))
 concat.split.multiple(temp, split.cols = c("Likes", "Siblings"),
                       seps = ",", direction = "long")
+}
 
 }
 \seealso{

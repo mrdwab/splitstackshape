@@ -30,17 +30,20 @@ The default splitting method for \code{concat.split}. Formerly based on
 \code{\link[=read.concat]{read.concat()}} but presently a simple wrapper around \code{\link[=cSplit]{cSplit()}}.
 }
 \note{
-This function no longer does anything different from \code{\link[=cSplit]{cSplit()}}. It is
+THIS FUNCTION IS DEPRECATED AND WILL BE REMOVED FROM LATER VERSIONS OF
+"SPLITSTACKSHAPE". It no longer does anything different from \code{\link[=cSplit]{cSplit()}}. It is
 recommended that you transition your code to the \code{cSplit} function instead.
 }
 \examples{
 
+\dontrun{
 temp <- head(concat.test)
 concat.split.compact(temp, "Likes")
 concat.split.compact(temp, 4, ";")
 
 ## Extra arguments to cSplit
 concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
+}
 
 }
 \seealso{

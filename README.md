@@ -1,6 +1,7 @@
 # splitstackshape
 
 [![Travis-CI Build Status](https://travis-ci.org/mrdwab/splitstackshape.svg?branch=v1_development)](https://travis-ci.org/mrdwab/splitstackshape)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mrdwab/splitstackshape?branch=v1_development&svg=true)](https://ci.appveyor.com/project/mrdwab/splitstackshape)
 [![Coverage Status](https://img.shields.io/codecov/c/github/mrdwab/splitstackshape/v1_development.svg)](https://codecov.io/gh/mrdwab/splitstackshape/branch/v1_development)
 
 R functions to split concatenated data, stack columns of your datasets, and convert your data into different shapes.
@@ -27,11 +28,16 @@ The package [is on CRAN](https://CRAN.R-project.org/package=splitstackshape). Yo
 install.packages("splitstackshape")
 ```
 
-To install the development version, use:
+To install the V2 beta version, use:
 
 ```r
-library(devtools)
-install_github("mrdwab/splitstackshape", ref = "v2.0")
+devtools::install_github("mrdwab/splitstackshape", ref = "v2.0")
 ```
 
-Current version: 1.4.4
+To install the V1 development version, use:
+
+```r
+devtools::install_github("mrdwab/splitstackshape", ref = "v1_development")
+```
+
+Current CRAN version: 1.4.4

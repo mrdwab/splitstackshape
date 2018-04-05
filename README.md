@@ -19,6 +19,8 @@ R functions to split concatenated data, stack columns of your datasets, and conv
 * `expandRows`: "Expands" the rows of a dataset.
 * `listCol_l`, `listCol_w`, and `unlist_cols`: Unlists (long) or flattens (wide) a column in a `data.frame` or a `data.table` stored as a `list`. 
 
+See the [**NEWS**](NEWS.md) file for more function changes.
+
 ## Install
 
 The package [is on CRAN](https://CRAN.R-project.org/package=splitstackshape). You can install it using:
@@ -27,11 +29,18 @@ The package [is on CRAN](https://CRAN.R-project.org/package=splitstackshape). Yo
 install.packages("splitstackshape")
 ```
 
-To install the development version, use:
+To install the V2 pre-release version, use:
 
 ```r
 library(devtools)
 install_github("mrdwab/splitstackshape", ref = "v2.0")
+```
+
+To install the V1 development version, use:
+
+```r
+library(devtools)
+install_github("mrdwab/splitstackshape", ref = "v1_development")
 ```
 
 Current CRAN version: 1.4.4

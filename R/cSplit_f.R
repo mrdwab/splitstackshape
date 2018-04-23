@@ -69,7 +69,7 @@ cSplit_f <- function(indt, splitCols, sep, drop = TRUE, dotsub = "|", stripWhite
       writeLines(indt[[splitCols[i]]], x)
     }
 
-    Split <- fread(x, sep[i], header = FALSE)
+    Split <- fread(x, sep = sep[i], header = FALSE)
     split_names <- paste(splitCols[i], seq_along(Split), sep = "_")
     set(indt, i = NULL, j = split_names, value = Split)
   }

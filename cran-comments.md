@@ -7,6 +7,9 @@
 
 0 errors | 0 warnings | 1 note
 
+I've changed my preferred email from ananda@mahto.info to mrdwab@gmail.com due
+to some problems I've been having with my self-hosted email.
+
 * This is a bugfix release
 
 ## Reverse dependencies

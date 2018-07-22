@@ -9,19 +9,18 @@ read.concat(data, col.prefix, sep, ...)
 \arguments{
 \item{data}{The input data.}
 
-\item{col.prefix}{The desired column prefix for the output
-\code{data.frame}.}
+\item{col.prefix}{The desired column prefix for the output \code{data.frame}.}
 
 \item{sep}{The character that acts as a delimiter.}
 
-\item{\dots}{Other arguments to pass to \code{read.table}.}
+\item{\dots}{Other arguments to pass to \code{\link[utils:read.table]{utils::read.table()}}.}
 }
 \value{
-A \code{data.frame}
+A \code{data.frame}.
 }
 \description{
-Originally a helper function for the \code{\link{concat.split.compact}} function.
-This function has now been effectively replaced by \code{\link{cSplit}}.
+Originally a helper function for the \code{\link[=concat.split.compact]{concat.split.compact()}} function. This
+function has now been effectively replaced by \code{\link[=cSplit]{cSplit()}}.
 }
 \examples{
 
@@ -34,11 +33,9 @@ vec <- c("12,51,34,17", "84,28,17,10", "11,43,28,15",
 "80,26,17,91", "10,41,25,13", "97,35,23,12,13")
 splitstackshape:::read.concat(vec, "var", ",")
 
-\dontshow{rm(vec)}
-
 }
 \seealso{
-\code{read.table}
+\code{\link[utils:read.table]{utils::read.table()}}
 }
 \author{
 Ananda Mahto

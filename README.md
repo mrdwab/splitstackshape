@@ -1,13 +1,14 @@
 # splitstackshape
 
-[![Travis-CI Build Status](https://travis-ci.org/mrdwab/splitstackshape.svg?branch=master)](https://travis-ci.org/mrdwab/splitstackshape)
+[![Travis-CI Build Status](https://travis-ci.org/mrdwab/splitstackshape.svg?branch=v1_development)](https://travis-ci.org/mrdwab/splitstackshape)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mrdwab/splitstackshape?branch=v1_development&svg=true)](https://ci.appveyor.com/project/mrdwab/splitstackshape)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mrdwab/splitstackshape/v1_development.svg)](https://codecov.io/gh/mrdwab/splitstackshape/branch/v1_development)
 
 R functions to split concatenated data, stack columns of your datasets, and convert your data into different shapes.
 
 ## Core Functions
 
 * `cSplit`: A core function that collects the functionality of several of the  `concat.split` family of functions.
-* `cSplit_f`: A fast way to split columns of data where you know each row would result in the same number of values after being split.
 * `concat.split`: A set of functions to split strings where data have been concatenated into a single value, as is common when getting data collected with tools like Google Forms. (`cSplit_l` to return a `list`; and `cSplit_e` to return an "expanded" view of the input data.)
 * `Stacked`: A function to create a list of `stack`ed sets of variables. Similar to `melt` from "reshape2", but doesn't put everything into one very long `data.frame`.
 * `Reshape`: A function to allow base R's `reshape` function to work with "unbalanced" datasets.
@@ -27,11 +28,16 @@ The package [is on CRAN](https://CRAN.R-project.org/package=splitstackshape). Yo
 install.packages("splitstackshape")
 ```
 
-To install the development version, use:
+To install the V2 beta version, use:
 
 ```r
-library(devtools)
-install_github("mrdwab/splitstackshape", ref = "v2.0")
+devtools::install_github("mrdwab/splitstackshape", ref = "v2.0")
 ```
 
-Current version: 1.4.4
+To install the V1 development version, use:
+
+```r
+devtools::install_github("mrdwab/splitstackshape", ref = "v1_development")
+```
+
+Current CRAN version: 1.4.4

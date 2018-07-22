@@ -1,8 +1,8 @@
 Package: splitstackshape
 Type: Package
 Title: Stack and Reshape Datasets After Splitting Concatenated Values
-Version: 1.4.4
-Date: 2018-03-29
+Version: 1.4.6
+Date: 2018-07-22
 Author: Ananda Mahto
 Maintainer: Ananda Mahto <ananda@mahto.info>
 Description: Online data collection tools like Google Forms often export
@@ -23,3 +23,5 @@ URL: http://github.com/mrdwab/splitstackshape
 BugReports: http://github.com/mrdwab/splitstackshape/issues
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
+Suggests: covr,
+    testthat

@@ -20,12 +20,12 @@ input dataset? Defaults to \code{TRUE}.}
 column be dropped from the result? Defaults to \code{TRUE}.}
 }
 \value{
-A \code{data.frame} or a \code{data.table}, depending on the input.
+A \code{data.frame} or \code{data.table}, depending on the input.
 }
 \description{
-Expands (replicates) the rows of a \code{data.frame} or a \code{data.table}, either by a fixed
-number, a specified vector, or a value contained in one of the columns in
-the source \code{data.frame} or a \code{data.table}.
+Expands (replicates) the rows of a \code{data.frame} or \code{data.table}, either by a
+fixed number, a specified vector, or a value contained in one of the columns
+in the source \code{data.frame} or \code{data.table}.
 }
 \examples{
 

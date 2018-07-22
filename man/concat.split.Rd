@@ -16,30 +16,29 @@ either by the column number or the variable name.}
 
 \item{sep}{The character separating each value (defaults to \code{","}).}
 
-\item{structure}{Can be either \code{"compact"}, \code{"expanded"}, or
-\code{"list"}. Defaults to \code{"compact"}. See Details.}
+\item{structure}{Can be either \code{"compact"}, \code{"expanded"}, or \code{list}. Defaults
+to \code{"compact"}. See Details.}
 
-\item{mode}{Can be either \code{"binary"} or \code{"value"} (where
-\code{"binary"} is default and it recodes values to 1 or \code{NA}, like
-Boolean data, but without assuming 0 when data is not available).  This
-setting only applies when \code{structure = "expanded"}; a warning message
-will be issued if used with other structures.}
+\item{mode}{Can be either \code{"binary"} or \code{"value"} (where \code{"binary"} is default
+and it recodes values to 1 or \code{NA}, like Boolean data, but without assuming 0
+when data is not available). This setting only applies when
+\code{structure = "expanded"}; a warning message will be issued if used with other
+structures.}
 
-\item{type}{Can be either \code{"numeric"} or \code{"character"} (where
-\code{"numeric"} is default).  This setting only applies when
-\code{structure = "expanded"}; a warning message will be issued if used with
-other structures.}
+\item{type}{Can be either \code{"numeric"} or \code{"character"} (where \code{"numeric"} is
+default).  This setting only applies when \code{structure = "expanded"}; a warning
+message will be issued if used with other structures.}
 
 \item{drop}{Logical (whether to remove the original variable from the output
 or not). Defaults to \code{FALSE}.}
 
-\item{fixed}{Is the input for the \code{sep} value \emph{fixed}, or a
-\emph{regular expression}? See Details.}
+\item{fixed}{Is the input for the \code{sep} value \emph{fixed}, or a \emph{regular
+expression}? See Details.}
 
-\item{fill}{The "fill" value for missing values when \code{structure =
-"expanded"}. Defaults to \code{NA}.}
+\item{fill}{The "fill" value for missing values when \code{structure = "expanded"}.
+Defaults to \code{NA}.}
 
-\item{\dots}{Additional arguments to \code{\link{cSplit}}.}
+\item{\dots}{Additional arguments to \code{\link[=cSplit]{cSplit()}}.}
 }
 \description{
 The \code{concat.split} function takes a column with multiple values, splits
@@ -47,24 +46,29 @@ the values into a \code{list} or into separate columns, and returns a new
 \code{data.frame} or \code{data.table}.
 }
 \details{
-\emph{structure} \itemize{ \item \code{"compact"} creates as many columns as
-the maximum length of the resulting split. This is the most useful
-general-case application of this function. \item When the input is numeric,
-\code{"expanded"} creates as many columns as the maximum value of the input
-data. This is most useful when converting to \code{mode = "binary"}. \item
-\code{"list"} creates a single new column that is structurally a
-\code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. }
-\emph{fixed} \itemize{ \item When \code{structure = "expanded"} or
-\code{structure = "list"}, it is possible to supply a a regular expression
-containing the characters to split on.  For example, to split on \code{","},
-\code{";"}, or \code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep =
-"[,;|]"}, and \code{fixed = FALSE} to split on any of those characters.}
+\emph{structure}
+\itemize{
+\item \code{"compact"} creates as many columns as the maximum length of the resulting
+split. This is the most useful general-case application of this function.
+\item When the input is numeric, \code{"expanded"} creates as many columns as the
+maximum value of the input data. This is most useful when converting to
+\code{mode = "binary"}.
+\item \code{"list"} creates a single new column that is structurally a \code{list} within a
+\code{data.frame} or \code{data.table}.
+}
+
+\emph{fixed}
+\itemize{
+\item When \code{structure = "expanded"} or \code{structure = "list"}, it is possible to
+supply a a regular expression containing the characters to split on. For
+example, to split on \code{","}, \code{";"}, or \code{"|"}, you can set \code{sep = ",|;|\|"} or
+\code{sep = "[,;|]"}, and \code{fixed = FALSE} to split on any of those characters.
+}
 }
 \note{
-This is more of a "legacy" or "convenience" wrapper function
-encompassing the features available in the separated functions of
-\code{\link{cSplit}}, \code{\link{concat.split.compact}},
-\code{\link{concat.split.list}}, and \code{\link{concat.split.expanded}}.
+This is more of a "legacy" or "convenience" wrapper function encompassing
+the features available in the separated functions of \code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_l]{cSplit_l()}},
+and \code{\link[=cSplit_e]{cSplit_e()}}.
 }
 \examples{
 
@@ -106,9 +110,7 @@ str(concat.split(temp, 2, structure = "list", drop = FALSE))
 
 }
 \seealso{
-\code{\link{cSplit}}, \code{\link{concat.split.compact}},
-\code{\link{concat.split.expanded}}, \code{\link{concat.split.list}},
-\code{\link{concat.split.multiple}}
+\code{\link[=cSplit]{cSplit()}}, \code{\link[=cSplit_l]{cSplit_l()}}, \code{\link[=cSplit_e]{cSplit_e()}}
 }
 \author{
 Ananda Mahto

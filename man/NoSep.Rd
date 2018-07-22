@@ -13,15 +13,13 @@ NoSep(data, charfirst = TRUE)
 numbers? Defaults to \code{TRUE}.}
 }
 \value{
-A \code{data.frame} with two columns, \code{.var} and
-\code{.time_1}.
+A \code{data.frame} with two columns, \code{.var} and \code{.time_1}.
 }
 \description{
 Used to split strings like "Abc8" into "Abc" and "8".
 }
 \note{
-This is a helper function for the \code{\link{Stacked}} and
-\code{\link{Reshape}} functions.
+This is a helper function for the \code{\link[=Stacked]{Stacked()}} and \code{\link[=Reshape]{Reshape()}} functions.
 }
 \examples{
 
@@ -31,11 +29,9 @@ splitstackshape:::NoSep(x)
 y <- paste0(1:3, "Var", LETTERS[1:3])
 splitstackshape:::NoSep(y, charfirst = FALSE)
 
-\dontshow{rm(x, y)}
-
 }
 \seealso{
-\code{\link{strsplit}}
+\code{\link[base:strsplit]{base::strsplit()}}
 }
 \author{
 Ananda Mahto

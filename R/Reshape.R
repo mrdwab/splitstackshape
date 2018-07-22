@@ -23,12 +23,10 @@
 #' @param var.stubs The prefixes of the variable groups.
 #' @param sep The character that separates the "variable name" from the "times"
 #' in the wide `data.frame`.
-#' @param rm.rownames Logical. `reshape` creates some long distracting 
-#' `rownames` that do not seem to serve much purpose. This argument is set to 
-#' `TRUE` to remove the `rownames` by default.
+#' @param rm.rownames Ignored as `data.table`s do not have rownames anyway.
 #' @param \dots Further arguments to [NoSep()] in case the separator is of a 
 #' different form.
-#' @return A "long" `data.frame` of the reshaped data that retains the
+#' @return A "long" `data.table` of the reshaped data that retains the
 #' attributes added by base R's `reshape` function.
 #' @author Ananda Mahto
 #' @seealso [Stacked()], [utils::stack()], [stats::reshape()], 
@@ -54,7 +52,7 @@
 #'        var.stubs = c("varA", "varB", "varC"))
 #' 
 #' @export Reshape
-Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TRUE, ...) {
+Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames, ...) {
   if (sep == ".") sep <- "\\."
   temp <- Names(data, unlist(vGrep(var.stubs, names(data), value = TRUE)))
   
@@ -91,11 +89,12 @@ Reshape <- function(data, id.vars = NULL, var.stubs, sep = ".", rm.rownames = TR
   out <- reshape(out, direction = "long", idvar = id.vars,
                  varying = lapply(vGrep(var.stubs, names(out), value = TRUE), sort),
                  sep = sep, v.names = var.stubs)
-  if (isTRUE(rm.rownames)) {
-    rownames(out) <- NULL
-    out
-  } else {
-    out
+  
+  if (!missing(rm.rownames)) {
+    warning("argument rm.rownames is deprecated.", call. = FALSE)
   }
+
+  out
+
 }
 NULL

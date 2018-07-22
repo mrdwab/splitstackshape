@@ -1,14 +1,16 @@
 #' Add an "id" Variable to a Dataset
 #' 
 #' Many functions will not work properly if there are duplicated ID variables
-#' in a dataset. This function is a convenience function for \code{.N} from the "data.table" package to create an "\code{.id}"
-#' variable that when used in conjunction with the existing ID variables,
-#' should be unique.
+#' in a dataset. This function is a convenience function for `.N` from the 
+#' "data.table" package to create an `.id` variable that when used in conjunction 
+#' with the existing ID variables, should be unique.
 #' 
 #' 
-#' @param data The input \code{data.frame} or \code{data.table}.
-#' @param id.vars The variables that should be treated as ID variables. Defaults to \code{NULL}, at which point all variables are used to create the new ID variable.
-#' @return The input dataset (as a \code{data.table}) if ID variables are unique, or the input dataset with a new column named "\code{.id}".
+#' @param data The input `data.frame` or `data.table`.
+#' @param id.vars The variables that should be treated as ID variables. Defaults 
+#' to `NULL`, at which point all variables are used to create the new ID variable.
+#' @return The input dataset (as a `data.table`) if ID variables are unique, or 
+#' the input dataset with a new column named `.id`.
 #' @author Ananda Mahto
 #' @examples
 #' 

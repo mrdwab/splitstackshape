@@ -1,7 +1,7 @@
 #' Split Concatenated Cells into a Condensed Format
 #' 
 #' The default splitting method for `concat.split`. Formerly based on 
-#' [read.concat()] but presently a simple wrapper around [cSplit()].
+#' [read.concat()] but presently a simple wrapper around [cSplit()]. 
 #' 
 #' 
 #' @param data The input `data.frame` or `data.table`.
@@ -13,23 +13,26 @@
 #' pattern (`TRUE`) or a regular expression (`FALSE`)? Defaults to `TRUE`.
 #' @param \dots optional arguments to pass to `cSplit`.
 #' @return A `data.table`.
-#' @note This function no longer does anything different from [cSplit()]. It is 
+#' @note THIS FUNCTION IS DEPRECATED AND WILL BE REMOVED FROM LATER VERSIONS OF
+#' "SPLITSTACKSHAPE". It no longer does anything different from [cSplit()]. It is 
 #' recommended that you transition your code to the `cSplit` function instead.
 #' @author Ananda Mahto
 #' @seealso [read.concat()], [cSplit()]
 #' @examples
 #' 
+#' \dontrun{
 #' temp <- head(concat.test)
 #' concat.split.compact(temp, "Likes")
 #' concat.split.compact(temp, 4, ";")
 #' 
 #' ## Extra arguments to cSplit
 #' concat.split.compact(temp, "Siblings", drop = TRUE, stripWhite = TRUE)
+#' }
 #' 
 #' @export concat.split.compact
 concat.split.compact <- function(data, split.col, sep = ",", 
                                  drop = FALSE, fixed = TRUE, ...) {
-  message("This function is deprecated. Use `cSplit` instead.")
+  .Deprecated("cSplit")
   cSplit(indt = data, splitCols = split.col, sep = sep, 
          drop = drop, fixed = fixed, direction = "wide", ...)
 }
@@ -38,30 +41,28 @@ NULL
 #' Split Concatenated Values into their Corresponding Column Position
 #' 
 #' "Expand" concatenated numeric or character values to their relevant position
-#' in a \code{data.frame} or \code{data.table} or create a binary representation of such data.
+#' in a `data.frame` or `data.table` or create a binary representation of such data.
 #' 
 #' 
-#' @param data The source \code{data.frame} or \code{data.table}.
+#' @param data The source `data.frame` or `data.table`.
 #' @param split.col The variable that needs to be split (either name or index
 #' position).
 #' @param sep The character separating each value. Can also be a regular
 #' expression.
-#' @param mode Can be either \code{"binary"} (where presence of a number in a
-#' given column is converted to "1") or \code{"value"} (where the value is
-#' retained and not recoded to "1"). Defaults to \code{"binary"}.
-#' @param type Can be either \code{"numeric"} (where the items being split are
-#' integers) or \code{"character"} (where the items being split are character
-#' strings). Defaults to \code{"numeric"}.
+#' @param mode Can be either `"binary"` (where presence of a number in a given 
+#' column is converted to "1") or `"value"` (where the value is retained and not 
+#' recoded to "1"). Defaults to `"binary"`.
+#' @param type Can be either `"numeric"` (where the items being split are
+#' integers) or `"character"` (where the items being split are character 
+#' strings). Defaults to `"numeric"`.
 #' @param drop Logical. Should the original variable be dropped? Defaults to
-#' \code{FALSE}.
-#' @param fixed Used for \code{strsplit} for allowing regular expressions to be
-#' used.
-#' @param fill Desired "fill" value. Defaults to \code{NA}.
-#' @return A \code{data.frame} or a \code{data.table} depending on the source input.
+#' `FALSE`.
+#' @param fixed Used for [base::strsplit()] for allowing regular expressions to 
+#' be used.
+#' @param fill Desired "fill" value. Defaults to `NA`.
+#' @return A `data.frame` or `data.table` depending on the source input.
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split}}, \code{\link{concat.split.list}},
-#' \code{\link{concat.split.compact}}, \code{\link{concat.split.multiple}},
-#' \code{\link{numMat}}, \code{\link{charMat}}
+#' @seealso [cSplit()], [cSplit_l()], [numMat()], [charMat()]
 #' @examples
 #' 
 #' temp <- head(concat.test)
@@ -73,8 +74,6 @@ NULL
 #' concat.split.expanded(temp, 4, ";", fill = 0)
 #' concat.split.expanded(temp, 4, ";", mode = "value", drop = TRUE)
 #' concat.split.expanded(temp, "Siblings", type = "character", drop = TRUE)
-#' 
-#' \dontshow{rm(temp)}
 #' 
 #' @aliases cSplit_e
 #' @aliases concat.split.expanded
@@ -120,24 +119,21 @@ NULL
 
 #' Split Concatenated Cells into a List Format
 #' 
-#' Takes a column in a \code{data.frame} or \code{data.table} with multiple values, splits the
-#' values into a \code{list}, and returns a new \code{data.frame} or \code{data.table}.
+#' Takes a column in a `data.frame` or `data.table` with multiple values, splits 
+#' the values into a `list`, and returns a new `data.frame` or `data.table`.
 #' 
 #' 
-#' @param data The source \code{data.frame} or \code{data.table}.
+#' @param data The source `data.frame` or `data.table`.
 #' @param split.col The variable that needs to be split (either name or index
 #' position).
-#' @param sep The character separating each value. Can also be a regular
-#' expression.
-#' @param drop Logical. Should the original variable be dropped? Defaults to
-#' \code{FALSE}.
-#' @param fixed Used for \code{\link{strsplit}} for allowing regular
-#' expressions to be used.
-#' @return A \code{data.frame} or \code{data.table} with the concatenated column split and added as
-#' a \code{list}.
+#' @param sep The character separating each value. Can also be a regular expression.
+#' @param drop Logical. Should the original variable be dropped? Defaults to `FALSE`.
+#' @param fixed Used for [base::strsplit()] for allowing regular expressions to 
+#' be used.
+#' @return A `data.frame` or `data.table` with the concatenated column split and 
+#' added as a `list`.
 #' @author Ananda Mahto
-#' @seealso \code{\link{concat.split}}, \code{\link{concat.split.compact}},
-#' \code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}}
+#' @seealso [cSplit()], [cSplit_e()]
 #' @examples
 #' 
 #' temp <- head(concat.test)
@@ -148,8 +144,6 @@ NULL
 #' str(concat.split.list(temp, "Likes"))
 #' concat.split.list(temp, 4, ";")
 #' concat.split.list(temp, 4, ";", drop = TRUE)
-#' 
-#' \dontshow{rm(temp)}
 #' 
 #' @aliases cSplit_l
 #' @aliases concat.split.list
@@ -166,9 +160,9 @@ cSplit_l <- concat.split.list <- function(data, split.col, sep = ",",
   varname <- paste(split.col, "list", sep="_")
   b <- strsplit(a, sep, fixed = fixed)
   
-  if (suppressWarnings(is.na(try(max(as.numeric(unlist(b))))))) {
+  if (suppressWarnings(is.na(try(max(as.numeric(na.omit(unlist(b)))))))) {
     data[[varname]] <- I(b)
-  } else if (!is.na(try(max(as.numeric(unlist(b)))))) {
+  } else if (!is.na(try(max(as.numeric(na.omit(unlist(b))))))) {
     data[[varname]] <- I(lapply(b, as.numeric))
   }
   if (isTRUE(drop)) {
@@ -184,53 +178,55 @@ NULL
 
 #' Split Concatenated Cells in a Dataset
 #' 
-#' The \code{concat.split} function takes a column with multiple values, splits
-#' the values into a \code{list} or into separate columns, and returns a new
-#' \code{data.frame} or \code{data.table}.
+#' The `concat.split` function takes a column with multiple values, splits
+#' the values into a `list` or into separate columns, and returns a new
+#' `data.frame` or `data.table`.
 #' 
-#' \emph{structure} \itemize{ \item \code{"compact"} creates as many columns as
-#' the maximum length of the resulting split. This is the most useful
-#' general-case application of this function. \item When the input is numeric,
-#' \code{"expanded"} creates as many columns as the maximum value of the input
-#' data. This is most useful when converting to \code{mode = "binary"}. \item
-#' \code{"list"} creates a single new column that is structurally a
-#' \code{\link{list}} within a \code{\link{data.frame}} or \code{data.table}. }
-#' \emph{fixed} \itemize{ \item When \code{structure = "expanded"} or
-#' \code{structure = "list"}, it is possible to supply a a regular expression
-#' containing the characters to split on.  For example, to split on \code{","},
-#' \code{";"}, or \code{"|"}, you can set \code{sep = ",|;|\|"} or \code{sep =
-#' "[,;|]"}, and \code{fixed = FALSE} to split on any of those characters.}
+#' @details 
 #' 
-#' @param data The source \code{data.frame} or \code{data.table}.
+#' *structure*
+#' 
+#' * `"compact"` creates as many columns as the maximum length of the resulting 
+#' split. This is the most useful general-case application of this function. 
+#' * When the input is numeric, `"expanded"` creates as many columns as the 
+#' maximum value of the input data. This is most useful when converting to 
+#' `mode = "binary"`. 
+#' * `"list"` creates a single new column that is structurally a `list` within a 
+#' `data.frame` or `data.table`.
+#' 
+#' *fixed*
+#' 
+#' * When `structure = "expanded"` or `structure = "list"`, it is possible to 
+#' supply a a regular expression containing the characters to split on. For 
+#' example, to split on `","`, `";"`, or `"|"`, you can set `sep = ",|;|\|"` or 
+#' `sep = "[,;|]"`, and `fixed = FALSE` to split on any of those characters.
+#' 
+#' @param data The source `data.frame` or `data.table`.
 #' @param split.col The variable that needs to be split; can be specified
 #' either by the column number or the variable name.
-#' @param sep The character separating each value (defaults to \code{","}).
-#' @param structure Can be either \code{"compact"}, \code{"expanded"}, or
-#' \code{"list"}. Defaults to \code{"compact"}. See Details.
-#' @param mode Can be either \code{"binary"} or \code{"value"} (where
-#' \code{"binary"} is default and it recodes values to 1 or \code{NA}, like
-#' Boolean data, but without assuming 0 when data is not available).  This
-#' setting only applies when \code{structure = "expanded"}; a warning message
-#' will be issued if used with other structures.
-#' @param type Can be either \code{"numeric"} or \code{"character"} (where
-#' \code{"numeric"} is default).  This setting only applies when
-#' \code{structure = "expanded"}; a warning message will be issued if used with
-#' other structures.
+#' @param sep The character separating each value (defaults to `","`).
+#' @param structure Can be either `"compact"`, `"expanded"`, or `list`. Defaults 
+#' to `"compact"`. See Details.
+#' @param mode Can be either `"binary"` or `"value"` (where `"binary"` is default 
+#' and it recodes values to 1 or `NA`, like Boolean data, but without assuming 0 
+#' when data is not available). This setting only applies when 
+#' `structure = "expanded"`; a warning message will be issued if used with other 
+#' structures.
+#' @param type Can be either `"numeric"` or `"character"` (where `"numeric"` is 
+#' default).  This setting only applies when `structure = "expanded"`; a warning 
+#' message will be issued if used with other structures.
 #' @param drop Logical (whether to remove the original variable from the output
-#' or not). Defaults to \code{FALSE}.
-#' @param fixed Is the input for the \code{sep} value \emph{fixed}, or a
-#' \emph{regular expression}? See Details.
-#' @param fill The "fill" value for missing values when \code{structure =
-#' "expanded"}. Defaults to \code{NA}.
-#' @param \dots Additional arguments to \code{\link{cSplit}}.
-#' @note This is more of a "legacy" or "convenience" wrapper function
-#' encompassing the features available in the separated functions of
-#' \code{\link{cSplit}}, \code{\link{concat.split.compact}},
-#' \code{\link{concat.split.list}}, and \code{\link{concat.split.expanded}}.
+#' or not). Defaults to `FALSE`.
+#' @param fixed Is the input for the `sep` value *fixed*, or a *regular 
+#' expression*? See Details.
+#' @param fill The "fill" value for missing values when `structure = "expanded"`. 
+#' Defaults to `NA`.
+#' @param \dots Additional arguments to [cSplit()].
+#' @note This is more of a "legacy" or "convenience" wrapper function encompassing 
+#' the features available in the separated functions of [cSplit()], [cSplit_l()], 
+#' and [cSplit_e()].
 #' @author Ananda Mahto
-#' @seealso \code{\link{cSplit}}, \code{\link{concat.split.compact}},
-#' \code{\link{concat.split.expanded}}, \code{\link{concat.split.list}},
-#' \code{\link{concat.split.multiple}}
+#' @seealso [cSplit()], [cSplit_l()], [cSplit_e()]
 #' @examples
 #' 
 #' ## Load some data
@@ -274,31 +270,31 @@ concat.split <- function(data, split.col, sep = ",", structure = "compact",
                          mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, 
                          fill = NA, ...) {
   
-  M1 <- paste(c("", "'mode' supplied but ignored.", 
-                "'mode' setting only applicable",
-                "when structure = 'expanded'"), collapse = "\n")
-  M2 <- paste(c("", "'type' supplied but ignored.", 
-                "'type' setting only applicable",
-                "when structure = 'expanded'"), collapse = "\n")
+  M1 <- paste(
+    c("", "'mode' supplied but ignored.", "'mode' setting only applicable",
+      "when structure = 'expanded'"), collapse = " ")
+  M2 <- paste(
+    c("", "'type' supplied but ignored.", "'type' setting only applicable",
+      "when structure = 'expanded'"), collapse = " ")
   
   temp <- switch(
     structure, 
     compact = {
       if (!is.null(mode)) warning(M1)
       if (!is.null(type)) warning(M2)
-      concat.split.compact(data = data, split.col = split.col, 
-                           sep = sep, drop = drop, fixed = fixed)
+      cSplit(indt = data, splitCols = split.col, 
+             sep = sep, drop = drop, fixed = fixed)
     },
     list = {
       if (!is.null(mode)) warning(M1)
       if (!is.null(type)) warning(M2)
-      concat.split.list(data = data, split.col = split.col, 
-                        sep = sep, drop = drop, fixed = fixed)
+      cSplit_l(data = data, split.col = split.col,
+               sep = sep, drop = drop, fixed = fixed)
     },
     expanded = {
-      concat.split.expanded(data = data, split.col = split.col, 
-                            sep = sep, mode = mode, type = type, 
-                            drop = drop, fixed = fixed, fill = fill)
+      cSplit_e(data = data, split.col = split.col, 
+               sep = sep, mode = mode, type = type, 
+               drop = drop, fixed = fixed, fill = fill)
     },
     stop("'structure' must be either 'compact', 'expanded', or 'list'"))
   temp
@@ -307,38 +303,36 @@ NULL
 
 #' Split Concatenated Cells and Optionally Reshape the Output
 #' 
-#' This is a wrapper for the \code{\link{cSplit}} function to maintain
-#' backwards compatibility with earlier versions of the "splitstackshape"
-#' package. It allows the user to split multiple columns at once and optionally
-#' convert the results into a "long" format.
+#' This is a wrapper for the [cSplit()] function to maintain backwards 
+#' compatibility with earlier versions of the "splitstackshape" package. It 
+#' allows the user to split multiple columns at once and optionally convert the 
+#' results into a "long" format.
 #' 
 #' 
-#' @param data The source \code{data.frame} or \code{data.table}.
+#' @param data The source `data.frame` or `data.table`.
 #' @param split.cols A vector of columns that need to be split.
 #' @param seps A vector of the separator character used in each column. If all
 #' columns use the same character, you can enter that single character.
-#' @param direction The desired form of the resulting \code{data.frame} or
-#' \code{data.table}, either \code{'wide'} or \code{'long'}.  Defaults to
-#' \code{'wide'}.
-#' @param \dots Other arguments to \code{\link{cSplit}}.
-#' @return A \code{data.table}.
+#' @param direction The desired form of the resulting `data.frame` or `data.table`, 
+#' either `"wide"` or `"long"`.  Defaults to `"wide"`.
+#' @param \dots Other arguments to [cSplit()].
+#' @return A `data.table`.
 #' @author Ananda Mahto
-#' @seealso \code{\link{cSplit}}, for which this is simply a wrapper, and
-#' \code{\link{concat.split}}, \code{\link{concat.split.compact}},
-#' \code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}},
-#' \code{\link{Reshape}}
+#' @seealso [cSplit()]
 #' @examples
 #' 
+#' \dontrun{
 #' temp <- head(concat.test)
 #' concat.split.multiple(temp, split.cols = c("Likes", "Hates", "Siblings"),
 #'                       seps = c(",", ";", ","))
 #' concat.split.multiple(temp, split.cols = c("Likes", "Siblings"),
 #'                       seps = ",", direction = "long")
-#' \dontshow{rm(temp)}
+#' }
 #' 
 #' @export concat.split.multiple
 concat.split.multiple <- function(data, split.cols, seps = ",", 
                                   direction = "wide", ...) {
+  .Deprecated("cSplit")
   message("This function is deprecated. Use `cSplit` instead.")
   cSplit(indt = data, splitCols = split.cols, 
          sep = seps, direction = direction, ...)

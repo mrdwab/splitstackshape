@@ -14,36 +14,33 @@ concat.split.multiple(data, split.cols, seps = ",", direction = "wide", ...)
 \item{seps}{A vector of the separator character used in each column. If all
 columns use the same character, you can enter that single character.}
 
-\item{direction}{The desired form of the resulting \code{data.frame} or
-\code{data.table}, either \code{'wide'} or \code{'long'}.  Defaults to
-\code{'wide'}.}
+\item{direction}{The desired form of the resulting \code{data.frame} or \code{data.table},
+either \code{"wide"} or \code{"long"}.  Defaults to \code{"wide"}.}
 
-\item{\dots}{Other arguments to \code{\link{cSplit}}.}
+\item{\dots}{Other arguments to \code{\link[=cSplit]{cSplit()}}.}
 }
 \value{
 A \code{data.table}.
 }
 \description{
-This is a wrapper for the \code{\link{cSplit}} function to maintain
-backwards compatibility with earlier versions of the "splitstackshape"
-package. It allows the user to split multiple columns at once and optionally
-convert the results into a "long" format.
+This is a wrapper for the \code{\link[=cSplit]{cSplit()}} function to maintain backwards
+compatibility with earlier versions of the "splitstackshape" package. It
+allows the user to split multiple columns at once and optionally convert the
+results into a "long" format.
 }
 \examples{
 
+\dontrun{
 temp <- head(concat.test)
 concat.split.multiple(temp, split.cols = c("Likes", "Hates", "Siblings"),
                       seps = c(",", ";", ","))
 concat.split.multiple(temp, split.cols = c("Likes", "Siblings"),
                       seps = ",", direction = "long")
-\dontshow{rm(temp)}
+}
 
 }
 \seealso{
-\code{\link{cSplit}}, for which this is simply a wrapper, and
-\code{\link{concat.split}}, \code{\link{concat.split.compact}},
-\code{\link{concat.split.expanded}}, \code{\link{concat.split.multiple}},
-\code{\link{Reshape}}
+\code{\link[=cSplit]{cSplit()}}
 }
 \author{
 Ananda Mahto

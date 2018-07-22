@@ -7,13 +7,11 @@
 charMat(listOfValues, fill = NA, mode = "binary")
 }
 \arguments{
-\item{listOfValues}{A \code{list} of input values to be inserted in a
-matrix.}
+\item{listOfValues}{A \code{list} of input values to be inserted in a matrix.}
 
 \item{fill}{The initializing fill value for the empty matrix.}
 
-\item{mode}{Either \code{"binary"} or \code{"value"}. Defaults to
-\code{"binary"}.}
+\item{mode}{Either \code{"binary"} or \code{"value"}. Defaults to \code{"binary"}.}
 }
 \value{
 A \code{matrix}.
@@ -22,9 +20,9 @@ A \code{matrix}.
 Create a binary matrix from a list of character values
 }
 \details{
-This is primarily a helper function for the \code{\link{concat.split}}
-function when creating the "expanded" structure. The input is anticipated to
-be a \code{list} of values obtained using \code{\link{strsplit}}.
+This is primarily a helper function for the \code{\link[=concat.split]{concat.split()}} function when
+creating the "expanded" structure. The input is anticipated to be a \code{list} of
+values obtained using \code{\link[base:strsplit]{base::strsplit()}}.
 }
 \examples{
 
@@ -34,11 +32,9 @@ splitstackshape:::charMat(A)
 splitstackshape:::charMat(A, 0)
 splitstackshape:::charMat(A, mode = "value")
 
-\dontshow{rm(invec, A)}
-
 }
 \seealso{
-\code{strsplit}, \code{\link{numMat}}
+\code{\link[base:strsplit]{base::strsplit()}}, \code{\link[=numMat]{numMat()}}.
 }
 \author{
 Ananda Mahto

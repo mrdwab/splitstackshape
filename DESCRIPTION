@@ -4,7 +4,7 @@ Title: Stack and Reshape Datasets After Splitting Concatenated Values
 Version: 1.4.6
 Date: 2018-07-22
 Author: Ananda Mahto
-Maintainer: Ananda Mahto <ananda@mahto.info>
+Maintainer: Ananda Mahto <mrdwab@gmail.com>
 Description: Online data collection tools like Google Forms often export
     multiple-response questions with data concatenated in cells. The
     concat.split (cSplit) family of functions splits such data into separate 

@@ -35,7 +35,7 @@ NULL
 #' @docType package
 #' @author Ananda Mahto
 #' 
-#' Maintainer: Ananda Mahto <ananda@@mahto.info>
+#' Maintainer: Ananda Mahto <mrdwab@gmail.com>
 #' @keywords package
 #' @import data.table
 #' @importFrom stats reshape setNames na.omit

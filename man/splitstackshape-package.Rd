@@ -77,6 +77,6 @@ system.time({
 \author{
 Ananda Mahto
 
-Maintainer: Ananda Mahto \href{mailto:ananda@mahto.info}{ananda@mahto.info}
+Maintainer: Ananda Mahto \href{mailto:mrdwab@gmail.com}{mrdwab@gmail.com}
 }
 \keyword{package}

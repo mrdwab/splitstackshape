@@ -9,6 +9,12 @@ BugReports        : http://github.com/mrdwab/splitstackshape/issues
 
 ---------------------------------------------------------------------
 
+## 1.4.6
+
+22 July 2018
+
+Interim release to help the `data.table` team with reverse dependency checks.
+
 ## 1.4.5
 
 05 April 2018

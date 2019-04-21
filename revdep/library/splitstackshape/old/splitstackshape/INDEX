@@ -1,0 +1,32 @@
+FacsToChars             Convert All Factor Columns to Character Columns
+Names                   Dataset Names as a Character Vector, Always
+NoSep                   Split Basic Alphanumeric Strings Which Have No
+                        Separators
+Reshape                 Reshape Wide Data Into a Semi-long Form
+Stacked                 Stack Columns from a Wide Form to a Long Form
+cSplit                  Split Concatenated Values into Separate Values
+charMat                 Create a Binary Matrix from a List of Character
+                        Values
+concat.split            Split Concatenated Cells in a Dataset
+concat.split.compact    Split Concatenated Cells into a Condensed
+                        Format
+concat.split.expanded   Split Concatenated Values into their
+                        Corresponding Column Position
+concat.split.list       Split Concatenated Cells into a List Format
+concat.split.multiple   Split Concatenated Cells and Optionally Reshape
+                        the Output
+concat.test             Example Dataset with Concatenated Cells
+expandRows              Expand the Rows of a Dataset
+getanID                 Add an "id" Variable to a Dataset
+listCol_l               Unlist a Column Stored as a List
+listCol_w               Flatten a Column Stored as a List
+merged.stack            Take a List of Stacked data.tables and Merge
+                        Them
+numMat                  Create a Numeric Matrix from a List of Values
+othernames              Extract All Names From a Dataset Other Than the
+                        Ones Listed
+read.concat             Read Concatenated Character Vectors Into a
+                        data.frame
+splitstackshape-package
+                        splitstackshape
+stratified              Take a Stratified Sample From a Dataset

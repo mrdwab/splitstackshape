@@ -1,0 +1,441 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "rodham"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('rodham')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("clean_content")
+> ### * clean_content
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clean_content
+> ### Title: Clean emails
+> ### Aliases: clean_content
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D hrc_emails <- load_emails(emails_bengh) # load emails
+> ##D cont <- get_content(hrc_emails)
+> ##D cont <- clean_content(hrc_emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("edges_emails")
+> ### * edges_emails
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: edges_emails
+> ### Title: Network the treacherous
+> ### Aliases: edges_emails
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- search_emails()
+> ##D 
+> ##D edges <- edges_emails(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("extract_emails")
+> ### * extract_emails
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: extract_emails
+> ### Title: Extract emails contents
+> ### Aliases: extract_emails
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # download emails
+> ##D download_emails("August") # August release
+> ##D 
+> ##D dir.create("emails_pdf") # dir to extract zip
+> ##D 
+> ##D unzip("August.zip", exdir = "./emails_pdf")
+> ##D 
+> ##D # create directory to store extracted contents
+> ##D dir.create("emails_txt")
+> ##D 
+> ##D ext <- get_xpdf()
+> ##D 
+> ##D extarct_contents(emails = "HRC_Email_296", dest = "./emails_txt", extractor = ext)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_com")
+> ### * get_com
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_com
+> ### Title: get_com: get emails sender's and receiver's name
+> ### Aliases: get_com get_com.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D com <- get_com(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_content")
+> ### * get_content
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_content
+> ### Title: get_contents: get original emails senders and receivers' name
+> ### Aliases: get_content get_content.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D contents <- get_content(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_date")
+> ### * get_date
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_date
+> ### Title: get_date: get emails date
+> ### Aliases: get_date get_date.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D dates <- get_date(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_emails")
+> ### * get_emails
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_emails
+> ### Title: Get emails and its contents
+> ### Aliases: get_emails
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # get xpdf extractor
+> ##D ext <- get_xpdf()
+> ##D 
+> ##D # create
+> ##D dir.create("emails")
+> ##D 
+> ##D # get emails released in august
+> ##D emails_aug <- get_emails(release = "August", save.dir = "./emails",
+> ##D                      extractor = ext)
+> ##D 
+> ##D # use manually downloaded extractor
+> ##D # ext <- "C:/xpdfbin-win-3.04/bin64/pdftotext.exe"
+> ##D 
+> ##D # get emails related to Benghazi released in December
+> ##D emails_bengh <- get_emails(release = "Benghazi", extractor = ext,
+> ##D                            save.dir = "./emails")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_id")
+> ### * get_id
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_id
+> ### Title: get_id: get emails subjects
+> ### Aliases: get_id get_id.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D docids <- get_id(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_interest")
+> ### * get_interest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_interest
+> ### Title: get_interest: get emails subjects
+> ### Aliases: get_interest get_interest.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D subjects <- get_interest(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_or")
+> ### * get_or
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_or
+> ### Title: get_or: get emails senders and receivers' name
+> ### Aliases: get_or get_or.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D original <- get_or(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_subject")
+> ### * get_subject
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_subject
+> ### Title: get_subject: get emails subjects
+> ### Aliases: get_subject get_subject.rodham
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- load_emails("emails")
+> ##D subjects <- get_subject(emails)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("load_emails")
+> ### * load_emails
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: load_emails
+> ### Title: load emails from text files
+> ### Aliases: load_emails
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # get xpdf extractor
+> ##D ext <- get_xpdf()
+> ##D 
+> ##D # create
+> ##D dir.create("emails")
+> ##D 
+> ##D # get emails released in august
+> ##D emails_aug <- get_emails(release = "August", save.dir = "./emails",
+> ##D                      extractor = ext)
+> ##D 
+> ##D # use manually downloaded extractor
+> ##D # ext <- "C:/xpdfbin-win-3.04/bin64/pdftotext.exe"
+> ##D 
+> ##D # get emails related to Benghazi released in December
+> ##D emails_bengh <- get_emails(release = "Benghazi", extractor = ext,
+> ##D                            save.dir = "./emails")
+> ##D 
+> ##D contents <- load_emails(emails_bengh)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rodham")
+> ### * rodham
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rodham
+> ### Title: rodham: Hillary Rodham Clinton emails
+> ### Aliases: rodham rodham-package
+> ### Keywords: internal
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # get emails from internal data set
+> ##D data("emails")
+> ##D 
+> ##D # build graph
+> ##D edges <- edges_emails(emails)
+> ##D g <- igraph::graph.data.frame(edges)
+> ##D plot(g)
+> ##D 
+> ##D # plot communities
+> ##D cm <- igraph::walktrap.community(g)
+> ##D plot(cm, g)
+> ##D 
+> ##D # get emails content
+> ##D # get extractor to extract content from emails
+> ##D ext <- get_xpdf()
+> ##D 
+> ##D dir.create("./emails") # create folder to store extracted content
+> ##D 
+> ##D # get emails released in august
+> ##D aug_emails <- get_emails(release = "August", save.dir = "./emails",
+> ##D                          extractor = ext)
+> ##D 
+> ##D # alternatively
+> ##D # download emails as zip then extract
+> ##D download_emails("August") # download
+> ##D 
+> ##D dir.create("emails_pdf") # create directory where to extract pdf emails to
+> ##D 
+> ##D unzip("August.zip", exdir = "./emails_pdf")
+> ##D 
+> ##D dir <- "emails_text"
+> ##D 
+> ##D dir.create(dir)
+> ##D 
+> ##D # extract emails to created directory
+> ##D extract_emails("emails_pdf", save.dir = dir, ext = ext)
+> ##D 
+> ##D # laod all emails
+> ##D hrc_emails <- load_emails(dir)
+> ##D 
+> ##D class(hrc_emails)
+> ##D 
+> ##D # methods
+> ##D dates <- get_date(hrc_emails)
+> ##D communication <- get_com(hrc_emails)
+> ##D cont <- get_content(hrc_emails) # get actual email content
+> ##D 
+> ##D cont <- clean_content(cont) # clean content see help
+> ##D 
+> ##D # tidy content
+> ##D cont <- tidy_emails(cont)
+> ##D head(cont)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("search_emails")
+> ### * search_emails
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: search_emails
+> ### Title: Search Rodham's emails
+> ### Aliases: search_emails
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D emails <- search_emails()
+> ##D 
+> ##D # only emails on cuba
+> ##D emails <- search_emails(subject = "Cuba")
+> ##D 
+> ##D # only emails from Jake Sullivan since 2014
+> ##D j_s <- search_emails(from = "Jake Sullivan", start = as.Date("2014-01-01"))
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tidy_emails")
+> ### * tidy_emails
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tidy_emails
+> ### Title: Tidy contents
+> ### Aliases: tidy_emails
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D content <- get_content(content)
+> ##D content <- clean_content(content)
+> ##D tidy <- tidy_emails(content)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.082 0.005 0.11 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

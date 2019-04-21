@@ -2,6 +2,7 @@ library(splitstackshape)
 context("testing stratified")
 
 test_that("stratified returns the expected number of rows", {
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(1)
   DF <- data.frame(
     ID = 1:100, A = sample(c("AA", "BB", "CC", "DD", "EE"), 100, replace = TRUE),

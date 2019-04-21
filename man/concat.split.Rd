@@ -5,8 +5,8 @@
 \title{Split Concatenated Cells in a Dataset}
 \usage{
 concat.split(data, split.col, sep = ",", structure = "compact",
-  mode = NULL, type = NULL, drop = FALSE, fixed = FALSE, fill = NA,
-  ...)
+  mode = NULL, type = NULL, drop = FALSE, fixed = FALSE,
+  fill = NA, ...)
 }
 \arguments{
 \item{data}{The source \code{data.frame} or \code{data.table}.}

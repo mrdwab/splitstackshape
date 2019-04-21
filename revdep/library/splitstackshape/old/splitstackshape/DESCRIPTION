@@ -1,0 +1,28 @@
+Package: splitstackshape
+Type: Package
+Title: Stack and Reshape Datasets After Splitting Concatenated Values
+Version: 1.4.6
+Date: 2018-07-22
+Author: Ananda Mahto
+Maintainer: Ananda Mahto <mrdwab@gmail.com>
+Description: Online data collection tools like Google Forms often export
+    multiple-response questions with data concatenated in cells. The
+    concat.split (cSplit) family of functions splits such data into separate 
+    cells. The package also includes functions to stack groups of columns and 
+    to reshape wide data, even when the data are "unbalanced"---something 
+    which reshape (from base R) does not handle, and which melt and dcast from 
+    reshape2 do not easily handle.
+License: GPL-3
+LazyData: TRUE
+LazyLoad: yes
+Depends: R (>= 2.10)
+Imports: data.table (>= 1.9.4)
+URL: http://github.com/mrdwab/splitstackshape
+BugReports: http://github.com/mrdwab/splitstackshape/issues
+RoxygenNote: 6.0.1
+Suggests: covr, testthat
+NeedsCompilation: no
+Packaged: 2018-07-22 18:44:55 UTC; mrdwab
+Repository: CRAN
+Date/Publication: 2018-07-23 07:30:06 UTC
+Built: R 3.5.1; ; 2019-04-21 18:22:07 UTC; unix

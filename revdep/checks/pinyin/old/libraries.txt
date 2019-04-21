@@ -1,0 +1,6 @@
+Library: /home/mrdwab/Documents/Packages/splitstackshape/revdep/library/splitstackshape/old
+data.table      (1.12.2)
+splitstackshape (1.4.6)
+
+Library: /home/mrdwab/Documents/Packages/splitstackshape/revdep/library/pinyin
+data.table (1.12.2)

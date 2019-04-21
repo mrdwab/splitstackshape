@@ -1,0 +1,16 @@
+Library: /home/mrdwab/Documents/Packages/splitstackshape/revdep/library/splitstackshape/new
+data.table      (1.12.2)
+splitstackshape (1.4.8)
+
+Library: /home/mrdwab/Documents/Packages/splitstackshape/revdep/library/Diderot
+bitops     (1.0-6)
+codetools  (0.2-16)
+data.table (1.12.2)
+foreach    (1.4.4)
+igraph     (1.2.4)
+iterators  (1.0.10)
+lattice    (0.20-38)
+magrittr   (1.5)
+Matrix     (1.2-17)
+pkgconfig  (2.0.2)
+stringi    (1.4.3)

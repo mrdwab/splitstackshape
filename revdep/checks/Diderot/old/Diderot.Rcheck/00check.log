@@ -1,0 +1,16 @@
+* using log directory ‘/home/mrdwab/Documents/Packages/splitstackshape/revdep/checks/Diderot/old/Diderot.Rcheck’
+* using R version 3.5.1 (2018-07-02)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘Diderot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Diderot’ version ‘0.12’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: ‘RCurl’ ‘doParallel’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR

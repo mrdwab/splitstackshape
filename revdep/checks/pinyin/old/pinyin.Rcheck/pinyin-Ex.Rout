@@ -1,0 +1,164 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "pinyin"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('pinyin')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("bookdown2py")
+> ### * bookdown2py
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: bookdown2py
+> ### Title: Convert the Chinese headers of bookdown .Rmd files into Pinyin
+> ### Aliases: bookdown2py
+> 
+> ### ** Examples
+> 
+> bookdown2py(dic = NA)
+The directory py does not exist!
+> 
+> 
+> 
+> cleanEx()
+> nameEx("file.rename2py")
+> ### * file.rename2py
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: file.rename2py
+> ### Title: Rename files according to a given dictionary
+> ### Aliases: file.rename2py
+> 
+> ### ** Examples
+> 
+> file.rename2py(dic = NA)
+The directory py does not exist!
+> 
+> 
+> 
+> cleanEx()
+> nameEx("file2py")
+> ### * file2py
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: file2py
+> ### Title: Convert the characters in an entire files according to a given
+> ###   dictionary
+> ### Aliases: file2py
+> 
+> ### ** Examples
+> 
+> file2py(dic = NA)
+The directory py does not exist!
+> 
+> 
+> 
+> cleanEx()
+> nameEx("load_dic")
+> ### * load_dic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: load_dic
+> ### Title: Load a customized dictionary.
+> ### Aliases: load_dic
+> 
+> ### ** Examples
+> 
+> load_dic()
+Please give a valid path or url to the dictionary file.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pinyin")
+> ### * pinyin
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pinyin
+> ### Title: Former version of py()
+> ### Aliases: pinyin
+> 
+> ### ** Examples
+> 
+> pinyin()
+The function "pinyin()" is deprecated. Please use "py()" instead.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("py")
+> ### * py
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: py
+> ### Title: Convert strings of Chinese characters into Pinyin.
+> ### Aliases: py
+> 
+> ### ** Examples
+> 
+> py(dic = NA)
+"dic" must be an environment.
+[[1]]
+NULL
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pydic")
+> ### * pydic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pydic
+> ### Title: Load a Pinyin library
+> ### Aliases: pydic
+> 
+> ### ** Examples
+> 
+> pydic()
+<environment: 0x55dd87aa06f8>
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.63 0.027 0.742 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

@@ -4,7 +4,6 @@
 \alias{unlist_cols}
 \alias{listCol_l}
 \alias{listCol_w}
-\alias{unlist_cols}
 \title{Unlists or Flattens List Columns in a \code{data.table}}
 \usage{
 listCol_l(indt, listCols, drop = TRUE, makeEqual = FALSE)

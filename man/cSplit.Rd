@@ -5,7 +5,8 @@
 \title{Split Concatenated Values in Columns into Separate Columns}
 \usage{
 cSplit(indt, splitCols, sep = ",", direction = "wide", fixed = TRUE,
-  drop = TRUE, stripWhite = TRUE, makeEqual = NULL, type.convert = TRUE)
+  drop = TRUE, stripWhite = TRUE, makeEqual = NULL,
+  type.convert = TRUE)
 }
 \arguments{
 \item{indt}{The input \code{data.table}.}

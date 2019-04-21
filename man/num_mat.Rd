@@ -2,7 +2,6 @@
 % Please edit documentation in R/cSplit_e_helper_functions.R
 \name{num_mat}
 \alias{num_mat}
-\alias{num_mat}
 \alias{char_mat}
 \title{Create Binary, Value, or Count Matrix from a List}
 \usage{

@@ -2,15 +2,14 @@
 % Please edit documentation in R/column_splitters.R
 \name{t_split}
 \alias{t_split}
-\alias{t_split}
 \alias{f_split}
 \title{Split Concatenated Vectors into Multi-column \code{data.table}s}
 \usage{
-t_split(vec, sep, fixed = TRUE, stripWhite = TRUE, type.convert = TRUE,
-  prefix = NULL)
+t_split(vec, sep, fixed = TRUE, stripWhite = TRUE,
+  type.convert = TRUE, prefix = NULL)
 
-f_split(vec, sep, fixed = TRUE, stripWhite = TRUE, type.convert = TRUE,
-  prefix = NULL)
+f_split(vec, sep, fixed = TRUE, stripWhite = TRUE,
+  type.convert = TRUE, prefix = NULL)
 }
 \arguments{
 \item{vec}{The input vector.}

@@ -5,8 +5,8 @@
 \alias{cSplit_e}
 \title{Split Concatenated Values into their Corresponding Column Position}
 \usage{
-cSplit_e(indt, splitCols, sep = ",", mode = "binary", type = "numeric",
-  drop = FALSE, fixed = TRUE, fill = NULL)
+cSplit_e(indt, splitCols, sep = ",", mode = "binary",
+  type = "numeric", drop = FALSE, fixed = TRUE, fill = NULL)
 }
 \arguments{
 \item{indt}{The source \code{data.table}.}

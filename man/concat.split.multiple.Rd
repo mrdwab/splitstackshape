@@ -4,7 +4,8 @@
 \alias{concat.split.multiple}
 \title{Split Concatenated Cells and Optionally Reshape the Output}
 \usage{
-concat.split.multiple(data, split.cols, seps = ",", direction = "wide", ...)
+concat.split.multiple(data, split.cols, seps = ",", direction = "wide",
+  ...)
 }
 \arguments{
 \item{data}{The source \code{data.table}.}

@@ -4,8 +4,8 @@
 \alias{Stacked}
 \title{Stack Columns from a Wide Form to a Long Form}
 \usage{
-Stacked(indt, id.vars = NULL, var.stubs, keep.all = TRUE, keyed = TRUE,
-  keep.rownames = FALSE, end_stub = FALSE)
+Stacked(indt, id.vars = NULL, var.stubs, keep.all = TRUE,
+  keyed = TRUE, keep.rownames = FALSE, end_stub = FALSE)
 }
 \arguments{
 \item{indt}{The source \code{data.table}.}

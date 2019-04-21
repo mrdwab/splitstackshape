@@ -2,7 +2,6 @@
 % Please edit documentation in R/cSplit_e_helper_functions.R
 \name{trim_list}
 \alias{trim_list}
-\alias{trim_list}
 \alias{trim_vec}
 \title{Trims Whitespace from Lists of Character Vectors}
 \usage{

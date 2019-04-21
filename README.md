@@ -40,4 +40,4 @@ To install the V1 development version, use:
 devtools::install_github("mrdwab/splitstackshape", ref = "v1_development")
 ```
 
-Current CRAN version: 1.4.6
+Current CRAN version: 1.4.8

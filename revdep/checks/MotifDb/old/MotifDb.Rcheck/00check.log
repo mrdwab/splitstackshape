@@ -1,0 +1,17 @@
+* using log directory ‘/home/mrdwab/Documents/Packages/splitstackshape/revdep/checks/MotifDb/old/MotifDb.Rcheck’
+* using R version 3.5.1 (2018-07-02)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MotifDb/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MotifDb’ version ‘1.24.1’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available:
+  ‘S4Vectors’ ‘IRanges’ ‘Biostrings’ ‘rtracklayer’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR

@@ -1,0 +1,19 @@
+* using log directory ‘/home/mrdwab/Documents/Packages/splitstackshape/revdep/checks/cnvGSA/old/cnvGSA.Rcheck’
+* using R version 3.5.1 (2018-07-02)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘cnvGSA/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘cnvGSA’ version ‘1.26.0’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: ‘brglm’ ‘doParallel’ ‘GenomicRanges’
+
+Packages suggested but not available for checking:
+  ‘cnvGSAdata’ ‘org.Hs.eg.db’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR

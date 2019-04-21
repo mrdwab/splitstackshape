@@ -4,7 +4,8 @@
 \alias{merged.stack}
 \title{Take a List of Stacked data.tables and Merge Them}
 \usage{
-merged.stack(data, id.vars = NULL, var.stubs, sep, keep.all = TRUE, ...)
+merged.stack(data, id.vars = NULL, var.stubs, sep, keep.all = TRUE,
+  ...)
 }
 \arguments{
 \item{data}{The input \code{data.frame}.}

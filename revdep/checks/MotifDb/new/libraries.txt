@@ -1,0 +1,22 @@
+Library: /home/mrdwab/Documents/Packages/splitstackshape/revdep/library/splitstackshape/new
+data.table      (1.12.2)
+splitstackshape (1.4.8)
+
+Library: /home/mrdwab/Documents/Packages/splitstackshape/revdep/library/MotifDb
+BH               (1.69.0-1)
+BiocGenerics     (0.28.0)
+BiocParallel     (1.16.6)
+bitops           (1.0-6)
+data.table       (1.12.2)
+formatR          (1.6)
+futile.logger    (1.4.3)
+futile.options   (1.0.1)
+GenomeInfoDbData (1.2.0)
+lambda.r         (1.2.3)
+lattice          (0.20-38)
+Matrix           (1.2-17)
+matrixStats      (0.54.0)
+RUnit            (0.4.32)
+snow             (0.4-3)
+XML              (3.98-1.19)
+zlibbioc         (1.28.0)

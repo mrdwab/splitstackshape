@@ -7,7 +7,6 @@ test_that("t_split is used as f_split fallback", {
                  "Unsupported `sep`. Splitting with `t_split` instead.")
   expect_message(f_split(vec, "[A-Z]+", fixed = FALSE),
                  "Unsupported `sep`. Splitting with `t_split` instead.")
-  vec <- c("A;B", "A", "A", "A")
 })
 
 test_that("t_split and f_split may have different number of columns", {

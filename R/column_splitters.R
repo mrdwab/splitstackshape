@@ -73,31 +73,31 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
     message("Unsupported `sep`. Splitting with `t_split` instead.")
     temp <- t_split(vec, sep, fixed, stripWhite, type.convert)
   } else {
-    VEC <- as.character(vec)
-    ana <- if (anyNA(VEC)) is.na(VEC) else NULL
-    anb <- !nzchar(VEC)
-    
-    if (is.null(ana) & !any(anb)) {
-      VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
-        stringi::stri_flatten(VEC, collapse = "\n")
-      } else {
-        # nocov start
-        .strflat(VEC)
-        # nocov end
-      }
-    } else {
-      if (!is.null(ana)) VEC[which(ana)] <- sep
-      if (any(anb)) VEC[which(anb)] <- sep
-      VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
-        stringi::stri_flatten(VEC, collapse = "\n")
-      } else {
-        # nocov start
-        .strflat(VEC)
-        # nocov end
-      }
-    }
     
     temp <- if (packageVersion("data.table") < "1.10.5") {
+      VEC <- as.character(vec)
+      ana <- if (anyNA(VEC)) is.na(VEC) else NULL
+      anb <- !nzchar(VEC)
+
+      if (is.null(ana) & !any(anb)) {
+        VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
+          stringi::stri_flatten(VEC, collapse = "\n")
+        } else {
+          # nocov start
+          .strflat(VEC)
+          # nocov end
+        }
+      } else {
+        if (!is.null(ana)) VEC[which(ana)] <- sep
+        if (any(anb)) VEC[which(anb)] <- sep
+        VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
+          stringi::stri_flatten(VEC, collapse = "\n")
+        } else {
+          # nocov start
+          .strflat(VEC)
+          # nocov end
+        }
+      }
       fread(VEC, sep = sep, fill = TRUE, 
             blank.lines.skip = FALSE, header = FALSE,
             colClasses = if (!type.convert) "character" else NULL,
@@ -105,14 +105,16 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
             strip.white = stripWhite)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
     } else {
-      # nocov start
-      fread(VEC, sep = sep, fill = TRUE, 
-            blank.lines.skip = FALSE, header = FALSE,
+      vec <- as.character(vec)
+      if (trim_vec(vec[length(vec)]) == "") {
+        vec[length(vec)] <- NA
+      } 
+      fread(text = vec, sep = sep, fill = TRUE, 
+            blank.lines.skip = FALSE, header = FALSE, nrows = length(vec),
             colClasses = if (!type.convert) "character" else NULL,
             encoding = "UTF-8",
             strip.white = stripWhite, logical01 = FALSE)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
-      # nocov end
     }
     
     if (length(temp) == 1L) {

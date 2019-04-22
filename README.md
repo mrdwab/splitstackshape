@@ -44,4 +44,4 @@ library(devtools)
 install_github("mrdwab/splitstackshape", ref = "v1_development")
 ```
 
-Current CRAN version: 1.4.4
+Current CRAN version: 1.4.8

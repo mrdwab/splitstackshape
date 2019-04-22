@@ -8,6 +8,8 @@ test_that("Correct dimensions of objects are returned", {
                    varB.3 = c(11, 22, 33), varC.3 = c(-1.23, .992, -.351))
 
   expect_equal(dim(reshape_long(DF, c("varA", "varB", "varC"))), c(9, 6))
+  expect_equal(names(reshape_long(DF, c("varA", "varB", "varC"), value.name = c("A", "B", "C"))),
+               c("id_1", "id_2", "variable", "A", "B", "C"))
   expect_equal(
     dim(reshape_long(DF, c("varA", "varB", "varC"), ids = "id_1", 
                      keep.all = FALSE)), c(9, 5))

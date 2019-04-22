@@ -147,6 +147,7 @@ NULL
 #' @export
 #' @aliases trim_list
 trim_list <- function(x, relist = TRUE, convert = FALSE) {
+  nl <- names(x)
   x <- replace(x, lengths(x) == 0, NA_character_)
   y <- as.character(unlist(x, use.names = FALSE))
   y[!nzchar(y)] <- NA_character_
@@ -160,9 +161,10 @@ trim_list <- function(x, relist = TRUE, convert = FALSE) {
       V2 <- NULL
       out <- data.table(out, rep.int(
         seq.int(length(x)), lengths(x)))[, list(list(out)), V2]$V1
-      if (is.null(names(x))) out else `names<-`(out, names(x))
+      if (is.null(nl)) out else `names<-`(out, nl)
+    } else {
+      out
     }
-    out
   }
 }
 NULL

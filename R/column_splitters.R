@@ -75,6 +75,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
   } else {
     
     temp <- if (packageVersion("data.table") < "1.10.5") {
+      # nocov start
       VEC <- as.character(vec)
       ana <- if (anyNA(VEC)) is.na(VEC) else NULL
       anb <- !nzchar(VEC)
@@ -83,9 +84,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
         VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
           stringi::stri_flatten(VEC, collapse = "\n")
         } else {
-          # nocov start
           .strflat(VEC)
-          # nocov end
         }
       } else {
         if (!is.null(ana)) VEC[which(ana)] <- sep
@@ -93,9 +92,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
         VEC <- if (requireNamespace("stringi", quietly = TRUE)) {
           stringi::stri_flatten(VEC, collapse = "\n")
         } else {
-          # nocov start
           .strflat(VEC)
-          # nocov end
         }
       }
       fread(VEC, sep = sep, fill = TRUE, 
@@ -104,6 +101,7 @@ f_split <- function(vec, sep, fixed = TRUE, stripWhite = TRUE,
             encoding = "UTF-8",
             strip.white = stripWhite)[, lapply(
               .SD, function(x) replace(x, x ==  "", NA))]
+      # nocov end
     } else {
       vec <- as.character(vec)
       if (trim_vec(vec[length(vec)]) == "") {

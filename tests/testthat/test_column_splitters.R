@@ -8,11 +8,6 @@ test_that("t_split is used as f_split fallback", {
   expect_message(f_split(vec, "[A-Z]+", fixed = FALSE),
                  "Unsupported `sep`. Splitting with `t_split` instead.")
   vec <- c("A;B", "A", "A", "A")
-  
-  if (packageVersion("data.table") >= "1.10.5") {
-    expect_message(f_split(vec, ";"), 
-                   "Expected more than 1 column. Trying with `t_split`.")
-  }
 })
 
 test_that("t_split and f_split may have different number of columns", {

@@ -49,12 +49,13 @@ Stacked <- function(indt, id.vars = NULL, var.stubs,
   
   for (i in seq_along(var.stubs)) {
     COLS <- check[["stub_list"]][[i]]
+    ML <- max(lengths(check[["stub_list"]]))
     .time <- gsub("^[[:punct:]]|[[:punct:]]$", "", sub(var.stubs[i], "", COLS))
     ZZ[[i]] <- melt(
       indt[, c(id.vars, COLS, if (keep.all) onames else NULL), with = FALSE],
       measure = COLS, value.name = var.stubs[i])
     setkeyv(ZZ[[i]], id.vars)
-    ZZ[[i]] <- set(ZZ[[i]], j = "variable", value = .time)
+    ZZ[[i]] <- set(ZZ[[i]], j = "variable", value = rep(.time, ML))
     if (keyed) {
       setkeyv(ZZ[[i]], c(id.vars, "variable"))
       setcolorder(ZZ[[i]], c(key(ZZ[[i]]), var.stubs[i], onames))

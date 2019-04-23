@@ -64,21 +64,22 @@ cSplit <- function(indt, splitCols, sep = ",", direction = "wide", fixed = TRUE,
   
   for (i in seq_along(splitCols)) {
     if (fixed) {
-      temp <- f_split(indt[[splitCols[i]]], sep[i], fixed, stripWhite, 
+      temp <- f_split(indt[[splitCols[i]]], sep[i], fixed, stripWhite,
                       type.convert, prefix = NULL)
       set(indt, j = sprintf("%s_%d", splitCols[i], seq_along(temp)), value = temp)
       if (drop) set(indt, j = splitCols[i], value = NULL)
     } else {
-      temp <- t_split(indt[[splitCols[i]]], sep[i], fixed, stripWhite, 
+      temp <- t_split(indt[[splitCols[i]]], sep[i], fixed, stripWhite,
                       type.convert, prefix = NULL)
       set(indt, j = sprintf("%s_%d", splitCols[i], seq_along(temp)), value = temp)
       if (drop) set(indt, j = splitCols[i], value = NULL)
     }
   }
-  
+
   if (direction == "wide") {
     if (isTRUE(makeEqual)) make_equal(indt, splitCols)[] else indt[]
   } else if (direction == "long") {
+    # Create a row index, make equal, melt, and drop original
     indt[, dropinid1 := .I]
     out <- set(suppressWarnings(
       melt(make_equal(indt, splitCols), measure = patterns(splitCols),

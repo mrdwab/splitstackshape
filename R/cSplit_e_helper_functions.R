@@ -161,10 +161,9 @@ trim_list <- function(x, relist = TRUE, convert = FALSE) {
       V2 <- NULL
       out <- data.table(out, rep.int(
         seq.int(length(x)), lengths(x)))[, list(list(out)), V2]$V1
-      if (is.null(nl)) out else `names<-`(out, nl)
-    } else {
-      out
+      if (!is.null(nl)) setattr(out, "names", nl)
     }
+    out
   }
 }
 NULL

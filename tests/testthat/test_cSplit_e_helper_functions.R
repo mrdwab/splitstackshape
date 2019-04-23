@@ -9,7 +9,7 @@ test_that("Whitespace is trimmed from vectors", {
                          relist = FALSE, convert = TRUE),
                c(1L, 2L, NA, 3L))
   expect_error(trim_vec(list(c(1, 2), c(1, 3, 4))))
-  expect_equal(names(trim_list(list(a = 1, b = 2))), c("a", "b"))
+  expect_equal(names(trim_list(list(a = " 1", b = 2))), c("a", "b"))
   expect_equal(names(trim_list(list(1, 2))), NULL)
 })
 

@@ -34,4 +34,5 @@ test_that("Correct messages are returned", {
                  "All non-stub names being used as ids")
   expect_message(merged.stack(DF, id.vars = "id_1", var.stubs = "varA"),
                  "This function is deprecated. Use reshape_long instead.")
+  expect_warning(merged.stack(DF, id.vars = "id_1", var.stubs = "varA", sep = "."))
 })

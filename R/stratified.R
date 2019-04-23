@@ -96,11 +96,12 @@ stratified <- function(indt, group, size, select = NULL, replace = FALSE,
   indt[, temp_grp := do.call(paste, .SD), .SDcols = group]
   
   if (any(size < 1L)) {
-    if (!all(size < 1L)) stop("Incompatible sizes supplied") else type <- "frac"
+    if (!all(size < 1L)) stop("Incompatible sizes supplied") 
+    else type <- "frac"
   }
   
   if (any(size >= 1L)) {
-    if (!all(size >= 1L)) stop("Incompatible sizes supplied") else type <- "n"
+    if (all(size >= 1L)) type <- "n"
   }
   
   check <- switch(type,

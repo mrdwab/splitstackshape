@@ -18,8 +18,9 @@ test_that("stratified returns the expected number of rows", {
   expect_message(stratified(DF, c("E", "D", "A"), size = 2))
   expect_error(stratified(data.table::as.data.table(DF), "A", c(1, 3)))
   expect_error(stratified(DF, "A", c(AA = 1, BB = 3, CC = 2, DD = 0, EE = 0)))
+  expect_error(stratified(DF, "A", c(AA = 1, BB = .5, CC = 1, DD = 1, EE = 1)))
   expect_equal(nrow(
-    stratified(as.data.table(DF), "A", c(AA = 1, BB = 3, CC = 2), 
+    stratified(as.data.table(DF), "A", c(AA = 1, BB = 3, CC = 2),
                select = list(A = c("AA", "BB", "CC")))), 6)
   expect_error(stratified(as.data.table(DF), "A", c(1, 2, 3, 2, 1)))
   df <- data.frame(x = c(1,1,2,2,2,7), t = 1:6)

@@ -7,7 +7,7 @@
 getanID(indt, id.vars = NULL)
 }
 \arguments{
-\item{indt}{The input \code{data.table}.}
+\item{indt}{The input \code{data.table} or \code{data.frame}}
 
 \item{id.vars}{The variables that should be treated as ID variables. Defaults
 to \code{NULL}, at which point all variables are used to create the new ID variable.}

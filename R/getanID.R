@@ -4,11 +4,14 @@
 #' a dataset. This function is a convenience function for [data.table::rowid()] 
 #' and is largely unnecessary now that `rowid` exists.
 #' 
-#' @param indt The input `data.table`.
+#' @param indt The input `data.table` or `data.frame`
 #' @param id.vars The variables that should be treated as ID variables. Defaults 
 #' to `NULL`, at which point all variables are used to create the new ID variable.
-#' @return The input dataset if ID variables are already unique, or the input 
-#' dataset with a new column named "`sub_id`".
+#' @param check Logical. Should the dataset be checked for existing uniqueness
+#' within the `id.vars`? Defaults to `TRUE`.
+#' @return If `check = TRUE`, the input dataset if ID variables are already unique, or the input 
+#' dataset with a new column named "`sub_id`". If `check = FALSE`, the input dataset with a new
+#' column named "`sub_id`".
 #' @author Ananda Mahto
 #' @examples
 #' 
@@ -23,17 +26,13 @@
 #' getanID(mydf, 1:2)
 #' 
 #' @export getanID
-getanID <- function(indt, id.vars = NULL) {
-  indt <- setDT(copy(indt))
-  if (is.null(id.vars)) id.vars <- names(indt)
-  if (is.numeric(id.vars)) id.vars <- names(indt)[id.vars]
+getanID <- function(indt, id.vars = NULL, check = TRUE) {
+  sub_id <- rowidv(indt, if (is.null(id.vars)) names(indt) else id.vars)
   
-  sub_id <- NULL
-  
-  if (any(duplicated(indt, by = id.vars))) {
-    indt[, sub_id := rowidv(.SD), .SDcols = id.vars][]
+  if (isTRUE(check)) {
+    if (length(unique(sub_id)) > 1L) cbind(indt, sub_id) else indt
   } else {
-    indt[]
+    cbind(indt, sub_id)
   }
 }
 NULL

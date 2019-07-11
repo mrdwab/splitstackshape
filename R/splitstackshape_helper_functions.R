@@ -47,35 +47,36 @@ NA_type <- function(string) {
 NULL
 
 # All Names for a Balanced Dataset -- Don't Export ------------------------
-all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL, 
-                      keep_all = TRUE, verbose = TRUE) {
-  V1 <- V2 <- NULL
-  stub_names <- grep(paste(stubs, collapse = "|"), current_names, value = TRUE)
-  stub_names <- stub_names[!stub_names %in% stubs]
-  stub_list <- setNames(
-    lapply(stubs, function(x) stub_names[grepl(x, stub_names)]), stubs)
+all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL, keep_all = TRUE, verbose = TRUE) {
+  
+  stub_list <- setNames(lapply(stubs, function(x) {
+    temp <- current_names[if (end_stub) endsWith(current_names, x) else startsWith(current_names, x)]
+    temp[!temp %in% stubs]
+  }), stubs)
+  
+  stub_names <- unlist(stub_list, use.names = FALSE)
   
   if (is.null(ids)) {
     if (verbose) message("All non-stub names being used as ids")
-    ids <- setdiff(current_names, stub_names)
+    ids <- current_names[!current_names %chin% stub_names]
   }
   
   if (!is.null(ids)) {
-    if (keep_all) ids <- setdiff(current_names, stub_names)
+    if (keep_all) ids <- current_names[!current_names %chin% stub_names]
     if (!keep_all) ids <- ids
   }
   
-  levs <- unique(gsub(paste(stubs, collapse = "|"), "", stub_names))
-  stub_levs <- trim_vec(CJ(stubs, levs)[, if (end_stub) paste0(levs, stubs) else paste0(stubs, levs)]) ## fix
+  levs <- unique(sub(paste(stubs, collapse = "|"), "", stub_names))
+  stub_levs <- trim_vec(CJ(stubs, levs)[, if (end_stub) paste0(levs, stubs) else paste0(stubs, levs)])
   full_names <- c(ids, stub_levs[order(stub_levs)])
   levs <- gsub("^[[:punct:]]|[[:punct:]]$", "", levs)
   levs <- levs[order(levs)]
-  miss <- setdiff(full_names, current_names)
+  miss <- full_names[!full_names %chin% current_names]
   list(stubs = stubs,
-       stub_names = stub_names, 
+       stub_names = stub_names,
        stub_list = stub_list,
-       id_names = ids, 
-       levs = levs, 
+       id_names = ids,
+       levs = levs,
        stub_levs = stub_levs,
        full_names = full_names,
        miss = miss)

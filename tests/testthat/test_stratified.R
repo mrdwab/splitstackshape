@@ -10,7 +10,7 @@ test_that("stratified returns the expected number of rows", {
     E = sample(c("M", "F"), 100, replace = TRUE))
   expect_equal(nrow(stratified(DF, "A", .1)), 10)
   expect_equal(nrow(stratified(DF, "A", 1)), 5)
-  expect_equal(nrow(stratified(DF, "A", .1, select = list(A = c("AA", "BB")))), 3)
+  expect_equal(nrow(stratified(DF, "A", .1, select = list(A = c("AA", "BB")))), 4)
   expect_error(stratified(DF, "A", .1, select = list(c("AA", "BB"))))
   expect_error(stratified(DF, "A", .1, select = list(Ax = c("AA", "BB"))))
   expect_equal(nrow(stratified(DF, group = 5, size = 5)), 15)

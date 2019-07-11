@@ -4,17 +4,21 @@
 \alias{getanID}
 \title{Add an "id" Variable to a Dataset}
 \usage{
-getanID(indt, id.vars = NULL)
+getanID(indt, id.vars = NULL, check = TRUE)
 }
 \arguments{
 \item{indt}{The input \code{data.table} or \code{data.frame}}
 
 \item{id.vars}{The variables that should be treated as ID variables. Defaults
 to \code{NULL}, at which point all variables are used to create the new ID variable.}
+
+\item{check}{Logical. Should the dataset be checked for existing uniqueness
+within the \code{id.vars}? Defaults to \code{TRUE}.}
 }
 \value{
-The input dataset if ID variables are already unique, or the input
-dataset with a new column named "\code{sub_id}".
+If \code{check = TRUE}, the input dataset if ID variables are already unique, or the input
+dataset with a new column named "\code{sub_id}". If \code{check = FALSE}, the input dataset with a new
+column named "\code{sub_id}".
 }
 \description{
 Many functions will not work properly if there are duplicated ID variables in

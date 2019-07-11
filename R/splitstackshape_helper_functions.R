@@ -65,18 +65,16 @@ all_names <- function(current_names, stubs, end_stub = FALSE, ids = NULL,
     if (!keep_all) ids <- ids
   }
   
-  id_names <- ids
-  
   levs <- unique(gsub(paste(stubs, collapse = "|"), "", stub_names))
   stub_levs <- trim_vec(CJ(stubs, levs)[, if (end_stub) paste0(levs, stubs) else paste0(stubs, levs)]) ## fix
-  full_names <- c(id_names, stub_levs[order(stub_levs)])
+  full_names <- c(ids, stub_levs[order(stub_levs)])
   levs <- gsub("^[[:punct:]]|[[:punct:]]$", "", levs)
   levs <- levs[order(levs)]
   miss <- setdiff(full_names, current_names)
   list(stubs = stubs,
        stub_names = stub_names, 
        stub_list = stub_list,
-       id_names = id_names, 
+       id_names = ids, 
        levs = levs, 
        stub_levs = stub_levs,
        full_names = full_names,
